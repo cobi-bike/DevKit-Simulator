@@ -1,0 +1,7 @@
+[ignore]
+./manifest.json
+[include]
+
+[libs]
+
+[options]
