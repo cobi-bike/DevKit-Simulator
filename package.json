@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "COBI simulator to help you test your Jetpack app",
   "scripts": {
-    "test": "flow",
+    "test": "flow && eslint",
     "build": "flow && gulp default && npm run docs",
     "prepublish": "npm run build",
     "flow": "flow",
