@@ -5,7 +5,7 @@ const buffer = require('vinyl-buffer')
 const browserify = require('browserify')
 const babelify = require('babelify')
 
-const sourcesPath = 'src/index.js'
+const sourcesPath = 'src/chrome.hooks.js'
 const babelConfig = {
   presets: [
     'flow',
@@ -24,6 +24,6 @@ gulp.task('default', function () {
   b.bundle()
     .pipe(source(sourcesPath))
     .pipe(buffer())
-    .pipe(concat('chrome.js')) // output filename
-    .pipe(gulp.dest('app/chrome/js/'))
+    .pipe(concat('index.js')) // output filename
+    .pipe(gulp.dest('app/chrome/'))
 })
