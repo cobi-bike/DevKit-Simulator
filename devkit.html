@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div id="status"></div>
+    <img id="image-result" hidden>
+    <h1>COBI simulator for Jetpacks</h1>
+    <h2><i>Spec version 0.30.0</i></h2>
+    <p> COBI supported? <span id="is-cobi-supported">false</span></p>
+    <input id="input-file" type="file" name="pic" accept="application/json">
+    <section>
+      <h3/>thumb controller<h3>
+      <button id="tc-up">up</button>
+      <button id="tc-down">down</button>
+      <button id="tc-left">left</button>
+      <button id="tc-right">right</button>
+    </section>
+    <section>
+      <h3/>Speed<h3>
+      <button>set</button><input placeholder="speed in">motor</input></br>
+      <button>set</button><input placeholder="speed in">intelligenceService</input></br>
+      <button>set</button><input placeholder="speed in">externalSensor</input></br>
+    </section>
+    <section>
+      <h3/>Cadence<h3>
+      <button>set</button><input placeholder="speed in">motor</input></br>
+      <button>set</button><input placeholder="speed in">intelligenceService</input></br>
+      <button>set</button><input placeholder="speed in">externalSensor</input></br>
+    </section>
+    <section>
+      <p>Eval output</p>
+      <p id="eval-output"></p>
+    </section>
+  </body>
+</html>
