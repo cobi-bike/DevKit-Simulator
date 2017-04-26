@@ -11,11 +11,7 @@ const babelConfig = {
     'flow',
     ['env', {
       'targets': {
-        'browsers': ['Chrome >= 43']
-      }
-    }]
-  ]
-}
+        'browsers': ['Chrome >= 43']}}]]}
 
 gulp.task('default', function () {
   const b = browserify(sourcesPath)
