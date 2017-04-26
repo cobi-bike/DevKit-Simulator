@@ -4,13 +4,13 @@
 /* global chrome:false */
 /* global FileReader:false */
 
+var meta = require('./meta');
+var util = require('./utils');
+
 chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', function (panel) {
   // code invoked on panel creation
   var isEnabled = document.getElementById('is-cobi-supported');
-  chrome.devtools.inspectedWindow.eval('COBI !== null && COBI !== undefined', function (result, isException) {
-    if (isException) {
-      return isEnabled.innerHTML = 'ERROR ' + result;
-    }
+  chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, function (result) {
     isEnabled.innerHTML = result;
   });
 
@@ -22,19 +22,18 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
 
   var reader = new FileReader();
   reader.onload = function (evt) {
+    log('HELLO :)');
+
     var content = JSON.parse(evt.target.result);
     var counter = 1;
     for (var msg in content) {
       var val = content[msg];
-      var channel = toMixedCase(val.channel);
-      var property = toMixedCase(val.property);
+      var path = util.path(val.channel, val.property);
+      var payload = JSON.stringify(val.payload);
       // var payload = val.payload
-      setTimeout(function (value) {
-        chrome.devtools.inspectedWindow.eval('console.log(' + value + ')'); //, function(result, isException) {resultOut.innerHTML = value;});
-      }.bind(null, JSON.stringify(channel + '/' + property + '= ' + val.payload)), 100 * counter);
-
+      setTimeout(log.bind(null, `${path} = ${payload}`), 100 * counter);
       // ----------------
-      setTimeout(sendCommand.bind(this, channel + '/' + property, JSON.stringify(val.payload)), 100 * counter);
+      setTimeout(emit.bind(null, path, payload), 100 * counter);
       counter++;
     };
   };
@@ -57,15 +56,47 @@ function sendTcAction(value, container) {
   });
 }
 
-function sendCommand(path, value) {
-  chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("' + path + '", ' + value + ')');
-}
+var emit = function emit(path, value) {
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value));
+};
 
-function toMixedCase(name) {
+var log = function log(s) {
+  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s));
+};
+
+},{"./meta":2,"./utils":3}],2:[function(require,module,exports){
+'use strict';
+
+var containsCOBIjs = 'COBI !== null && COBI !== undefined';
+var foreignLog = function foreignLog(v) {
+  return `console.log(${JSON.stringify(v)})`;
+};
+var emitStr = function emitStr(path, value) {
+  return `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`;
+};
+
+module.exports.containsCOBIjs = containsCOBIjs;
+module.exports.foreignLog = foreignLog;
+module.exports.emitStr = emitStr;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+var path = function path(channel, property) {
+  var ch = channel.indexOf('_') === 0 ? channel : toMixedCase(channel);
+  var prop = property.indexOf('_') === 0 ? property : toMixedCase(property);
+
+  return `${ch}/${prop}`;
+};
+
+var toMixedCase = function toMixedCase(name) {
   var words = name.split('_').map(function (w) {
     return w[0].toUpperCase() + w.substr(1).toLowerCase();
   });
   return words[0].toLowerCase() + words.slice(1).join('');
-}
+};
+
+module.exports.path = path;
+module.exports.toMixedCase = toMixedCase;
 
 },{}]},{},[1]);
