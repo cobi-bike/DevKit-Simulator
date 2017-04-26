@@ -2,20 +2,16 @@
 /* global chrome:false */
 /* global FileReader:false */
 
+const meta = require('./meta')
+const util = require('./utils')
+
 chrome.devtools.panels.create('COBI',
     'images/cobi-icon.png',
     'index.html',
     function (panel) {
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
-      chrome.devtools.inspectedWindow.eval(
-        'COBI !== null && COBI !== undefined',
-        function (result, isException) {
-          if (isException) {
-            return isEnabled.innerHTML = 'ERROR ' + result
-          }
-          isEnabled.innerHTML = result
-        })
+      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, result => { isEnabled.innerHTML = result })
 
       let tcUp = document.getElementById('tc-up')
       let tcDown = document.getElementById('tc-down')
@@ -29,18 +25,12 @@ chrome.devtools.panels.create('COBI',
         let counter = 1
         for (let msg in content) {
           const val = content[msg]
-          const channel = toMixedCase(val.channel)
-          const property = toMixedCase(val.property)
+          const path = util.path(val.channel, val.property)
+          const payload = JSON.stringify(val.payload)
           // var payload = val.payload
-          setTimeout(function (value) {
-            chrome.devtools.inspectedWindow.eval('console.log(' + value + ')')//, function(result, isException) {resultOut.innerHTML = value;});
-          }.bind(null, JSON.stringify(channel + '/' + property + '= ' + val.payload))
-          , 100 * counter)
-
+          setTimeout(log.bind(null, `${path} = ${payload}`), 100 * counter)
           // ----------------
-          setTimeout(sendCommand.bind(this, channel + '/' + property,
-                                            JSON.stringify(val.payload))
-                    , 100 * counter)
+          setTimeout(emit.bind(null, path, payload), 100 * counter)
           counter++
         };
       }
@@ -65,12 +55,10 @@ function sendTcAction (value, container) {
     })
 }
 
-function sendCommand (path, value) {
-  chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("' + path + '", ' + value + ')')
+const emit = function (path, value) {
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value))
 }
 
-function toMixedCase (name: String) {
-  const words = name.split('_')
-                  .map(function (w) { return w[0].toUpperCase() + w.substr(1).toLowerCase() })
-  return words[0].toLowerCase() + words.slice(1).join('')
+const log = function (s) {
+  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s))
 }
