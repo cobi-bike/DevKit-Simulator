@@ -3,8 +3,8 @@
 /* global FileReader:false */
 
 chrome.devtools.panels.create('COBI',
-    'app/images/cobi-icon.png',
-    'app/index.html',
+    'images/cobi-icon.png',
+    'index.html',
     function (panel) {
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')

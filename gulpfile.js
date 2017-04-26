@@ -24,6 +24,6 @@ gulp.task('default', function () {
   b.bundle()
     .pipe(source(sourcesPath))
     .pipe(buffer())
-    .pipe(concat('index.js')) // output filename
+    .pipe(concat('chrome.js')) // output filename
     .pipe(gulp.dest('app/chrome/js/'))
 })

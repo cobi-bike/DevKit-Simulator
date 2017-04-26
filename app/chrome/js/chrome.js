@@ -4,7 +4,7 @@
 /* global chrome:false */
 /* global FileReader:false */
 
-chrome.devtools.panels.create('COBI', 'app/images/cobi-icon.png', 'app/index.html', function (panel) {
+chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', function (panel) {
   // code invoked on panel creation
   var isEnabled = document.getElementById('is-cobi-supported');
   chrome.devtools.inspectedWindow.eval('COBI !== null && COBI !== undefined', function (result, isException) {
