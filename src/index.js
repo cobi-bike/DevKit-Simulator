@@ -8,7 +8,6 @@ chrome.devtools.panels.create('COBI',
     function (panel) {
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
-      isEnabled.innerHTML = 'HELLO'
       chrome.devtools.inspectedWindow.eval(
         'COBI !== null && COBI !== undefined',
         function (result, isException) {
@@ -35,7 +34,7 @@ chrome.devtools.panels.create('COBI',
           // var payload = val.payload
           setTimeout(function (value) {
             chrome.devtools.inspectedWindow.eval('console.log(' + value + ')')//, function(result, isException) {resultOut.innerHTML = value;});
-          }.bind(this, JSON.stringify(channel + '/' + property + '= ' + val.payload))
+          }.bind(null, JSON.stringify(channel + '/' + property + '= ' + val.payload))
           , 100 * counter)
 
           // ----------------
@@ -70,7 +69,7 @@ function sendCommand (path, value) {
   chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("' + path + '", ' + value + ')')
 }
 
-function toMixedCase (name) {
+function toMixedCase (name: String) {
   const words = name.split('_')
                   .map(function (w) { return w[0].toUpperCase() + w.substr(1).toLowerCase() })
   return words[0].toLowerCase() + words.slice(1).join('')

@@ -7,6 +7,7 @@
     "build": "flow && gulp default && npm run docs",
     "prepublish": "npm run build",
     "flow": "flow",
+    "gulp": "gulp",
     "docs": "documentation build -f html -o ./docs -g --shallow ./app/js/**.js"
   },
   "author": "COBI GmbH",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.4.0",
     "babel-preset-flow": "^6.23.0",
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
