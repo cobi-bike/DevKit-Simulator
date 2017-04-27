@@ -22,8 +22,6 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
 
   var reader = new FileReader();
   reader.onload = function (evt) {
-    log('HELLO :)');
-
     var content = JSON.parse(evt.target.result);
     var counter = 1;
     for (var msg in content) {
