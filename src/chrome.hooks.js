@@ -1,7 +1,9 @@
 // @flow
 /* global chrome:false */
 /* global FileReader:false */
+import type {Map} from 'immutable'
 
+const Immutable = require('immutable')
 const meta = require('./meta')
 const util = require('./utils')
 
@@ -21,24 +23,25 @@ chrome.devtools.panels.create('COBI',
 
       let reader = new FileReader()
       reader.onload = function (evt) {
-        const content = JSON.parse(evt.target.result)
-        let counter = 1
-        for (let msg in content) {
-          const val = content[msg]
-          const path = util.path(val.channel, val.property)
-          const payload = JSON.stringify(val.payload)
-          // var payload = val.payload
-          setTimeout(log.bind(null, `${path} = ${payload}`), 100 * counter)
-          // ----------------
-          setTimeout(emit.bind(null, path, payload), 100 * counter)
-          counter++
-        };
+        const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
+        const normals = util.normalize(content)
+
+        const emmiters = normals.map(v => {
+          const path = util.path(v.get('channel'), v.get('property'))
+          return emit.bind(null, path, v.get('payload'))
+        }).map(setTimeout)
+
+        const loggers = normals.map(v => {
+          const path = util.path(v.get('channel'), v.get('property'))
+          return log.bind(null, `${path} = ${v.get('payload')}`)
+        }).map(setTimeout)
+        // console.log(loggers.count)
+        // console.log(emmiters.count)
       }
 
       let input = document.getElementById('input-file')
       input.addEventListener('change', function () {
         reader.readAsText(input.files[0])
-        // resultOut.innerHTML = "input file:";
       })
 
       tcUp.addEventListener('click', sendTcAction.bind(this, 'UP', resultOut))

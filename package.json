@@ -40,5 +40,8 @@
     "simulator",
     "chrome",
     "devtools"
-  ]
+  ],
+  "dependencies": {
+    "immutable": "^3.8.1"
+  }
 }
