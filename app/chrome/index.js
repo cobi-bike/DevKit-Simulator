@@ -5031,17 +5031,30 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
 });
 
 function sendTcAction(value, container) {
-  chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")', function (result, isException) {
+  chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")', function (result) {
     container.innerHTML = 'tc: ' + result;
   });
 }
 
-var emit = function emit(path, value) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value));
+var emit = function emit(path, value, cb) {
+  if (cb) {
+    return chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, cb);
+  }
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, onEvalError);
 };
 
-var log = function log(s) {
-  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s));
+var log = function log(s, cb) {
+  if (cb) {
+    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, cb);
+  }
+  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, onEvalError);
+};
+
+// https://developer.chrome.com/extensions/devtools_inspectedWindow#method-eval
+var onEvalError = function onEvalError(result, isException) {
+  if (isException) {
+    chrome.devtools.inspectedWindow.eval(meta.foreignError({ result: result, msg: isException }));
+  }
 };
 
 },{"./meta":3,"./utils":4,"immutable":1}],3:[function(require,module,exports){
@@ -5049,14 +5062,19 @@ var log = function log(s) {
 
 var containsCOBIjs = 'COBI !== null && COBI !== undefined';
 var foreignLog = function foreignLog(v) {
-  return `console.log(${JSON.stringify(v)})`;
+  return `console.info(${JSON.stringify(v)})`;
 };
+var foreignError = function foreignError(v) {
+  return `console.warn("COBI simulator - internal error", ${JSON.stringify(v)})`;
+};
+
 var emitStr = function emitStr(path, value) {
   return `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`;
 };
 
 module.exports.containsCOBIjs = containsCOBIjs;
 module.exports.foreignLog = foreignLog;
+module.exports.foreignError = foreignError;
 module.exports.emitStr = emitStr;
 
 },{}],4:[function(require,module,exports){

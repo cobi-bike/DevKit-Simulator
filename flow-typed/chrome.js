@@ -19,7 +19,8 @@ declare var chrome: {
       },
     },
     inspectedWindow: {
-      eval: (code: string, cb?: (res: any, err: ?Object) => any) => void,
+      // https://developer.chrome.com/extensions/devtools_inspectedWindow#method-eval
+      eval: (code: string, options?: Object, cb?: (res: Object, err?: Object) => any) => void,
       tabId: number,
     },
     panels: {

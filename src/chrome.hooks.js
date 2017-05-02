@@ -53,15 +53,28 @@ chrome.devtools.panels.create('COBI',
 
 function sendTcAction (value, container) {
   chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")',
-    function (result, isException) {
+    function (result: string) {
       container.innerHTML = 'tc: ' + result
     })
 }
 
-const emit = function (path, value) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value))
+const emit = function (path, value: Object, cb: (res: Object, err?: Object) => any) {
+  if (cb) {
+    return chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, cb)
+  }
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, onEvalError)
 }
 
-const log = function (s) {
-  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s))
+const log = function (s, cb: (res: Object, err?: Object) => any) {
+  if (cb) {
+    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, cb)
+  }
+  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, onEvalError)
+}
+
+// https://developer.chrome.com/extensions/devtools_inspectedWindow#method-eval
+const onEvalError = (result, isException) => {
+  if (isException) {
+    chrome.devtools.inspectedWindow.eval(meta.foreignError({result: result, msg: isException}))
+  }
 }

@@ -28,6 +28,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.44.2",
+    "flow-interfaces-chrome": "^0.3.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "vinyl-buffer": "^1.0.0",
