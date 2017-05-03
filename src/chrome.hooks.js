@@ -1,6 +1,7 @@
 // @flow
 /* global chrome:false */
 /* global FileReader:false */
+/* global DOMParser:false */
 import type {Map} from 'immutable'
 
 const Immutable = require('immutable')
@@ -12,7 +13,8 @@ chrome.devtools.panels.create('COBI',
     'index.html',
     function (panel) {
       let trackReader = new FileReader()
-      let gpxReader = new FileReader() // TODO
+      let gpxReader = new FileReader()
+      // ----
       trackReader.onload = function (evt) {
         const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
         const normals = util.normalize(content)
@@ -21,9 +23,29 @@ chrome.devtools.panels.create('COBI',
         }
         setUpFakeInput(normals)
       }
+      gpxReader.onload = function (evt) {
+        const parser = new DOMParser()
+        const content = parser.parseFromString(evt.target.result, 'application/xml')
 
+        let errors = util.gpxErrors(content)
+        if (errors !== null) {
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`))
+        }
+        return chrome.devtools.inspectedWindow.eval(meta.foreignLog(content))
+        /*
+        const normals = util.normalize(content)
+        if (util.waitingTimeouts()) {
+          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+        }
+        setUpFakeInput(normals)
+        */
+      }
+
+      // ----
       let track = document.getElementById('input-track')
       track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
+      let localizer = document.getElementById('input-gpx')
+      localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
 
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')

@@ -38,13 +38,15 @@ const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
   return input.mapKeys(k => k - start)
 }
 
+const gpxToTrack = function (doc: Document) {
+  return doc
+}
+
 /**
  * check if there is any errors on the gpx file, returns null when no errors occurs
  * FIXME: see issue #2
  */
-function gpxErrors (content: string) {
-  let oParser = new DOMParser()
-  let oDOM = oParser.parseFromString(content, 'text/xml')
+function gpxErrors (oDOM: Document) {
   // print the name of the root element or error message
   if (oDOM.documentElement.nodeName === 'parsererror') {
     return { 'msg': 'Input doesnt conforms with neither v1.1 nor v1.0 gpx schemas'
@@ -70,12 +72,13 @@ const updateTimeouts = function (...ids) {
  * are there any timeouts currently running?
  */
 const waitingTimeouts = function () {
-  return timeouts.count() !== 0
+  return !timeouts.isEmpty()
 }
 
 module.exports.path = path
 module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
+module.exports.gpxToTrack = gpxToTrack
 module.exports.gpxErrors = gpxErrors
 module.exports.updateTimeouts = updateTimeouts
 module.exports.waitingTimeouts = waitingTimeouts

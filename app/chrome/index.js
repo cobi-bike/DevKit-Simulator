@@ -4984,13 +4984,15 @@
 var Immutable = require('immutable');
 /* global chrome:false */
 /* global FileReader:false */
+/* global DOMParser:false */
 
 var meta = require('./meta');
 var util = require('./utils');
 
 chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', function (panel) {
   var trackReader = new FileReader();
-  var gpxReader = new FileReader(); // TODO
+  var gpxReader = new FileReader();
+  // ----
   trackReader.onload = function (evt) {
     var content = Immutable.fromJS(JSON.parse(evt.target.result));
     var normals = util.normalize(content);
@@ -4999,10 +5001,32 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
     }
     setUpFakeInput(normals);
   };
+  gpxReader.onload = function (evt) {
+    var parser = new DOMParser();
+    var content = parser.parseFromString(evt.target.result, 'application/xml');
 
+    var errors = util.gpxErrors(content);
+    if (errors !== null) {
+      return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`));
+    }
+    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(content));
+    /*
+    const normals = util.normalize(content)
+    if (util.waitingTimeouts()) {
+      chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+    }
+    setUpFakeInput(normals)
+    */
+  };
+
+  // ----
   var track = document.getElementById('input-track');
   track.addEventListener('change', function () {
     return trackReader.readAsText(track.files[0]);
+  });
+  var localizer = document.getElementById('input-gpx');
+  localizer.addEventListener('change', function () {
+    return gpxReader.readAsText(localizer.files[0]);
   });
 
   // code invoked on panel creation
@@ -5124,13 +5148,15 @@ var normalize = function normalize(cobiTrack) {
   });
 };
 
+var gpxToTrack = function gpxToTrack(doc) {
+  return doc;
+};
+
 /**
  * check if there is any errors on the gpx file, returns null when no errors occurs
  * FIXME: see issue #2
  */
-function gpxErrors(content) {
-  var oParser = new DOMParser();
-  var oDOM = oParser.parseFromString(content, 'text/xml');
+function gpxErrors(oDOM) {
   // print the name of the root element or error message
   if (oDOM.documentElement.nodeName === 'parsererror') {
     return { 'msg': 'Input doesnt conforms with neither v1.1 nor v1.0 gpx schemas'
@@ -5163,12 +5189,13 @@ var updateTimeouts = function updateTimeouts() {
  * are there any timeouts currently running?
  */
 var waitingTimeouts = function waitingTimeouts() {
-  return timeouts.count() !== 0;
+  return !timeouts.isEmpty();
 };
 
 module.exports.path = path;
 module.exports.toMixedCase = toMixedCase;
 module.exports.normalize = normalize;
+module.exports.gpxToTrack = gpxToTrack;
 module.exports.gpxErrors = gpxErrors;
 module.exports.updateTimeouts = updateTimeouts;
 module.exports.waitingTimeouts = waitingTimeouts;
