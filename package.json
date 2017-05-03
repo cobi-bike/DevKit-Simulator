@@ -8,7 +8,8 @@
     "prepublish": "npm run build",
     "flow": "flow",
     "gulp": "gulp",
-    "docs": "documentation build -f html -o ./docs -g --shallow ./app/js/**.js"
+    "docs": "documentation build -f html -o ./docs -g --shallow ./app/js/**.js",
+    "remove-types": "./node_modules/.bin/babel src --out-dir lib --presets=flow"
   },
   "author": "COBI GmbH",
   "license": "MIT",
