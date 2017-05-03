@@ -5087,10 +5087,13 @@ var Immutable = require('immutable');
 // holds current timeouts ids. Needed in case a user loads a new file
 // while already playing another one
 
-/* global FileReader:false */
 /* global DOMParser:false */
 var timeouts = Immutable.List();
 
+/**
+ * create a firebase-like path using the channel and property enum name
+ * @example path("HUB", "FRONT_LIGHT_ID") -> "hub/frontLightId"
+ */
 var path = function path(channel, property) {
   var ch = channel.indexOf('_') === 0 ? channel : toMixedCase(channel);
   var prop = property.indexOf('_') === 0 ? property : toMixedCase(property);
@@ -5098,6 +5101,10 @@ var path = function path(channel, property) {
   return `${ch}/${prop}`;
 };
 
+/**
+ * converts an underscore separated string into a camelcase onEvalError
+ * @example "FRONT_LIGHT_ID" -> "frontLightId"
+ */
 var toMixedCase = function toMixedCase(name) {
   var words = name.split('_').map(function (w) {
     return w[0].toUpperCase() + w.substr(1).toLowerCase();
@@ -5105,6 +5112,10 @@ var toMixedCase = function toMixedCase(name) {
   return words[0].toLowerCase() + words.slice(1).join('');
 };
 
+/**
+ * converts an log of COBI Bus events from their absolute epoch value
+ * to a relative one with the lowest epoch as base.
+ */
 var normalize = function normalize(cobiTrack) {
   var input = cobiTrack.mapKeys(Number.parseInt);
   var start = input.keySeq().min();
@@ -5113,8 +5124,10 @@ var normalize = function normalize(cobiTrack) {
   });
 };
 
-// check if there is any errors, returns null when no errors occurs
-// FIXME: see issue #2
+/**
+ * check if there is any errors on the gpx file, returns null when no errors occurs
+ * FIXME: see issue #2
+ */
 function gpxErrors(content) {
   var oParser = new DOMParser();
   var oDOM = oParser.parseFromString(content, 'text/xml');
@@ -5128,6 +5141,10 @@ function gpxErrors(content) {
   return null;
 }
 
+/**
+ * Adds the timeouts ids to the list of current running timeouts.
+ * Remove the previous timeouts if any exists
+ */
 var updateTimeouts = function updateTimeouts() {
   if (timeouts.count() !== 0) {
     timeouts.map(function (l) {
@@ -5142,6 +5159,9 @@ var updateTimeouts = function updateTimeouts() {
   timeouts = Immutable.List().push(ids);
 };
 
+/**
+ * are there any timeouts currently running?
+ */
 var waitingTimeouts = function waitingTimeouts() {
   return timeouts.count() !== 0;
 };
