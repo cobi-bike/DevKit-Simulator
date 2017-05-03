@@ -2,6 +2,7 @@
 
 const containsCOBIjs = 'COBI !== null && COBI !== undefined'
 const foreignLog = (v: any) => `console.info(${JSON.stringify(v)})`
+const foreignWarn = (v: any) => `console.warn("COBI simulator", ${JSON.stringify(v)})`
 const foreignError = (v: any) => `console.warn("COBI simulator - internal error", ${JSON.stringify(v)})`
 
 const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`
@@ -9,4 +10,5 @@ const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${
 module.exports.containsCOBIjs = containsCOBIjs
 module.exports.foreignLog = foreignLog
 module.exports.foreignError = foreignError
+module.exports.foreignWarn = foreignWarn
 module.exports.emitStr = emitStr

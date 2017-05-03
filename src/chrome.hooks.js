@@ -11,6 +11,20 @@ chrome.devtools.panels.create('COBI',
     'images/cobi-icon.png',
     'index.html',
     function (panel) {
+      let trackReader = new FileReader()
+      let gpxReader = new FileReader() // TODO
+      trackReader.onload = function (evt) {
+        const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
+        const normals = util.normalize(content)
+        if (util.waitingTimeouts()) {
+          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+        }
+        setUpFakeInput(normals)
+      }
+
+      let track = document.getElementById('input-track')
+      track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
+
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, result => { isEnabled.innerHTML = result })
@@ -20,30 +34,6 @@ chrome.devtools.panels.create('COBI',
       let tcRight = document.getElementById('tc-right')
       let tcLeft = document.getElementById('tc-left')
       let resultOut = document.getElementById('eval-output')
-
-      let reader = new FileReader()
-      reader.onload = function (evt) {
-        const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
-        const normals = util.normalize(content)
-
-        const emmiters = normals.map(v => {
-          const path = util.path(v.get('channel'), v.get('property'))
-          return emit.bind(null, path, v.get('payload'))
-        }).map(setTimeout)
-
-        const loggers = normals.map(v => {
-          const path = util.path(v.get('channel'), v.get('property'))
-          return log.bind(null, `${path} = ${v.get('payload')}`)
-        }).map(setTimeout)
-        // console.log(loggers.count)
-        // console.log(emmiters.count)
-      }
-
-      let input = document.getElementById('input-file')
-      input.addEventListener('change', function () {
-        reader.readAsText(input.files[0])
-      })
-
       tcUp.addEventListener('click', sendTcAction.bind(this, 'UP', resultOut))
       tcDown.addEventListener('click', sendTcAction.bind(this, 'DOWN', resultOut))
       tcLeft.addEventListener('click', sendTcAction.bind(this, 'LEFT', resultOut))
@@ -58,23 +48,25 @@ function sendTcAction (value, container) {
     })
 }
 
-const emit = function (path, value: Object, cb: (res: Object, err?: Object) => any) {
-  if (cb) {
-    return chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, cb)
-  }
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, onEvalError)
-}
-
-const log = function (s, cb: (res: Object, err?: Object) => any) {
-  if (cb) {
-    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, cb)
-  }
-  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, onEvalError)
-}
-
-// https://developer.chrome.com/extensions/devtools_inspectedWindow#method-eval
+// TODO: implement a proper error handling strategy
 const onEvalError = (result, isException) => {
   if (isException) {
     chrome.devtools.inspectedWindow.eval(meta.foreignError({result: result, msg: isException}))
   }
+}
+
+const setUpFakeInput = function (normals) {
+  const emmiters = normals.map(v => {
+    const path = util.path(v.get('channel'), v.get('property'))
+    const expression = meta.emitStr(path, v.get('payload'))
+    return () => chrome.devtools.inspectedWindow.eval(expression)
+  }).map(setTimeout)
+
+  const loggers = normals.map(v => {
+    const path = util.path(v.get('channel'), v.get('property'))
+    const expression = meta.foreignLog(`${path} = ${v.get('payload')}`)
+    return () => chrome.devtools.inspectedWindow.eval(expression)
+  }).map(setTimeout)
+
+  util.updateTimeouts(emmiters, loggers)
 }

@@ -4989,6 +4989,22 @@ var meta = require('./meta');
 var util = require('./utils');
 
 chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', function (panel) {
+  var trackReader = new FileReader();
+  var gpxReader = new FileReader(); // TODO
+  trackReader.onload = function (evt) {
+    var content = Immutable.fromJS(JSON.parse(evt.target.result));
+    var normals = util.normalize(content);
+    if (util.waitingTimeouts()) {
+      chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'));
+    }
+    setUpFakeInput(normals);
+  };
+
+  var track = document.getElementById('input-track');
+  track.addEventListener('change', function () {
+    return trackReader.readAsText(track.files[0]);
+  });
+
   // code invoked on panel creation
   var isEnabled = document.getElementById('is-cobi-supported');
   chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, function (result) {
@@ -5000,30 +5016,6 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
   var tcRight = document.getElementById('tc-right');
   var tcLeft = document.getElementById('tc-left');
   var resultOut = document.getElementById('eval-output');
-
-  var reader = new FileReader();
-  reader.onload = function (evt) {
-    var content = Immutable.fromJS(JSON.parse(evt.target.result));
-    var normals = util.normalize(content);
-
-    var emmiters = normals.map(function (v) {
-      var path = util.path(v.get('channel'), v.get('property'));
-      return emit.bind(null, path, v.get('payload'));
-    }).map(setTimeout);
-
-    var loggers = normals.map(function (v) {
-      var path = util.path(v.get('channel'), v.get('property'));
-      return log.bind(null, `${path} = ${v.get('payload')}`);
-    }).map(setTimeout);
-    // console.log(loggers.count)
-    // console.log(emmiters.count)
-  };
-
-  var input = document.getElementById('input-file');
-  input.addEventListener('change', function () {
-    reader.readAsText(input.files[0]);
-  });
-
   tcUp.addEventListener('click', sendTcAction.bind(this, 'UP', resultOut));
   tcDown.addEventListener('click', sendTcAction.bind(this, 'DOWN', resultOut));
   tcLeft.addEventListener('click', sendTcAction.bind(this, 'LEFT', resultOut));
@@ -5036,25 +5028,31 @@ function sendTcAction(value, container) {
   });
 }
 
-var emit = function emit(path, value, cb) {
-  if (cb) {
-    return chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, cb);
-  }
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, value), {}, onEvalError);
-};
-
-var log = function log(s, cb) {
-  if (cb) {
-    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, cb);
-  }
-  chrome.devtools.inspectedWindow.eval(meta.foreignLog(s), {}, onEvalError);
-};
-
-// https://developer.chrome.com/extensions/devtools_inspectedWindow#method-eval
+// TODO: implement a proper error handling strategy
 var onEvalError = function onEvalError(result, isException) {
   if (isException) {
     chrome.devtools.inspectedWindow.eval(meta.foreignError({ result: result, msg: isException }));
   }
+};
+
+var setUpFakeInput = function setUpFakeInput(normals) {
+  var emmiters = normals.map(function (v) {
+    var path = util.path(v.get('channel'), v.get('property'));
+    var expression = meta.emitStr(path, v.get('payload'));
+    return function () {
+      return chrome.devtools.inspectedWindow.eval(expression);
+    };
+  }).map(setTimeout);
+
+  var loggers = normals.map(function (v) {
+    var path = util.path(v.get('channel'), v.get('property'));
+    var expression = meta.foreignLog(`${path} = ${v.get('payload')}`);
+    return function () {
+      return chrome.devtools.inspectedWindow.eval(expression);
+    };
+  }).map(setTimeout);
+
+  util.updateTimeouts(emmiters, loggers);
 };
 
 },{"./meta":3,"./utils":4,"immutable":1}],3:[function(require,module,exports){
@@ -5063,6 +5061,9 @@ var onEvalError = function onEvalError(result, isException) {
 var containsCOBIjs = 'COBI !== null && COBI !== undefined';
 var foreignLog = function foreignLog(v) {
   return `console.info(${JSON.stringify(v)})`;
+};
+var foreignWarn = function foreignWarn(v) {
+  return `console.warn("COBI simulator", ${JSON.stringify(v)})`;
 };
 var foreignError = function foreignError(v) {
   return `console.warn("COBI simulator - internal error", ${JSON.stringify(v)})`;
@@ -5075,10 +5076,20 @@ var emitStr = function emitStr(path, value) {
 module.exports.containsCOBIjs = containsCOBIjs;
 module.exports.foreignLog = foreignLog;
 module.exports.foreignError = foreignError;
+module.exports.foreignWarn = foreignWarn;
 module.exports.emitStr = emitStr;
 
 },{}],4:[function(require,module,exports){
 'use strict';
+
+var Immutable = require('immutable');
+
+// holds current timeouts ids. Needed in case a user loads a new file
+// while already playing another one
+
+/* global FileReader:false */
+/* global DOMParser:false */
+var timeouts = Immutable.List();
 
 var path = function path(channel, property) {
   var ch = channel.indexOf('_') === 0 ? channel : toMixedCase(channel);
@@ -5086,7 +5097,6 @@ var path = function path(channel, property) {
 
   return `${ch}/${prop}`;
 };
-
 
 var toMixedCase = function toMixedCase(name) {
   var words = name.split('_').map(function (w) {
@@ -5103,8 +5113,44 @@ var normalize = function normalize(cobiTrack) {
   });
 };
 
+// check if there is any errors, returns null when no errors occurs
+// FIXME: see issue #2
+function gpxErrors(content) {
+  var oParser = new DOMParser();
+  var oDOM = oParser.parseFromString(content, 'text/xml');
+  // print the name of the root element or error message
+  if (oDOM.documentElement.nodeName === 'parsererror') {
+    return { 'msg': 'Input doesnt conforms with neither v1.1 nor v1.0 gpx schemas'
+      // v10: gpxV10Res,
+      // v11: gpxV11Res
+    };
+  }
+  return null;
+}
+
+var updateTimeouts = function updateTimeouts() {
+  if (timeouts.count() !== 0) {
+    timeouts.map(function (l) {
+      return l.map(clearTimeout);
+    });
+  }
+
+  for (var _len = arguments.length, ids = Array(_len), _key = 0; _key < _len; _key++) {
+    ids[_key] = arguments[_key];
+  }
+
+  timeouts = Immutable.List().push(ids);
+};
+
+var waitingTimeouts = function waitingTimeouts() {
+  return timeouts.count() !== 0;
+};
+
 module.exports.path = path;
 module.exports.toMixedCase = toMixedCase;
 module.exports.normalize = normalize;
+module.exports.gpxErrors = gpxErrors;
+module.exports.updateTimeouts = updateTimeouts;
+module.exports.waitingTimeouts = waitingTimeouts;
 
-},{}]},{},[2]);
+},{"immutable":1}]},{},[2]);
