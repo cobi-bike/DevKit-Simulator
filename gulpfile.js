@@ -20,6 +20,10 @@ const babelConfig = {
         'browsers': ['Chrome >= 43']}}]]}
 const bundle = function () {
   b.bundle()
+    .on('error', function (err) {
+      console.error(err.toString())
+      this.emit('end')
+    })
     .pipe(source(sourcesPath))
     .pipe(buffer())
     .pipe(concat('index.js')) // output filename
