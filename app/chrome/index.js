@@ -1,4 +1,891 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+},{}],2:[function(require,module,exports){
+/**
+* geoJSON validation according to the GeoJSON spefication Version 1
+* @module geoJSONValidation
+* @class Main
+* @exports {GJV} 
+*/
+
+(function(exports){
+
+    var definitions = {};
+
+    /**
+     * Test an object to see if it is a function
+     * @method isFunction 
+     * @param object {Object}
+     * @return {Boolean}
+     */
+    function isFunction(object) {
+        return typeof(object) == 'function';
+    }
+    
+    /**
+     * A truthy test for objects
+     * @method isObject
+     * @param {Object}
+     * @return {Boolean}
+     */
+    function isObject(object) {
+        return object === Object(object);
+    }
+
+    /**
+     * Formats error messages, calls the callback
+     * @method done
+     * @private
+     * @param cb {Function} callback
+     * @param [message] {Function} callback
+     * @return {Boolean} is the object valid or not?
+     */
+    function _done(cb, message){
+        var valid = false;
+
+        if(typeof message === "string"){
+            message = [message];
+
+        }else if( Object.prototype.toString.call( message ) === '[object Array]' ) {
+            if(message.length === 0){
+                valid = true;
+            }
+        }else{
+            valid = true;
+        }
+
+        if( isFunction(cb)){
+            if(valid){
+                cb(valid, []);
+            }else{
+                cb(valid, message);
+            }
+        }
+
+        return valid;
+    }
+
+    /**
+     * calls a custom definition if one is avalible for the given type
+     * @method _customDefinitions 
+     * @private
+     * @param type {"String"} a GeoJSON object type
+     * @param object {Object} the Object being tested 
+     * @return {Array} an array of errors
+     */
+    function _customDefinitions(type, object){
+
+        var errors;
+
+        if(isFunction(definitions[type])){
+            try{
+                errors = definitions[type](object);
+            }catch(e){
+                errors = ["Problem with custom definition for '" + type + ": " + e];
+            }
+            if(typeof result === "string"){
+                errors = [errors];
+            }
+            if(Object.prototype.toString.call( errors ) === '[object Array]'){
+                return errors;
+            }
+        }
+        return [];
+    }
+
+    /**
+     * Define a custom validation function for one of GeoJSON objects
+     * @method define 
+     * @param type {GeoJSON Type} the type 
+     * @param definition {Function} A validation function
+     * @return {Boolean} Return true if the function was loaded corectly else false
+     */
+    exports.define = function(type, definition){
+        if((type in all_types) && isFunction(definition)){
+            //TODO: check to see if the type is valid
+            definitions[type] = definition;
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Determines if an object is a position or not
+     * @method isPosition 
+     * @param position {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isPosition = function(position, cb){
+
+        var errors = [];
+
+        //It must be an array
+        if(Array.isArray(position)){
+            //and the array must have more than one element
+            if(position.length <= 1){
+                errors.push("Position must be at least two elements");
+            }
+        }else{
+            errors.push("Position must be an array");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("Position", position));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a GeoJSON Object or not
+     * @method isGeoJSONObject|valid
+     * @param geoJSONObject {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isGeoJSONObject = exports.valid = function(geoJSONObject, cb){
+
+        if(!isObject(geoJSONObject)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+        if('type' in geoJSONObject){
+            if(non_geo_types[geoJSONObject.type]){
+                return non_geo_types[geoJSONObject.type](geoJSONObject, cb);
+            }else if(geo_types[geoJSONObject.type]){
+                return geo_types[geoJSONObject.type](geoJSONObject, cb);
+            }else{
+                errors.push('type must be one of: "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection", "Feature", or "FeatureCollection"');
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("GeoJSONObject", geoJSONObject));
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a Geometry Object or not
+     * @method isGeometryObject
+     * @param geometryObject {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isGeometryObject = function(geometryObject, cb){
+
+        if(!isObject(geometryObject)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('type' in geometryObject){
+            if(geo_types[geometryObject.type]){
+                return geo_types[geometryObject.type](geometryObject, cb);
+            }else{
+                errors.push('type must be one of: "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon" or "GeometryCollection"');
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("GeometryObject", geometryObject));
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a Point or not
+     * @method isPoint
+     * @param point {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isPoint = function(point, cb) {
+
+        if(!isObject(point)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in point){
+            exports.isBbox(point.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in point){
+            if(point.type !== "Point"){
+                errors.push("type must be 'Point'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in point){
+            exports.isPosition(point.coordinates, function(valid, err){
+                if(!valid){
+                    errors.push('Coordinates must be a single position');
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("Point", point));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an array can be interperted as coordinates for a MultiPoint
+     * @method isMultiPointCoor
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiPointCoor = function(coordinates, cb) {
+
+        var errors = [];
+
+        if(Array.isArray(coordinates)){
+            coordinates.forEach(function(val, index){
+                exports.isPosition(val, function(valid, err){
+                    if(!valid){
+                        //modify the err msg from "isPosition" to note the element number
+                        err[0] = "at "+ index+ ": ".concat(err[0]);
+                        //build a list of invalide positions
+                        errors = errors.concat(err);
+                    }
+                });
+            });
+        }else{
+            errors.push("coordinates must be an array");
+        }
+
+        return _done(cb, errors);
+    };
+    /**
+     * Determines if an object is a MultiPoint or not
+     * @method isMultiPoint
+     * @param position {Object}
+     * @param cb {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiPoint = function(multiPoint, cb) {
+
+        if(!isObject(multiPoint)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in multiPoint){
+            exports.isBbox(multiPoint.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in multiPoint){
+            if(multiPoint.type !== "MultiPoint"){
+                errors.push("type must be 'MultiPoint'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in multiPoint){
+            exports.isMultiPointCoor(multiPoint.coordinates, function(valid, err){
+                if(!valid){
+                    errors =  errors.concat(err);
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("MultiPoint", multiPoint));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an array can be interperted as coordinates for a lineString
+     * @method isLineStringCoor
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isLineStringCoor = function(coordinates, cb) {
+
+        var errors = [];
+        if(Array.isArray(coordinates)){
+            if(coordinates.length > 1){
+                coordinates.forEach(function(val, index){
+                    exports.isPosition(val, function(valid, err){
+                        if(!valid){
+                            //modify the err msg from "isPosition" to note the element number
+                            err[0] = "at "+ index+ ": ".concat(err[0]);
+                            //build a list of invalide positions
+                            errors = errors.concat(err);
+                        }
+                    });
+                });
+            }else{
+                errors.push("coordinates must have at least two elements");
+            }
+        }else{
+            errors.push( "coordinates must be an array");
+        }
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a lineString or not
+     * @method isLineString
+     * @param lineString {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isLineString = function(lineString, cb){
+
+        if(!isObject(lineString)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in lineString){
+            exports.isBbox(lineString.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in lineString){
+            if(lineString.type !== "LineString"){
+                errors.push("type must be 'LineString'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in lineString){
+            exports.isLineStringCoor(lineString.coordinates, function(valid, err){
+                if(!valid){
+                    errors =  errors.concat(err);
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("LineString", lineString));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an array can be interperted as coordinates for a MultiLineString
+     * @method isMultiLineStringCoor
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiLineStringCoor = function(coordinates, cb) {
+        var errors = [];
+        if(Array.isArray(coordinates)){
+            coordinates.forEach(function(val, index){
+                exports.isLineStringCoor(val, function(valid, err){
+                    if(!valid){
+                        //modify the err msg from "isPosition" to note the element number
+                        err[0] = "at "+ index+ ": ".concat(err[0]);
+                        //build a list of invalide positions
+                        errors = errors.concat(err);
+                    }
+                });
+            });
+        }else{
+            errors.push("coordinates must be an array");
+        }
+        _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a MultiLine String or not
+     * @method isMultiLineString
+     * @param multilineString {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiLineString = function(multilineString, cb){
+
+        if(!isObject(multilineString)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in multilineString){
+            exports.isBbox(multilineString.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in multilineString){
+            if(multilineString.type !== "MultiLineString"){
+                errors.push("type must be 'MultiLineString'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in multilineString){
+            exports.isMultiLineStringCoor(multilineString.coordinates, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("MultiPoint", multilineString));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an array is a linear Ring String or not
+     * @method isMultiLineString
+     * @private
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    function _linearRingCoor(coordinates, cb) {
+
+        var errors = [];
+        if(Array.isArray(coordinates)){
+            //4 or more positions
+
+            coordinates.forEach(function(val, index){
+                exports.isPosition(val, function(valid, err){
+                    if(!valid){
+                        //modify the err msg from "isPosition" to note the element number
+                        err[0] = "at "+ index+ ": ".concat(err[0]);
+                        //build a list of invalide positions
+                        errors = errors.concat(err);
+                    }
+                });
+            });
+
+            // check the first and last positions to see if they are equivalent
+            // TODO: maybe better checking?
+            if(coordinates[0].toString() !== coordinates[coordinates.length -1 ].toString()){
+                errors.push( "The first and last positions must be equivalent");
+            }
+
+            if(coordinates.length < 4){
+                errors.push("coordinates must have at least four positions");
+            }
+        }else{
+            errors.push("coordinates must be an array");
+        }
+
+        return _done(cb, errors);
+    }
+
+    /**
+     * Determines if an array is valid Polygon Coordinates or not
+     * @method _polygonCoor
+     * @private
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isPolygonCoor = function (coordinates, cb){
+
+        var errors = [];
+        if(Array.isArray(coordinates)){
+            coordinates.forEach(function(val, index){
+                _linearRingCoor(val, function(valid, err){
+                    if(!valid){
+                        //modify the err msg from "isPosition" to note the element number
+                        err[0] = "at "+ index+ ": ".concat(err[0]);
+                        //build a list of invalid positions
+                        errors = errors.concat(err);
+                    }
+                });
+            });
+        }else{
+            errors.push("coordinates must be an array");
+        }
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid Polygon
+     * @method isPolygon
+     * @param polygon {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isPolygon = function(polygon, cb){
+
+        if(!isObject(polygon)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in polygon){
+            exports.isBbox(polygon.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in polygon){
+            if(polygon.type !== "Polygon"){
+                errors.push("type must be 'Polygon'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in polygon){
+            exports.isPolygonCoor(polygon.coordinates, function(valid, err) {
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("Polygon", polygon));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an array can be interperted as coordinates for a MultiPolygon
+     * @method isMultiPolygonCoor
+     * @param coordinates {Array}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiPolygonCoor = function(coordinates, cb) {
+        var errors = [];
+        if(Array.isArray(coordinates)){
+            coordinates.forEach(function(val, index){
+                exports.isPolygonCoor(val, function(valid, err){
+                    if(!valid){
+                        //modify the err msg from "isPosition" to note the element number
+                        err[0] = "at "+ index+ ": ".concat(err[0]);
+                        //build a list of invalide positions
+                        errors = errors.concat(err);
+                    }
+                });
+            });
+        }else{
+            errors.push("coordinates must be an array");
+        }
+
+        _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid MultiPolygon
+     * @method isMultiPolygon
+     * @param multiPolygon {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isMultiPolygon = function(multiPolygon, cb){
+
+        if(!isObject(multiPolygon)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in multiPolygon){
+            exports.isBbox(multiPolygon.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in multiPolygon){
+            if(multiPolygon.type !== "MultiPolygon"){
+                errors.push("type must be 'MultiPolygon'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('coordinates' in multiPolygon){
+            exports.isMultiPolygonCoor(multiPolygon.coordinates, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }else{
+            errors.push("must have a member with the name 'coordinates'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("MultiPolygon", multiPolygon));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid Geometry Collection
+     * @method isGeometryCollection
+     * @param geometryCollection {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isGeometryCollection = function(geometryCollection, cb){
+
+        if(!isObject(geometryCollection)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in geometryCollection){
+            exports.isBbox(geometryCollection.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in geometryCollection){
+            if(geometryCollection.type !== "GeometryCollection"){
+                errors.push("type must be 'GeometryCollection'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('geometries' in geometryCollection){
+            if(Array.isArray(geometryCollection.geometries)){
+                geometryCollection.geometries.forEach(function(val, index){
+                    exports.isGeometryObject(val, function(valid, err){
+                        if(!valid){
+                            //modify the err msg from "isPosition" to note the element number
+                            err[0] = "at "+ index+ ": ".concat(err[0]);
+                            //build a list of invalide positions
+                            errors = errors.concat(err);
+                        }
+                    });
+                });
+            }else{
+                errors.push("'geometries' must be an array");
+            }
+        }else{
+            errors.push("must have a member with the name 'geometries'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("GeometryCollection", geometryCollection));
+
+        return _done( cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid Feature
+     * @method isFeature
+     * @param feature {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isFeature = function(feature, cb){
+
+        if(!isObject(feature)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in feature){
+            exports.isBbox(feature.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in feature){
+            if(feature.type !== "Feature"){
+                errors.push("type must be 'feature'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if(!('properties' in feature)){
+            errors.push("must have a member with the name 'properties'");
+        }
+
+        if('geometry' in feature){
+            if(feature.geometry !== null){
+                exports.isGeometryObject(feature.geometry, function(valid, err){
+                    if(!valid){
+                        errors = errors.concat(err);
+                    }
+                });
+            }
+        }else{
+            errors.push("must have a member with the name 'geometry'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("Feature", feature));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid Feature Collection
+     * @method isFeatureCollection
+     * @param featureCollection {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isFeatureCollection = function(featureCollection, cb){
+
+        if(!isObject(featureCollection)){
+            return _done(cb, ['must be a JSON Object']);
+        }
+
+        var errors = [];
+
+        if('bbox' in featureCollection){
+            exports.isBbox(featureCollection.bbox, function(valid, err){
+                if(!valid){
+                    errors = errors.concat(err);
+                }
+            });
+        }
+
+        if('type' in featureCollection){
+            if(featureCollection.type !== "FeatureCollection"){
+                errors.push("type must be 'FeatureCollection'");
+            }
+        }else{
+            errors.push("must have a member with the name 'type'");
+        }
+
+        if('features' in featureCollection){
+            if(Array.isArray(featureCollection.features)){
+                featureCollection.features.forEach(function(val, index){
+                    exports.isFeature(val, function(valid, err){
+                        if(!valid){
+                            //modify the err msg from "isPosition" to note the element number
+                            err[0] = "at "+ index+ ": ".concat(err[0]);
+                            //build a list of invalide positions
+                            errors = errors.concat(err);
+                        }
+                    });
+                });
+            }else{
+                errors.push("'features' must be an array");
+            }
+        }else{
+            errors.push("must have a member with the name 'features'");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("FeatureCollection", featureCollection));
+
+        return _done(cb, errors);
+    };
+
+    /**
+     * Determines if an object is a valid Bounding Box
+     * @method isBbox
+     * @param bbox {Object}
+     * @param [cb] {Function} the callback
+     * @return {Boolean}
+     */
+    exports.isBbox = function(bbox, cb){
+        var errors = [];
+        if(Array.isArray(bbox)){
+            if(bbox.length % 2 !== 0){
+                errors.push("bbox, must be a 2*n array");
+            }
+        }else{
+            errors.push("bbox must be an array");
+        }
+
+        //run custom checks
+        errors = errors.concat(_customDefinitions("Bbox", bbox));
+
+        _done(cb,errors);
+    };
+
+    var non_geo_types = {
+        "Feature": exports.isFeature,
+        "FeatureCollection": exports.isFeatureCollection
+    },
+
+    geo_types = {
+        "Point": exports.isPoint,
+        "MultiPoint": exports.isMultiPoint,
+        "LineString": exports.isLineString,
+        "MultiLineString": exports.isMultiLineString,
+        "Polygon": exports.isPolygon,
+        "MultiPolygon": exports.isMultiPolygon,
+        "GeometryCollection": exports.isGeometryCollection,
+    },
+
+    all_types = {
+        "Feature": exports.isFeature,
+        "FeatureCollection": exports.isFeatureCollection,
+        "Point": exports.isPoint,
+        "MultiPoint": exports.isMultiPoint,
+        "LineString": exports.isLineString,
+        "MultiLineString": exports.isMultiLineString,
+        "Polygon": exports.isPolygon,
+        "MultiPolygon": exports.isMultiPolygon,
+        "GeometryCollection": exports.isGeometryCollection,
+        "Bbox": exports.isBox,
+        "Position": exports.isPosition,
+        "GeoJSON": exports.isGeoJSONObject,
+        "GeometryObject": exports.isGeometryObject
+    };
+
+    exports.all_types = all_types;
+
+})(typeof exports === 'undefined'? this['GJV']={}: exports);
+
+},{}],3:[function(require,module,exports){
 /**
  *  Copyright (c) 2014-2015, Facebook, Inc.
  *  All rights reserved.
@@ -4978,16 +5865,609 @@
   return Immutable;
 
 }));
-},{}],2:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],5:[function(require,module,exports){
+(function (process){
+var toGeoJSON = (function() {
+    'use strict';
+
+    var removeSpace = /\s*/g,
+        trimSpace = /^\s*|\s*$/g,
+        splitSpace = /\s+/;
+    // generate a short, numeric hash of a string
+    function okhash(x) {
+        if (!x || !x.length) return 0;
+        for (var i = 0, h = 0; i < x.length; i++) {
+            h = ((h << 5) - h) + x.charCodeAt(i) | 0;
+        } return h;
+    }
+    // all Y children of X
+    function get(x, y) { return x.getElementsByTagName(y); }
+    function attr(x, y) { return x.getAttribute(y); }
+    function attrf(x, y) { return parseFloat(attr(x, y)); }
+    // one Y child of X, if any, otherwise null
+    function get1(x, y) { var n = get(x, y); return n.length ? n[0] : null; }
+    // https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
+    function norm(el) { if (el.normalize) { el.normalize(); } return el; }
+    // cast array x into numbers
+    function numarray(x) {
+        for (var j = 0, o = []; j < x.length; j++) { o[j] = parseFloat(x[j]); }
+        return o;
+    }
+    // get the content of a text node, if any
+    function nodeVal(x) {
+        if (x) { norm(x); }
+        return (x && x.textContent) || '';
+    }
+    // get the contents of multiple text nodes, if present
+    function getMulti(x, ys) {
+        var o = {}, n, k;
+        for (k = 0; k < ys.length; k++) {
+            n = get1(x, ys[k]);
+            if (n) o[ys[k]] = nodeVal(n);
+        }
+        return o;
+    }
+    // add properties of Y to X, overwriting if present in both
+    function extend(x, y) { for (var k in y) x[k] = y[k]; }
+    // get one coordinate from a coordinate array, if any
+    function coord1(v) { return numarray(v.replace(removeSpace, '').split(',')); }
+    // get all coordinates from a coordinate array as [[],[]]
+    function coord(v) {
+        var coords = v.replace(trimSpace, '').split(splitSpace),
+            o = [];
+        for (var i = 0; i < coords.length; i++) {
+            o.push(coord1(coords[i]));
+        }
+        return o;
+    }
+    function coordPair(x) {
+        var ll = [attrf(x, 'lon'), attrf(x, 'lat')],
+            ele = get1(x, 'ele'),
+            // handle namespaced attribute in browser
+            heartRate = get1(x, 'gpxtpx:hr') || get1(x, 'hr'),
+            time = get1(x, 'time'),
+            e;
+        if (ele) {
+            e = parseFloat(nodeVal(ele));
+            if (!isNaN(e)) {
+                ll.push(e);
+            }
+        }
+        return {
+            coordinates: ll,
+            time: time ? nodeVal(time) : null,
+            heartRate: heartRate ? parseFloat(nodeVal(heartRate)) : null
+        };
+    }
+
+    // create a new feature collection parent object
+    function fc() {
+        return {
+            type: 'FeatureCollection',
+            features: []
+        };
+    }
+
+    var serializer;
+    if (typeof XMLSerializer !== 'undefined') {
+        /* istanbul ignore next */
+        serializer = new XMLSerializer();
+    // only require xmldom in a node environment
+    } else if (typeof exports === 'object' && typeof process === 'object' && !process.browser) {
+        serializer = new (require('xmldom').XMLSerializer)();
+    }
+    function xml2str(str) {
+        // IE9 will create a new XMLSerializer but it'll crash immediately.
+        // This line is ignored because we don't run coverage tests in IE9
+        /* istanbul ignore next */
+        if (str.xml !== undefined) return str.xml;
+        return serializer.serializeToString(str);
+    }
+
+    var t = {
+        kml: function(doc) {
+
+            var gj = fc(),
+                // styleindex keeps track of hashed styles in order to match features
+                styleIndex = {}, styleByHash = {},
+                // stylemapindex keeps track of style maps to expose in properties
+                styleMapIndex = {},
+                // atomic geospatial types supported by KML - MultiGeometry is
+                // handled separately
+                geotypes = ['Polygon', 'LineString', 'Point', 'Track', 'gx:Track'],
+                // all root placemarks in the file
+                placemarks = get(doc, 'Placemark'),
+                styles = get(doc, 'Style'),
+                styleMaps = get(doc, 'StyleMap');
+
+            for (var k = 0; k < styles.length; k++) {
+                var hash = okhash(xml2str(styles[k])).toString(16);
+                styleIndex['#' + attr(styles[k], 'id')] = hash;
+                styleByHash[hash] = styles[k];
+            }
+            for (var l = 0; l < styleMaps.length; l++) {
+                styleIndex['#' + attr(styleMaps[l], 'id')] = okhash(xml2str(styleMaps[l])).toString(16);
+                var pairs = get(styleMaps[l], 'Pair');
+                var pairsMap = {};
+                for (var m = 0; m < pairs.length; m++) {
+                    pairsMap[nodeVal(get1(pairs[m], 'key'))] = nodeVal(get1(pairs[m], 'styleUrl'));
+                }
+                styleMapIndex['#' + attr(styleMaps[l], 'id')] = pairsMap;
+
+            }
+            for (var j = 0; j < placemarks.length; j++) {
+                gj.features = gj.features.concat(getPlacemark(placemarks[j]));
+            }
+            function kmlColor(v) {
+                var color, opacity;
+                v = v || '';
+                if (v.substr(0, 1) === '#') { v = v.substr(1); }
+                if (v.length === 6 || v.length === 3) { color = v; }
+                if (v.length === 8) {
+                    opacity = parseInt(v.substr(0, 2), 16) / 255;
+                    color = '#' + v.substr(6, 2) +
+                        v.substr(4, 2) +
+                        v.substr(2, 2);
+                }
+                return [color, isNaN(opacity) ? undefined : opacity];
+            }
+            function gxCoord(v) { return numarray(v.split(' ')); }
+            function gxCoords(root) {
+                var elems = get(root, 'coord', 'gx'), coords = [], times = [];
+                if (elems.length === 0) elems = get(root, 'gx:coord');
+                for (var i = 0; i < elems.length; i++) coords.push(gxCoord(nodeVal(elems[i])));
+                var timeElems = get(root, 'when');
+                for (var j = 0; j < timeElems.length; j++) times.push(nodeVal(timeElems[j]));
+                return {
+                    coords: coords,
+                    times: times
+                };
+            }
+            function getGeometry(root) {
+                var geomNode, geomNodes, i, j, k, geoms = [], coordTimes = [];
+                if (get1(root, 'MultiGeometry')) { return getGeometry(get1(root, 'MultiGeometry')); }
+                if (get1(root, 'MultiTrack')) { return getGeometry(get1(root, 'MultiTrack')); }
+                if (get1(root, 'gx:MultiTrack')) { return getGeometry(get1(root, 'gx:MultiTrack')); }
+                for (i = 0; i < geotypes.length; i++) {
+                    geomNodes = get(root, geotypes[i]);
+                    if (geomNodes) {
+                        for (j = 0; j < geomNodes.length; j++) {
+                            geomNode = geomNodes[j];
+                            if (geotypes[i] === 'Point') {
+                                geoms.push({
+                                    type: 'Point',
+                                    coordinates: coord1(nodeVal(get1(geomNode, 'coordinates')))
+                                });
+                            } else if (geotypes[i] === 'LineString') {
+                                geoms.push({
+                                    type: 'LineString',
+                                    coordinates: coord(nodeVal(get1(geomNode, 'coordinates')))
+                                });
+                            } else if (geotypes[i] === 'Polygon') {
+                                var rings = get(geomNode, 'LinearRing'),
+                                    coords = [];
+                                for (k = 0; k < rings.length; k++) {
+                                    coords.push(coord(nodeVal(get1(rings[k], 'coordinates'))));
+                                }
+                                geoms.push({
+                                    type: 'Polygon',
+                                    coordinates: coords
+                                });
+                            } else if (geotypes[i] === 'Track' ||
+                                geotypes[i] === 'gx:Track') {
+                                var track = gxCoords(geomNode);
+                                geoms.push({
+                                    type: 'LineString',
+                                    coordinates: track.coords
+                                });
+                                if (track.times.length) coordTimes.push(track.times);
+                            }
+                        }
+                    }
+                }
+                return {
+                    geoms: geoms,
+                    coordTimes: coordTimes
+                };
+            }
+            function getPlacemark(root) {
+                var geomsAndTimes = getGeometry(root), i, properties = {},
+                    name = nodeVal(get1(root, 'name')),
+                    styleUrl = nodeVal(get1(root, 'styleUrl')),
+                    description = nodeVal(get1(root, 'description')),
+                    timeSpan = get1(root, 'TimeSpan'),
+                    timeStamp = get1(root, 'TimeStamp'),
+                    extendedData = get1(root, 'ExtendedData'),
+                    lineStyle = get1(root, 'LineStyle'),
+                    polyStyle = get1(root, 'PolyStyle'),
+                    visibility = get1(root, 'visibility');
+
+                if (!geomsAndTimes.geoms.length) return [];
+                if (name) properties.name = name;
+                if (styleUrl) {
+                    if (styleUrl[0] !== '#') {
+                        styleUrl = '#' + styleUrl;
+                    }
+
+                    properties.styleUrl = styleUrl;
+                    if (styleIndex[styleUrl]) {
+                        properties.styleHash = styleIndex[styleUrl];
+                    }
+                    if (styleMapIndex[styleUrl]) {
+                        properties.styleMapHash = styleMapIndex[styleUrl];
+                        properties.styleHash = styleIndex[styleMapIndex[styleUrl].normal];
+                    }
+                    // Try to populate the lineStyle or polyStyle since we got the style hash
+                    var style = styleByHash[properties.styleHash];
+                    if (style) {
+                        if (!lineStyle) lineStyle = get1(style, 'LineStyle');
+                        if (!polyStyle) polyStyle = get1(style, 'PolyStyle');
+                    }
+                }
+                if (description) properties.description = description;
+                if (timeSpan) {
+                    var begin = nodeVal(get1(timeSpan, 'begin'));
+                    var end = nodeVal(get1(timeSpan, 'end'));
+                    properties.timespan = { begin: begin, end: end };
+                }
+                if (timeStamp) {
+                    properties.timestamp = nodeVal(get1(timeStamp, 'when'));
+                }
+                if (lineStyle) {
+                    var linestyles = kmlColor(nodeVal(get1(lineStyle, 'color'))),
+                        color = linestyles[0],
+                        opacity = linestyles[1],
+                        width = parseFloat(nodeVal(get1(lineStyle, 'width')));
+                    if (color) properties.stroke = color;
+                    if (!isNaN(opacity)) properties['stroke-opacity'] = opacity;
+                    if (!isNaN(width)) properties['stroke-width'] = width;
+                }
+                if (polyStyle) {
+                    var polystyles = kmlColor(nodeVal(get1(polyStyle, 'color'))),
+                        pcolor = polystyles[0],
+                        popacity = polystyles[1],
+                        fill = nodeVal(get1(polyStyle, 'fill')),
+                        outline = nodeVal(get1(polyStyle, 'outline'));
+                    if (pcolor) properties.fill = pcolor;
+                    if (!isNaN(popacity)) properties['fill-opacity'] = popacity;
+                    if (fill) properties['fill-opacity'] = fill === '1' ? properties['fill-opacity'] || 1 : 0;
+                    if (outline) properties['stroke-opacity'] = outline === '1' ? properties['stroke-opacity'] || 1 : 0;
+                }
+                if (extendedData) {
+                    var datas = get(extendedData, 'Data'),
+                        simpleDatas = get(extendedData, 'SimpleData');
+
+                    for (i = 0; i < datas.length; i++) {
+                        properties[datas[i].getAttribute('name')] = nodeVal(get1(datas[i], 'value'));
+                    }
+                    for (i = 0; i < simpleDatas.length; i++) {
+                        properties[simpleDatas[i].getAttribute('name')] = nodeVal(simpleDatas[i]);
+                    }
+                }
+                if (visibility) {
+                    properties.visibility = nodeVal(visibility);
+                }
+                if (geomsAndTimes.coordTimes.length) {
+                    properties.coordTimes = (geomsAndTimes.coordTimes.length === 1) ?
+                        geomsAndTimes.coordTimes[0] : geomsAndTimes.coordTimes;
+                }
+                var feature = {
+                    type: 'Feature',
+                    geometry: (geomsAndTimes.geoms.length === 1) ? geomsAndTimes.geoms[0] : {
+                        type: 'GeometryCollection',
+                        geometries: geomsAndTimes.geoms
+                    },
+                    properties: properties
+                };
+                if (attr(root, 'id')) feature.id = attr(root, 'id');
+                return [feature];
+            }
+            return gj;
+        },
+        gpx: function(doc) {
+            var i,
+                tracks = get(doc, 'trk'),
+                routes = get(doc, 'rte'),
+                waypoints = get(doc, 'wpt'),
+                // a feature collection
+                gj = fc(),
+                feature;
+            for (i = 0; i < tracks.length; i++) {
+                feature = getTrack(tracks[i]);
+                if (feature) gj.features.push(feature);
+            }
+            for (i = 0; i < routes.length; i++) {
+                feature = getRoute(routes[i]);
+                if (feature) gj.features.push(feature);
+            }
+            for (i = 0; i < waypoints.length; i++) {
+                gj.features.push(getPoint(waypoints[i]));
+            }
+            function getPoints(node, pointname) {
+                var pts = get(node, pointname),
+                    line = [],
+                    times = [],
+                    heartRates = [],
+                    l = pts.length;
+                if (l < 2) return {};  // Invalid line in GeoJSON
+                for (var i = 0; i < l; i++) {
+                    var c = coordPair(pts[i]);
+                    line.push(c.coordinates);
+                    if (c.time) times.push(c.time);
+                    if (c.heartRate) heartRates.push(c.heartRate);
+                }
+                return {
+                    line: line,
+                    times: times,
+                    heartRates: heartRates
+                };
+            }
+            function getTrack(node) {
+                var segments = get(node, 'trkseg'),
+                    track = [],
+                    times = [],
+                    heartRates = [],
+                    line;
+                for (var i = 0; i < segments.length; i++) {
+                    line = getPoints(segments[i], 'trkpt');
+                    if (line) {
+                        if (line.line) track.push(line.line);
+                        if (line.times && line.times.length) times.push(line.times);
+                        if (line.heartRates && line.heartRates.length) heartRates.push(line.heartRates);
+                    }
+                }
+                if (track.length === 0) return;
+                var properties = getProperties(node);
+                if (times.length) properties.coordTimes = track.length === 1 ? times[0] : times;
+                if (heartRates.length) properties.heartRates = track.length === 1 ? heartRates[0] : heartRates;
+                return {
+                    type: 'Feature',
+                    properties: properties,
+                    geometry: {
+                        type: track.length === 1 ? 'LineString' : 'MultiLineString',
+                        coordinates: track.length === 1 ? track[0] : track
+                    }
+                };
+            }
+            function getRoute(node) {
+                var line = getPoints(node, 'rtept');
+                if (!line.line) return;
+                var routeObj = {
+                    type: 'Feature',
+                    properties: getProperties(node),
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: line.line
+                    }
+                };
+                return routeObj;
+            }
+            function getPoint(node) {
+                var prop = getProperties(node);
+                extend(prop, getMulti(node, ['sym', 'type']));
+                return {
+                    type: 'Feature',
+                    properties: prop,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: coordPair(node).coordinates
+                    }
+                };
+            }
+            function getProperties(node) {
+                var prop, links;
+                prop = getMulti(node, ['name', 'cmt', 'desc', 'time', 'keywords']);
+                links = get(node, 'link');
+                if (links.length) prop.links = [];
+                for (var i = 0, link; i < links.length; i++) {
+                    link = { href: attr(links[i], 'href') };
+                    extend(link, getMulti(links[i], ['text', 'type']));
+                    prop.links.push(link);
+                }
+                return prop;
+            }
+            return gj;
+        }
+    };
+    return t;
+})();
+
+if (typeof module !== 'undefined') module.exports = toGeoJSON;
+
+}).call(this,require('_process'))
+},{"_process":4,"xmldom":1}],6:[function(require,module,exports){
 'use strict';
 
-var Immutable = require('immutable');
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
-
+var Immutable = require('immutable');
 var meta = require('./meta');
 var util = require('./utils');
+var toGeoJSON = require('togeojson');
+var GJV = require('geojson-validation');
 
 chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', function (panel) {
   var trackReader = new FileReader();
@@ -5001,6 +6481,7 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
     }
     setUpFakeInput(normals);
   };
+
   gpxReader.onload = function (evt) {
     var parser = new DOMParser();
     var content = parser.parseFromString(evt.target.result, 'application/xml');
@@ -5009,7 +6490,15 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
     if (errors !== null) {
       return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`));
     }
-    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(content));
+
+    var geojson = toGeoJSON.gpx(content);
+    if (!GJV.valid(geojson)) {
+      return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid geojson`));
+    }
+    if (!GJV.isFeatureCollection(geojson)) {
+      return chrome.devtools.inspectedWindow.eval(meta.foreignError(`not a geojson feature collection`));
+    }
+    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(util.geoToTrack(geojson)));
     /*
     const normals = util.normalize(content)
     if (util.waitingTimeouts()) {
@@ -5079,7 +6568,7 @@ var setUpFakeInput = function setUpFakeInput(normals) {
   util.updateTimeouts(emmiters, loggers);
 };
 
-},{"./meta":3,"./utils":4,"immutable":1}],3:[function(require,module,exports){
+},{"./meta":7,"./utils":8,"geojson-validation":2,"immutable":3,"togeojson":5}],7:[function(require,module,exports){
 'use strict';
 
 var containsCOBIjs = 'COBI !== null && COBI !== undefined';
@@ -5103,15 +6592,16 @@ module.exports.foreignError = foreignError;
 module.exports.foreignWarn = foreignWarn;
 module.exports.emitStr = emitStr;
 
-},{}],4:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Immutable = require('immutable');
+var GJV = require('geojson-validation');
 
 // holds current timeouts ids. Needed in case a user loads a new file
 // while already playing another one
-
-/* global DOMParser:false */
 var timeouts = Immutable.List();
 
 /**
@@ -5137,7 +6627,7 @@ var toMixedCase = function toMixedCase(name) {
 };
 
 /**
- * converts an log of COBI Bus events from their absolute epoch value
+ * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
 var normalize = function normalize(cobiTrack) {
@@ -5148,8 +6638,42 @@ var normalize = function normalize(cobiTrack) {
   });
 };
 
-var gpxToTrack = function gpxToTrack(doc) {
-  return doc;
+/**
+ * converts a geojson FeatureCollection into
+ */
+var geoToTrack = function geoToTrack(geojson) {
+  // get the first linestring inside the feature collection
+  var geoTrack = geojson.features.find(function (v) {
+    return GJV.isFeature(v) && GJV.isLineString(v.geometry) && v.properties && v.properties.coordTimes && v.geometry && v.geometry.coordinates && v.properties.coordTimes.length === v.geometry.coordinates.length;
+  });
+
+  var times = Immutable.List(geoTrack.properties.coordTimes).map(Date.parse);
+  var start = times.first();
+  var ntimes = times.map(function (v) {
+    return v - start;
+  });
+
+  var msgs = Immutable.fromJS(geoTrack.geometry.coordinates).map(function (v) {
+    return partialMobileLocation(v.get(0), v.get(1));
+  });
+  return ntimes.zipWith(function (t, m) {
+    return Immutable.Map(_defineProperty({}, t, m));
+  }, msgs);
+};
+
+var partialMobileLocation = function partialMobileLocation(latitude, longitude) {
+  return Immutable.Map({
+    'action': 'NOTIFY',
+    'channel': 'MOBILE',
+    'property': 'LOCATION',
+    'payload': Immutable.Map({
+      'altitude': 0,
+      'bearing': 0,
+      'latitude': latitude,
+      'longitude': longitude,
+      'speed': 0
+    })
+  });
 };
 
 /**
@@ -5195,9 +6719,9 @@ var waitingTimeouts = function waitingTimeouts() {
 module.exports.path = path;
 module.exports.toMixedCase = toMixedCase;
 module.exports.normalize = normalize;
-module.exports.gpxToTrack = gpxToTrack;
+module.exports.geoToTrack = geoToTrack;
 module.exports.gpxErrors = gpxErrors;
 module.exports.updateTimeouts = updateTimeouts;
 module.exports.waitingTimeouts = waitingTimeouts;
 
-},{"immutable":1}]},{},[2]);
+},{"geojson-validation":2,"immutable":3}]},{},[6]);

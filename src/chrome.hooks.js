@@ -3,10 +3,13 @@
 /* global FileReader:false */
 /* global DOMParser:false */
 import type {Map} from 'immutable'
+import type {GeoJSONObject} from 'geojson-flow'
 
 const Immutable = require('immutable')
 const meta = require('./meta')
 const util = require('./utils')
+const toGeoJSON = require('togeojson')
+const GJV = require('geojson-validation')
 
 chrome.devtools.panels.create('COBI',
     'images/cobi-icon.png',
@@ -23,6 +26,7 @@ chrome.devtools.panels.create('COBI',
         }
         setUpFakeInput(normals)
       }
+
       gpxReader.onload = function (evt) {
         const parser = new DOMParser()
         const content = parser.parseFromString(evt.target.result, 'application/xml')
@@ -31,7 +35,15 @@ chrome.devtools.panels.create('COBI',
         if (errors !== null) {
           return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`))
         }
-        return chrome.devtools.inspectedWindow.eval(meta.foreignLog(content))
+
+        const geojson: GeoJSONObject = toGeoJSON.gpx(content)
+        if (!GJV.valid(geojson)) {
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid geojson`))
+        }
+        if (!GJV.isFeatureCollection(geojson)) {
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`not a geojson feature collection`))
+        }
+        return chrome.devtools.inspectedWindow.eval(meta.foreignLog(util.geoToTrack(geojson)))
         /*
         const normals = util.normalize(content)
         if (util.waitingTimeouts()) {
