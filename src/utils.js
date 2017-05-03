@@ -1,7 +1,9 @@
 // @flow
-/* global DOMParser:false */
 import type {Map, List} from 'immutable'
+import type {FeatureCollection, Feature, LineString} from 'geojson-flow'
+
 const Immutable = require('immutable')
+const GJV = require('geojson-validation')
 
 // holds current timeouts ids. Needed in case a user loads a new file
 // while already playing another one
@@ -29,7 +31,7 @@ const toMixedCase = function (name: string) {
 }
 
 /**
- * converts an log of COBI Bus events from their absolute epoch value
+ * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
 const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
@@ -38,8 +40,39 @@ const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
   return input.mapKeys(k => k - start)
 }
 
-const gpxToTrack = function (doc: Document) {
-  return doc
+/**
+ * converts a geojson FeatureCollection into
+ */
+const geoToTrack = function (geojson: FeatureCollection) {
+  // get the first linestring inside the feature collection
+  const geoTrack: ?Feature = geojson.features.find(v => {
+    return GJV.isFeature(v) && GJV.isLineString(v.geometry) && v.properties &&
+          v.properties.coordTimes && v.geometry && v.geometry.coordinates &&
+          v.properties.coordTimes.length === v.geometry.coordinates.length
+  })
+
+  const times = Immutable.List(geoTrack.properties.coordTimes).map(Date.parse)
+  const start = times.first()
+  const ntimes = times.map(v => v - start)
+
+  const msgs = Immutable.fromJS(geoTrack.geometry.coordinates)
+                        .map(v => partialMobileLocation(v.get(0), v.get(1)))
+  return ntimes.zipWith((t, m) => Immutable.Map({[t]: m}), msgs)
+}
+
+const partialMobileLocation = function (latitude: number, longitude: number) {
+  return Immutable.Map({
+    'action': 'NOTIFY',
+    'channel': 'MOBILE',
+    'property': 'LOCATION',
+    'payload': Immutable.Map({
+      'altitude': 0,
+      'bearing': 0,
+      'latitude': latitude,
+      'longitude': longitude,
+      'speed': 0
+    })
+  })
 }
 
 /**
@@ -78,7 +111,7 @@ const waitingTimeouts = function () {
 module.exports.path = path
 module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
-module.exports.gpxToTrack = gpxToTrack
+module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
 module.exports.updateTimeouts = updateTimeouts
 module.exports.waitingTimeouts = waitingTimeouts
