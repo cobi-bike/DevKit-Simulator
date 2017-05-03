@@ -4,7 +4,7 @@
   "description": "COBI simulator to help you test your Jetpack app",
   "scripts": {
     "test": "flow && eslint",
-    "build": "flow && gulp default && npm run docs",
+    "build": "npm run docs && npm run remove-types",
     "prepublish": "npm run build",
     "flow": "flow",
     "gulp": "gulp",
@@ -19,6 +19,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-flow": "^6.23.0",
     "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
     "browserify": "^14.3.0",
     "documentation": "^4.0.0-rc.0",
     "eslint": "^3.19.0",
@@ -30,6 +31,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.44.2",
     "flow-interfaces-chrome": "^0.3.1",
+    "geojson-flow": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "vinyl-buffer": "^1.0.0",
@@ -44,6 +46,8 @@
     "devtools"
   ],
   "dependencies": {
-    "immutable": "^3.8.1"
+    "geojson-validation": "^0.1.6",
+    "immutable": "^3.8.1",
+    "togeojson": "^0.16.0"
   }
 }
