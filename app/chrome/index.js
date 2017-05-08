@@ -6488,7 +6488,7 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
 
     var errors = util.gpxErrors(content);
     if (errors !== null) {
-      return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`));
+      return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`));
     }
 
     var geojson = toGeoJSON.gpx(content);
@@ -6545,12 +6545,13 @@ function sendTcAction(value, container) {
   });
 }
 
-// TODO: implement a proper error handling strategy
-var onEvalError = function onEvalError(result, isException) {
+/* TODO: implement a proper error handling strategy
+const onEvalError = (result, isException) => {
   if (isException) {
-    chrome.devtools.inspectedWindow.eval(meta.foreignError({ result: result, msg: isException }));
+    chrome.devtools.inspectedWindow.eval(meta.foreignError({result: result, msg: isException}))
   }
-};
+}
+*/
 
 var setUpFakeInput = function setUpFakeInput(normals) {
   var emmiters = normals.map(function (v) {
@@ -6648,7 +6649,7 @@ var normalize = function normalize(cobiTrack) {
 var geoToTrack = function geoToTrack(geojson) {
   // get the first linestring inside the feature collection
   var geoTrack = geojson.features.find(function (v) {
-    return GJV.isFeature(v) && GJV.isLineString(v.geometry) && v.properties && v.properties.coordTimes && v.geometry && v.geometry.coordinates && v.properties.coordTimes.length === v.geometry.coordinates.length;
+    return GJV.isFeature(v) && GJV.isLineString(v.geometry) && GJV.isLineStringCoor(v.geometry.coordinates) && v.properties && v.properties.coordTimes && v.properties.coordTimes.length === v.geometry.coordinates.length;
   });
 
   var times = Immutable.List(geoTrack.properties.coordTimes).map(Date.parse);
@@ -6713,7 +6714,9 @@ var updateTimeouts = function updateTimeouts() {
     ids[_key] = arguments[_key];
   }
 
-  timeouts = Immutable.fromJS(ids);
+  timeouts = Immutable.List(ids).map(function (m) {
+    return m.toList();
+  });
 };
 
 /**

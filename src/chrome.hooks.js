@@ -33,7 +33,7 @@ chrome.devtools.panels.create('COBI',
 
         let errors = util.gpxErrors(content)
         if (errors !== null) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${errors}`))
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`))
         }
 
         const geojson: GeoJSONObject = toGeoJSON.gpx(content)
@@ -86,12 +86,13 @@ function sendTcAction (value, container) {
     })
 }
 
-// TODO: implement a proper error handling strategy
+/* TODO: implement a proper error handling strategy
 const onEvalError = (result, isException) => {
   if (isException) {
     chrome.devtools.inspectedWindow.eval(meta.foreignError({result: result, msg: isException}))
   }
 }
+*/
 
 const setUpFakeInput = function (normals) {
   const emmiters = normals.map(v => {

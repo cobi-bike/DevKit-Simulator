@@ -46,8 +46,9 @@ const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
 const geoToTrack = function (geojson: FeatureCollection) {
   // get the first linestring inside the feature collection
   const geoTrack: ?Feature = geojson.features.find(v => {
-    return GJV.isFeature(v) && GJV.isLineString(v.geometry) && v.properties &&
-          v.properties.coordTimes && v.geometry && v.geometry.coordinates &&
+    return GJV.isFeature(v) && GJV.isLineString(v.geometry) &&
+          GJV.isLineStringCoor(v.geometry.coordinates) &&
+          v.properties && v.properties.coordTimes &&
           v.properties.coordTimes.length === v.geometry.coordinates.length
   })
 
@@ -95,11 +96,12 @@ function gpxErrors (oDOM: Document) {
  * Adds the timeouts ids to the list of current running timeouts.
  * Remove the previous timeouts if any exists
  */
-const updateTimeouts = function (...ids: List<number>[]) {
+const updateTimeouts = function (...ids: Array<Map<number, number>>) {
   if (timeouts.count() !== 0) {
     timeouts.map(l => l.map(clearTimeout))
   }
-  timeouts = Immutable.fromJS(ids)
+  timeouts = Immutable.List(ids)
+          .map(m => m.toList())
 }
 
 /**
