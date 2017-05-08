@@ -6498,7 +6498,11 @@ chrome.devtools.panels.create('COBI', 'images/cobi-icon.png', 'index.html', func
     if (!GJV.isFeatureCollection(geojson)) {
       return chrome.devtools.inspectedWindow.eval(meta.foreignError(`not a geojson feature collection`));
     }
-    return chrome.devtools.inspectedWindow.eval(meta.foreignLog(util.geoToTrack(geojson)));
+
+    if (util.waitingTimeouts()) {
+      chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'));
+    }
+    setUpFakeInput(util.geoToTrack(geojson));
     /*
     const normals = util.normalize(content)
     if (util.waitingTimeouts()) {
@@ -6656,9 +6660,12 @@ var geoToTrack = function geoToTrack(geojson) {
   var msgs = Immutable.fromJS(geoTrack.geometry.coordinates).map(function (v) {
     return partialMobileLocation(v.get(0), v.get(1));
   });
-  return ntimes.zipWith(function (t, m) {
+  var logs = ntimes.zipWith(function (t, m) {
     return Immutable.Map(_defineProperty({}, t, m));
   }, msgs);
+  return logs.reduce(function (r, v) {
+    return r.merge(v);
+  });
 };
 
 var partialMobileLocation = function partialMobileLocation(latitude, longitude) {
@@ -6706,7 +6713,7 @@ var updateTimeouts = function updateTimeouts() {
     ids[_key] = arguments[_key];
   }
 
-  timeouts = Immutable.List().push(ids);
+  timeouts = Immutable.fromJS(ids);
 };
 
 /**

@@ -1,6 +1,6 @@
 // @flow
 import type {Map, List} from 'immutable'
-import type {FeatureCollection, Feature, LineString} from 'geojson-flow'
+import type {FeatureCollection, Feature} from 'geojson-flow'
 
 const Immutable = require('immutable')
 const GJV = require('geojson-validation')
@@ -57,7 +57,8 @@ const geoToTrack = function (geojson: FeatureCollection) {
 
   const msgs = Immutable.fromJS(geoTrack.geometry.coordinates)
                         .map(v => partialMobileLocation(v.get(0), v.get(1)))
-  return ntimes.zipWith((t, m) => Immutable.Map({[t]: m}), msgs)
+  const logs = ntimes.zipWith((t, m) => Immutable.Map({[t]: m}), msgs)
+  return logs.reduce((r, v) => r.merge(v))
 }
 
 const partialMobileLocation = function (latitude: number, longitude: number) {
@@ -94,11 +95,11 @@ function gpxErrors (oDOM: Document) {
  * Adds the timeouts ids to the list of current running timeouts.
  * Remove the previous timeouts if any exists
  */
-const updateTimeouts = function (...ids) {
+const updateTimeouts = function (...ids: List<number>[]) {
   if (timeouts.count() !== 0) {
     timeouts.map(l => l.map(clearTimeout))
   }
-  timeouts = Immutable.List().push(ids)
+  timeouts = Immutable.fromJS(ids)
 }
 
 /**

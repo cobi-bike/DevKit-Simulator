@@ -43,7 +43,11 @@ chrome.devtools.panels.create('COBI',
         if (!GJV.isFeatureCollection(geojson)) {
           return chrome.devtools.inspectedWindow.eval(meta.foreignError(`not a geojson feature collection`))
         }
-        return chrome.devtools.inspectedWindow.eval(meta.foreignLog(util.geoToTrack(geojson)))
+
+        if (util.waitingTimeouts()) {
+          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+        }
+        setUpFakeInput(util.geoToTrack(geojson))
         /*
         const normals = util.normalize(content)
         if (util.waitingTimeouts()) {
