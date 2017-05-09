@@ -1,5 +1,6 @@
-
+app/chrome/index.js
 lib/
+docs/
 
 # -------- ATOM files ------------
 *.swp
