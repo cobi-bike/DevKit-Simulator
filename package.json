@@ -8,8 +8,7 @@
     "prepublish": "npm run build",
     "flow": "flow",
     "gulp": "gulp",
-    "docs": "documentation build -f html -o ./docs -g --shallow ./app/js/**.js",
-    "remove-types": "./node_modules/.bin/babel src --out-dir lib --presets=flow"
+    "docs": "documentation build -f html -o ./docs -g --shallow ./app/js/**.js"
   },
   "author": "COBI GmbH",
   "license": "MIT",
@@ -33,10 +32,10 @@
     "flow-interfaces-chrome": "^0.3.1",
     "geojson-flow": "^1.0.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.9.0"
+    "vinyl-source-stream": "^1.1.0"
   },
   "keywords": [
     "COBI",
