@@ -1,0 +1,8124 @@
+{
+  "1493029123061" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : "MALE",
+    "property" : "GENDER"
+  },
+  "1493029123064" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 30,
+    "property" : "AGE"
+  },
+  "1493029123065" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 1.8,
+    "property" : "HEIGHT"
+  },
+  "1493029123067" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 75,
+    "property" : "WEIGHT"
+  },
+  "1493029123068" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 63,
+    "property" : "RESTING_HEART_RATE"
+  },
+  "1493029123071" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 187,
+    "property" : "MAX_HEART_RATE"
+  },
+  "1493029123074" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 65,
+    "property" : "MIN_CADENCE"
+  },
+  "1493029123076" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 95,
+    "property" : "MAX_CADENCE"
+  },
+  "1493029123078" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : "ONEPLUS A3003",
+    "property" : "MODEL"
+  },
+  "1493029123081" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : "ANDROID",
+    "property" : "OS"
+  },
+  "1493029123083" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : "7.1.2",
+    "property" : "OS_VERSION"
+  },
+  "1493029123085" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : "COBI.debug",
+    "property" : "APPLICATION_NAME"
+  },
+  "1493029123088" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : "1.8.0",
+    "property" : "VERSION"
+  },
+  "1493029123090" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : "bike.cobi.app.debug",
+    "property" : "NAMESPACE"
+  },
+  "1493029123856" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : {
+      "blue" : 191,
+      "green" : 48384,
+      "red" : 12189696
+    },
+    "property" : "THEME_COLOR"
+  },
+  "1493029123885" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : "MALE",
+    "property" : "GENDER"
+  },
+  "1493029123888" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 30,
+    "property" : "AGE"
+  },
+  "1493029123889" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 1.8,
+    "property" : "HEIGHT"
+  },
+  "1493029123891" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 75,
+    "property" : "WEIGHT"
+  },
+  "1493029123893" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 63,
+    "property" : "RESTING_HEART_RATE"
+  },
+  "1493029123895" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 187,
+    "property" : "MAX_HEART_RATE"
+  },
+  "1493029123897" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 65,
+    "property" : "MIN_CADENCE"
+  },
+  "1493029123899" : {
+    "action" : "NOTIFY",
+    "channel" : "USER",
+    "payload" : 95,
+    "property" : "MAX_CADENCE"
+  },
+  "1493029123911" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493029123914" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493029123916" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493029123918" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493029124296" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195295,
+      "longitude" : 8.6378199,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493029125735" : {
+    "action" : "NOTIFY",
+    "channel" : "BIKE",
+    "payload" : "URBAN",
+    "property" : "TYPE"
+  },
+  "1493029125737" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : {
+      "blue" : 191,
+      "green" : 48384,
+      "red" : 12189696
+    },
+    "property" : "THEME_COLOR"
+  },
+  "1493029125738" : {
+    "action" : "NOTIFY",
+    "channel" : "BIKE",
+    "payload" : 28,
+    "property" : "WHEEL_DIAMETER"
+  },
+  "1493029125739" : {
+    "action" : "NOTIFY",
+    "channel" : "BIKE",
+    "payload" : "pepper",
+    "property" : "NAME"
+  },
+  "1493029125795" : {
+    "action" : "NOTIFY",
+    "channel" : "INTELLIGENCE_SERVICE",
+    "payload" : "EASY",
+    "property" : "FITNESS_ZONE"
+  },
+  "1493029126006" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029126151" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "24012705160017",
+    "property" : "SERIAL_NUMBER"
+  },
+  "1493029126231" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "APP",
+    "property" : "APPLICATION_MODE"
+  },
+  "1493029126323" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029126396" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029126464" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029126532" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029126638" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "1.5.0-alpha0",
+    "property" : "FIRMWARE_VERSION"
+  },
+  "1493029126710" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "1.5.0-alpha0",
+    "property" : "FIRMWARE_VERSION"
+  },
+  "1493029126786" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "24012705160017",
+    "property" : "SERIAL_NUMBER"
+  },
+  "1493029126861" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "1.5.0-alpha0",
+    "property" : "FIRMWARE_VERSION"
+  },
+  "1493029126945" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : false,
+    "property" : "MOTOR_INTERFACE_READY"
+  },
+  "1493029127050" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029127056" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029127093" : {
+    "action" : "NOTIFY",
+    "channel" : "FRONT_LIGHT",
+    "payload" : {
+      "automatic" : false,
+      "mode" : "OFF"
+    },
+    "property" : "LIGHT_CONFIG"
+  },
+  "1493029127171" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029127251" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029127332" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "flags" : {
+        "LIGHTS" : false,
+        "ON" : false,
+        "SOUNDS" : false
+      },
+      "sensitivity" : 88
+    },
+    "property" : "ALARM_CONFIG"
+  },
+  "1493029127393" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "automatic" : true,
+      "features" : {
+        "MOBILE_CHARGING" : true
+      },
+      "mode" : "OFF"
+    },
+    "property" : "ECO_MODE_CONFIG"
+  },
+  "1493029127442" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029127476" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "COBI",
+    "property" : "THUMB_CONTROLLER_INTERFACE_ID"
+  },
+  "1493029127575" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "NONE",
+    "property" : "MOTOR_INTERFACE_ID"
+  },
+  "1493029127657" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "NONE",
+    "property" : "TRANSMISSION_INTERFACE_ID"
+  },
+  "1493029127802" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 156,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029127883" : {
+    "action" : "NOTIFY",
+    "channel" : "REAR_LIGHT",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "UNKNOWN"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029128129" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "muted" : true,
+      "volume" : 100
+    },
+    "property" : "AUDIO_CONFIG"
+  },
+  "1493029128259" : {
+    "action" : "NOTIFY",
+    "channel" : "REAR_LIGHT",
+    "payload" : {
+      "connectionState" : "NONE",
+      "connectionType" : "NONE",
+      "deviceId" : 0
+    },
+    "property" : "CONNECTIVITY"
+  },
+  "1493029129076" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029129090" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029130478" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029131116" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029131133" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029132863" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 161,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029133088" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029133091" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029133429" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029135120" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029135134" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029135495" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.27,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029137151" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029137166" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029137977" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 157,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029139135" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029139148" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029139449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029140527" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029141123" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029141139" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029143029" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 156,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029143143" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029143174" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029143255" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029145127" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029145130" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029145547" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.17,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029147201" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029147239" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029148128" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 161,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029149188" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029149206" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029150685" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029151168" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029151176" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029151490" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029153172" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 150,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029153206" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029153214" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029155192" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029155214" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029155709" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029157208" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029157232" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029157496" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029158193" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 159,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029159192" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029159196" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029160778" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029161247" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029161268" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029163246" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029163255" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029163278" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 157,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029163444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029165228" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029165256" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029165801" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029167261" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029167269" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029168353" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 148,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029169269" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029169279" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029169444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029170819" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029171264" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029171267" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029173275" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029173288" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029173403" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 164,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029175296" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029175313" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029175851" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029177305" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029177310" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029178471" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 159,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029179312" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029179323" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029180872" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029181332" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029181348" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029181451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029183307" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029183317" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029183579" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 156,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029185332" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029185347" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029186012" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029187386" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029187410" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029187455" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029188633" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 151,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029189343" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029189348" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029191030" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.17,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029191387" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029191405" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029193366" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029193387" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029193694" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 145,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029195391" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029195420" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029196066" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029197422" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029197453" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029198792" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 157,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029199394" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029199403" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029201132" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.23,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029201426" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029201452" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029203418" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029203432" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029203855" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 157,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029205452" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029205466" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029206143" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029207426" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029207441" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029208962" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 151,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029209444" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029209448" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029211169" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029211471" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029211480" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029213464" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029213486" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029213991" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 142,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029215479" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029215488" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029216189" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029217468" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029217472" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029217483" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029219047" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 153,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029219505" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029219510" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029221328" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029221517" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029221525" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029223475" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029223503" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029223505" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029224153" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 153,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029225541" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029225558" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029226353" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029227526" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029227563" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029229212" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 150,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029229439" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029229544" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029229559" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029231385" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029231565" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029231567" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029233561" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029233566" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029234267" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 150,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029235468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029235578" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029235582" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029236453" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029237652" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029237666" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029239339" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 152,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029239607" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029239622" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029241477" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029241634" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029241649" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029243616" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029243631" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029244441" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 166,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029245644" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029245657" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029246489" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029247629" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029247654" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029249508" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 160,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029249639" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029249641" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029251536" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029251634" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029251673" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029253662" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029253677" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029254569" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 145,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029255694" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029255710" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029256661" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029257669" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029257672" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029259625" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 147,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029259693" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029259703" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029261694" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.26,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029261735" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029261751" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029263714" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029263732" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029264716" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 165,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029265703" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029265721" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029266718" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.26,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029267734" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029267741" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029269711" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029269727" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029269778" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 162,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029271741" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029271768" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029271792" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029273757" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029273764" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029274842" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 171,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029275765" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029275785" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029276869" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.23,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029277740" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029277755" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029279767" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029279785" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029279946" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 155,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029281791" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029281821" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029281846" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029283454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029283774" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029283788" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029285005" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 161,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029285800" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029285823" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029286858" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029287794" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029287805" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029289460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029289804" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029289809" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029290093" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 154,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029291841" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029291889" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029291978" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029293827" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029293841" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029295143" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 189,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029295869" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029295876" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029297022" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029297843" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029297880" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029299888" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029299913" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029300281" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 192,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029301882" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029301889" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029302029" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029303889" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029303903" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029305297" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 145,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029305901" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029305911" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029307065" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.25,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029307903" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029307925" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029309413" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029309910" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029309922" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029310365" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 183,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029311936" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029311959" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029312122" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029313435" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029313923" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029313932" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029315421" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 152,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029315941" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029315950" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029317140" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029317935" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029317942" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029319965" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029319984" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029320529" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 143,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029321985" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029321993" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029322181" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.23,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029323974" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029323996" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029325594" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 149,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029325991" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029325994" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029327310" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.23,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029327992" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029328017" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029330013" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029330029" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029330659" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 191,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029332035" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029332045" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029332329" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029334020" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029334036" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029335718" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 170,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029336044" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029336052" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029337366" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029337462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029338031" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029338070" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029340060" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029340071" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029340812" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 152,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029342084" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029342102" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029342404" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029343434" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029344077" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029344082" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029345874" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 150,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029346099" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029346119" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029347412" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029348134" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029348149" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029350105" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029350113" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029350985" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 171,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029352130" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029352136" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029352472" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029354133" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029354162" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029355994" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 145,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029356169" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029356181" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029357515" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029358178" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029358193" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029360155" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029360159" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029361103" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 148,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029362187" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029362190" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029362518" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029364168" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029364174" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029366173" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029366187" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029366219" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 150,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029367658" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.11,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029368180" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029368192" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029370216" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029370229" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029371254" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 153,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029372202" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029372220" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029372685" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.2,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029374223" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029374231" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029376204" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029376207" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029376313" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 155,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029377711" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029378231" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029378237" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029380235" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029380251" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029381461" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 162,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029382252" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029382264" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029382732" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029384273" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029384285" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029386267" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029386289" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029386479" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 149,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029387794" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029388292" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029388306" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029390274" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029390292" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029391472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029391542" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 164,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029392295" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029392298" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029392817" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029394334" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029394348" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029394990" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029396326" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029396353" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029396649" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 164,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029397455" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029397855" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029398332" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029398338" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029400335" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029400357" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029401714" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 148,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029402355" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029402374" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029402982" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029403464" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029404369" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029404389" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029406367" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029406389" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029406772" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 176,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029408006" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029408427" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029408460" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029409443" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029410376" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029410397" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029411829" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 194,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029412394" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029412398" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029413029" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029414387" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029414418" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029415459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029416411" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029416423" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029416939" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 194,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029418066" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.24,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029418407" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029418411" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029420425" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029420443" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029421998" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 193,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029422449" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029422483" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029423085" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.17,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029423385" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493029423386" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493029423388" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493029423389" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493029424442" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029424481" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029426492" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029426521" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029427059" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 194,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029428152" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029428444" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029428455" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029430489" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029430502" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029432129" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 194,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029432492" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029432496" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029433168" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.22,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029434490" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029434496" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029436508" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029436519" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029437188" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 192,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029438196" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.21,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029438511" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029438531" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029440517" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029440529" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029442295" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 189,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029442512" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029442527" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029443341" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029444536" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029444555" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029446561" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029446587" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029447345" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 184,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029448366" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.11,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029448541" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029448545" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029450579" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029450588" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029452417" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 187,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029452561" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029452568" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029453382" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.11,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029454584" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029454606" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029456578" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029456594" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029457505" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 190,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029458415" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.13,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029458628" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029458631" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029460620" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029460626" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029462567" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 189,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029462639" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029462642" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029463479" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029464643" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029464667" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029466631" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029466691" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029467634" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 188,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029468514" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.18,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029468642" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029468647" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029470670" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029470673" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029472656" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029472662" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029472728" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 185,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029473518" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029474691" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029474714" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029476714" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029476726" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029477810" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 185,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029478554" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029478701" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029478719" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029480717" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029480722" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029481439" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029482710" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029482713" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029482860" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 189,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029483685" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029484744" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029484766" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029486770" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029486784" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029487462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029487925" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 187,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029488727" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.19,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029488739" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029488744" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029490780" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029490801" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029492766" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029492783" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029492980" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 181,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493029493484" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029493742" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1010.16,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493029494787" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493029494794" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493029495794" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "AWAY",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493029499463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029547450" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029589477" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029595463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029601444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029607482" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029613459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029619461" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029655463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029661443" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029669894" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195371,
+      "longitude" : 8.6377187,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493029703449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029709481" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029715456" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029723461" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493029723464" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493029723466" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493029723467" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493029733450" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029757465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029763468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029769449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029781468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029787471" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029805491" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029807726" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029811469" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029817433" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029823479" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029829460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029877448" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029883465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029895451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029901450" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029943444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029949454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029955467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029961458" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029967499" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195295,
+      "longitude" : 8.6378199,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493029991449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493029994987" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030015468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030021461" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030023496" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493030023498" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493030023499" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493030063457" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030069456" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030075473" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030081439" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030087441" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030105446" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030117479" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030139773" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030165467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030171466" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030177472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030201466" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030207478" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030219436" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030231457" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030237465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030243452" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030255473" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030261463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030267485" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030273454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030291479" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030323588" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493030323592" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493030323593" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493030323595" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493030333448" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030339468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030357478" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030363472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030369468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030417485" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030423463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030429441" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030435463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030453479" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030459461" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030531472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030537484" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030587695" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195371,
+      "longitude" : 8.6377187,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493030594994" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030609450" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030615455" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030623296" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493030623298" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493030623299" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493030623301" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493030637846" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030639462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030651470" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030657464" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030681434" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030687467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030693468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030729489" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030735487" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030741445" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030747486" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030765486" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030771491" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030789466" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030795491" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030910095" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195295,
+      "longitude" : 8.6378199,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493030923416" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493030923420" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493030923422" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493030923423" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493030939471" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030945462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030951448" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030957470" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030981442" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030987446" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493030993467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031011483" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031017487" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031029480" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031035481" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031041443" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031047462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031053486" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031059457" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031071467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031101457" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031107469" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031137473" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031143465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031149463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031155434" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031191455" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031194984" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031197447" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031223633" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493031223635" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493031223636" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493031223637" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493031227695" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195371,
+      "longitude" : 8.6377187,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493031233440" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031239467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031263454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031269448" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031293454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031299488" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031311443" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031317451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031347469" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031359485" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031365459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031383478" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031389448" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031395440" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031407461" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031413456" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031419440" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031485465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031491434" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031497468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031503467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031509463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031524078" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493031524080" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493031524081" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493031524082" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493031527472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031533476" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031539444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031551464" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031557457" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031563450" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031569454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031581463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031587484" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031617459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031623474" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031629465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031634057" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031647475" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031677451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031713447" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031719468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031725454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031737466" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031743451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031755462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031773445" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031779463" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031797469" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031800107" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031803475" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031809462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031815482" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031821460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031823494" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493031823496" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493031823499" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "NONE",
+    "property" : "PRECIPITATION_TYPE"
+  },
+  "1493031823500" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493031827454" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031847695" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "altitude" : 0,
+      "bearing" : 0,
+      "latitude" : 50.1195295,
+      "longitude" : 8.6378199,
+      "speed" : 0
+    },
+    "property" : "LOCATION"
+  },
+  "1493031857444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031863449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031869469" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031875460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031881477" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031893487" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031911449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031917466" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031923458" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031929467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031935446" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031953476" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031959458" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031965444" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031971468" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031977456" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031989462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493031995471" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032001475" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032007489" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032013475" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032019484" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032037460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032043438" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032049460" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032055464" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032061467" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032067453" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032109470" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032115462" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032121479" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032123468" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : "COBI.debug",
+    "property" : "API"
+  },
+  "1493032123469" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 0,
+    "property" : "PRECIPITATION_INTENSITY"
+  },
+  "1493032123470" : {
+    "action" : "NOTIFY",
+    "channel" : "WEATHER_SERVICE",
+    "payload" : 12,
+    "property" : "TEMPERATURE"
+  },
+  "1493032132225" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032139489" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032145451" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032151465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032163464" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032169459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032175436" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032181472" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032187459" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032193449" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032265476" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032271487" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032308231" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "APP",
+    "property" : "APPLICATION_MODE"
+  },
+  "1493032308369" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "AWAY",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032308505" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "APP",
+    "property" : "APPLICATION_MODE"
+  },
+  "1493032308583" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "AWAY",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032308804" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : true,
+    "property" : "FRONT_LIGHT_INTERFACE_READY"
+  },
+  "1493032308824" : {
+    "action" : "NOTIFY",
+    "channel" : "FRONT_LIGHT",
+    "payload" : "0000",
+    "property" : "PART_NUMBER"
+  },
+  "1493032308832" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "NOT_RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032308943" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493032308946" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493032308965" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : true,
+    "property" : "BATTERY_INTERFACE_READY"
+  },
+  "1493032308973" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032308980" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : false,
+    "property" : "FRONT_LIGHT_INTERFACE_READY"
+  },
+  "1493032308992" : {
+    "action" : "NOTIFY",
+    "channel" : "FRONT_LIGHT",
+    "payload" : "0000",
+    "property" : "PART_NUMBER"
+  },
+  "1493032309432" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493032309440" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493032309721" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : true,
+    "property" : "FRONT_LIGHT_INTERFACE_READY"
+  },
+  "1493032309726" : {
+    "action" : "NOTIFY",
+    "channel" : "FRONT_LIGHT",
+    "payload" : "0000",
+    "property" : "PART_NUMBER"
+  },
+  "1493032309772" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032310706" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 193,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493032311464" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493032311485" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493032311531" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1008.81,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493032313456" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493032313477" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493032315477" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "INTERNAL_BATTERY_STATE"
+  },
+  "1493032315489" : {
+    "action" : "NOTIFY",
+    "channel" : "BATTERY",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "STATE"
+  },
+  "1493032315770" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 193,
+    "property" : "AMBIENT_LIGHT"
+  },
+  "1493032316557" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : 1008.84,
+    "property" : "ATMOSPHERIC_PRESSURE"
+  },
+  "1493032317029" : {
+    "action" : "NOTIFY",
+    "channel" : "APP",
+    "payload" : "BACKGROUND",
+    "property" : "APP_MODE"
+  },
+  "1493032317084" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "RIDABLE",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032317296" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "AWAY",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032317303" : {
+    "action" : "NOTIFY",
+    "channel" : "HUB",
+    "payload" : "AWAY",
+    "property" : "RIDE_LIFECYCLE_STATE"
+  },
+  "1493032376934" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032387185" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032395950" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032403259" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032413501" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032425205" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032429595" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032435442" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032466166" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032477858" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032486664" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032491021" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032502751" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032511504" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032534902" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032542212" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032545175" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032552446" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032562682" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032580228" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032587532" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032594861" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032600705" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 100,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032609978" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032618243" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032624093" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032628485" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032645075" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493032647698" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 99,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493033864668" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 98,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493037911862" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 97,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493037978583" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 97,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038083919" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038115382" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038135823" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038163517" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038175162" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038181013" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038213077" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038217471" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038233543" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038237881" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038248100" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038253918" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038265597" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038287465" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038288930" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 96,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038312934" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038328314" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038348743" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038350184" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038360408" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038377879" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038379356" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038396825" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038398324" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038424552" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038430372" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038439118" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038440610" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038447861" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038452255" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038465375" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038474119" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038477040" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038544066" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038568850" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038595110" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038596555" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038602391" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038621363" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038631557" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038633030" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038708849" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038716116" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 95,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038728820" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038845879" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493038901429" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493039221304" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493039249176" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493039605547" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493039703229" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493039719211" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040031065" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 93,
+      "state" : "FULL_CHARGE"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040031388" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 93,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040034861" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 93,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040040896" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 93,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040046881" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 93,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040052885" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040058888" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040064891" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040070860" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040076901" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040082905" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040088898" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040100868" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  },
+  "1493040106856" : {
+    "action" : "NOTIFY",
+    "channel" : "MOBILE",
+    "payload" : {
+      "batteryLevel" : 94,
+      "state" : "CHARGING"
+    },
+    "property" : "BATTERY_STATE"
+  }
+}

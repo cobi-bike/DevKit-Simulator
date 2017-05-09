@@ -12,7 +12,7 @@ const toGeoJSON = require('togeojson')
 const GJV = require('geojson-validation')
 
 chrome.devtools.panels.create('COBI',
-    'images/cobi-icon.png',
+    'assets/cobi-icon.png',
     'index.html',
     function (panel) {
       let trackReader = new FileReader()

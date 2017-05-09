@@ -37,9 +37,14 @@ gulp.task('node', function () {
     .pipe(gulp.dest('lib'))
 })
 
+gulp.task('copy', function () {
+  return gulp.src('assets/*.*')
+  .pipe(gulp.dest('app/chrome/assets/'))
+})
+
 // build everything once, probably for production
-gulp.task('once', ['browser', 'node'])
+gulp.task('once', ['browser', 'node', 'assets'])
 // watch and rebuild everything on change
 gulp.task('watch', function () {
-  gulp.watch('src/*.js', ['browser', 'node'])
+  gulp.watch('src/*.js', ['browser', 'node', 'copy'])
 })
