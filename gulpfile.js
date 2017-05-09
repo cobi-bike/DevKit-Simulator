@@ -6,34 +6,42 @@ const browserify = require('browserify')
 const babelify = require('babelify')
 const watchify = require('watchify')
 
-const sourcesPath = 'src/chrome.hooks.js'
+// ------ configurations
+const chromePath = 'src/chrome.hooks.js'
+const srcGlob = 'src/*.js'
+
 const watchifyOpts = {
   cache: {},
   packageCache: {},
   plugin: [watchify]
 }
-const babelConfig = {
+const babelBrowser = {
   presets: [
     'flow',
     ['env', {
       'targets': {
         'browsers': ['Chrome >= 43']}}]]}
-const bundle = function () {
-  b.bundle()
-    .on('error', function (err) {
-      console.error(err.toString())
-      this.emit('end')
-    })
-    .pipe(source(sourcesPath))
-    .pipe(buffer())
-    .pipe(concat('index.js')) // output filename
-    .pipe(gulp.dest('app/chrome/'))
-}
 
-// --------------------------------
-const b = browserify(sourcesPath, watchifyOpts)
-b.transform(babelify, babelConfig)
-b.on('update', bundle)
-b.on('log', console.info)
+const babelNode = {presets: ['flow']}
 
-gulp.task('default', bundle)
+// ---------- tasks
+gulp.task('browser', function () {
+  const b = browserify(chromePath, watchifyOpts)
+  b.transform(babelify, babelBrowser)
+  // run automatically on every update
+  const bundleBrowser = function () {
+    b.bundle()
+      .on('error', function (err) {
+        console.error(err.toString())
+        this.emit('end')
+      })
+      .pipe(source(chromePath))
+      .pipe(buffer())
+      .pipe(concat('index.js')) // output filename
+      .pipe(gulp.dest('app/chrome/'))
+  }
+  // build once and wait for updates
+  b.on('update', bundleBrowser)
+  b.on('log', console.info)
+  bundleBrowser()
+})
