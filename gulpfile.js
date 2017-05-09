@@ -43,7 +43,7 @@ gulp.task('copy', function () {
 })
 
 // build everything once, probably for production
-gulp.task('once', ['browser', 'node', 'assets'])
+gulp.task('once', ['browser', 'node', 'copy'])
 // watch and rebuild everything on change
 gulp.task('watch', function () {
   gulp.watch('src/*.js', ['browser', 'node', 'copy'])
