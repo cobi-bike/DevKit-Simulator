@@ -3,7 +3,7 @@
 /* global FileReader:false */
 /* global DOMParser:false */
 import type {Map} from 'immutable'
-import type {GeoJSONObject} from 'geojson-flow'
+import type {FeatureCollection, Feature} from 'geojson-flow'
 
 const Immutable = require('immutable')
 const meta = require('./meta')
@@ -36,18 +36,21 @@ chrome.devtools.panels.create('COBI',
           return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`))
         }
 
-        const geojson: GeoJSONObject = toGeoJSON.gpx(content)
+        const geojson: FeatureCollection = toGeoJSON.gpx(content)
         if (!GJV.valid(geojson)) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid geojson`))
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid input file`))
         }
-        if (!GJV.isFeatureCollection(geojson)) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`not a geojson feature collection`))
+
+        const featLineStr = util.fetchLineStr(geojson)
+        if (!featLineStr) {
+          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`input file elements not supported`))
         }
 
         if (util.waitingTimeouts()) {
           chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
         }
-        setUpFakeInput(util.geoToTrack(geojson))
+
+        setUpFakeInput(util.geoToTrack(featLineStr))
         /*
         const normals = util.normalize(content)
         if (util.waitingTimeouts()) {

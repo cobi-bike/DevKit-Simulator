@@ -40,19 +40,23 @@ const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
   return input.mapKeys(k => k - start)
 }
 
+const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
+  return geojson.features.find(v => {
+    return GJV.isFeature(v) && GJV.isLineString(v.geometry) &&
+          GJV.isLineStringCoor(v.geometry.coordinates) &&
+          v.properties && v.properties.coordTimes && // https://github.com/facebook/flow/issues/1959
+          v.properties.coordTimes.length === v.geometry.coordinates.length
+  })
+}
+
 /**
  * converts a geojson FeatureCollection into
  */
-const geoToTrack = function (geojson: FeatureCollection) {
+const geoToTrack = function (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
   // get the first linestring inside the feature collection
-  const geoTrack: ?Feature = geojson.features.find(v => {
-    return GJV.isFeature(v) && GJV.isLineString(v.geometry) &&
-          GJV.isLineStringCoor(v.geometry.coordinates) &&
-          v.properties && v.properties.coordTimes &&
-          v.properties.coordTimes.length === v.geometry.coordinates.length
-  })
 
-  const times = Immutable.List(geoTrack.properties.coordTimes).map(Date.parse)
+  const times = Immutable.List(geoTrack.properties.coordTimes)
+              .map(Date.parse)
   const start = times.first()
   const ntimes = times.map(v => v - start)
 
@@ -114,6 +118,7 @@ const waitingTimeouts = function () {
 module.exports.path = path
 module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
+module.exports.fetchLineStr = fetchLineStr
 module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
 module.exports.updateTimeouts = updateTimeouts
