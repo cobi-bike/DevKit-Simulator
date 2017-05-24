@@ -2,6 +2,7 @@
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
+/* global HTMLInputElement */
 import type {Map} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 
@@ -16,88 +17,37 @@ chrome.devtools.panels.create('COBI',
     'index.html',
     function (panel) {
       let trackReader = new FileReader()
+      trackReader.onload = onCobiTrackFileLoaded
       let gpxReader = new FileReader()
-      // ----
-      trackReader.onload = function (evt) {
-        const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
-        const normals = util.normalize(content)
-        if (util.waitingTimeouts()) {
-          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
-        }
-        setUpFakeInput(normals)
-      }
-
-      gpxReader.onload = function (evt) {
-        const parser = new DOMParser()
-        const content = parser.parseFromString(evt.target.result, 'application/xml')
-
-        let errors = util.gpxErrors(content)
-        if (errors !== null) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`))
-        }
-
-        const geojson: FeatureCollection = toGeoJSON.gpx(content)
-        if (!GJV.valid(geojson)) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid input file`))
-        }
-
-        const featLineStr = util.fetchLineStr(geojson)
-        if (!featLineStr) {
-          return chrome.devtools.inspectedWindow.eval(meta.foreignError(`input file elements not supported`))
-        }
-
-        if (util.waitingTimeouts()) {
-          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
-        }
-
-        setUpFakeInput(util.geoToTrack(featLineStr))
-        /*
-        const normals = util.normalize(content)
-        if (util.waitingTimeouts()) {
-          chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
-        }
-        setUpFakeInput(normals)
-        */
-      }
+      gpxReader.onload = onGpxFileLoaded
 
       // ----
-      let track = document.getElementById('input-track')
-      track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
-      let localizer = document.getElementById('input-gpx')
-      localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
+      const track = document.getElementById('input-track')
+      if (track instanceof HTMLInputElement) track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
+      const localizer = document.getElementById('input-gpx')
+      if (localizer instanceof HTMLInputElement) localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
 
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
-      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, result => { isEnabled.innerHTML = result })
+      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
 
       let tcUp = document.getElementById('tc-up')
       let tcDown = document.getElementById('tc-down')
       let tcRight = document.getElementById('tc-right')
       let tcLeft = document.getElementById('tc-left')
-      let resultOut = document.getElementById('eval-output')
-      tcUp.addEventListener('click', sendTcAction.bind(this, 'UP', resultOut))
-      tcDown.addEventListener('click', sendTcAction.bind(this, 'DOWN', resultOut))
-      tcLeft.addEventListener('click', sendTcAction.bind(this, 'LEFT', resultOut))
-      tcRight.addEventListener('click', sendTcAction.bind(this, 'RIGHT', resultOut))
+      if (tcUp) tcUp.addEventListener('click', thumbAction.bind(this, 'UP'))
+      if (tcDown) tcDown.addEventListener('click', thumbAction.bind(this, 'DOWN'))
+      if (tcLeft) tcLeft.addEventListener('click', thumbAction.bind(this, 'LEFT'))
+      if (tcRight) tcRight.addEventListener('click', thumbAction.bind(this, 'RIGHT'))
     }
 )
 
-function sendTcAction (value, container) {
-  chrome.devtools.inspectedWindow.eval('COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")',
-    function (result: string) {
-      container.innerHTML = 'tc: ' + result
-    })
+const thumbAction = function (value) {
+  chrome.devtools.inspectedWindow.eval(`COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")`)
+  chrome.devtools.inspectedWindow.eval(meta.foreignLog(`"hub/externalInterfaceAction" = ${value}`))
 }
 
-/* TODO: implement a proper error handling strategy
-const onEvalError = (result, isException) => {
-  if (isException) {
-    chrome.devtools.inspectedWindow.eval(meta.foreignError({result: result, msg: isException}))
-  }
-}
-*/
-
-const setUpFakeInput = function (normals) {
+const fakeInput = function (normals) {
   const emmiters = normals.map(v => {
     const path = util.path(v.get('channel'), v.get('property'))
     const expression = meta.emitStr(path, v.get('payload'))
@@ -111,4 +61,40 @@ const setUpFakeInput = function (normals) {
   }).map(setTimeout)
 
   util.updateTimeouts(emmiters, loggers)
+}
+
+const onCobiTrackFileLoaded = function (evt) {
+  const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
+  const normals = util.normalize(content)
+  if (util.waitingTimeouts()) {
+    chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+  }
+  fakeInput(normals)
+}
+
+const onGpxFileLoaded = function (evt) {
+  const parser = new DOMParser()
+  const content = parser.parseFromString(evt.target.result, 'application/xml')
+
+  let errors = util.gpxErrors(content)
+  if (errors !== null) {
+    const msg = meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`)
+    return chrome.devtools.inspectedWindow.eval(msg)
+  }
+
+  const geojson: FeatureCollection = toGeoJSON.gpx(content)
+  if (!GJV.valid(geojson)) {
+    return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid input file`))
+  }
+
+  const featLineStr = util.fetchLineStr(geojson)
+  if (!featLineStr) {
+    return chrome.devtools.inspectedWindow.eval(meta.foreignError(`input file elements not supported`))
+  }
+
+  if (util.waitingTimeouts()) {
+    chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+  }
+
+  fakeInput(util.geoToTrack(featLineStr))
 }

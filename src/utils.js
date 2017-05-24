@@ -42,9 +42,9 @@ const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
 
 const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
   return geojson.features.find(v => {
-    return GJV.isFeature(v) && GJV.isLineString(v.geometry) &&
-          GJV.isLineStringCoor(v.geometry.coordinates) &&
-          v.properties && v.properties.coordTimes && // https://github.com/facebook/flow/issues/1959
+    return GJV.isFeature(v) && v.geometry && GJV.isLineString(v.geometry) &&
+          Array.isArray(v.geometry.coordinates) && v.properties &&
+          Array.isArray(v.properties.coordTimes) &&
           v.properties.coordTimes.length === v.geometry.coordinates.length
   })
 }
@@ -54,7 +54,6 @@ const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
  */
 const geoToTrack = function (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
   // get the first linestring inside the feature collection
-
   const times = Immutable.List(geoTrack.properties.coordTimes)
               .map(Date.parse)
   const start = times.first()
@@ -87,7 +86,7 @@ const partialMobileLocation = function (latitude: number, longitude: number) {
  */
 function gpxErrors (oDOM: Document) {
   // print the name of the root element or error message
-  if (oDOM.documentElement.nodeName === 'parsererror') {
+  if (oDOM.documentElement && oDOM.documentElement.nodeName === 'parsererror') {
     return { 'msg': 'Input doesnt conforms with neither v1.1 nor v1.0 gpx schemas'
       // v10: gpxV10Res,
       // v11: gpxV11Res
