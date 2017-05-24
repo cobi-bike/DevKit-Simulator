@@ -8,6 +8,7 @@ import type {FeatureCollection} from 'geojson-flow'
 
 const Immutable = require('immutable')
 const meta = require('./meta')
+const log = require('./log')
 const util = require('./utils')
 const toGeoJSON = require('togeojson')
 const GJV = require('geojson-validation')
@@ -43,8 +44,9 @@ chrome.devtools.panels.create('COBI',
 )
 
 const thumbAction = function (value) {
-  chrome.devtools.inspectedWindow.eval(`COBI.__emitter.emit("hub/externalInterfaceAction", "' + value + '")`)
-  chrome.devtools.inspectedWindow.eval(meta.foreignLog(`"hub/externalInterfaceAction" = ${value}`))
+  const expression = meta.emitStr('hub/externalInterfaceAction', value)
+  chrome.devtools.inspectedWindow.eval(expression)
+  logOut(log.level.VERBOSE, `"hub/externalInterfaceAction" = ${value}`)
 }
 
 const fakeInput = function (normals) {
@@ -56,8 +58,7 @@ const fakeInput = function (normals) {
 
   const loggers = normals.map(v => {
     const path = util.path(v.get('channel'), v.get('property'))
-    const expression = meta.foreignLog(`${path} = ${v.get('payload')}`)
-    return () => chrome.devtools.inspectedWindow.eval(expression)
+    return () => logOut(log.level.VERBOSE, `${path} = ${v.get('payload')}`)
   }).map(setTimeout)
 
   util.updateTimeouts(emmiters, loggers)
@@ -67,7 +68,7 @@ const onCobiTrackFileLoaded = function (evt) {
   const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
   if (util.waitingTimeouts()) {
-    chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+    logOut(log.level.WARNING, 'Deactivating previous fake events')
   }
   fakeInput(normals)
 }
@@ -78,23 +79,28 @@ const onGpxFileLoaded = function (evt) {
 
   let errors = util.gpxErrors(content)
   if (errors !== null) {
-    const msg = meta.foreignError(`invalid GPX file passed: ${JSON.stringify(errors)}`)
-    return chrome.devtools.inspectedWindow.eval(msg)
+    return logOut(log.level.ERROR, `invalid GPX file passed: ${JSON.stringify(errors)}`)
   }
 
   const geojson: FeatureCollection = toGeoJSON.gpx(content)
   if (!GJV.valid(geojson)) {
-    return chrome.devtools.inspectedWindow.eval(meta.foreignError(`invalid input file`))
+    return logOut(log.level.ERROR, `invalid input file`)
   }
 
   const featLineStr = util.fetchLineStr(geojson)
   if (!featLineStr) {
-    return chrome.devtools.inspectedWindow.eval(meta.foreignError(`input file elements not supported`))
+    return logOut(log.level.ERROR, `input file elements not supported`)
   }
 
   if (util.waitingTimeouts()) {
-    chrome.devtools.inspectedWindow.eval(meta.foreignWarn('Deactivating previous fake events'))
+    logOut(log.level.WARNING, 'Deactivating previous fake events')
   }
 
   fakeInput(util.geoToTrack(featLineStr))
+}
+
+// TODO: log only if current log level is greater than or equal passed log level
+const logOut = function (level, content) {
+  const logger = log.amidst(level, content)
+  return () => chrome.devtools.inspectedWindow.eval(logger)
 }
