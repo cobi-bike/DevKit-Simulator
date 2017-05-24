@@ -1,14 +1,19 @@
 {
   "manifest_version": 2,
   "name": "COBI - jetpack simulator",
-  "description": "This extension extends the DevTools to include a panel where
-    you can test your COBI jetpacks before releasing them into the world",
   "version": "0.1.0",
+
+  "description": "COBI's webapp events simulator",
   "minimum_chrome_version": "43",
 
   "browser_action": {
-      "default_icon": "images/cobi-icon.png"
-    },
+    "default_icon": "assets/cobi-icon.png",
+    "default_title": "COBI simulator",
+    "default_popup": "popup.html"
+  },
 
-  "devtools_page": "index.html"
+  "devtools_page": "index.html",
+  "homepage_url": "https://github.com/cobi-bike/jetpack-simulator",
+
+  "offline_enabled": true
 }

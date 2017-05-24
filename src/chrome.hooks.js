@@ -3,7 +3,7 @@
 /* global FileReader:false */
 /* global DOMParser:false */
 import type {Map} from 'immutable'
-import type {FeatureCollection, Feature} from 'geojson-flow'
+import type {FeatureCollection} from 'geojson-flow'
 
 const Immutable = require('immutable')
 const meta = require('./meta')
