@@ -2,8 +2,8 @@
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
-/* global HTMLInputElement */
-import type {Map} from 'immutable'
+
+import type {Map, List} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 
 const Immutable = require('immutable')
@@ -24,9 +24,9 @@ chrome.devtools.panels.create('COBI',
 
       // ----
       const track = document.getElementById('input-track')
-      if (track instanceof HTMLInputElement) track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
+      track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
       const localizer = document.getElementById('input-gpx')
-      if (localizer instanceof HTMLInputElement) localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
+      localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
 
       // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
@@ -50,22 +50,23 @@ const thumbAction = function (value) {
 }
 
 const fakeInput = function (normals) {
-  const emmiters = normals.map(v => {
-    const path = util.path(v.get('channel'), v.get('property'))
-    const expression = meta.emitStr(path, v.get('payload'))
-    return () => chrome.devtools.inspectedWindow.eval(expression)
-  }).map(setTimeout)
+  const emmiters = normals.map(([t, msg]) => {
+    const path = util.path(msg.get('channel'), msg.get('property'))
+    const expression = meta.emitStr(path, msg.get('payload'))
+    return [() => chrome.devtools.inspectedWindow.eval(expression), t]
+  }).map(([fn, t]) => setTimeout(fn, t))
 
-  const loggers = normals.map(v => {
-    const path = util.path(v.get('channel'), v.get('property'))
-    return () => logOut(log.level.VERBOSE, `${path} = ${v.get('payload')}`)
-  }).map(setTimeout)
+  const loggers = normals.map(([t, msg]) => {
+    const path = util.path(msg.get('channel'), msg.get('property'))
+    return [() => logOut(log.level.VERBOSE, `${path} = ${msg.get('payload')}`), t]
+  }).map(([fn, t]) => setTimeout(fn, t))
 
-  util.updateTimeouts(emmiters, loggers)
+  util.updateTimeouts(Immutable.List([emmiters, loggers]))
 }
 
 const onCobiTrackFileLoaded = function (evt) {
-  const content: Map<string, Map<string, any>> = Immutable.fromJS(JSON.parse(evt.target.result))
+  // timestampt and cobibus msg
+  const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
   if (util.waitingTimeouts()) {
     logOut(log.level.WARNING, 'Deactivating previous fake events')
@@ -102,5 +103,5 @@ const onGpxFileLoaded = function (evt) {
 // TODO: log only if current log level is greater than or equal passed log level
 const logOut = function (level, content) {
   const logger = log.amidst(level, content)
-  return () => chrome.devtools.inspectedWindow.eval(logger)
+  chrome.devtools.inspectedWindow.eval(logger)
 }

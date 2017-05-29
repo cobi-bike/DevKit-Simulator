@@ -34,12 +34,15 @@ const toMixedCase = function (name: string) {
  * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
-const normalize = function (cobiTrack: Map<string, Map<string, any>>) {
-  const input = cobiTrack.mapKeys(Number.parseInt)
-  const start = input.keySeq().min()
-  return input.mapKeys(k => k - start)
+const normalize = function (cobiTrack: List<[number, Map<string, any>]>) {
+  const start = cobiTrack.minBy(([time]) => time)[0] // first timestampt
+  return cobiTrack.map(([t, msg]) => [t - start, Immutable.fromJS(msg)])
 }
 
+/**
+ * take a feature collection and returns the first linestring feature that
+ * also contains timestampts (coordTimes)
+ */
 const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
   return geojson.features.find(v => {
     return GJV.isFeature(v) && v.geometry && GJV.isLineString(v.geometry) &&
@@ -61,8 +64,7 @@ const geoToTrack = function (geoTrack: Feature) { // https://github.com/facebook
 
   const msgs = Immutable.fromJS(geoTrack.geometry.coordinates)
                         .map(v => partialMobileLocation(v.get(0), v.get(1)))
-  const logs = ntimes.zipWith((t, m) => Immutable.Map({[t]: m}), msgs)
-  return logs.reduce((r, v) => r.merge(v))
+  return ntimes.zip(msgs)
 }
 
 const partialMobileLocation = function (latitude: number, longitude: number) {
@@ -99,12 +101,11 @@ function gpxErrors (oDOM: Document) {
  * Adds the timeouts ids to the list of current running timeouts.
  * Remove the previous timeouts if any exists
  */
-const updateTimeouts = function (...ids: Array<Map<number, number>>) {
+const updateTimeouts = function (ids: List<List<number>>) {
   if (timeouts.count() !== 0) {
     timeouts.map(l => l.map(clearTimeout))
   }
-  timeouts = Immutable.List(ids)
-          .map(m => m.toList())
+  timeouts = ids
 }
 
 /**
