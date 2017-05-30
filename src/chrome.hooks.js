@@ -59,12 +59,18 @@ chrome.devtools.panels.create('COBI',
     }
 )
 
+/**
+ * cdk-2 mock input data to test webapps
+ */
 function thumbAction (value) {
   const expression = meta.emitStr('hub/externalInterfaceAction', value)
   chrome.devtools.inspectedWindow.eval(expression)
   chrome.devtools.inspectedWindow.eval(log.log(`"hub/externalInterfaceAction" = ${value}`))
 }
 
+/**
+ * cdk-2 mock input data to test webapps
+ */
 function fakeInput (normals) {
   const emmiters = normals.map(([t, msg]) => {
     const path = util.path(msg.get('channel'), msg.get('property'))
@@ -80,6 +86,9 @@ function fakeInput (normals) {
   core.update('timeouts', Immutable.List([emmiters, loggers]))
 }
 
+/**
+ * cdk-2 mock input data to test webapps
+ */
 function onCobiTrackFileLoaded (evt) {
   const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
@@ -89,6 +98,9 @@ function onCobiTrackFileLoaded (evt) {
   fakeInput(normals)
 }
 
+/**
+ * cdk-2 mock input data to test webapps
+ */
 function onGpxFileLoaded (evt) {
   const parser = new DOMParser()
   const content = parser.parseFromString(evt.target.result, 'application/xml')
@@ -114,13 +126,17 @@ function onGpxFileLoaded (evt) {
 
   fakeInput(util.geoToTrack(featLineStr))
 }
-
+/**
+ * cdk-60 manually set the activity type
+ */
 function toggleActivity (button) {
   const path = 'intelligenceService/activity'
   chrome.devtools.inspectedWindow.eval(meta.emitStr(path, button.checked))
   chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${button.checked}`))
 }
-
+/**
+ * cdk-61 mock the location of the user and deactivates fake events
+ */
 function setPosition () {
   const lat = parseInt(core.state().get('input/latitude').value)
   const lon = parseInt(core.state().get('input/longitude').value)
