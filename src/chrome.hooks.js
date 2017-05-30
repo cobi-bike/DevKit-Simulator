@@ -7,6 +7,7 @@ import type {Map, List} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 
 const Immutable = require('immutable')
+const core = require('./core')
 const meta = require('./meta')
 const log = require('./log')
 const util = require('./utils')
@@ -28,18 +29,27 @@ chrome.devtools.panels.create('COBI',
       const localizer = document.getElementById('input-gpx')
       localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
 
-      // code invoked on panel creation
       let isEnabled = document.getElementById('is-cobi-supported')
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
-
+      // ui elements setup
       let tcUp = document.getElementById('tc-up')
       let tcDown = document.getElementById('tc-down')
       let tcRight = document.getElementById('tc-right')
       let tcLeft = document.getElementById('tc-left')
-      if (tcUp) tcUp.addEventListener('click', thumbAction.bind(this, 'UP'))
-      if (tcDown) tcDown.addEventListener('click', thumbAction.bind(this, 'DOWN'))
-      if (tcLeft) tcLeft.addEventListener('click', thumbAction.bind(this, 'LEFT'))
-      if (tcRight) tcRight.addEventListener('click', thumbAction.bind(this, 'RIGHT'))
+      let activityButton = document.getElementById('activity-toggle')
+      if (tcUp) tcUp.addEventListener('click', () => thumbAction('UP'))
+      if (tcDown) tcDown.addEventListener('click', () => thumbAction('DOWN'))
+      if (tcLeft) tcLeft.addEventListener('click', () => thumbAction('LEFT'))
+      if (tcRight) tcRight.addEventListener('click', () => thumbAction('RIGHT'))
+      if (activityButton) activityButton.addEventListener('click', () => toggleActivity(activityButton))
+      // keep a reference to ui elements for later usage
+      core.update('input/gpxFile', track)
+      core.update('input/trackFile', localizer)
+      core.update('input/tcUp', tcUp)
+      core.update('input/tcDown', tcDown)
+      core.update('input/tcRight', tcRight)
+      core.update('input/tcLeft', tcLeft)
+      core.update('input/activity', activityButton)
     }
 )
 
@@ -61,17 +71,13 @@ const fakeInput = function (normals) {
     return [() => chrome.devtools.inspectedWindow.eval(log.log(`${path} = ${msg.get('payload')}`)), t]
   }).map(([fn, t]) => setTimeout(fn, t))
 
-  util.updateTimeouts(Immutable.List([emmiters, loggers]))
+  core.update('timeouts', Immutable.List([emmiters, loggers]))
 }
 
 const onCobiTrackFileLoaded = function (evt) {
-  // timestampt and cobibus msg
-
-  //logOut(log.level.ERROR, evt.target.files.toString())
-
   const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
-  if (util.waitingTimeouts()) {
+  if (!core.state().get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
   }
   fakeInput(normals)
@@ -80,8 +86,6 @@ const onCobiTrackFileLoaded = function (evt) {
 const onGpxFileLoaded = function (evt) {
   const parser = new DOMParser()
   const content = parser.parseFromString(evt.target.result, 'application/xml')
-
-  // logOut(log.level.ERROR, evt.target.files.toString())
 
   let errors = util.gpxErrors(content)
   if (errors !== null) {
@@ -98,9 +102,15 @@ const onGpxFileLoaded = function (evt) {
     return chrome.devtools.inspectedWindow.eval(log.error('Deactivating previous fake events'))
   }
 
-  if (util.waitingTimeouts()) {
+  if (!core.state().get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
   }
 
   fakeInput(util.geoToTrack(featLineStr))
+}
+
+const toggleActivity = function (button) {
+  const path = 'intelligenceService/activity'
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, button.checked))
+  chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${button.checked}`))
 }
