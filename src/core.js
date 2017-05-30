@@ -13,12 +13,15 @@ const Schema = Immutable.Record({
   'input/tcUp': null,
   'input/tcDown': null,
   'input/tcRight': null,
-  'input/tcLeft': null
+  'input/tcLeft': null,
+  'input/latitude': null,
+  'input/longitude': null
+
 })
 // the schema only allows the above keys
 let state = new Schema()
 
-const update = function (key: string, value: any) {
+function update (key: string, value: any) {
   if (key === 'timeouts' && state.get(key).count() !== 0) {
     // Remove the previous timeouts if any exists
     state.get('timeouts').map(ids => ids.map(clearTimeout))

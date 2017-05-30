@@ -36,12 +36,16 @@ chrome.devtools.panels.create('COBI',
       let tcDown = document.getElementById('tc-down')
       let tcRight = document.getElementById('tc-right')
       let tcLeft = document.getElementById('tc-left')
+      let latitude = document.getElementById('latitude')
+      let longitude = document.getElementById('longitude')
+      let positionButton = document.getElementById('position')
       let activityButton = document.getElementById('activity-toggle')
       if (tcUp) tcUp.addEventListener('click', () => thumbAction('UP'))
       if (tcDown) tcDown.addEventListener('click', () => thumbAction('DOWN'))
       if (tcLeft) tcLeft.addEventListener('click', () => thumbAction('LEFT'))
       if (tcRight) tcRight.addEventListener('click', () => thumbAction('RIGHT'))
       if (activityButton) activityButton.addEventListener('click', () => toggleActivity(activityButton))
+      if (positionButton) positionButton.addEventListener('click', setPosition)
       // keep a reference to ui elements for later usage
       core.update('input/gpxFile', track)
       core.update('input/trackFile', localizer)
@@ -50,16 +54,18 @@ chrome.devtools.panels.create('COBI',
       core.update('input/tcRight', tcRight)
       core.update('input/tcLeft', tcLeft)
       core.update('input/activity', activityButton)
+      core.update('input/latitude', latitude)
+      core.update('input/longitude', longitude)
     }
 )
 
-const thumbAction = function (value) {
+function thumbAction (value) {
   const expression = meta.emitStr('hub/externalInterfaceAction', value)
   chrome.devtools.inspectedWindow.eval(expression)
   chrome.devtools.inspectedWindow.eval(log.log(`"hub/externalInterfaceAction" = ${value}`))
 }
 
-const fakeInput = function (normals) {
+function fakeInput (normals) {
   const emmiters = normals.map(([t, msg]) => {
     const path = util.path(msg.get('channel'), msg.get('property'))
     const expression = meta.emitStr(path, msg.get('payload'))
@@ -74,7 +80,7 @@ const fakeInput = function (normals) {
   core.update('timeouts', Immutable.List([emmiters, loggers]))
 }
 
-const onCobiTrackFileLoaded = function (evt) {
+function onCobiTrackFileLoaded (evt) {
   const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
   if (!core.state().get('timeouts').isEmpty()) {
@@ -83,7 +89,7 @@ const onCobiTrackFileLoaded = function (evt) {
   fakeInput(normals)
 }
 
-const onGpxFileLoaded = function (evt) {
+function onGpxFileLoaded (evt) {
   const parser = new DOMParser()
   const content = parser.parseFromString(evt.target.result, 'application/xml')
 
@@ -109,8 +115,24 @@ const onGpxFileLoaded = function (evt) {
   fakeInput(util.geoToTrack(featLineStr))
 }
 
-const toggleActivity = function (button) {
+function toggleActivity (button) {
   const path = 'intelligenceService/activity'
   chrome.devtools.inspectedWindow.eval(meta.emitStr(path, button.checked))
   chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${button.checked}`))
+}
+
+function setPosition () {
+  const lat = parseInt(core.state().get('input/latitude').value)
+  const lon = parseInt(core.state().get('input/longitude').value)
+
+  const msg = util.partialMobileLocation(lat, lon)
+  const path = 'mobile/location'
+
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, msg.get('payload')))
+  chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${msg.get('payload')}`))
+
+  if (!core.state().get('timeouts').isEmpty()) {
+    chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
+    core.update('timeouts', Immutable.List())
+  }
 }

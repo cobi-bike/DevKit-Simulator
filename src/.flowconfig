@@ -1,7 +1,4 @@
 [ignore]
-.*app/chrome/manifest.*
-.*/react/node_modules/.*
-.*/electron/node_modules/.*
 .*node_modules/babel.*
 .*node_modules/classnames.*
 .*node_modules/json-loader.*
@@ -12,8 +9,9 @@
 .*node_modules/documentation/lib.*
 
 [include]
+../node_modules/*
 
 [libs]
-node_modules/flow-interfaces-chrome/interfaces/
+./node_modules/flow-interfaces-chrome/interfaces/
 
 [options]

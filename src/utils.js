@@ -5,15 +5,11 @@ import type {FeatureCollection, Feature} from 'geojson-flow'
 const Immutable = require('immutable')
 const GJV = require('geojson-validation')
 
-// holds current timeouts ids. Needed in case a user loads a new file
-// while already playing another one
-let timeouts: List<List<number>> = Immutable.List()
-
 /**
  * create a firebase-like path using the channel and property enum name
  * @example path("HUB", "FRONT_LIGHT_ID") -> "hub/frontLightId"
  */
-const path = function (channel: string, property: string) {
+function path (channel: string, property: string) {
   const ch = channel.indexOf('_') === 0 ? channel : toMixedCase(channel)
   const prop = property.indexOf('_') === 0 ? property : toMixedCase(property)
 
@@ -24,7 +20,7 @@ const path = function (channel: string, property: string) {
  * converts an underscore separated string into a camelcase onEvalError
  * @example "FRONT_LIGHT_ID" -> "frontLightId"
  */
-const toMixedCase = function (name: string) {
+function toMixedCase (name: string) {
   const words = name.split('_')
                   .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
   return words[0].toLowerCase() + words.slice(1).join('')
@@ -34,7 +30,7 @@ const toMixedCase = function (name: string) {
  * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
-const normalize = function (cobiTrack: List<[number, Map<string, any>]>) {
+function normalize (cobiTrack: List<[number, Map<string, any>]>) {
   const start = cobiTrack.minBy(([time]) => time)[0] // first timestampt
   return cobiTrack.map(([t, msg]) => [t - start, Immutable.fromJS(msg)])
 }
@@ -43,7 +39,7 @@ const normalize = function (cobiTrack: List<[number, Map<string, any>]>) {
  * take a feature collection and returns the first linestring feature that
  * also contains timestampts (coordTimes)
  */
-const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
+function fetchLineStr (geojson: FeatureCollection): ?Feature {
   return geojson.features.find(v => {
     return GJV.isFeature(v) && v.geometry && GJV.isLineString(v.geometry) &&
           Array.isArray(v.geometry.coordinates) && v.properties &&
@@ -55,7 +51,7 @@ const fetchLineStr = function (geojson: FeatureCollection): ?Feature {
 /**
  * converts a geojson FeatureCollection into
  */
-const geoToTrack = function (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
+function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
   // get the first linestring inside the feature collection
   const times = Immutable.List(geoTrack.properties.coordTimes)
               .map(Date.parse)
@@ -67,7 +63,7 @@ const geoToTrack = function (geoTrack: Feature) { // https://github.com/facebook
   return ntimes.zip(msgs)
 }
 
-const partialMobileLocation = function (latitude: number, longitude: number) {
+function partialMobileLocation (latitude: number, longitude: number) {
   return Immutable.Map({
     'action': 'NOTIFY',
     'channel': 'MOBILE',
@@ -103,3 +99,4 @@ module.exports.normalize = normalize
 module.exports.fetchLineStr = fetchLineStr
 module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
+module.exports.partialMobileLocation = partialMobileLocation
