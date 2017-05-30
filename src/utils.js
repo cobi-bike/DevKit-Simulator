@@ -97,29 +97,9 @@ function gpxErrors (oDOM: Document) {
   return null
 }
 
-/**
- * Adds the timeouts ids to the list of current running timeouts.
- * Remove the previous timeouts if any exists
- */
-const updateTimeouts = function (ids: List<List<number>>) {
-  if (timeouts.count() !== 0) {
-    timeouts.map(l => l.map(clearTimeout))
-  }
-  timeouts = ids
-}
-
-/**
- * are there any timeouts currently running?
- */
-const waitingTimeouts = function () {
-  return !timeouts.isEmpty()
-}
-
 module.exports.path = path
 module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
 module.exports.fetchLineStr = fetchLineStr
 module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
-module.exports.updateTimeouts = updateTimeouts
-module.exports.waitingTimeouts = waitingTimeouts
