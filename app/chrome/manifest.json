@@ -12,6 +12,12 @@
     "default_popup": "popup.html"
   },
 
+  "icons": {
+    "16": "assets/cobi-icon.png",
+    "48": "assets/cobi-icon.png",
+    "128": "assets/cobi-icon.png"
+  },
+
   "devtools_page": "index.html",
   "homepage_url": "https://github.com/cobi-bike/jetpack-simulator",
 
