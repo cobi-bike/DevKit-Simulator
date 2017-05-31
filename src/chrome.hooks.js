@@ -98,7 +98,7 @@ function fakeInput (normals) {
 function onCobiTrackFileLoaded (evt) {
   const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
-  if (!core.state().get('timeouts').isEmpty()) {
+  if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
   }
   fakeInput(normals)
@@ -126,7 +126,7 @@ function onGpxFileLoaded (evt) {
     return chrome.devtools.inspectedWindow.eval(log.error('Deactivating previous fake events'))
   }
 
-  if (!core.state().get('timeouts').isEmpty()) {
+  if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
   }
 
@@ -146,8 +146,8 @@ function toggleActivity (button) {
  * cdk-61 mock the location of the user and deactivates fake events
  */
 function setPosition () {
-  const lat = parseInt(core.state().get('input/latitude').value)
-  const lon = parseInt(core.state().get('input/longitude').value)
+  const lat = parseInt(core.get('input/latitude').value)
+  const lon = parseInt(core.get('input/longitude').value)
 
   const msg = util.partialMobileLocation(lat, lon)
   const path = 'mobile/location'
@@ -155,7 +155,7 @@ function setPosition () {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(path, msg.get('payload')))
   chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${msg.get('payload')}`))
 
-  if (!core.state().get('timeouts').isEmpty()) {
+  if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
     core.update('timeouts', Immutable.List())
   }

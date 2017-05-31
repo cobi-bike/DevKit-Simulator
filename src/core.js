@@ -33,4 +33,4 @@ function update (key: string, value: any) {
 }
 
 module.exports.update = update
-module.exports.state = () => state
+module.exports.get = (key: string) => state.get(key)
