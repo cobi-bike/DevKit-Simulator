@@ -5,18 +5,19 @@ const Immutable = require('immutable')
 // A record is similar to a JS object, but enforce a specific set of allowed
 // string keys, and have default values.
 const Schema = Immutable.Record({
-  timeouts: Immutable.List(),
+  'timeouts': Immutable.List(),
   // buttons and similar ui stuff
   'input/gpxFile': null,
   'input/trackFile': null,
   'input/activity': null,
+  'input/tcType': null,
   'input/tcUp': null,
   'input/tcDown': null,
   'input/tcRight': null,
   'input/tcLeft': null,
+  'input/tcSelect': null,
   'input/latitude': null,
   'input/longitude': null
-
 })
 // the schema only allows the above keys
 let state = new Schema()

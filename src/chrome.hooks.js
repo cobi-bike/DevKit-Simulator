@@ -32,27 +32,33 @@ chrome.devtools.panels.create('COBI',
       let isEnabled = document.getElementById('is-cobi-supported')
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
       // ui elements setup
+      let tcType = document.getElementById('tc-type')
       let tcUp = document.getElementById('tc-up')
       let tcDown = document.getElementById('tc-down')
       let tcRight = document.getElementById('tc-right')
       let tcLeft = document.getElementById('tc-left')
+      let tcSelect = document.getElementById('tc-select')
       let latitude = document.getElementById('latitude')
       let longitude = document.getElementById('longitude')
       let positionButton = document.getElementById('position')
       let activityButton = document.getElementById('activity-toggle')
+      if (tcType) tcType.addEventListener('change', () => setThumbControllerType(tcType.options[tcType.selectedIndex].value))
       if (tcUp) tcUp.addEventListener('click', () => thumbAction('UP'))
       if (tcDown) tcDown.addEventListener('click', () => thumbAction('DOWN'))
       if (tcLeft) tcLeft.addEventListener('click', () => thumbAction('LEFT'))
       if (tcRight) tcRight.addEventListener('click', () => thumbAction('RIGHT'))
+      if (tcRight) tcRight.addEventListener('click', () => thumbAction('SELECT'))
       if (activityButton) activityButton.addEventListener('click', () => toggleActivity(activityButton))
       if (positionButton) positionButton.addEventListener('click', setPosition)
       // keep a reference to ui elements for later usage
       core.update('input/gpxFile', track)
       core.update('input/trackFile', localizer)
+      core.update('input/tcType', tcType)
       core.update('input/tcUp', tcUp)
       core.update('input/tcDown', tcDown)
       core.update('input/tcRight', tcRight)
       core.update('input/tcLeft', tcLeft)
+      core.update('input/tcSelect', tcSelect)
       core.update('input/activity', activityButton)
       core.update('input/latitude', latitude)
       core.update('input/longitude', longitude)
@@ -126,6 +132,7 @@ function onGpxFileLoaded (evt) {
 
   fakeInput(util.geoToTrack(featLineStr))
 }
+
 /**
  * cdk-60 manually set the activity type
  */
@@ -134,6 +141,7 @@ function toggleActivity (button) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(path, button.checked))
   chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${button.checked}`))
 }
+
 /**
  * cdk-61 mock the location of the user and deactivates fake events
  */
@@ -151,4 +159,14 @@ function setPosition () {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
     core.update('timeouts', Immutable.List())
   }
+}
+
+/**
+ * cdk-59 manually set the type of Thumb controller
+ */
+function setThumbControllerType (value) {
+  const path = 'hub/thumbControllerInterfaceId'
+  const expression = meta.emitStr(path, value)
+  chrome.devtools.inspectedWindow.eval(expression)
+  chrome.devtools.inspectedWindow.eval(log.log(`"${path}" = ${value}`))
 }
