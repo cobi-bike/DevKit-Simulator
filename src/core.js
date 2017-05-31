@@ -7,8 +7,7 @@ const Immutable = require('immutable')
 const Schema = Immutable.Record({
   'timeouts': Immutable.List(),
   // buttons and similar ui stuff
-  'input/gpxFile': null,
-  'input/trackFile': null,
+  'input/file': null,
   'button/activity': null,
   'select/tcType': null,
   'button/tcUp': null,

@@ -28,10 +28,16 @@ chrome.devtools.panels.create('COBI',
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
       // ui elements setup
       // keep a reference to ui elements for later usage
-      core.update('input/gpxFile', document.getElementById('input-track'))
-          .onchange = () => trackReader.readAsText(core.get('input/gpxFile').files[0])
-      core.update('input/trackFile', document.getElementById('input-gpx'))
-          .onchange = () => gpxReader.readAsText(core.get('input/trackFile').files[0])
+      core.update('input/file', document.getElementById('input-file'))
+          .onchange = (evt) => {
+            const file = evt.target.files[0]
+            if (!file) return // cancelled input - do nothing
+            chrome.devtools.inspectedWindow.eval(log.info(`loading: ${file.name}`))
+            if (file.type.endsWith('json')) {
+              return trackReader.readAsText(file)
+            } // xml otherwise
+            return gpxReader.readAsText(file)
+          }
       core.update('select/tcType', document.getElementById('tc-type'))
           .onchange = () => {
             const tcType = core.get('select/tcType')
@@ -105,17 +111,17 @@ function onGpxFileLoaded (evt) {
 
   let errors = util.gpxErrors(content)
   if (errors !== null) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`invalid GPX file passed: ${JSON.stringify(errors)}`))
+    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
   }
 
   const geojson: FeatureCollection = toGeoJSON.gpx(content)
   if (!GJV.valid(geojson)) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`invalid input file`))
+    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid input file`))
   }
 
   const featLineStr = util.fetchLineStr(geojson)
   if (!featLineStr) {
-    return chrome.devtools.inspectedWindow.eval(log.error('Deactivating previous fake events'))
+    return chrome.devtools.inspectedWindow.eval(log.error('Invalid input file data'))
   }
 
   if (!core.get('timeouts').isEmpty()) {
