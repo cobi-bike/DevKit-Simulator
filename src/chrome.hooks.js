@@ -23,45 +23,37 @@ chrome.devtools.panels.create('COBI',
       let gpxReader = new FileReader()
       gpxReader.onload = onGpxFileLoaded
 
-      // ----
-      const track = document.getElementById('input-track')
-      track.addEventListener('change', () => trackReader.readAsText(track.files[0]))
-      const localizer = document.getElementById('input-gpx')
-      localizer.addEventListener('change', () => gpxReader.readAsText(localizer.files[0]))
-
+      // XXX: do we need this? maybe not with injection
       let isEnabled = document.getElementById('is-cobi-supported')
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
       // ui elements setup
-      let tcType = document.getElementById('tc-type')
-      let tcUp = document.getElementById('tc-up')
-      let tcDown = document.getElementById('tc-down')
-      let tcRight = document.getElementById('tc-right')
-      let tcLeft = document.getElementById('tc-left')
-      let tcSelect = document.getElementById('tc-select')
-      let latitude = document.getElementById('latitude')
-      let longitude = document.getElementById('longitude')
-      let positionButton = document.getElementById('position')
-      let activityButton = document.getElementById('activity-toggle')
-      if (tcType) tcType.addEventListener('change', () => setThumbControllerType(tcType.options[tcType.selectedIndex].value))
-      if (tcUp) tcUp.addEventListener('click', () => thumbAction('UP'))
-      if (tcDown) tcDown.addEventListener('click', () => thumbAction('DOWN'))
-      if (tcLeft) tcLeft.addEventListener('click', () => thumbAction('LEFT'))
-      if (tcRight) tcRight.addEventListener('click', () => thumbAction('RIGHT'))
-      if (tcRight) tcRight.addEventListener('click', () => thumbAction('SELECT'))
-      if (activityButton) activityButton.addEventListener('click', () => toggleActivity(activityButton))
-      if (positionButton) positionButton.addEventListener('click', setPosition)
       // keep a reference to ui elements for later usage
-      core.update('input/gpxFile', track)
-      core.update('input/trackFile', localizer)
-      core.update('input/tcType', tcType)
-      core.update('input/tcUp', tcUp)
-      core.update('input/tcDown', tcDown)
-      core.update('input/tcRight', tcRight)
-      core.update('input/tcLeft', tcLeft)
-      core.update('input/tcSelect', tcSelect)
-      core.update('input/activity', activityButton)
-      core.update('input/latitude', latitude)
-      core.update('input/longitude', longitude)
+      core.update('input/gpxFile', document.getElementById('input-track'))
+          .onchange = () => trackReader.readAsText(core.get('input/gpxFile').files[0])
+      core.update('input/trackFile', document.getElementById('input-gpx'))
+          .onchange = () => gpxReader.readAsText(core.get('input/trackFile').files[0])
+      core.update('select/tcType', document.getElementById('tc-type'))
+          .onchange = () => {
+            const tcType = core.get('select/tcType')
+            setThumbControllerType(tcType.options[tcType.selectedIndex].value)
+          }
+      core.update('button/tcUp', document.getElementById('tc-up'))
+          .onclick = () => thumbAction('UP')
+      core.update('button/tcDown', document.getElementById('tc-down'))
+          .onclick = () => thumbAction('DOWN')
+      core.update('button/tcRight', document.getElementById('tc-right'))
+          .onclick = () => thumbAction('RIGHT')
+      core.update('button/tcLeft', document.getElementById('tc-left'))
+          .onclick = () => thumbAction('LEFT')
+      core.update('button/tcSelect', document.getElementById('tc-select'))
+          .onclick = () => thumbAction('SELECT')
+      core.update('button/activity', document.getElementById('activity-toggle'))
+          .onclick = () => toggleActivity(core.get('button/activity'))
+      core.update('button/position', document.getElementById('position'))
+          .onclick = () => setPosition(core.get('input/latitude'),
+                                       core.get('input/longitude'))
+      core.update('input/latitude', document.getElementById('latitude'))
+      core.update('input/longitude', document.getElementById('longitude'))
     }
 )
 
@@ -145,20 +137,20 @@ function toggleActivity (button) {
 /**
  * cdk-61 mock the location of the user and deactivates fake events
  */
-function setPosition () {
-  const lat = parseInt(core.get('input/latitude').value)
-  const lon = parseInt(core.get('input/longitude').value)
+function setPosition (inputLat, inputLon) {
+  const lat = parseInt(inputLat.value)
+  const lon = parseInt(inputLon.value)
 
   const msg = util.partialMobileLocation(lat, lon)
   const path = 'mobile/location'
-
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, msg.get('payload')))
-  chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${msg.get('payload')}`))
 
   if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
     core.update('timeouts', Immutable.List())
   }
+
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(path, msg.get('payload')))
+  chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${msg.get('payload')}`))
 }
 
 /**
