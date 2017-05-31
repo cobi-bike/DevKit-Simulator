@@ -12,6 +12,6 @@
 ../node_modules/*
 
 [libs]
-./node_modules/flow-interfaces-chrome/interfaces/
+../node_modules/flow-interfaces-chrome/interfaces/
 
 [options]
