@@ -1,5 +1,5 @@
 {
-  "name": "COBI DevKit Simulator",
+  "name": "cobi-devkit-simulator",
   "version": "0.1.0",
   "description": "COBI DevKit Simulator is a browser-based IDE to build web apps for bikes.",
   "scripts": {
