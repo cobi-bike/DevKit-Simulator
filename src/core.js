@@ -3,9 +3,9 @@
 const Immutable = require('immutable')
 
 /**
- * A record is similar to a JS object, but enforce a specific set of allowed
- * string keys, and have default values. This allows us to pin-point changes
- * more dynamically
+ * A schema of the allowed key/value pairs for the COBI simulator. Invalid keys
+ * are ignored when set/update is called on the schema. This allows us to
+ * pin-point changes more dynamically
  */
 const Schema = Immutable.Record({
   'timeouts': Immutable.List(),
