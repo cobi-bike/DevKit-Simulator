@@ -4,7 +4,7 @@
   "description": "COBI simulator to help you test your Jetpack app",
   "scripts": {
     "test": "flow && eslint",
-    "build": "npm run docs && npm run remove-types",
+    "build": "npm run docs && npm run gulp once",
     "prepublish": "npm run build",
     "flow": "flow",
     "gulp": "gulp",
