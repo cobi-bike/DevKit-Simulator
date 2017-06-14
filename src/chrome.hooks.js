@@ -14,6 +14,10 @@ const util = require('./utils')
 const toGeoJSON = require('togeojson')
 const GJV = require('geojson-validation')
 
+/**
+ * Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
+ * icon and index page. The panel is named COBI
+ */
 chrome.devtools.panels.create('COBI',
     'assets/cobi-icon.png',
     'index.html',
@@ -90,6 +94,7 @@ function fakeInput (normals) {
   core.update('timeouts', Immutable.List([emmiters, loggers]))
 }
 
+// TODO: validate the input and display an error if it doesnt conform to the cobi track schema
 /**
  * cdk-2 mock input data to test webapps
  */

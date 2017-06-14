@@ -2,8 +2,11 @@
 
 const Immutable = require('immutable')
 
-// A record is similar to a JS object, but enforce a specific set of allowed
-// string keys, and have default values.
+/**
+ * A record is similar to a JS object, but enforce a specific set of allowed
+ * string keys, and have default values. This allows us to pin-point changes
+ * more dynamically
+ */
 const Schema = Immutable.Record({
   'timeouts': Immutable.List(),
   // buttons and similar ui stuff
@@ -26,7 +29,7 @@ let state = new Schema()
  * changes the value of key in the system state.
  * It might perform additional work based on internal configuration
  *
- * Throws on value === null or on unknown key
+ * Throws on `value === null` and on unknown key
  */
 function update (key: string, value: any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)

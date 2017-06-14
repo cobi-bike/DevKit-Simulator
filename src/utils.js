@@ -17,7 +17,7 @@ function path (channel: string, property: string) {
 }
 
 /**
- * converts an underscore separated string into a camelcase onEvalError
+ * converts an underscore separated string into a camelcase one
  * @example "FRONT_LIGHT_ID" -> "frontLightId"
  */
 function toMixedCase (name: string) {
