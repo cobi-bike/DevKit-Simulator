@@ -1,0 +1,1123 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>jetpack-simulator 0.1.0 | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='max-width-4 mx-auto'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>jetpack-simulator</h3>
+          <div class='mb1'><code>0.1.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#path'
+                  class="">
+                  path
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#tomixedcase'
+                  class="">
+                  toMixedCase
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#update'
+                  class="">
+                  update
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#normalize'
+                  class="">
+                  normalize
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fetchlinestr'
+                  class="">
+                  fetchLineStr
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#geototrack'
+                  class="">
+                  geoToTrack
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#thumbaction'
+                  class="">
+                  thumbAction
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fakeinput'
+                  class="">
+                  fakeInput
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gpxerrors'
+                  class="">
+                  gpxErrors
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#oncobitrackfileloaded'
+                  class="">
+                  onCobiTrackFileLoaded
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ongpxfileloaded'
+                  class="">
+                  onGpxFileLoaded
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#toggleactivity'
+                  class="">
+                  toggleActivity
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setposition'
+                  class="">
+                  setPosition
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setthumbcontrollertype'
+                  class="">
+                  setThumbControllerType
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='path'>
+      path
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L12-L17'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>create a firebase-like path using the channel and property enum name</p>
+
+
+  <div class='pre p1 fill-light mt0'>path(channel: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, property: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>channel</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>property</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>path(<span class="hljs-string">"HUB"</span>, <span class="hljs-string">"FRONT_LIGHT_ID"</span>) -&gt; <span class="hljs-string">"hub/frontLightId"</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='tomixedcase'>
+      toMixedCase
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L23-L27'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>converts an underscore separated string into a camelcase onEvalError</p>
+
+
+  <div class='pre p1 fill-light mt0'>toMixedCase(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-string">"FRONT_LIGHT_ID"</span> -&gt; <span class="hljs-string">"frontLightId"</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='update'>
+      update
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/core.js#L31-L43'>
+      <span>src/core.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>changes the value of key in the system state.
+It might perform additional work based on internal configuration</p>
+<p>Throws on value === null or on unknown key</p>
+
+
+  <div class='pre p1 fill-light mt0'>update(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, value: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='normalize'>
+      normalize
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L33-L36'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>converts a log of COBI Bus events from their absolute epoch value
+to a relative one with the lowest epoch as base.</p>
+
+
+  <div class='pre p1 fill-light mt0'>normalize(cobiTrack: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>cobiTrack</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fetchlinestr'>
+      fetchLineStr
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L42-L49'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>take a feature collection and returns the first linestring feature that
+also contains timestampts (coordTimes)</p>
+
+
+  <div class='pre p1 fill-light mt0'>fetchLineStr(geojson: FeatureCollection): Feature?</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>geojson</span> <code class='quiet'>(FeatureCollection)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>Feature?</code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='geototrack'>
+      geoToTrack
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L54-L64'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>converts a geojson FeatureCollection into</p>
+
+
+  <div class='pre p1 fill-light mt0'>geoToTrack(geoTrack: Feature)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>geoTrack</span> <code class='quiet'>(Feature)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='thumbaction'>
+      thumbAction
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L69-L73'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-2 mock input data to test webapps</p>
+
+
+  <div class='pre p1 fill-light mt0'>thumbAction(value: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fakeinput'>
+      fakeInput
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L78-L91'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-2 mock input data to test webapps</p>
+
+
+  <div class='pre p1 fill-light mt0'>fakeInput(normals: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>normals</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gpxerrors'>
+      gpxErrors
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/utils.js#L85-L94'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>check if there is any errors on the gpx file, returns null when no errors occurs
+FIXME: see issue #2</p>
+
+
+  <div class='pre p1 fill-light mt0'>gpxErrors(oDOM: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oDOM</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='oncobitrackfileloaded'>
+      onCobiTrackFileLoaded
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L96-L103'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-2 mock input data to test webapps</p>
+
+
+  <div class='pre p1 fill-light mt0'>onCobiTrackFileLoaded(evt: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>evt</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ongpxfileloaded'>
+      onGpxFileLoaded
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L108-L132'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-2 mock input data to test webapps</p>
+
+
+  <div class='pre p1 fill-light mt0'>onGpxFileLoaded(evt: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>evt</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='toggleactivity'>
+      toggleActivity
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L137-L141'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-60 manually set the activity type</p>
+
+
+  <div class='pre p1 fill-light mt0'>toggleActivity(button: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>button</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setposition'>
+      setPosition
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L146-L160'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-61 mock the location of the user and deactivates fake events</p>
+
+
+  <div class='pre p1 fill-light mt0'>setPosition(inputLat: any, inputLon: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputLat</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputLon</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setthumbcontrollertype'>
+      setThumbControllerType
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/67fafcff07dad4c87e2aae05ab459dd71fb84f2f/src/chrome.hooks.js#L165-L170'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>cdk-59 manually set the type of Thumb controller</p>
+
+
+  <div class='pre p1 fill-light mt0'>setThumbControllerType(value: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
