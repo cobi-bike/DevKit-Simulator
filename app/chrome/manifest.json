@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "COBI - jetpack simulator",
+  "name": "COBI DevKit Simulator",
   "version": "0.0.0.1",
 
-  "description": "COBI's webapp events simulator",
+  "description": "Chrome-based IDE to build web apps for bikes",
   "minimum_chrome_version": "43",
 
   "browser_action": {
     "default_icon": "assets/cobi-icon.png",
-    "default_title": "COBI simulator",
+    "default_title": "COBI DevKit Simulator",
     "default_popup": "popup.html"
   },
 
