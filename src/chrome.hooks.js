@@ -3,7 +3,7 @@
 /* global FileReader:false */
 /* global DOMParser:false */
 
-import type {Map, List} from 'immutable'
+import type {List} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 
 const Immutable = require('immutable')
@@ -48,8 +48,8 @@ chrome.devtools.panels.create('COBI',
             const tcType = core.get('select/tcType')
             const value = tcType.options[tcType.selectedIndex].value
             core.get('button/tcRight').disabled = value.match(/intuvia/i) !== null
-            core.get('button/tcLeft').disabled = value.match(/intuvia/i) !== null
-            setThumbControllerType()
+            core.get('button/tcRight').disabled = value.match(/intuvia/i) !== null
+            setThumbControllerType(value)
           }
       core.update('button/stopPlayback', document.getElementById('stop-playback'))
           .onclick = () => {
@@ -110,7 +110,7 @@ function fakeInput (normals) {
  * cdk-2 mock input data to test webapps
  */
 function onCobiTrackFileLoaded (evt) {
-  const content: List<[number, Map<string, any>]> = Immutable.List(JSON.parse(evt.target.result))
+  const content: List<[number, Object]> = Immutable.List(JSON.parse(evt.target.result))
   const normals = util.normalize(content)
   if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))

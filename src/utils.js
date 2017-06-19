@@ -30,7 +30,7 @@ function toMixedCase (name: string) {
  * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
-function normalize (cobiTrack: List<[number, Map<string, any>]>) {
+function normalize (cobiTrack: List<[number, Object]>): List<[number, Map<string, any>]> {
   const start = cobiTrack.minBy(([time]) => time)[0] // first timestampt
   return cobiTrack.map(([t, msg]) => [t - start, Immutable.fromJS(msg)])
 }
