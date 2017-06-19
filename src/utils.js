@@ -80,19 +80,26 @@ function partialMobileLocation (latitude: number, longitude: number) {
 
 /**
  * check if there is any errors on the gpx file, returns null when no errors occurs
- * FIXME: see issue #2
  */
 function gpxErrors (oDOM: Document) {
   // print the name of the root element or error message
   if (oDOM.documentElement && oDOM.documentElement.nodeName === 'parsererror') {
-    return { 'msg': 'Input doesnt conforms with neither v1.1 nor v1.0 gpx schemas'
-      // v10: gpxV10Res,
-      // v11: gpxV11Res
-    }
+    return 'parsererror reading xml file'
   }
   return null
 }
 
+function cobiTrackErrors (raw: any) {
+  if (!Array.isArray(raw)) return `root element must be an Array`
+
+  if (raw.every(v => Array.isArray(v) && v.length === 2)) return `Every element of the array MUST be a [t, msg] tuple`
+
+  if (raw.every(([t]) => Number.isInteger(t))) return `Every timestampt element MUST be an integer in milliseconds`
+
+  if (raw.every(([msg]) => msg['action' && msg['channel'] && msg['property'] && msg['payload'])) {
+    return `Every message MUST contain "action", "channel", "property" and "payload"`
+  }
+}
 module.exports.path = path
 module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
@@ -100,3 +107,4 @@ module.exports.fetchLineStr = fetchLineStr
 module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
 module.exports.partialMobileLocation = partialMobileLocation
+module.exports.cobiTrackErrors = cobiTrackErrors

@@ -110,7 +110,12 @@ function fakeInput (normals) {
  * cdk-2 mock input data to test webapps
  */
 function onCobiTrackFileLoaded (evt) {
-  const content: List<[number, Object]> = Immutable.List(JSON.parse(evt.target.result))
+  const raw = JSON.parse(evt.target.result)
+  const errors = util.cobiTrackErrors(raw)
+  if (errors) {
+    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
+  }
+  const content: List<[number, Object]> = Immutable.List(raw)
   const normals = util.normalize(content)
   if (!core.get('timeouts').isEmpty()) {
     chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
@@ -126,7 +131,7 @@ function onGpxFileLoaded (evt) {
   const content = parser.parseFromString(evt.target.result, 'application/xml')
 
   let errors = util.gpxErrors(content)
-  if (errors !== null) {
+  if (errors) {
     return chrome.devtools.inspectedWindow.eval(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
   }
 
