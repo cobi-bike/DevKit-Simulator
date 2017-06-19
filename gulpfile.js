@@ -14,6 +14,11 @@ const babelBrowser = {
       'targets': {
         'browsers': ['Chrome >= 43']}}]]}
 
+function handleError (err) {
+  console.error(err.toString())
+  this.emit('end')
+}
+
 // ---------- tasks
 gulp.task('browser', function () {
   const chromePath = 'src/chrome.hooks.js'
@@ -21,10 +26,7 @@ gulp.task('browser', function () {
   b.transform(babelify, babelBrowser)
   // run automatically on every update
   b.bundle()
-      .on('error', function (err) {
-        console.error(err.toString())
-        this.emit('end')
-      })
+      .on('error', handleError)
       .pipe(source(chromePath))
       .pipe(buffer())
       .pipe(concat('index.js')) // output filename
@@ -34,17 +36,16 @@ gulp.task('browser', function () {
 gulp.task('node', function () {
   return gulp.src('src/*.js')
     .pipe(babel({presets: ['flow']}))
+    .on('error', handleError)
     .pipe(gulp.dest('lib'))
 })
 
 gulp.task('copy', function () {
   return gulp.src('assets/*.*')
-  .pipe(gulp.dest('app/chrome/assets/'))
+             .pipe(gulp.dest('app/chrome/assets/'))
 })
 
 // build everything once, probably for production
 gulp.task('once', ['browser', 'node', 'copy'])
 // watch and rebuild everything on change
-gulp.task('watch', function () {
-  gulp.watch('src/*.js', ['browser', 'node', 'copy'])
-})
+gulp.task('watch', () => gulp.watch('src/*.js', ['browser', 'node', 'copy']))
