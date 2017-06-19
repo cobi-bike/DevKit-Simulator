@@ -27,7 +27,7 @@ chrome.devtools.panels.create('COBI',
       let gpxReader = new FileReader()
       gpxReader.onload = onGpxFileLoaded
 
-      // XXX: do we need this? maybe not with injection
+      // TODO: do we need this? maybe not with injection
       let isEnabled = document.getElementById('is-cobi-supported')
       chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
       // ui elements setup
@@ -46,6 +46,13 @@ chrome.devtools.panels.create('COBI',
           .onchange = () => {
             const tcType = core.get('select/tcType')
             setThumbControllerType(tcType.options[tcType.selectedIndex].value)
+          }
+      core.update('button/stopPlayback', document.getElementById('stop-playback'))
+          .onclick = () => {
+            if (!core.get('timeouts').isEmpty()) {
+              chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
+            }
+            core.update('timeouts', Immutable.List())
           }
       core.update('button/tcUp', document.getElementById('tc-up'))
           .onclick = () => thumbAction('UP')

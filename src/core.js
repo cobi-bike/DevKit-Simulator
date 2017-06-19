@@ -13,6 +13,7 @@ const Schema = Immutable.Record({
   'input/file': null,
   'button/activity': null,
   'select/tcType': null,
+  'button/stopPlayback': null,
   'button/tcUp': null,
   'button/tcDown': null,
   'button/tcRight': null,
@@ -40,6 +41,7 @@ function update (key: string, value: any) {
     state.get('timeouts').map(ids => ids.map(clearTimeout))
     // not allowed by design - cdk-60
     state.get('button/activity').disabled = !value.isEmpty()
+    state.get('button/stopPlayback').disabled = value.isEmpty()
   }
   state = state.set(key, value)
   return value
