@@ -10,6 +10,7 @@ const Immutable = require('immutable')
 const Schema = Immutable.Record({
   'timeouts': Immutable.List(),
   // buttons and similar ui stuff
+  'text/cobiSupported?': false.toString(),
   'input/file': null,
   'button/activity': null,
   'select/tcType': null,

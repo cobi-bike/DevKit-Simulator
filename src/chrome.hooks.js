@@ -27,9 +27,10 @@ chrome.devtools.panels.create('COBI',
       let gpxReader = new FileReader()
       gpxReader.onload = onGpxFileLoaded
 
-      // TODO: do we need this? maybe not with injection
-      let isEnabled = document.getElementById('is-cobi-supported')
-      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => { isEnabled.innerHTML = result })
+      core.update('text/cobiSupported?', document.getElementById('is-cobi-supported'))
+      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => {
+        core.get('text/cobiSupported?').innerHTML = result.toString()
+      })
       // ui elements setup
       // keep a reference to ui elements for later usage
       core.update('input/file', document.getElementById('input-file'))
