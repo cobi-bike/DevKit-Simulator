@@ -46,7 +46,10 @@ chrome.devtools.panels.create('COBI',
       core.update('select/tcType', document.getElementById('tc-type'))
           .onchange = () => {
             const tcType = core.get('select/tcType')
-            setThumbControllerType(tcType.options[tcType.selectedIndex].value)
+            const value = tcType.options[tcType.selectedIndex].value
+            core.get('button/tcRight').disabled = value.match(/intuvia/i) !== null
+            core.get('button/tcLeft').disabled = value.match(/intuvia/i) !== null
+            setThumbControllerType()
           }
       core.update('button/stopPlayback', document.getElementById('stop-playback'))
           .onclick = () => {
