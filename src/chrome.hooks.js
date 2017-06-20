@@ -94,18 +94,17 @@ function fakeInput (normals) {
   const emmiters = normals.map(([t, msg]) => {
     const path = util.path(msg.get('channel'), msg.get('property'))
     const expression = meta.emitStr(path, msg.get('payload'))
-    return [() => chrome.devtools.inspectedWindow.eval(expression), t]
-  }).map(([fn, t]) => setTimeout(fn, t))
+    return [t, () => chrome.devtools.inspectedWindow.eval(expression)]
+  }).map(([t, fn]) => setTimeout(fn, t))
 
   const loggers = normals.map(([t, msg]) => {
     const path = util.path(msg.get('channel'), msg.get('property'))
-    return [() => chrome.devtools.inspectedWindow.eval(log.log(`${path} = ${msg.get('payload')}`)), t]
-  }).map(([fn, t]) => setTimeout(fn, t))
+    return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${path} = ${msg.get('payload')}`))]
+  }).map(([t, fn]) => setTimeout(fn, t))
 
   core.update('timeouts', Immutable.List([emmiters, loggers]))
 }
 
-// TODO: validate the input and display an error if it doesnt conform to the cobi track schema
 /**
  * cdk-2 mock input data to test webapps
  */
