@@ -101,7 +101,6 @@ function cobiTrackErrors (raw: any) {
   }
 }
 module.exports.path = path
-module.exports.toMixedCase = toMixedCase
 module.exports.normalize = normalize
 module.exports.fetchLineStr = fetchLineStr
 module.exports.geoToTrack = geoToTrack
