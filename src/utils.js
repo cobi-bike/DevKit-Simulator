@@ -92,11 +92,11 @@ function gpxErrors (oDOM: Document) {
 function cobiTrackErrors (raw: any) {
   if (!Array.isArray(raw)) return `root element must be an Array`
 
-  if (raw.every(v => Array.isArray(v) && v.length === 2)) return `Every element of the array MUST be a [t, msg] tuple`
+  if (!raw.every(v => Array.isArray(v) && v.length === 2)) return `Every element of the array MUST be a [t, msg] tuple`
 
-  if (raw.every(([t]) => Number.isInteger(t))) return `Every timestampt element MUST be an integer in milliseconds`
+  if (!raw.every(([t]) => Number.isInteger(t))) return `Every timestampt element MUST be an integer in milliseconds`
 
-  if (raw.every(([msg]) => msg['action'] && msg['channel'] && msg['property'] && msg['payload'])) {
+  if (!raw.every(([msg]) => msg['action'] && msg['channel'] && msg['property'] && msg['payload'])) {
     return `Every message MUST contain "action", "channel", "property" and "payload"`
   }
 }
