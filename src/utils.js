@@ -92,14 +92,25 @@ function gpxErrors (oDOM: Document) {
 function cobiTrackErrors (raw: any) {
   if (!Array.isArray(raw)) return `root element must be an Array`
 
-  if (!raw.every(v => Array.isArray(v) && v.length === 2)) return `Every element of the array MUST be a [t, msg] tuple`
+  const notTuples = raw.filter(v => !(Array.isArray(v) && v.length === 2))
+  if (notTuples.length > 0) {
+    return `Every element of the array MUST be a [t, msg] tuple.
+    the following elements failed: ${JSON.stringify(notTuples)}`
+  }
 
-  if (!raw.every(([t]) => Number.isInteger(t))) return `Every timestampt element MUST be an integer in milliseconds`
+  const notTimestamps = raw.filter(([t]) => !Number.isInteger(t))
+  if (notTimestamps.length > 0) {
+    return `Every timestampt element MUST be an integer in milliseconds.
+    the following elements failed: ${JSON.stringify(notTimestamps)}`
+  }
 
-  if (!raw.every(([msg]) => msg['action'] && msg['channel'] && msg['property'] && msg['payload'])) {
-    return `Every message MUST contain "action", "channel", "property" and "payload"`
+  const notMessages = raw.filter(([_, msg]) => !(msg['action'] && msg['channel'] && msg['property'] && msg['payload']))
+  if (notMessages.length > 0) {
+    return `Every message MUST contain "action", "channel", "property" and "payload".
+    the following elements failed: ${JSON.stringify(notMessages)}`
   }
 }
+
 module.exports.path = path
 module.exports.normalize = normalize
 module.exports.fetchLineStr = fetchLineStr
