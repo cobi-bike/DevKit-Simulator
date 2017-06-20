@@ -115,9 +115,9 @@
               
                 
                 <li><a
-                  href='#fakeinput'
+                  href='#gpxerrors'
                   class="">
-                  fakeInput
+                  gpxErrors
                   
                 </a>
                 
@@ -125,9 +125,9 @@
               
                 
                 <li><a
-                  href='#gpxerrors'
+                  href='#fakeinput'
                   class="">
-                  gpxErrors
+                  fakeInput
                   
                 </a>
                 
@@ -203,16 +203,16 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/core.js#L10-L24'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/core.js#L10-L26'>
       <span>src/core.js</span>
       </a>
     
   </div>
   
 
-  <p>A record is similar to a JS object, but enforce a specific set of allowed
-string keys, and have default values. This allows us to pin-point changes
-more dynamically</p>
+  <p>A schema of the allowed key/value pairs for the COBI simulator. Invalid keys
+are ignored when set/update is called on the schema. This allows us to
+pin-point changes more dynamically</p>
 
 
   <div class='pre p1 fill-light mt0'>Schema</div>
@@ -256,7 +256,7 @@ more dynamically</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L12-L17'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L12-L17'>
       <span>src/utils.js</span>
       </a>
     
@@ -334,7 +334,7 @@ more dynamically</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L21-L68'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L21-L79'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -386,7 +386,7 @@ icon and index page. The panel is named COBI</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L23-L27'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L23-L27'>
       <span>src/utils.js</span>
       </a>
     
@@ -456,7 +456,7 @@ icon and index page. The panel is named COBI</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L33-L36'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L33-L36'>
       <span>src/utils.js</span>
       </a>
     
@@ -467,7 +467,7 @@ icon and index page. The panel is named COBI</p>
 to a relative one with the lowest epoch as base.</p>
 
 
-  <div class='pre p1 fill-light mt0'>normalize(cobiTrack: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  <div class='pre p1 fill-light mt0'>normalize(cobiTrack: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>]>): List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]></div>
   
   
 
@@ -484,7 +484,7 @@ to a relative one with the lowest epoch as base.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>cobiTrack</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+            <span class='code bold'>cobiTrack</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>]>)</code>
 	    
           </div>
           
@@ -495,6 +495,11 @@ to a relative one with the lowest epoch as base.</p>
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]></code>
+    
   
 
   
@@ -521,7 +526,7 @@ to a relative one with the lowest epoch as base.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/core.js#L34-L46'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/core.js#L36-L49'>
       <span>src/core.js</span>
       </a>
     
@@ -595,7 +600,7 @@ It might perform additional work based on internal configuration</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L42-L49'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L42-L49'>
       <span>src/utils.js</span>
       </a>
     
@@ -665,7 +670,7 @@ also contains timestampts (coordTimes)</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L54-L64'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L54-L64'>
       <span>src/utils.js</span>
       </a>
     
@@ -729,7 +734,7 @@ also contains timestampts (coordTimes)</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L73-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L84-L88'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -788,12 +793,76 @@ also contains timestampts (coordTimes)</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='gpxerrors'>
+      gpxErrors
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/utils.js#L84-L90'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>check if there is any errors on the gpx file, returns null when no errors occurs</p>
+
+
+  <div class='pre p1 fill-light mt0'>gpxErrors(oDOM: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oDOM</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='fakeinput'>
       fakeInput
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L82-L95'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L93-L106'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -852,77 +921,12 @@ also contains timestampts (coordTimes)</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='gpxerrors'>
-      gpxErrors
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/utils.js#L85-L94'>
-      <span>src/utils.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>check if there is any errors on the gpx file, returns null when no errors occurs
-FIXME: see issue #2</p>
-
-
-  <div class='pre p1 fill-light mt0'>gpxErrors(oDOM: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>oDOM</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Document</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='oncobitrackfileloaded'>
       onCobiTrackFileLoaded
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L101-L108'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L112-L124'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -986,7 +990,7 @@ FIXME: see issue #2</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L113-L137'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L129-L153'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -1050,7 +1054,7 @@ FIXME: see issue #2</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L142-L146'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L158-L162'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -1114,7 +1118,7 @@ FIXME: see issue #2</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L151-L165'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L167-L181'>
       <span>src/chrome.hooks.js</span>
       </a>
     
@@ -1186,7 +1190,7 @@ FIXME: see issue #2</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/b9bc739545da0daa0224179fbd51e784e27d86a2/src/chrome.hooks.js#L170-L175'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/4adc17c1be5ffce193d05fb44380a3c32fd10082/src/chrome.hooks.js#L186-L191'>
       <span>src/chrome.hooks.js</span>
       </a>
     

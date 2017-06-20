@@ -96,7 +96,7 @@ function cobiTrackErrors (raw: any) {
 
   if (raw.every(([t]) => Number.isInteger(t))) return `Every timestampt element MUST be an integer in milliseconds`
 
-  if (raw.every(([msg]) => msg['action' && msg['channel'] && msg['property'] && msg['payload'])) {
+  if (raw.every(([msg]) => msg['action'] && msg['channel'] && msg['property'] && msg['payload'])) {
     return `Every message MUST contain "action", "channel", "property" and "payload"`
   }
 }
