@@ -102,7 +102,7 @@ function cobiTrackErrors (raw: any) {
     the following elements failed: ${JSON.stringify(notTimestamps)}`
   }
 
-  const notMessages = raw.filter(([_, msg]) => !(msg['action'] != null && msg['path'] != null && msg['payload'] != null))
+  const notMessages = raw.filter(([_, msg]) => !(msg['action'] && msg['path'] && msg['payload'] != null))
   if (notMessages.length > 0) {
     return `Every message MUST contain "action", "path" and "payload".
     the following elements failed: ${JSON.stringify(notMessages)}`
