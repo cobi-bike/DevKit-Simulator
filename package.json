@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "COBI DevKit Simulator is a browser-based IDE to build web apps for bikes.",
   "scripts": {
-    "test": "flow && eslint",
+    "test": "eslint",
     "build": "npm run docs && npm run gulp once",
     "prepublish": "npm run build",
     "flow": "flow",
@@ -28,7 +28,7 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.44.2",
+    "flow-bin": "^0.48.0",
     "flow-interfaces-chrome": "^0.3.1",
     "geojson-flow": "^1.0.1",
     "gulp": "^3.9.1",

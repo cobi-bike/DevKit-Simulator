@@ -49,7 +49,8 @@ function fetchLineStr (geojson: FeatureCollection): ?Feature {
 }
 
 /**
- * converts a geojson FeatureCollection into
+ * converts a geojson feature and returns a cobitrack compatible
+ * js representation with relative timestamps
  */
 function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
   const times = Immutable.List(geoTrack.properties.coordTimes)
