@@ -98,14 +98,12 @@ function thumbAction (value) {
  */
 function fakeInput (normals) {
   const emmiters = normals.map(([t, msg]) => {
-    const path = util.path(msg.get('channel'), msg.get('property'))
-    const expression = meta.emitStr(path, msg.get('payload'))
+    const expression = meta.emitStr(msg.get('path'), msg.get('payload'))
     return [t, () => chrome.devtools.inspectedWindow.eval(expression)]
   }).map(([t, fn]) => setTimeout(fn, t))
 
   const loggers = normals.map(([t, msg]) => {
-    const path = util.path(msg.get('channel'), msg.get('property'))
-    return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${path} = ${msg.get('payload')}`))]
+    return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${msg.get('path')} = ${msg.get('payload')}`))]
   }).map(([t, fn]) => setTimeout(fn, t))
 
   core.update('timeouts', Immutable.List([emmiters, loggers]))

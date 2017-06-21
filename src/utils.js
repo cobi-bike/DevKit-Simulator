@@ -52,7 +52,6 @@ function fetchLineStr (geojson: FeatureCollection): ?Feature {
  * converts a geojson FeatureCollection into
  */
 function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
-  // get the first linestring inside the feature collection
   const times = Immutable.List(geoTrack.properties.coordTimes)
               .map(Date.parse)
   const start = times.first()
@@ -66,8 +65,7 @@ function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/is
 function partialMobileLocation (latitude: number, longitude: number) {
   return Immutable.Map({
     'action': 'NOTIFY',
-    'channel': 'MOBILE',
-    'property': 'LOCATION',
+    'path': 'mobile/location',
     'payload': Immutable.Map({
       'altitude': 0,
       'bearing': 0,
@@ -104,9 +102,9 @@ function cobiTrackErrors (raw: any) {
     the following elements failed: ${JSON.stringify(notTimestamps)}`
   }
 
-  const notMessages = raw.filter(([_, msg]) => !(msg['action'] && msg['channel'] && msg['property'] && msg['payload']))
+  const notMessages = raw.filter(([_, msg]) => !(msg['action'] && msg['path'] && msg['payload']))
   if (notMessages.length > 0) {
-    return `Every message MUST contain "action", "channel", "property" and "payload".
+    return `Every message MUST contain "action", "payload" and "payload".
     the following elements failed: ${JSON.stringify(notMessages)}`
   }
 }
