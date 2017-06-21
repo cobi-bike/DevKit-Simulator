@@ -12,7 +12,7 @@ const Schema = Immutable.Record({
   // buttons and similar ui stuff
   'text/cobiSupported?': false.toString(),
   'input/file': null,
-  'button/activity': null,
+  'button/touchUI': null,
   'select/tcType': null,
   'button/stopPlayback': null,
   'button/tcUp': null,
@@ -41,7 +41,7 @@ function update (key: string, value: any) {
     // Remove the previous timeouts if any exists
     state.get('timeouts').map(ids => ids.map(clearTimeout))
     // not allowed by design - cdk-60
-    state.get('button/activity').disabled = !value.isEmpty()
+    state.get('button/touchUI').disabled = !value.isEmpty()
     state.get('button/stopPlayback').disabled = value.isEmpty()
   }
   state = state.set(key, value)
@@ -49,4 +49,7 @@ function update (key: string, value: any) {
 }
 
 module.exports.update = update
-module.exports.get = (key: string) => state.get(key)
+module.exports.get = (key: string) => {
+  if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  return state.get(key)
+}

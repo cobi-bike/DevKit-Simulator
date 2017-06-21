@@ -74,8 +74,8 @@ chrome.devtools.panels.create('COBI',
           .onclick = () => thumbAction('LEFT')
       core.update('button/tcSelect', document.getElementById('tc-select'))
           .onclick = () => thumbAction('SELECT')
-      core.update('button/activity', document.getElementById('activity-toggle'))
-          .onclick = () => toggleActivity(core.get('button/activity'))
+      core.update('button/touchUI', document.getElementById('touch-ui-toggle'))
+          .onclick = () => toggleTouchUI(core.get('button/touchUI'))
       core.update('button/position', document.getElementById('position'))
           .onclick = () => setPosition(core.get('input/latitude'),
                                        core.get('input/longitude'))
@@ -156,10 +156,10 @@ function onGpxFileLoaded (evt) {
 }
 
 /**
- * cdk-60 manually set the activity type
+ * cdk-60 manually set the touch UI flag
  */
-function toggleActivity (button) {
-  const path = 'intelligenceService/activity'
+function toggleTouchUI (button) {
+  const path = 'app/touchUi'
   chrome.devtools.inspectedWindow.eval(meta.emitStr(path, button.checked))
   chrome.devtools.inspectedWindow.eval(log.info(`'${path}' = ${button.checked}`))
 }
