@@ -28,8 +28,14 @@ chrome.devtools.panels.create('COBI',
       gpxReader.onload = onGpxFileLoaded
 
       core.update('text/cobiSupported?', document.getElementById('is-cobi-supported'))
-      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, result => {
+      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result, e) => {
         core.get('text/cobiSupported?').innerHTML = result.toString()
+        if (result) {
+          chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, {}, (result, e) => {
+             // show the problem in the simulator
+            if (e) core.get('text/cobiSupported?').innerHTML = e.toString()
+          })
+        }
       })
       // ui elements setup
       // keep a reference to ui elements for later usage
