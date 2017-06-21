@@ -4,7 +4,7 @@
   "version": "0.0.0.1",
 
   "description": "Chrome-based IDE to build web apps for bikes",
-  "minimum_chrome_version": "43",
+  "minimum_chrome_version": "45",
 
   "browser_action": {
     "default_icon": "assets/cobi-icon.png",

@@ -12,7 +12,7 @@ const babelBrowser = {
     'flow',
     ['env', {
       'targets': {
-        'browsers': ['Chrome >= 43']}}]]}
+        'browsers': ['Chrome >= 45']}}]]}
 
 function handleError (err) {
   console.error(err.toString())

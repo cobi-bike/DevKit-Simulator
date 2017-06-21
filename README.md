@@ -31,6 +31,8 @@ will retranspile all files if a change is detected.
 If you just want to get a deployment version `npm run gulp once` will just do that.
 The final files will be in the `app/chrome` folder.
 
+To test your changes simply run `npm test`
+
 ### install development version locally
 - go to `chrome settings` -> `extensions`
 - activate `developer mode` on the top right
