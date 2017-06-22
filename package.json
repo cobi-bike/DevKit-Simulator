@@ -4,8 +4,8 @@
   "description": "COBI DevKit Simulator is a browser-based IDE to build web apps for bikes.",
   "scripts": {
     "test": "eslint src/",
-    "build": "npm run docs && npm run gulp once",
-    "prepublish": "npm run build",
+    "build": "npm run gulp once && npm run docs",
+    "prepare": "npm test && npm run build",
     "flow": "flow src/",
     "gulp": "gulp",
     "docs": "documentation build -f html -o ./docs -g --shallow ./src/**.js"
