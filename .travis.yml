@@ -1,0 +1,14 @@
+
+language: node_js
+
+script: npm run prepare
+after_success: zip -r chrome.zip app/chrome
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "chrome.zip"
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
