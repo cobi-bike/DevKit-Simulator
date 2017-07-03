@@ -2,6 +2,9 @@
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
+/* global marker:false */
+/* global map:false */
+/* global google: false */
 
 import type {List} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
@@ -13,6 +16,8 @@ const log = require('./log')
 const util = require('./utils')
 const toGeoJSON = require('togeojson')
 const GJV = require('geojson-validation')
+
+const mobileLocation = 'mobile/location'
 
 /**
  * Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
@@ -106,7 +111,14 @@ function fakeInput (normals) {
     return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${msg.get('path')} = ${msg.get('payload')}`))]
   }).map(([t, fn]) => setTimeout(fn, t))
 
-  core.update('timeouts', Immutable.List([emmiters, loggers]))
+  const mappers = normals
+    .filter(([t, msg]) => msg.get('path') === mobileLocation)
+    .map(([t, msg]) => {
+      return [t, () => changeMarkerPosition(msg.get('payload').get('latitude'), msg.get('payload').get('longitude'))]
+    })
+    .map(([t, fn]) => setTimeout(fn, t))
+
+  core.update('timeouts', Immutable.List([emmiters, loggers, mappers]))
 }
 
 /**
@@ -168,10 +180,12 @@ function toggleTouchUI (button) {
  * cdk-61 mock the location of the user and deactivates fake events
  */
 function setPosition (inputLat, inputLon) {
-  const lat = parseInt(inputLat.value)
-  const lon = parseInt(inputLon.value)
+  const lat = parseFloat(inputLat.value) || 0
+  const lon = parseFloat(inputLon.value) || 0
 
-  const msg = util.partialMobileLocation(lat, lon)
+  changeMarkerPosition(lat, lon)
+
+  const msg = util.partialMobileLocation(lon, lat)
   const path = 'mobile/location'
 
   if (!core.get('timeouts').isEmpty()) {
@@ -191,4 +205,12 @@ function setThumbControllerType (value) {
   const expression = meta.emitStr(path, value)
   chrome.devtools.inspectedWindow.eval(expression)
   chrome.devtools.inspectedWindow.eval(log.log(`"${path}" = ${value}`))
+}
+
+/**
+ * CDK-107 update the position of the Marker in the Embedded Google Map
+ */
+function changeMarkerPosition (lat: number, lon: number) {
+  marker.setPosition(new google.maps.LatLng(lat, lon))
+  map.setCenter(new google.maps.LatLng(lat, lon))
 }

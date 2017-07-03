@@ -63,7 +63,7 @@ function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/is
   return ntimes.zip(msgs)
 }
 
-function partialMobileLocation (latitude: number, longitude: number) {
+function partialMobileLocation (longitude: number, latitude: number) {
   return Immutable.Map({
     'action': 'NOTIFY',
     'path': 'mobile/location',
