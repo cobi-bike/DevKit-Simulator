@@ -1,6 +1,9 @@
 // @flow
 
+import type {List} from 'immutable'
+
 const Immutable = require('immutable')
+const Emitter = require('events')
 
 /**
  * A schema of the allowed key/value pairs for the COBI simulator. Invalid keys
@@ -8,28 +11,15 @@ const Immutable = require('immutable')
  * pin-point changes more dynamically
  */
 const Schema = Immutable.Record({
-  'timeouts': Immutable.List(),
-  // buttons and similar ui stuff
-  'text/cobiSupported?': false.toString(),
-  'input/file': null,
-  'button/touchUI': null,
-  'select/tcType': null,
-  'button/stopPlayback': null,
-  'button/tcUp': null,
-  'button/tcDown': null,
-  'button/tcRight': null,
-  'button/tcLeft': null,
-  'button/tcSelect': null,
-  'button/position': null,
-  'input/latitude': null,
-  'input/longitude': null
+  'track': Immutable.List(), // List<[number, Map<string, any>]>
+  'timeouts': Immutable.List() // List<number>
 })
 // the schema only allows the above keys
 let state = new Schema()
+let listener = new Emitter()
 
 /**
  * changes the value of key in the system state.
- * It might perform additional work based on internal configuration
  *
  * Throws on `value === null` and on unknown key
  */
@@ -37,19 +27,37 @@ function update (key: string, value: any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   if (!value) throw new Error(`invalid value ${value} for key ${key}`)
 
-  if (key === 'timeouts') {
-    // Remove the previous timeouts if any exists
-    state.get('timeouts').map(ids => ids.map(clearTimeout))
-    // not allowed by design - cdk-60
-    state.get('button/touchUI').disabled = !value.isEmpty()
-    state.get('button/stopPlayback').disabled = value.isEmpty()
-  }
+  const oldValue = state.get(key)
   state = state.set(key, value)
+  listener.emit(key, value, oldValue)
   return value
 }
 
-module.exports.update = update
-module.exports.get = (key: string) => {
+function get (key: string) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   return state.get(key)
 }
+
+function listen (key: string, callback: (value: any, oldValue: any) => void) {
+  if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  listener.on(key, callback)
+}
+
+function listenOnce (key: string, callback: (value: any, oldValue: any) => void) {
+  if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  listener.once(key, callback)
+}
+
+function remove (key: string, callback?: (value: any, oldValue: any) => void) {
+  if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  if (callback) {
+    return listener.removeListener(key, callback)
+  }
+  listener.removeAllListeners(key)
+}
+
+module.exports.update = update
+module.exports.get = get
+module.exports.on = listen
+module.exports.once = listenOnce
+module.exports.remove = remove
