@@ -19,10 +19,9 @@
   },
 
   "devtools_page": "index.html",
-  "homepage_url": "https://github.com/cobi-bike/jetpack-simulator",
+  "homepage_url": "https://github.com/cobi-bike/COBI.js-simulator",
 
   "offline_enabled": true,
 
   "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://maps.googleapis.com; object-src 'self' 'unsafe-eval' 'unsafe-inline'"
-
 }
