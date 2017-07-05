@@ -5,9 +5,37 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com ">
 
     <style>
+
+    @font-face {
+	  font-family: 'UniSansBook';
+	  src: url("fonts/UniSansBook.eot");
+	  src: url("fonts/UniSansBook.eot?#iefix") format("embedded-opentype"), url("fonts/UniSansBook.woff2") format("woff2"), url("fonts/UniSansBook.woff") format("woff"), url("fonts/UniSansBook.ttf") format("truetype"), url("fonts/UniSansBook.svg#uni_sansbook") format("svg");
+	  font-weight: 400;
+	  font-style: normal; }
+	@font-face {
+	  font-family: 'UniSansBold';
+	  src: url("fonts/UniSansBold.eot");
+	  src: url("fonts/UniSansBold.eot?#iefix") format("embedded-opentype"), url("fonts/UniSansBold.woff2") format("woff2"), url("fonts/UniSansBold.woff") format("woff"), url("fonts/UniSansBold.ttf") format("truetype"), url("fonts/UniSansBold.svg#uni_sansBold") format("svg");
+	  font-weight: bold;
+	  font-style: normal; }
+	@font-face {
+	  font-family: 'UniSansHeavy';
+	  src: url("fonts/UniSansHeavy.eot");
+	  src: url("fonts/UniSansHeavy.eot?#iefix") format("embedded-opentype"), url("fonts/UniSansHeavy.woff2") format("woff2"), url("fonts/UniSansHeavy.woff") format("woff"), url("fonts/UniSansHeavy.ttf") format("truetype"), url("fonts/UniSansHeavy.svg#uni_sansHeavy") format("svg");
+	  font-weight: 900;
+	  font-style: normal; }
+	@font-face {
+	  font-family: 'UniSansSemiBold';
+	  src: url("fonts/UniSansSemiBold.woff2") format("woff2"), url("fonts/UniSansSemiBold.woff") format("woff");
+	  font-weight: 500;
+	  font-style: normal; }
+
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-family: "UniSansBook";
         font-size: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #2d2d37;
       }
       #status {
         /* avoid an excessively wide status text */
@@ -17,16 +45,131 @@
         max-width: 400px;
       }
       #map {
-        float: right;
-        right: 0;
-        width: 50%;
-        height: 300px;
-        background-color: grey;
-      }
+            position: absolute;
+		    float: right;
+		    right: 0;
+		    top: 0;
+		    width: 50%;
+		    height: 100%;
+		    background-color: grey;}
+
+
+   		#left_collumn {
+   		clear: both;
+    	float: left;
+    	padding: 20px 0 30px 30px;
+   		}
+
+       #main {
+           	position: relative;
+		    display: block;
+		    max-width: 95%;
+		    height: 700px;
+		    margin: 40px auto;
+		    background-color: #F3F3F3;
+		    border-radius: 4px;
+  	 	 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+       }
+
+       h1 {
+       	line-height: 1.2;
+	    font-family: 'UniSansBook';
+	    font-weight: normal;
+	    letter-spacing: 0.5px;
+	    margin-bottom: 0px;
+       }
+
+       h2 {
+       	font-size: 14px;
+       }
+
+       button {
+		  text-transform: uppercase;
+		  font-size: 14px;
+		  background: none;
+		  transition: background-color .1s linear, color .1s linear, border-color .1s linear;
+		  padding: 10px 20px;
+		  border-radius: 21px;
+		  border: 1.5px solid;
+		  text-align: center;
+		  position: relative;
+		  cursor: pointer; }
+
+		  .button[disabled] {
+    background: none !important;
+    border-color: #ddd !important;
+    cursor: auto;
+    color: #888; }
+    .button[disabled]:hover {
+      background: none;
+      border-color: #ddd;
+      cursor: auto;
+      color: #888; }
+  .button.loading[disabled] {
+    background-color: #00c8e6 !important;
+    border-color: #00c8e6 !important; }
+    .button.loading[disabled]:hover {
+      background-color: #00c8e6;
+      border-color: #00c8e6; }
+
+.button--confirmation {
+  text-transform: none; }
+
+.button--coral {
+  background-color: #fa4b69;
+  border-color: #fa4b69;
+  color: white; }
+  .button--coral:hover, .button--coral:focus {
+    background-color: #d43e57;
+    border-color: #d43e57; }
+
+.button--white {
+  background-color: white;
+  border-color: white; }
+  .button--white:hover, .button--white:focus {
+    background-color: #e3e3e3;
+    border-color: #e3e3e3; }
+
+.button--ghost--tarmac {
+  color: #2d2d37; }
+  .button--ghost--tarmac:hover, .button--ghost--tarmac:focus {
+    background-color: #2d2d37;
+    border-color: #2d2d37;
+    color: #fff; }
+  .button--ghost--tarmac.loading {
+    background-color: #2d2d37;
+    border-color: #2d2d37; }
+
+.button--filled--blue {
+  background-color: #00c8e6;
+  border-color: #00c8e6; }
+  .button--filled--blue:hover {
+    background-color: #019Cb3;
+    border-color: #019Cb3; }
+  .button--filled--blue.loading:hover {
+    background-color: #00c8e6;
+    border-color: #00c8e6; }
+
+.settings__form__save-button {
+  background-color: #00c8e6;
+  border-color: #00c8e6; }
+  .settings__form__save-button:hover {
+    background-color: #00c8e6;
+    border-color: #00c8e6; }
+  .settings__form__save-button.hover {
+    background-color: #019Cb3;
+    border-color: #019Cb3; }
+  .settings__form__save-button.loading:hover {
+    background-color: #00c8e6;
+    border-color: #00c8e6; }
+  .settings__form__save-button.loading, .settings__form__save-button.loading.hover {
+    background-color: #00c8e6;
+    border-color: #00c8e6; }
+
     </style>
 
     <!--
-      - JavaScript and HTML must be in separate files: see chrome Content Security
+      - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
@@ -34,42 +177,48 @@
     <script src="index.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <div id="map"></div>
-    <img id="image-result" hidden>
-    <h1>COBI.js simulator for Webapps</h1>
-    <p> COBI.js supported? <span id="is-cobi-supported">false</span></p>
-    <section>
-      <h4> Fake input file</h4>
-      <span>A json Cobitrack file or a gpx file </span>
-      <input id="input-file" type="file" name="pic" accept="application/json,application/xml">
-      <button id="stop-playback" disabled>Stop playback</button>
-    </section>
-    <section>
-      <h4>Touch UI </h4>
-      <input id="touch-ui-toggle" type="checkbox"> <span> Enabled </span>
-    </section>
-    <section>
-      <h4>Location </h4>
-      <span> latitude: </span><input id="latitude" type="number" min="-90" max="90">
-      <span> longitude: </span><input id="longitude" type="number" min="-180" max="180">
-      <button id="position">apply</button>
-    </section>
-    <section>
-      <h3>thumb controller</h3>
-      <select id="tc-type">
-        <option value="COBI" selected="selected">cobi</option>
-        <option value="BOSCH_INTUVIA">bosch intuvia</option>
-        <option value="BOSCH_NYON">bosch nyon</option>
-        <option value="BOSCH_INTUVIA_MY17">bosch intuvia 2017</option>
-      </select>
-      <button id="tc-up">up</button>
-      <button id="tc-down">down</button>
-      <button id="tc-left">left</button>
-      <button id="tc-right">right</button>
-      <button id="tc-select">select</button>
-    </section>
+  	<div id="main">
 
+	    <div id="status"></div>
+		    <div id="left_collumn">
+			    <img id="image-result" hidden>
+			    <h1>COBI.js simulator </h1>
+			    <p> website contains COBI.js?: <span id="is-cobi-supported">false</span></p><br>
+			    <section>
+			      <h3> Fake input file</h3>
+			      <span>A json Cobitrack file or a gpx file </span>
+			      <input id="input-file" type="file" name="pic" accept="application/json,application/xml">
+			      <button id="stop-playback" class="button settings__form__save-button spinning-button button--filled--blue hover">Stop playback</button>
+			    </section>
+			    <section>
+			      <span>Touch interaction enabled </span>
+			      <input id="touch-ui-toggle" type="checkbox"> <span> Enabled </span>
+			    </section>
+			    <section>
+			      <h3>Location </h3>
+			      <span> latitude: </span><input id="latitude" type="number" min="-90" max="90">
+			      <span> longitude: </span><input id="longitude" type="number" min="-180" max="180">
+			      <button id="position">apply</button>
+			    </section>
+			    <section>
+			      <h3>Thumb controller</h3>
+			      <select id="tc-type">
+			        <option value="COBI" selected="selected">cobi</option>
+			        <option value="BOSCH_INTUVIA">bosch intuvia</option>
+			        <option value="BOSCH_NYON">bosch nyon</option>
+			        <option value="BOSCH_INTUVIA_MY17">bosch intuvia 2017</option>
+			      </select>
+			      <button id="tc-up">up</button>
+			      <button id="tc-down">down</button>
+			      <button id="tc-left">left</button>
+			      <button id="tc-right">right</button>
+			      <button id="tc-select">select</button>
+			    </section>
+		</div>
+		<div id="map">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9648.550840485967!2d8.679191246590985!3d50.113904763975704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sde!4v1499095717961" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+		</div>
+	</div>
     <script src="maps.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJmloGS_QRE3aetND1q2CRH6Q_lJiwTyA&callback=initMap"></script>
 
