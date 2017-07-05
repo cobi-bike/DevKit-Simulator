@@ -1,12 +1,7 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>COBI.js simulator</title>
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com ">
 
     <style>
@@ -31,7 +26,7 @@
     </style>
 
     <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
+      - JavaScript and HTML must be in separate files: see chrome Content Security
       - Policy documentation[1] for details and explanation.
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
@@ -42,8 +37,7 @@
     <div id="status"></div>
     <div id="map"></div>
     <img id="image-result" hidden>
-    <h1>COBI simulator for Jetpacks</h1>
-    <h2><i>Spec version 0.30.0</i></h2>
+    <h1>COBI.js simulator for Webapps</h1>
     <p> COBI.js supported? <span id="is-cobi-supported">false</span></p>
     <section>
       <h4> Fake input file</h4>
