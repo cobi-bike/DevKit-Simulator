@@ -21,6 +21,7 @@ function handleError (err) {
 
 // ---------- tasks
 gulp.task('browser', function () {
+  console.log('\n')// only separating the log lines :)
   const chromePath = 'src/chrome.hooks.js'
   const b = browserify(chromePath)
   b.transform(babelify, babelBrowser)
