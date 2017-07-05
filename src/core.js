@@ -1,7 +1,5 @@
 // @flow
 
-import type {List} from 'immutable'
-
 const Immutable = require('immutable')
 const Emitter = require('events')
 
@@ -11,6 +9,7 @@ const Emitter = require('events')
  * pin-point changes more dynamically
  */
 const Schema = Immutable.Record({
+  'isCobiEnabled': false,
   'track': Immutable.List(), // List<[number, Map<string, any>]>
   'timeouts': Immutable.List() // List<number>
 })
@@ -25,7 +24,7 @@ let listener = new Emitter()
  */
 function update (key: string, value: any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  if (!value) throw new Error(`invalid value ${value} for key ${key}`)
+  if (value === null || value === undefined) throw new Error(`invalid value ${value} for key ${key}`)
 
   const oldValue = state.get(key)
   state = state.set(key, value)
