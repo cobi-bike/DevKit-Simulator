@@ -24,8 +24,6 @@ const hubThumbControllerAction = 'hub/externalInterfaceAction'
 const appTouchUi = 'app/touchUi'
 const hubThumbControllerType = 'hub/thumbControllerInterfaceId'
 
-const mobileLocation = 'mobile/location'
-
 /**
  * Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
  * icon and index page. The panel is named COBI
@@ -38,18 +36,6 @@ chrome.devtools.panels.create('COBI',
       trackReader.onload = onCobiTrackFileLoaded
       let gpxReader = new FileReader()
       gpxReader.onload = onGpxFileLoaded
-      // ----
-      // BUG: this might be executed even before the cobi.js lib is loaded
-      // causing the simulator to miss the cobi.js values
-      chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-        $('#is-cobi-supported').html = result.toString()
-        if (result) {
-          chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, {}, (result, error) => {
-             // show the problem in the simulator
-            if (error) $('#is-cobi-supported').html = error.toString()
-          })
-        }
-      })
       // core elements
       // set up internal event driven listeners
       core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
@@ -58,7 +44,9 @@ chrome.devtools.panels.create('COBI',
       core.on('track', mapMarkerFollowsFakeInput)
       core.on('timeouts', deactivatePreviousTimeouts)
       core.on('timeouts', updateUIforTimeouts)
-
+      core.once('isCobiEnabled', welcomeUser)
+      // ----
+      autoDetectCobiJs()
       // ui elements setup
       // keep a reference to ui elements for later usage
       $('#input-file').on('change', (event) => {
@@ -247,10 +235,32 @@ function updateUIforTimeouts (timeouts) {
   $('#stop-playback').prop('disabled', timeouts.isEmpty())
 }
 
+function autoDetectCobiJs () {
+  chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
+    $('#is-cobi-supported').html = result
+    if (core.update('isCobiEnabled', result || false)) {
+      chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, {}, (_, error) => {
+         // show the problem in the simulator
+        if (error) {
+          $('#is-cobi-supported').html = error.toString()
+        }
+      })
+    }
+    // cobi.js is not included in the user website. This can have two possible
+    // reasons:
+    // - this is not a webapp and therefore cobi.js will never be there
+    // - we evaluated this too early and thus have to retry a bit later
+    setTimeout(autoDetectCobiJs, 1)
+    if (result) console.warn('COBI.js was not detected. Retrying in 1 second')
+  })
+}
+
 /**
- * CDK-107 update the position of the Marker in the Embedded Google Map
+ * display an ascii version of the COBI logo once the app authentication
+ * works
  */
-function changeMarkerPosition (lat: number, lon: number) {
-  marker.setPosition(new google.maps.LatLng(lat, lon))
-  map.setCenter(new google.maps.LatLng(lat, lon))
+function welcomeUser (isCobiEnabled: boolean) {
+  if (isCobiEnabled) {
+    chrome.devtools.inspectedWindow.eval(log.info(meta.welcome))
+  }
 }
