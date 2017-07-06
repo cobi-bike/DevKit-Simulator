@@ -9,8 +9,8 @@ const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${
  * It basically monkey patches the parts that are expected to be there
  * when running on an iOS system, but that are not on a Chrome browser
  */
-const fakeiOSWebkit =
-  `(function () {
+const fakeiOSWebkit = `
+  (function () {
     if (!window.webkit) {
       window.webkit = {
         messageHandlers: {
@@ -40,17 +40,16 @@ const fakeiOSWebkit =
           }
         }
       }
-    }
-
-    // monkey path the emit function to hijack all cobi events
-    // and put them in the cache
-    var oldEmit = COBI.__emitter.emit
-    COBI.__emitter.emit = function () {
-      var event = arguments[0]
-      if (typeof event === 'string' && event.match(/^\\w+\\/\\w+$/)) {
-        window.webkit.messageHandlers.cobiShell.cache[event] = arguments[1]
+      // monkey path the emit function to hijack all cobi events
+      // and put them in the cache
+      var oldEmit = COBI.__emitter.emit
+      COBI.__emitter.emit = function () {
+        var event = arguments[0]
+        if (typeof event === 'string' && event.match(/^\\w+\\/\\w+$/)) {
+          window.webkit.messageHandlers.cobiShell.cache[event] = arguments[1]
+        }
+        oldEmit.apply(COBI.__emitter, arguments)
       }
-      oldEmit.apply(COBI.__emitter, arguments)
     }
   })()`
 
