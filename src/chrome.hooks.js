@@ -45,6 +45,7 @@ chrome.devtools.panels.create('COBI',
       core.on('timeouts', deactivatePreviousTimeouts)
       core.on('timeouts', updateUIforTimeouts)
       core.once('isCobiEnabled', welcomeUser)
+
       // ----
       autoDetectCobiJs()
       // ui elements setup
@@ -251,7 +252,7 @@ function autoDetectCobiJs () {
     // - this is not a webapp and therefore cobi.js will never be there
     // - we evaluated this too early and thus have to retry a bit later
     setTimeout(autoDetectCobiJs, 1)
-    if (result) console.warn('COBI.js was not detected. Retrying in 1 second')
+    // if (result) console.warn('COBI.js was not detected. Retrying in 1 second')
   })
 }
 
