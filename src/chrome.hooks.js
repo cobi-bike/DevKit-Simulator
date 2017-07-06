@@ -238,14 +238,9 @@ function updateUIforTimeouts (timeouts) {
 
 function autoDetectCobiJs () {
   chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-    $('#is-cobi-supported').html = result
+    $('#is-cobi-supported').html(JSON.stringify(result))
     if (core.update('isCobiEnabled', result || false)) {
-      chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, {}, (_, error) => {
-         // show the problem in the simulator
-        if (error) {
-          $('#is-cobi-supported').html = error.toString()
-        }
-      })
+      chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit)
     }
     // cobi.js is not included in the user website. This can have two possible
     // reasons:
