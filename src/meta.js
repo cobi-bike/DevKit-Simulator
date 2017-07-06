@@ -15,10 +15,7 @@ const fakeiOSWebkit = `
       window.webkit = {
         messageHandlers: {
           cobiAuth: {
-            postMessage: (authKey) => {
-              window.COBI.__apiKey = authKey
-              console.info('COBI.js api key confirmed !!')
-            }
+            postMessage: (authKey) => window.COBI.__authenticated({confirmed: true, apiKey: authKey})
           },
           cobiShell: {
             cache: {},
