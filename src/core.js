@@ -10,6 +10,7 @@ const Emitter = require('events')
  */
 const Schema = Immutable.Record({
   'isCobiEnabled': false,
+  'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
   'timeouts': Immutable.List() // List<number>
 })

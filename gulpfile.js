@@ -43,7 +43,7 @@ gulp.task('node', function () {
 
 gulp.task('copy', function () {
   return gulp.src('assets/**/*.*')
-             .pipe(gulp.dest('app/chrome/assets/'))
+             .pipe(gulp.dest('app/chrome/'))
 })
 
 // build everything once, probably for production

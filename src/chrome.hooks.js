@@ -21,15 +21,16 @@ const util = require('./utils')
 // --
 const mobileLocation = 'mobile/location'
 const hubThumbControllerAction = 'hub/externalInterfaceAction'
-const appTouchUi = 'app/touchUi'
+const appTouchUi = 'app/touchInteractionEnabled'
 const hubThumbControllerType = 'hub/thumbControllerInterfaceId'
+const hubBellRinging = 'hub/bellRinging'
 
 /**
  * Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
  * icon and index page. The panel is named COBI
  */
 chrome.devtools.panels.create('COBI',
-    'assets/cobi-icon.png',
+    'images/cobi-icon.png',
     'index.html',
     function (panel) {
       let trackReader = new FileReader()
@@ -44,7 +45,9 @@ chrome.devtools.panels.create('COBI',
       core.on('track', mapMarkerFollowsFakeInput)
       core.on('timeouts', deactivatePreviousTimeouts)
       core.on('timeouts', updateUIforTimeouts)
+      core.on('timeouts', current => $('#playback').toggle(!current.isEmpty()))
       core.once('isCobiEnabled', welcomeUser)
+      core.on('thumbControllerType', onThumbControllerTypeChanged)
 
       // ----
       autoDetectCobiJs()
@@ -52,38 +55,43 @@ chrome.devtools.panels.create('COBI',
       // keep a reference to ui elements for later usage
       $('#input-file').on('change', (event) => {
         const file = event.target.files[0]
-        if (!file) return // cancelled input - do nothing
+        if (!file) {  // cancelled input - do nothing
+          return $('#fileLabel').html('No file chosen')
+        }
         chrome.devtools.inspectedWindow.eval(log.info(`loading: ${file.name}`))
+        const displayName = file.name.length > 14 ? file.name.substring(0, 14) + '...'
+                                                  : file.name
+        $('#fileLabel').html(displayName)
         if (file.type.endsWith('json')) {
           return trackReader.readAsText(file)
         } // xml otherwise
         return gpxReader.readAsText(file)
       })
 
-      $('#tc-type').on('change', () => {
-        const value = $('#tc-type').val()
-        $('#tc-right').prop('disabled', value.match(/intuvia/i) !== null)
-        $('#tc-left').prop('disabled', value.match(/intuvia/i) !== null)
-        setThumbControllerType(value)
-      })
+      $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
+      $('#playback').hide()
+        .on('click', () => {
+          if (!core.get('timeouts').isEmpty()) {
+            chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
+          }
+          core.update('timeouts', Immutable.List())
+        })
 
-      $('#stop-playback').on('click', () => {
-        if (!core.get('timeouts').isEmpty()) {
-          chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
-        }
-        core.update('timeouts', Immutable.List())
+      $('#nyn-select').mouseenter(() => {
+        $('#joystick').css('opacity', '1.0')
+        $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
       })
+      $('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
 
       $('#tc-up').on('click', () => thumbAction('UP'))
       $('#tc-down').on('click', () => thumbAction('DOWN'))
       $('#tc-right').on('click', () => thumbAction('RIGHT'))
       $('#tc-left').on('click', () => thumbAction('LEFT'))
       $('#tc-select').on('click', () => thumbAction('SELECT'))
+      $('#tc-bell').on('click', () => ringTheBell(true))
       $('#touch-ui-toggle').on('click', () => toggleTouchUI($('#touch-ui-toggle').is(':checked')))
-      $('#position').on('click', () => setPosition($('#latitude').val(),
-                                                   $('#longitude').val()))
-    }
-)
+      $('#position').on('click', () => setPosition($('#coordinates')))
+    })
 
 /**
  * CDK-2 mock input data to test webapps
@@ -183,9 +191,16 @@ function toggleTouchUI (checked) {
 /**
  * CDK-61 mock the location of the user and deactivates fake events
  */
-function setPosition (inputLat, inputLon) {
-  const lat = parseFloat(inputLat) || 0
-  const lon = parseFloat(inputLon) || 0
+function setPosition (jQCoordinates) {
+  const inputText = jQCoordinates.val() || jQCoordinates.attr('placeholder')
+  const [lat, lon] = inputText.split(',')
+                              .map(text => text.trim())
+                              .map(parseFloat)
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid coordinates
+      - expected: latitude, longitude
+      - instead got: ${inputText}`))
+  }
 
   changeMarkerPosition(lat, lon)
 
@@ -200,10 +215,35 @@ function setPosition (inputLat, inputLon) {
 /**
  * CDK-59 manually set the type of Thumb controller
  */
-function setThumbControllerType (value) {
-  const expression = meta.emitStr(hubThumbControllerType, value)
+function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
+  switch (currentValue) {
+    case 'COBI':
+      $('#cobi').show()
+      break
+    case 'BOSCH_NYON':
+      $('#nyon').show()
+      break
+    case 'BOSCH_INTUVIA':
+    case 'BOSCH_INTUVIA_MY17':
+      $('#intuvia').show()
+      break
+  }
+
+  switch (oldValue) {
+    case 'COBI':
+      $('#cobi').hide()
+      break
+    case 'BOSCH_NYON':
+      $('#nyon').hide()
+      break
+    case 'BOSCH_INTUVIA':
+    case 'BOSCH_INTUVIA_MY17':
+      $('#intuvia').hide()
+      break
+  }
+  const expression = meta.emitStr(hubThumbControllerType, currentValue)
   chrome.devtools.inspectedWindow.eval(expression)
-  chrome.devtools.inspectedWindow.eval(log.log(`"${hubThumbControllerType}" = ${value}`))
+  chrome.devtools.inspectedWindow.eval(log.log(`"${hubThumbControllerType}" = ${currentValue}`))
 }
 
 /**
@@ -238,7 +278,7 @@ function updateUIforTimeouts (timeouts) {
 
 function autoDetectCobiJs () {
   chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-    $('#is-cobi-supported').html(JSON.stringify(result))
+    $('#is-cobi-supported').html(result ? 'connected' : 'not connected')
     if (core.update('isCobiEnabled', result || false)) {
       chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit)
     }
@@ -258,5 +298,13 @@ function autoDetectCobiJs () {
 function welcomeUser (isCobiEnabled: boolean) {
   if (isCobiEnabled) {
     chrome.devtools.inspectedWindow.eval(log.info(meta.welcome))
+  }
+}
+
+function ringTheBell (value: boolean) {
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(hubBellRinging, value))
+  chrome.devtools.inspectedWindow.eval(log.log(`${hubBellRinging} = ${value.toString()}`))
+  if (value) {
+    setTimeout(() => ringTheBell(false), 1000 * Math.random()) // ms
   }
 }
