@@ -2,6 +2,9 @@
 *.pem
 app/chrome/index.js
 app/chrome/assets/
+app/chrome/fonts/
+app/chrome/images/
+app/chrome.zip
 lib/
 
 # -------- ATOM files ------------
