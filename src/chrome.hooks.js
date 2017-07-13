@@ -292,6 +292,10 @@ function ringTheBell (value: boolean) {
   }
 }
 
+/**
+ * Stop the current running track file or reset a new cobitrack
+ * according to the class assigned to the button: stop button or play button
+ */
 function onPlayBackButtonPressed () {
   var buttonClass = $(this).attr('class')
   if (buttonClass === 'stop') {
