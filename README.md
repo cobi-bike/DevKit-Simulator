@@ -1,27 +1,32 @@
 
 # COBI.js simulator
 
-COBI DevKit Simulator is a browser-based IDE to simulate the expected behavior
-of a web app for the COBI system.
+COBI DevKit Simulator is a browser-based DevTools extension to simulate WebApp events without having to install them on your Smartphone nor connect them to the COBI Hub.
 
-It is currently only available for Chrome browsers version 48 or greater.
+Currently it is only available for Chrome browsers version 45 or greater.
 
 More information:
 - [COBI.js library](https://github.com/cobi-bike/COBI.js)
 - [COBI DevKit Forum](https://forums.cobi.bike/)
 
+![preview](/resources/SimulatorScreenShot.png)
+
 ## install
 The easiest way to get the COBI Devkit simulator is to install it directly from the
 [Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno).
 
-You need to be logged in as a *COBI employee* in order to access the previous link.
-
 ## usage
 You can find the simulator in the *Chrome Devtools* in a tab named `COBI`.
 
-You can use the simulator manually through its controllers or by replaying a
-`cobitrack` or `gpx` file. Please note that some controllers are disabled during
-file playback. You can find example playback files in the `assets` folder.
+The simulator offers some basic manual controls:
+- thumb controller selection
+- thumb controller actions
+- location
+- touch interaction
+
+Furthermore it is also possible to load a `cobitrack` or `gpx` file which the simulator will convert into events and reproduce them in the same tempo as they were recorded.
+
+You can find some example files in the `resource/assets` folder.
 
 ## contributing
 
