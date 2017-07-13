@@ -6,6 +6,10 @@ of a web app for the COBI system.
 
 It is currently only available for Chrome browsers version 48 or greater.
 
+More information:
+- [COBI.js library](https://github.com/cobi-bike/COBI.js)
+- [COBI DevKit Forum](https://forums.cobi.bike/)
+
 ## install
 The easiest way to get the COBI Devkit simulator is to install it directly from the
 [Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno).
