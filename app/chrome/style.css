@@ -525,6 +525,22 @@ input:checked + .slider:before {
     margin-right: 20px;
 }
 
+.popup {
+    width: 270px;
+    margin: 10px auto;
+    font-size: 15px;
+}
+
+.popup::before {
+    display: inline-block;
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -3px;
+    content: url('images/info.svg');
+}
+
 /* COBI thumb controller */
 
 #cobi {
