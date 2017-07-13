@@ -102,9 +102,11 @@ chrome.devtools.panels.create('COBI',
       $('#tc-select').on('click', () => thumbAction('SELECT'))
       $('#tc-bell').on('click', () => ringTheBell(true))
       // thumbcontrollers - nyon
-      $('#nyn-plus').on('click', () => thumbAction('UP'))
-      $('#nyn-minus').on('click', () => thumbAction('DOWN'))
-      $('#nyn-home').on('click', () => thumbAction('HOME'))
+      const thumbControllerActionUnavailable = () =>
+        chrome.devtools.inspectedWindow.eval(log.warn(`This thumb controller button is reserved for the native app`))
+      $('#nyn-plus').on('click', thumbControllerActionUnavailable)
+      $('#nyn-minus').on('click', thumbControllerActionUnavailable)
+      $('#nyn-home').on('click', thumbControllerActionUnavailable)
       $('#nyn-up').on('click', () => thumbAction('UP'))
       $('#nyn-down').on('click', () => thumbAction('DOWN'))
       $('#nyn-right').on('click', () => thumbAction('RIGHT'))
