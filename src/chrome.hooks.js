@@ -6,7 +6,7 @@
 /* global map:false */
 /* global google: false */
 
-import type {List} from 'immutable'
+import type {List, Map} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 // --
 const Immutable = require('immutable')
@@ -24,10 +24,17 @@ const hubThumbControllerAction = 'hub/externalInterfaceAction'
 const appTouchUi = 'app/touchInteractionEnabled'
 const hubThumbControllerType = 'hub/thumbControllerInterfaceId'
 const hubBellRinging = 'hub/bellRinging'
+// --
+const thumbControllerHTMLIds = Immutable.Map({
+  'COBI': '#cobi',
+  'BOSCH_NYON': '#nyon',
+  'BOSCH_INTUVIA': '#intuvia',
+  'BOSCH_INTUVIA_MY17': '#intuvia'
+})
+const ENTER = 13
 
 /**
- * Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
- * icon and index page. The panel is named COBI
+ * Chrome devtools panel creation. We create a panel with no drawers
  */
 chrome.devtools.panels.create('COBI',
     'images/cobi-icon.png',
@@ -43,12 +50,15 @@ chrome.devtools.panels.create('COBI',
       core.on('track', fakeInput)
       core.on('track', logFakeInput)
       core.on('track', mapMarkerFollowsFakeInput)
-      core.on('timeouts', deactivatePreviousTimeouts)
-      core.on('timeouts', updateUIforTimeouts)
-      core.on('timeouts', current => $('#playback').toggle(!current.isEmpty()))
-      core.once('isCobiEnabled', welcomeUser)
-      core.on('thumbControllerType', onThumbControllerTypeChanged)
+      core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
 
+      core.on('timeouts', deactivatePreviousTimeouts)
+      core.on('timeouts', (timeouts: List<number>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
+      core.on('timeouts', (timeouts: List<number>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
+                                                                         : $('#playback').attr('class', 'stop'))
+
+      core.once('cobiVersion', welcomeUser)
+      core.on('thumbControllerType', onThumbControllerTypeChanged)
       // ----
       autoDetectCobiJs()
       // ui elements setup
@@ -69,13 +79,9 @@ chrome.devtools.panels.create('COBI',
       })
 
       $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
-      $('#playback').hide()
-        .on('click', () => {
-          if (!core.get('timeouts').isEmpty()) {
-            chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
-          }
-          core.update('timeouts', Immutable.List())
-        })
+      $('#playback')
+        .hide()
+        .on('click', onPlayBackButtonPressed)
 
       $('#nyn-select').mouseenter(() => {
         $('#joystick').css('opacity', '1.0')
@@ -90,7 +96,8 @@ chrome.devtools.panels.create('COBI',
       $('#tc-select').on('click', () => thumbAction('SELECT'))
       $('#tc-bell').on('click', () => ringTheBell(true))
       $('#touch-ui-toggle').on('click', () => toggleTouchUI($('#touch-ui-toggle').is(':checked')))
-      $('#position').on('click', () => setPosition($('#coordinates')))
+      $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
+                                                                          : null)
     })
 
 /**
@@ -105,7 +112,7 @@ function thumbAction (value) {
 /**
  * CDK-2 mock input data to test webapps
  */
-function fakeInput (track) {
+function fakeInput (track: List<[number, Map<string, any>]>) {
   const emmiters = track.map(([t, msg]) => {
     const expression = meta.emitStr(msg.get('path'), msg.get('payload'))
     return [t, () => chrome.devtools.inspectedWindow.eval(expression)]
@@ -117,7 +124,7 @@ function fakeInput (track) {
 /**
  * CDK-2 log mocked input data to test webapps
  */
-function logFakeInput (track) {
+function logFakeInput (track: List<[number, Map<string, any>]>) {
   const loggers = track.map(([t, msg]) => {
     return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${msg.get('path')} = ${msg.get('payload')}`))]
   }).map(([t, fn]) => setTimeout(fn, t))
@@ -128,7 +135,7 @@ function logFakeInput (track) {
 /**
  * CDK-2 move the map marker and center based on fake locations
  */
-function mapMarkerFollowsFakeInput (track) {
+function mapMarkerFollowsFakeInput (track: List<[number, Map<string, any>]>) {
   const mappers = track
     .filter(([t, msg]) => msg.get('path') === mobileLocation)
     .map(([t, msg]) => {
@@ -192,14 +199,14 @@ function toggleTouchUI (checked) {
  * CDK-61 mock the location of the user and deactivates fake events
  */
 function setPosition (jQCoordinates) {
-  const inputText = jQCoordinates.val() || jQCoordinates.attr('placeholder')
+  const inputText = jQCoordinates.val()
   const [lat, lon] = inputText.split(',')
                               .map(text => text.trim())
                               .map(parseFloat)
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
     return chrome.devtools.inspectedWindow.eval(log.error(`Invalid coordinates
       - expected: latitude, longitude
-      - instead got: ${inputText}`))
+      - instead got: ${inputText || 'null'}`))
   }
 
   changeMarkerPosition(lat, lon)
@@ -216,31 +223,13 @@ function setPosition (jQCoordinates) {
  * CDK-59 manually set the type of Thumb controller
  */
 function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
-  switch (currentValue) {
-    case 'COBI':
-      $('#cobi').show()
-      break
-    case 'BOSCH_NYON':
-      $('#nyon').show()
-      break
-    case 'BOSCH_INTUVIA':
-    case 'BOSCH_INTUVIA_MY17':
-      $('#intuvia').show()
-      break
-  }
+  let newId = thumbControllerHTMLIds.get(currentValue)
+  let oldId = thumbControllerHTMLIds.get(oldValue)
+  if (newId === oldId) return
 
-  switch (oldValue) {
-    case 'COBI':
-      $('#cobi').hide()
-      break
-    case 'BOSCH_NYON':
-      $('#nyon').hide()
-      break
-    case 'BOSCH_INTUVIA':
-    case 'BOSCH_INTUVIA_MY17':
-      $('#intuvia').hide()
-      break
-  }
+  $(newId).show()
+  $(oldId).hide()
+
   const expression = meta.emitStr(hubThumbControllerType, currentValue)
   chrome.devtools.inspectedWindow.eval(expression)
   chrome.devtools.inspectedWindow.eval(log.log(`"${hubThumbControllerType}" = ${currentValue}`))
@@ -258,7 +247,7 @@ function changeMarkerPosition (lat: number, lon: number) {
  * deactivate old waiting timeouts and update the UI
  * according to the current timeouts value
  */
-function deactivatePreviousTimeouts (timeouts, oldTimeouts) {
+function deactivatePreviousTimeouts (timeouts: List<number>, oldTimeouts: List<number>) {
   // Remove the previous timeouts if any exists
   if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
     oldTimeouts.map(ids => ids.map(clearTimeout))
@@ -266,20 +255,10 @@ function deactivatePreviousTimeouts (timeouts, oldTimeouts) {
   }
 }
 
-/**
- * activates/deactivates certain ui elements whenever a the timeouts
- * are updated
- */
-function updateUIforTimeouts (timeouts) {
-  // not allowed by design - CDK-60
-  $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty())
-  $('#stop-playback').prop('disabled', timeouts.isEmpty())
-}
-
 function autoDetectCobiJs () {
   chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-    $('#is-cobi-supported').html(result ? 'connected' : 'not connected')
-    if (core.update('isCobiEnabled', result || false)) {
+    $('#is-cobi-supported').html(result || 'not connected')
+    if (core.update('cobiVersion', result || false)) {
       chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit)
     }
     // cobi.js is not included in the user website. This can have two possible
@@ -295,16 +274,29 @@ function autoDetectCobiJs () {
  * display an ascii version of the COBI logo once the app authentication
  * works
  */
-function welcomeUser (isCobiEnabled: boolean) {
-  if (isCobiEnabled) {
+function welcomeUser (cobiVersion: boolean) {
+  if (cobiVersion) {
     chrome.devtools.inspectedWindow.eval(log.info(meta.welcome))
   }
 }
 
+/**
+ * fake ringing the Hub Bell and sets a timeout to deactivate it
+ * at a random point between 0 - 500 ms
+ */
 function ringTheBell (value: boolean) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(hubBellRinging, value))
   chrome.devtools.inspectedWindow.eval(log.log(`${hubBellRinging} = ${value.toString()}`))
   if (value) {
-    setTimeout(() => ringTheBell(false), 1000 * Math.random()) // ms
+    setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
+  }
+}
+
+function onPlayBackButtonPressed () {
+  var buttonClass = $(this).attr('class')
+  if (buttonClass === 'stop') {
+    return core.update('timeouts', Immutable.List())
+  } else if (buttonClass === 'play') {
+    core.update('track', core.get('track')) // fake track input event
   }
 }

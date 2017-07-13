@@ -1,6 +1,6 @@
 // @flow
 
-const containsCOBIjs = 'COBI !== null && COBI !== undefined'
+const containsCOBIjs = 'COBI ? COBI.specVersion : null'
 const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`
 
 /**

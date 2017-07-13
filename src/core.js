@@ -9,7 +9,7 @@ const Emitter = require('events')
  * pin-point changes more dynamically
  */
 const Schema = Immutable.Record({
-  'isCobiEnabled': false,
+  'cobiVersion': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
   'timeouts': Immutable.List() // List<number>
@@ -38,17 +38,17 @@ function get (key: string) {
   return state.get(key)
 }
 
-function listen (key: string, callback: (value: any, oldValue: any) => void) {
+function listen (key: string, callback: (value: any, oldValue: any) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   listener.on(key, callback)
 }
 
-function listenOnce (key: string, callback: (value: any, oldValue: any) => void) {
+function listenOnce (key: string, callback: (value: any, oldValue: any) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   listener.once(key, callback)
 }
 
-function remove (key: string, callback?: (value: any, oldValue: any) => void) {
+function remove (key: string, callback?: (value: any, oldValue: any) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   if (callback) {
     return listener.removeListener(key, callback)
