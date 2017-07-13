@@ -12,7 +12,7 @@ const Schema = Immutable.Record({
   'cobiVersion': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
-  'timeouts': Immutable.List() // List<number>
+  'timeouts': Immutable.List() // List<List<number>>
 })
 // the schema only allows the above keys
 let state = new Schema()

@@ -53,9 +53,9 @@ chrome.devtools.panels.create('COBI',
       core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
 
       core.on('timeouts', deactivatePreviousTimeouts)
-      core.on('timeouts', (timeouts: List<number>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
-      core.on('timeouts', (timeouts: List<number>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
-                                                                         : $('#playback').attr('class', 'stop'))
+      core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
+      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
+                                                                               : $('#playback').attr('class', 'stop'))
 
       core.once('cobiVersion', welcomeUser)
       core.on('thumbControllerType', onThumbControllerTypeChanged)
@@ -247,7 +247,7 @@ function changeMarkerPosition (lat: number, lon: number) {
  * deactivate old waiting timeouts and update the UI
  * according to the current timeouts value
  */
-function deactivatePreviousTimeouts (timeouts: List<number>, oldTimeouts: List<number>) {
+function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
   // Remove the previous timeouts if any exists
   if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
     oldTimeouts.map(ids => ids.map(clearTimeout))
