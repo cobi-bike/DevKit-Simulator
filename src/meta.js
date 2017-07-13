@@ -2,6 +2,7 @@
 
 const containsCOBIjs = 'COBI ? COBI.specVersion : null'
 const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`
+const fetch = (path: string) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`
 
 /**
  * this code should be injected to a webpage containing COBI.js in order
@@ -84,3 +85,4 @@ module.exports.containsCOBIjs = containsCOBIjs
 module.exports.emitStr = emitStr
 module.exports.fakeiOSWebkit = fakeiOSWebkit
 module.exports.welcome = welcome
+module.exports.fetch = fetch
