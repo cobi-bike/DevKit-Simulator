@@ -53,6 +53,8 @@ chrome.devtools.panels.create('COBI',
       core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
 
       core.on('timeouts', deactivatePreviousTimeouts)
+      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
+      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
       core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
       core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
                                                                                : $('#playback').attr('class', 'stop'))
@@ -78,6 +80,10 @@ chrome.devtools.panels.create('COBI',
         return gpxReader.readAsText(file)
       })
 
+      // --
+      $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
+      $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
+                                                                          : null)
       $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
       $('#playback')
         .hide()
@@ -88,16 +94,26 @@ chrome.devtools.panels.create('COBI',
         $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
       })
       $('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
-
+      // thumbcontrollers - COBI
       $('#tc-up').on('click', () => thumbAction('UP'))
       $('#tc-down').on('click', () => thumbAction('DOWN'))
       $('#tc-right').on('click', () => thumbAction('RIGHT'))
       $('#tc-left').on('click', () => thumbAction('LEFT'))
       $('#tc-select').on('click', () => thumbAction('SELECT'))
       $('#tc-bell').on('click', () => ringTheBell(true))
-      $('#touch-ui-toggle').on('click', () => toggleTouchUI($('#touch-ui-toggle').is(':checked')))
-      $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
-                                                                          : null)
+      // thumbcontrollers - nyon
+      $('#nyn-plus').on('click', () => thumbAction('UP'))
+      $('#nyn-minus').on('click', () => thumbAction('DOWN'))
+      $('#nyn-home').on('click', () => thumbAction('HOME'))
+      $('#nyn-up').on('click', () => thumbAction('UP'))
+      $('#nyn-down').on('click', () => thumbAction('DOWN'))
+      $('#nyn-right').on('click', () => thumbAction('RIGHT'))
+      $('#nyn-left').on('click', () => thumbAction('LEFT'))
+      $('#nyn-select').on('click', () => thumbAction('SELECT'))
+      // thumbcontrollers - bosch
+      $('#iva-plus').on('click', () => thumbAction('UP'))
+      $('#iva-minus').on('click', () => thumbAction('DOWN'))
+      $('#iva-center').on('click', () => thumbAction('SELECT'))
     })
 
 /**
@@ -190,7 +206,7 @@ function onGpxFileLoaded (evt) {
 /**
  * CDK-60 manually set the touch UI flag
  */
-function toggleTouchUI (checked) {
+function setTouchInteraction (checked) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(appTouchUi, checked))
   chrome.devtools.inspectedWindow.eval(log.info(`'${appTouchUi}' = ${checked}`))
 }
