@@ -18,12 +18,16 @@ const core = require('./core')
 const meta = require('./meta')
 const log = require('./log')
 const util = require('./utils')
+const math = require('./math')
 // --
 const mobileLocation = 'mobile/location'
 const hubThumbControllerAction = 'hub/externalInterfaceAction'
 const appTouchUi = 'app/touchInteractionEnabled'
 const hubThumbControllerType = 'hub/thumbControllerInterfaceId'
 const hubBellRinging = 'hub/bellRinging'
+const navigationServiceStatus = 'navigationService/status'
+const navigationServiceDestination = 'navigationService/destinationLocation'
+const navigationServiceETA = 'navigationService/Eta'
 // --
 const thumbControllerHTMLIds = Immutable.Map({
   'COBI': '#cobi',
@@ -32,6 +36,7 @@ const thumbControllerHTMLIds = Immutable.Map({
   'BOSCH_INTUVIA_MY17': '#intuvia'
 })
 const ENTER = 13
+const averageSpeed = 15 // km/h
 
 /**
  * Chrome devtools panel creation. We create a panel with no drawers
@@ -84,6 +89,7 @@ chrome.devtools.panels.create('COBI',
       $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
       $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
                                                                           : null)
+      $('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
       $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
       $('#playback')
         .hide()
@@ -321,4 +327,41 @@ function onPlayBackButtonPressed () {
   } else if (buttonClass === 'play') {
     core.update('track', core.get('track')) // fake track input event
   }
+}
+
+function onDestinationCoordinatesChanged (event) {
+  if (event.keyCode !== ENTER) return
+
+  const inputText = $('#destination-coordinates').val()
+  if (inputText.length === 0) {
+    chrome.devtools.inspectedWindow.eval(log.info(`${navigationServiceStatus} = 'NONE'`))
+    return chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
+  }
+  const [lat, lon] = inputText.split(',')
+                              .map(text => text.trim())
+                              .map(parseFloat)
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid coordinates
+      - expected: latitude, longitude
+      - instead got: ${inputText}`))
+  }
+
+  chrome.devtools.inspectedWindow.eval(meta.fetch(mobileLocation), {}, (location) => {
+    if (!location) {
+      return chrome.devtools.inspectedWindow.eval(log.error(`cannot set ETA because current position is unknown`))
+    }
+    const destination = util.partialMobileLocation(lon, lat)
+    const distanceToDestination = math.beeLine(lat, lon, location.latitude, location.longitude)
+    // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
+    const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
+
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDestination, destination.get('payload')))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDestination}' = ${destination.get('payload')}`))
+
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceETA}' = ${eta}`))
+
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NAVIGATING'))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceStatus}' = ${'NAVIGATING'}`))
+  })
 }
