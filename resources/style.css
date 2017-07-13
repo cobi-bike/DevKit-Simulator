@@ -525,21 +525,25 @@ input:checked + .slider:before {
     margin-right: 20px;
 }
 
-.popup {
-    width: 270px;
-    margin: 10px auto;
-    font-size: 15px;
-}
+/* Browser Popup */
+                .popup{
+                  width: 270px;
+                  margin-top: 20px;
+                  margin-bottom: 20px;
+                  padding-right: 20px;
+                  padding-left: 20px;
+                  font-size: 15px;
+                }
 
-.popup::before {
-    display: inline-block;
-    float: left;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    margin-top: -3px;
-    content: url('images/info.svg');
-}
+                .popup::before {
+                  display: inline-block;
+                  float: left;
+                  width: 40px;
+                  height: 40px;
+                  margin-right: 10px;
+                  margin-top: -2px;
+                  content: url('images/info.svg');
+                }
 
 /* COBI thumb controller */
 
