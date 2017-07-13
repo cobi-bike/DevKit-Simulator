@@ -28,6 +28,7 @@ const hubBellRinging = 'hub/bellRinging'
 const navigationServiceStatus = 'navigationService/status'
 const navigationServiceDestination = 'navigationService/destinationLocation'
 const navigationServiceETA = 'navigationService/Eta'
+const navigationServiceDistanceToDestination = 'navigationService/distanceToDestination'
 // --
 const thumbControllerHTMLIds = Immutable.Map({
   'COBI': '#cobi',
@@ -357,6 +358,9 @@ function onDestinationCoordinatesChanged (event) {
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDestination, destination.get('payload')))
     chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDestination}' = ${destination.get('payload')}`))
+
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, distanceToDestination))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDistanceToDestination}' = ${distanceToDestination}`))
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
     chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceETA}' = ${eta}`))
