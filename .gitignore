@@ -4,6 +4,7 @@ app/chrome/index.js
 app/chrome/assets/
 app/chrome/fonts/
 app/chrome/images/
+app/chrome/style.css
 app/chrome.zip
 lib/
 
