@@ -89,6 +89,10 @@ $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle'
 $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
                                                                           : null)
 $('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
+$('#cancel-destination').on('click', () => {
+  chrome.devtools.inspectedWindow.eval(log.info(`${navigationServiceStatus} = 'NONE'`))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
+})
 $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
 $('#playback').hide().on('click', onPlayBackButtonPressed)
 
