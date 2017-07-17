@@ -1,7 +1,6 @@
 
 const fetchCOBIjsVersion = 'COBI ? COBI.specVersion : null'
-const devkitInvitation = `This website doesnt contain the COBI.js library. Please
-visit https://github.com/cobi-bike/COBI.js for more information.`
+const devkitInvitation =  `This website doesnt contain the COBI.js library. Please visit https://github.com/cobi-bike/COBI.js for more information.`
 
 let COBIpanelCreated = false
 let devkitInvitationPrinted = false
@@ -24,7 +23,7 @@ function autoDetectCobiJs () {
     }
 
     if(!result && !devkitInvitationPrinted) {
-      chrome.devtools.inspectedWindow.eval(`console.warn('${devkitInvitation}')`)
+      chrome.devtools.inspectedWindow.eval(`console.error('${devkitInvitation}')`)
       devkitInvitationPrinted = true
     }
     setTimeout(autoDetectCobiJs, 1000) // 1 seconds
