@@ -8,6 +8,7 @@ Currently it is only available for Chrome browsers version 45 or greater.
 More information:
 - [COBI.js library](https://github.com/cobi-bike/COBI.js)
 - [COBI DevKit Forum](https://forums.cobi.bike/)
+- [COBI.js api docs](https://cobi-bike.github.io/COBI.js/)
 
 ![preview](/resources/SimulatorScreenShot.png)
 
