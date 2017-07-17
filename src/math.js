@@ -1,7 +1,7 @@
 // @flow
 
 /**
- * computes the geodesic or bee line distance between two latitude longitude points
+ * computes the geodesic or bee line distance between two latitude longitude points in kilometers
  * https://en.wikipedia.org/wiki/Bee_line
  */
 function computeDistance (lat1: number, lon1: number, lat2: number, lon2: number) {
