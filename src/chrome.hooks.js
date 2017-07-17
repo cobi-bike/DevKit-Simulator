@@ -63,12 +63,12 @@ core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#p
                                                                                : $('#playback').attr('class', 'stop'))
 
 core.once('cobiVersion', welcomeUser)
-  // core.on('cobiVersion', () => chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit))
+// core.on('cobiVersion', () => chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit))
 core.on('cobiVersion', (version) => $('#is-cobi-supported').html(version || 'not connected'))
 core.on('thumbControllerType', onThumbControllerTypeChanged)
-      // ----
-      // ui elements setup
-      // keep a reference to ui elements for later usage
+// ----
+// ui elements setup
+// keep a reference to ui elements for later usage
 $('#input-file').on('change', (event) => {
   const file = event.target.files[0]
   if (!file) {  // cancelled input - do nothing
@@ -84,7 +84,7 @@ $('#input-file').on('change', (event) => {
   return gpxReader.readAsText(file)
 })
 
-      // --
+// --
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
 $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
                                                                           : null)
@@ -97,16 +97,15 @@ $('#nyn-select').mouseenter(() => {
   $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
 })
 $('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
-      // thumbcontrollers - COBI
+// thumbcontrollers - COBI
 $('#tc-up').on('click', () => thumbAction('UP'))
 $('#tc-down').on('click', () => thumbAction('DOWN'))
 $('#tc-right').on('click', () => thumbAction('RIGHT'))
 $('#tc-left').on('click', () => thumbAction('LEFT'))
 $('#tc-select').on('click', () => thumbAction('SELECT'))
 $('#tc-bell').on('click', () => ringTheBell(true))
-      // thumbcontrollers - nyon
-const thumbControllerActionUnavailable = () =>
-        chrome.devtools.inspectedWindow.eval(log.warn(`This thumb controller button is reserved for the native app`))
+// thumbcontrollers - nyon
+const thumbControllerActionUnavailable = () => chrome.devtools.inspectedWindow.eval(log.warn(`This thumb controller button is reserved for the native app`))
 $('#nyn-plus').on('click', thumbControllerActionUnavailable)
 $('#nyn-minus').on('click', thumbControllerActionUnavailable)
 $('#nyn-home').on('click', thumbControllerActionUnavailable)
@@ -115,7 +114,7 @@ $('#nyn-down').on('click', () => thumbAction('DOWN'))
 $('#nyn-right').on('click', () => thumbAction('RIGHT'))
 $('#nyn-left').on('click', () => thumbAction('LEFT'))
 $('#nyn-select').on('click', () => thumbAction('SELECT'))
-      // thumbcontrollers - bosch
+// thumbcontrollers - bosch
 $('#iva-plus').on('click', () => thumbAction('UP'))
 $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
