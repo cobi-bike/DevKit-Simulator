@@ -39,91 +39,86 @@ const thumbControllerHTMLIds = Immutable.Map({
 const ENTER = 13
 const averageSpeed = 15 // km/h
 
-/**
- * Chrome devtools panel creation. We create a panel with no drawers
- */
-chrome.devtools.panels.create('COBI',
-    'images/cobi-icon.png',
-    'index.html',
-    function (panel) {
-      let trackReader = new FileReader()
-      trackReader.onload = onCobiTrackFileLoaded
-      let gpxReader = new FileReader()
-      gpxReader.onload = onGpxFileLoaded
+// chrome.devtools.inspectedWindow.eval(log.info('COBI panel created'))
+  // run intermitedly to check for COBI.js library
+autoDetectCobiJs()
+
+let trackReader = new FileReader()
+trackReader.onload = onCobiTrackFileLoaded
+let gpxReader = new FileReader()
+gpxReader.onload = onGpxFileLoaded
       // core elements
       // set up internal event driven listeners
-      core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
-      core.on('track', fakeInput)
-      core.on('track', logFakeInput)
-      core.on('track', mapMarkerFollowsFakeInput)
-      core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
+core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
+core.on('track', fakeInput)
+core.on('track', logFakeInput)
+core.on('track', mapMarkerFollowsFakeInput)
+core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
 
-      core.on('timeouts', deactivatePreviousTimeouts)
-      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
-      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
-      core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
-      core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
+core.on('timeouts', deactivatePreviousTimeouts)
+core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
+core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
+core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
+core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
                                                                                : $('#playback').attr('class', 'stop'))
 
-      core.once('cobiVersion', welcomeUser)
-      core.on('thumbControllerType', onThumbControllerTypeChanged)
+core.once('cobiVersion', welcomeUser)
+  // core.on('cobiVersion', () => chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit))
+core.on('cobiVersion', (version) => $('#is-cobi-supported').html(version || 'not connected'))
+core.on('thumbControllerType', onThumbControllerTypeChanged)
       // ----
-      autoDetectCobiJs()
       // ui elements setup
       // keep a reference to ui elements for later usage
-      $('#input-file').on('change', (event) => {
-        const file = event.target.files[0]
-        if (!file) {  // cancelled input - do nothing
-          return $('#fileLabel').html('No file chosen')
-        }
-        chrome.devtools.inspectedWindow.eval(log.info(`loading: ${file.name}`))
-        const displayName = file.name.length > 14 ? file.name.substring(0, 14) + '...'
+$('#input-file').on('change', (event) => {
+  const file = event.target.files[0]
+  if (!file) {  // cancelled input - do nothing
+    return $('#fileLabel').html('No file chosen')
+  }
+  chrome.devtools.inspectedWindow.eval(log.info(`loading: ${file.name}`))
+  const displayName = file.name.length > 14 ? file.name.substring(0, 14) + '...'
                                                   : file.name
-        $('#fileLabel').html(displayName)
-        if (file.type.endsWith('json')) {
-          return trackReader.readAsText(file)
-        } // xml otherwise
-        return gpxReader.readAsText(file)
-      })
+  $('#fileLabel').html(displayName)
+  if (file.type.endsWith('json')) {
+    return trackReader.readAsText(file)
+  } // xml otherwise
+  return gpxReader.readAsText(file)
+})
 
       // --
-      $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
-      $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
+$('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
+$('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
                                                                           : null)
-      $('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
-      $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
-      $('#playback')
-        .hide()
-        .on('click', onPlayBackButtonPressed)
+$('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
+$('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
+$('#playback').hide().on('click', onPlayBackButtonPressed)
 
-      $('#nyn-select').mouseenter(() => {
-        $('#joystick').css('opacity', '1.0')
-        $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
-      })
-      $('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
+$('#nyn-select').mouseenter(() => {
+  $('#joystick').css('opacity', '1.0')
+  $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
+})
+$('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
       // thumbcontrollers - COBI
-      $('#tc-up').on('click', () => thumbAction('UP'))
-      $('#tc-down').on('click', () => thumbAction('DOWN'))
-      $('#tc-right').on('click', () => thumbAction('RIGHT'))
-      $('#tc-left').on('click', () => thumbAction('LEFT'))
-      $('#tc-select').on('click', () => thumbAction('SELECT'))
-      $('#tc-bell').on('click', () => ringTheBell(true))
+$('#tc-up').on('click', () => thumbAction('UP'))
+$('#tc-down').on('click', () => thumbAction('DOWN'))
+$('#tc-right').on('click', () => thumbAction('RIGHT'))
+$('#tc-left').on('click', () => thumbAction('LEFT'))
+$('#tc-select').on('click', () => thumbAction('SELECT'))
+$('#tc-bell').on('click', () => ringTheBell(true))
       // thumbcontrollers - nyon
-      const thumbControllerActionUnavailable = () =>
+const thumbControllerActionUnavailable = () =>
         chrome.devtools.inspectedWindow.eval(log.warn(`This thumb controller button is reserved for the native app`))
-      $('#nyn-plus').on('click', thumbControllerActionUnavailable)
-      $('#nyn-minus').on('click', thumbControllerActionUnavailable)
-      $('#nyn-home').on('click', thumbControllerActionUnavailable)
-      $('#nyn-up').on('click', () => thumbAction('UP'))
-      $('#nyn-down').on('click', () => thumbAction('DOWN'))
-      $('#nyn-right').on('click', () => thumbAction('RIGHT'))
-      $('#nyn-left').on('click', () => thumbAction('LEFT'))
-      $('#nyn-select').on('click', () => thumbAction('SELECT'))
+$('#nyn-plus').on('click', thumbControllerActionUnavailable)
+$('#nyn-minus').on('click', thumbControllerActionUnavailable)
+$('#nyn-home').on('click', thumbControllerActionUnavailable)
+$('#nyn-up').on('click', () => thumbAction('UP'))
+$('#nyn-down').on('click', () => thumbAction('DOWN'))
+$('#nyn-right').on('click', () => thumbAction('RIGHT'))
+$('#nyn-left').on('click', () => thumbAction('LEFT'))
+$('#nyn-select').on('click', () => thumbAction('SELECT'))
       // thumbcontrollers - bosch
-      $('#iva-plus').on('click', () => thumbAction('UP'))
-      $('#iva-minus').on('click', () => thumbAction('DOWN'))
-      $('#iva-center').on('click', () => thumbAction('SELECT'))
-    })
+$('#iva-plus').on('click', () => thumbAction('UP'))
+$('#iva-minus').on('click', () => thumbAction('DOWN'))
+$('#iva-center').on('click', () => thumbAction('SELECT'))
 
 /**
  * CDK-2 mock input data to test webapps
@@ -217,7 +212,7 @@ function onGpxFileLoaded (evt) {
  */
 function setTouchInteraction (checked) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(appTouchUi, checked))
-  chrome.devtools.inspectedWindow.eval(log.info(`'${appTouchUi}' = ${checked}`))
+  chrome.devtools.inspectedWindow.eval(log.info(`'${appTouchUi}' = ${checked.toString()}`))
 }
 
 /**
@@ -280,17 +275,17 @@ function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: 
   }
 }
 
+/**
+ * It is possible that the user reloaded the website without actually re-opening
+ * the simulator so we need to retry every once in a while to check that
+ * all necessary elements are there.
+ */
 function autoDetectCobiJs () {
   chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-    $('#is-cobi-supported').html(result || 'not connected')
-    if (core.update('cobiVersion', result || false)) {
-      chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit)
+    if (result) {
+      core.update('cobiVersion', result)
     }
-    // cobi.js is not included in the user website. This can have two possible
-    // reasons:
-    // - this is not a webapp and therefore cobi.js will never be there
-    // - we evaluated this too early and thus have to retry a bit later
-    setTimeout(autoDetectCobiJs, 1)
+    // setTimeout(autoDetectCobiJs, 60000)
     // if (result) console.warn('COBI.js was not detected. Retrying in 1 second')
   })
 }
@@ -299,8 +294,8 @@ function autoDetectCobiJs () {
  * display an ascii version of the COBI logo once the app authentication
  * works
  */
-function welcomeUser (cobiVersion: boolean) {
-  if (cobiVersion) {
+function welcomeUser (current: boolean, previous: boolean) {
+  if (!previous && current) {
     chrome.devtools.inspectedWindow.eval(log.info(meta.welcome))
   }
 }
@@ -349,23 +344,27 @@ function onDestinationCoordinatesChanged (event) {
 
   chrome.devtools.inspectedWindow.eval(meta.fetch(mobileLocation), {}, (location) => {
     if (!location) {
-      return chrome.devtools.inspectedWindow.eval(log.error(`cannot set ETA because current position is unknown`))
+      const error = `destination triggers navigation events which require the current position but
+      none was found. Please set the current position and try again.`
+      return chrome.devtools.inspectedWindow.eval(log.error(error))
     }
     const destination = util.partialMobileLocation(lon, lat)
     const distanceToDestination = math.beeLine(lat, lon, location.latitude, location.longitude)
     // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
     const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
+    // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
+    const dTDmeters = distanceToDestination * 1000
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDestination, destination.get('payload')))
     chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDestination}' = ${destination.get('payload')}`))
 
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, distanceToDestination))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDistanceToDestination}' = ${distanceToDestination}`))
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, dTDmeters))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDistanceToDestination}' = ${dTDmeters}`))
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
     chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceETA}' = ${eta}`))
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NAVIGATING'))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceStatus}' = ${'NAVIGATING'}`))
+    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceStatus}' = 'NAVIGATING'`))
   })
 }

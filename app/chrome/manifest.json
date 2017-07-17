@@ -18,7 +18,7 @@
     "128": "images/cobi-icon.png"
   },
 
-  "devtools_page": "index.html",
+  "devtools_page": "default.html",
   "homepage_url": "https://github.com/cobi-bike/COBI.js-simulator",
 
   "offline_enabled": true,
