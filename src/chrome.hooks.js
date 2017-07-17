@@ -40,15 +40,15 @@ const ENTER = 13
 const averageSpeed = 15 // km/h
 
 // chrome.devtools.inspectedWindow.eval(log.info('COBI panel created'))
-  // run intermitedly to check for COBI.js library
+// run intermitedly to check for COBI.js library
 autoDetectCobiJs()
 
 let trackReader = new FileReader()
 trackReader.onload = onCobiTrackFileLoaded
 let gpxReader = new FileReader()
 gpxReader.onload = onGpxFileLoaded
-      // core elements
-      // set up internal event driven listeners
+// core elements
+// set up internal event driven listeners
 core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
 core.on('track', fakeInput)
 core.on('track', logFakeInput)
