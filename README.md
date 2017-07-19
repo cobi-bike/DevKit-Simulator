@@ -27,7 +27,7 @@ The simulator offers some basic manual controls:
 
 Furthermore it is also possible to load a `cobitrack` or `gpx` file which the simulator will convert into events and reproduce them in the same tempo as they were recorded.
 
-You can find some example files in the `resource/assets` folder.
+You can find some example files in the [resource/assets](resource/assets) folder.
 
 ## contributing
 
@@ -39,7 +39,7 @@ For best development experience I recommend you to run `npm run gulp watch` whic
 will retranspile all files if a change is detected.
 
 If you just want to get a deployment version `npm run gulp once` will just do that.
-The final files will be in the `app/chrome` folder.
+The final files will be in the [app/chrome](app/chrome) folder.
 
 To test your changes simply run `npm test`
 
@@ -60,7 +60,7 @@ make sure to conform to it before submitting a pull request.
 
 What to do if the extension breaks.
 
-- check the error console of devtools. Part of React Devtools runs scripts in the
+- check the error console of devtools. Part of COBI Devtools runs scripts in the
 context of your page, and is vulnerable to misbehaving polyfills.
 
 - open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the "debug devtools" debugger. Check the console there for errors.
