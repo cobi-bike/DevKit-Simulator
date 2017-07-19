@@ -83,6 +83,7 @@ const fakeiOSWebkit = `
       COBI.__emitter.emit = function () {
         var event = arguments[0]
         if (typeof event === 'string' && event.match(/^\\w+\\/\\w+$/)) {
+          console.log(event + ' = ' + JSON.stringify(arguments[1]))
           window.webkit.messageHandlers.cobiShell.cache[event] = arguments[1]
         }
         oldEmit.apply(COBI.__emitter, arguments)

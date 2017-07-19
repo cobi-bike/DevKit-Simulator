@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="13px" viewBox="0 0 10 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>play</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="cobi_js_simulator" transform="translate(-211.000000, -218.000000)" fill="#585858">
+            <path d="M220.251657,225.533112 L212.810475,229.930174 L212.810475,229.930174 C212.239903,230.26733 211.504044,230.078109 211.166888,229.507537 C211.057634,229.322645 211,229.111821 211,228.897062 L211,220.102938 L211,220.102938 C211,219.440196 211.537258,218.902938 212.2,218.902938 C212.414759,218.902938 212.625583,218.960572 212.810475,219.069826 L220.251657,223.466888 L220.251657,223.466888 C220.822229,223.804044 221.01145,224.539903 220.674294,225.110475 C220.571316,225.284745 220.425927,225.430134 220.251657,225.533112 Z" id="play"></path>
+        </g>
+    </g>
+</svg>

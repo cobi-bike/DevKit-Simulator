@@ -39,7 +39,6 @@ const thumbControllerHTMLIds = Immutable.Map({
 const ENTER = 13
 const averageSpeed = 15 // km/h
 
-// chrome.devtools.inspectedWindow.eval(log.info('COBI panel created'))
 // run intermitedly to check for COBI.js library
 autoDetectCobiJs()
 
@@ -51,19 +50,16 @@ gpxReader.onload = onGpxFileLoaded
 // set up internal event driven listeners
 core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
 core.on('track', fakeInput)
-core.on('track', logFakeInput)
 core.on('track', mapMarkerFollowsFakeInput)
-core.on('track', (track: List<[number, Map<string, any>]>) => $('#playback').toggle(!track.isEmpty()))
 
 core.on('timeouts', deactivatePreviousTimeouts)
 core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
 core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
 core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
-core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? $('#playback').attr('class', 'play')
-                                                                               : $('#playback').attr('class', 'stop'))
+core.on('timeouts', (timeouts: List<any>) => $('#btn-play').toggle(timeouts.isEmpty()))
+core.on('timeouts', (timeouts: List<any>) => $('#btn-stop').toggle(!timeouts.isEmpty()))
 
 core.once('cobiVersion', welcomeUser)
-// core.on('cobiVersion', () => chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit))
 core.on('cobiVersion', (version) => $('#is-cobi-supported').html(version || 'not connected'))
 core.on('thumbControllerType', onThumbControllerTypeChanged)
 // ----
@@ -89,12 +85,12 @@ $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle'
 $('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
                                                                           : null)
 $('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
-$('#cancel-destination').on('click', () => {
-  chrome.devtools.inspectedWindow.eval(log.info(`${navigationServiceStatus} = 'NONE'`))
+$('#btn-cancel').on('click', () => {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
 })
 $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
-$('#playback').hide().on('click', onPlayBackButtonPressed)
+$('#btn-stop').hide().on('click', () => onTogglePlayBackButtonPressed(false))
+$('#btn-play').hide().on('click', () => onTogglePlayBackButtonPressed(true))
 
 $('#nyn-select').mouseenter(() => {
   $('#joystick').css('opacity', '1.0')
@@ -127,9 +123,7 @@ $('#iva-center').on('click', () => thumbAction('SELECT'))
  * CDK-2 mock input data to test webapps
  */
 function thumbAction (value) {
-  const expression = meta.emitStr(hubThumbControllerAction, value)
-  chrome.devtools.inspectedWindow.eval(expression)
-  chrome.devtools.inspectedWindow.eval(log.log(`${hubThumbControllerAction} = ${value}`))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(hubThumbControllerAction, value))
 }
 
 /**
@@ -142,17 +136,6 @@ function fakeInput (track: List<[number, Map<string, any>]>) {
   }).map(([t, fn]) => setTimeout(fn, t))
 
   core.update('timeouts', core.get('timeouts').push(emmiters))
-}
-
-/**
- * CDK-2 log mocked input data to test webapps
- */
-function logFakeInput (track: List<[number, Map<string, any>]>) {
-  const loggers = track.map(([t, msg]) => {
-    return [t, () => chrome.devtools.inspectedWindow.eval(log.log(`${msg.get('path')} = ${msg.get('payload')}`))]
-  }).map(([t, fn]) => setTimeout(fn, t))
-
-  core.update('timeouts', core.get('timeouts').push(loggers))
 }
 
 /**
@@ -215,7 +198,6 @@ function onGpxFileLoaded (evt) {
  */
 function setTouchInteraction (checked) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(appTouchUi, checked))
-  chrome.devtools.inspectedWindow.eval(log.info(`'${appTouchUi}' = ${checked.toString()}`))
 }
 
 /**
@@ -239,7 +221,6 @@ function setPosition (jQCoordinates) {
   core.update('timeouts', Immutable.List())
 
   chrome.devtools.inspectedWindow.eval(meta.emitStr(mobileLocation, msg.get('payload')))
-  chrome.devtools.inspectedWindow.eval(log.info(`'${mobileLocation}' = ${msg.get('payload')}`))
 }
 
 /**
@@ -255,7 +236,6 @@ function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
 
   const expression = meta.emitStr(hubThumbControllerType, currentValue)
   chrome.devtools.inspectedWindow.eval(expression)
-  chrome.devtools.inspectedWindow.eval(log.log(`"${hubThumbControllerType}" = ${currentValue}`))
 }
 
 /**
@@ -309,7 +289,6 @@ function welcomeUser (current: boolean, previous: boolean) {
  */
 function ringTheBell (value: boolean) {
   chrome.devtools.inspectedWindow.eval(meta.emitStr(hubBellRinging, value))
-  chrome.devtools.inspectedWindow.eval(log.log(`${hubBellRinging} = ${value.toString()}`))
   if (value) {
     setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
   }
@@ -319,11 +298,10 @@ function ringTheBell (value: boolean) {
  * Stop the current running track file or reset a new cobitrack
  * according to the class assigned to the button: stop button or play button
  */
-function onPlayBackButtonPressed () {
-  var buttonClass = $(this).attr('class')
-  if (buttonClass === 'stop') {
+function onTogglePlayBackButtonPressed (play) {
+  if (!play) {
     return core.update('timeouts', Immutable.List())
-  } else if (buttonClass === 'play') {
+  } else {
     core.update('track', core.get('track')) // fake track input event
   }
 }
@@ -333,7 +311,6 @@ function onDestinationCoordinatesChanged (event) {
 
   const inputText = $('#destination-coordinates').val()
   if (inputText.length === 0) {
-    chrome.devtools.inspectedWindow.eval(log.info(`${navigationServiceStatus} = 'NONE'`))
     return chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
   }
   const [lat, lon] = inputText.split(',')
@@ -359,15 +336,8 @@ function onDestinationCoordinatesChanged (event) {
     const dTDmeters = distanceToDestination * 1000
 
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDestination, destination.get('payload')))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDestination}' = ${destination.get('payload')}`))
-
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, dTDmeters))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceDistanceToDestination}' = ${dTDmeters}`))
-
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceETA}' = ${eta}`))
-
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NAVIGATING'))
-    chrome.devtools.inspectedWindow.eval(log.info(`'${navigationServiceStatus}' = 'NAVIGATING'`))
   })
 }

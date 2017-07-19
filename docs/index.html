@@ -25,6 +25,16 @@
               
                 
                 <li><a
+                  href='#computedistance'
+                  class="">
+                  computeDistance
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#schema'
                   class="">
                   Schema
@@ -45,26 +55,6 @@
               
                 
                 <li><a
-                  href='#fakeioswebkit'
-                  class="">
-                  fakeiOSWebkit
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#create'
-                  class="">
-                  create
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#tomixedcase'
                   class="">
                   toMixedCase
@@ -75,9 +65,9 @@
               
                 
                 <li><a
-                  href='#normalize'
+                  href='#update'
                   class="">
-                  normalize
+                  update
                   
                 </a>
                 
@@ -85,9 +75,19 @@
               
                 
                 <li><a
-                  href='#update'
+                  href='#toradians'
                   class="">
-                  update
+                  toRadians
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#normalize'
+                  class="">
+                  normalize
                   
                 </a>
                 
@@ -145,6 +145,26 @@
               
                 
                 <li><a
+                  href='#logfakeinput'
+                  class="">
+                  logFakeInput
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#mapmarkerfollowsfakeinput'
+                  class="">
+                  mapMarkerFollowsFakeInput
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#oncobitrackfileloaded'
                   class="">
                   onCobiTrackFileLoaded
@@ -165,9 +185,9 @@
               
                 
                 <li><a
-                  href='#toggletouchui'
+                  href='#settouchinteraction'
                   class="">
-                  toggleTouchUI
+                  setTouchInteraction
                   
                 </a>
                 
@@ -185,9 +205,69 @@
               
                 
                 <li><a
-                  href='#setthumbcontrollertype'
+                  href='#onthumbcontrollertypechanged'
                   class="">
-                  setThumbControllerType
+                  onThumbControllerTypeChanged
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#changemarkerposition'
+                  class="">
+                  changeMarkerPosition
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#deactivateprevioustimeouts'
+                  class="">
+                  deactivatePreviousTimeouts
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#autodetectcobijs'
+                  class="">
+                  autoDetectCobiJs
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#welcomeuser'
+                  class="">
+                  welcomeUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ringthebell'
+                  class="">
+                  ringTheBell
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#onplaybackbuttonpressed'
+                  class="">
+                  onPlayBackButtonPressed
                   
                 </a>
                 
@@ -208,12 +288,101 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='computedistance'>
+      computeDistance
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/math.js#L7-L19'>
+      <span>src/math.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>computes the geodesic or bee line distance between two latitude longitude points in kilometers
+<a href="https://en.wikipedia.org/wiki/Bee_line">https://en.wikipedia.org/wiki/Bee_line</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>computeDistance(lat1: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon1: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lat2: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon2: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lat1</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lon1</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lat2</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lon2</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='schema'>
       Schema
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/core.js#L10-L26'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/core.js#L11-L16'>
       <span>src/core.js</span>
       </a>
     
@@ -266,7 +435,7 @@ pin-point changes more dynamically</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L12-L17'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L12-L17'>
       <span>src/utils.js</span>
       </a>
     
@@ -339,118 +508,12 @@ pin-point changes more dynamically</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='fakeioswebkit'>
-      fakeiOSWebkit
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/meta.js#L12-L49'>
-      <span>src/meta.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>this code should be injected to a webpage containing COBI.js in order
-to create an echo server for read/write messages
-It basically monkey patches the parts that are expected to be there
-when running on an iOS system, but that are not on a Chrome browser</p>
-
-
-  <div class='pre p1 fill-light mt0'>fakeiOSWebkit</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='create'>
-      create
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L21-L85'>
-      <span>src/chrome.hooks.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Chrome devtools panel creation. We create a panel with no drawers. Set intelligenceService
-icon and index page. The panel is named COBI</p>
-
-
-  <div class='pre p1 fill-light mt0'>create</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='tomixedcase'>
       toMixedCase
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L23-L27'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L23-L27'>
       <span>src/utils.js</span>
       </a>
     
@@ -515,12 +578,149 @@ icon and index page. The panel is named COBI</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='update'>
+      update
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/core.js#L26-L34'>
+      <span>src/core.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>changes the value of key in the system state.</p>
+<p>Throws on <code>value === null</code> and on unknown key</p>
+
+
+  <div class='pre p1 fill-light mt0'>update(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, value: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='toradians'>
+      toRadians
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/math.js#L28-L30'>
+      <span>src/math.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>convert a decimal number to radians</p>
+
+
+  <div class='pre p1 fill-light mt0'>toRadians(degrees: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>degrees</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='normalize'>
       normalize
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L33-L36'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L33-L36'>
       <span>src/utils.js</span>
       </a>
     
@@ -585,86 +785,12 @@ to a relative one with the lowest epoch as base.</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='update'>
-      update
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/core.js#L36-L49'>
-      <span>src/core.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>changes the value of key in the system state.
-It might perform additional work based on internal configuration</p>
-<p>Throws on <code>value === null</code> and on unknown key</p>
-
-
-  <div class='pre p1 fill-light mt0'>update(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, value: any)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='fetchlinestr'>
       fetchLineStr
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L42-L49'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L42-L49'>
       <span>src/utils.js</span>
       </a>
     
@@ -734,7 +860,7 @@ also contains timestampts (coordTimes)</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L55-L64'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L55-L64'>
       <span>src/utils.js</span>
       </a>
     
@@ -799,7 +925,7 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/utils.js#L83-L89'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/utils.js#L83-L89'>
       <span>src/utils.js</span>
       </a>
     
@@ -863,14 +989,14 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L90-L94'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L129-L133'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-2 mock input data to test webapps</p>
+  <p>CDK-2 mock input data to test webapps</p>
 
 
   <div class='pre p1 fill-light mt0'>thumbAction(value: any)</div>
@@ -927,17 +1053,17 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L99-L110'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L138-L145'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-2 mock input data to test webapps</p>
+  <p>CDK-2 mock input data to test webapps</p>
 
 
-  <div class='pre p1 fill-light mt0'>fakeInput(normals: any)</div>
+  <div class='pre p1 fill-light mt0'>fakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
   
   
 
@@ -954,7 +1080,135 @@ js representation with relative timestamps</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>normals</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='logfakeinput'>
+      logFakeInput
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L150-L156'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>CDK-2 log mocked input data to test webapps</p>
+
+
+  <div class='pre p1 fill-light mt0'>logFakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='mapmarkerfollowsfakeinput'>
+      mapMarkerFollowsFakeInput
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L161-L171'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>CDK-2 move the map marker and center based on fake locations</p>
+
+
+  <div class='pre p1 fill-light mt0'>mapMarkerFollowsFakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
 	    
           </div>
           
@@ -991,14 +1245,14 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L115-L127'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L176-L186'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-2 mock input data to test webapps</p>
+  <p>CDK-107 mock input data to test webapps</p>
 
 
   <div class='pre p1 fill-light mt0'>onCobiTrackFileLoaded(evt: any)</div>
@@ -1055,14 +1309,14 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L132-L156'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L191-L211'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-2 mock input data to test webapps</p>
+  <p>CDK-2 mock input data to test webapps</p>
 
 
   <div class='pre p1 fill-light mt0'>onGpxFileLoaded(evt: any)</div>
@@ -1114,22 +1368,22 @@ js representation with relative timestamps</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='toggletouchui'>
-      toggleTouchUI
+    <h3 class='fl m0' id='settouchinteraction'>
+      setTouchInteraction
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L161-L165'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L216-L219'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-60 manually set the touch UI flag</p>
+  <p>CDK-60 manually set the touch UI flag</p>
 
 
-  <div class='pre p1 fill-light mt0'>toggleTouchUI(button: any)</div>
+  <div class='pre p1 fill-light mt0'>setTouchInteraction(checked: any)</div>
   
   
 
@@ -1146,7 +1400,7 @@ js representation with relative timestamps</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>button</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>checked</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1183,17 +1437,17 @@ js representation with relative timestamps</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L170-L184'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L224-L243'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-61 mock the location of the user and deactivates fake events</p>
+  <p>CDK-61 mock the location of the user and deactivates fake events</p>
 
 
-  <div class='pre p1 fill-light mt0'>setPosition(inputLat: any, inputLon: any)</div>
+  <div class='pre p1 fill-light mt0'>setPosition(jQCoordinates: any)</div>
   
   
 
@@ -1210,15 +1464,7 @@ js representation with relative timestamps</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>inputLat</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>inputLon</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>jQCoordinates</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1250,22 +1496,22 @@ js representation with relative timestamps</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='setthumbcontrollertype'>
-      setThumbControllerType
+    <h3 class='fl m0' id='onthumbcontrollertypechanged'>
+      onThumbControllerTypeChanged
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/30d1ed07bfcd0fc8ce841bcdf552464772d1f2da/src/chrome.hooks.js#L189-L194'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L248-L259'>
       <span>src/chrome.hooks.js</span>
       </a>
     
   </div>
   
 
-  <p>cdk-59 manually set the type of Thumb controller</p>
+  <p>CDK-59 manually set the type of Thumb controller</p>
 
 
-  <div class='pre p1 fill-light mt0'>setThumbControllerType(value: any)</div>
+  <div class='pre p1 fill-light mt0'>onThumbControllerTypeChanged(currentValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, oldValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
   
   
 
@@ -1282,13 +1528,409 @@ js representation with relative timestamps</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>currentValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oldValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
         </div>
       
     </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='changemarkerposition'>
+      changeMarkerPosition
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L264-L267'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>CDK-107 update the position of the Marker in the Embedded Google Map</p>
+
+
+  <div class='pre p1 fill-light mt0'>changeMarkerPosition(lat: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lat</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lon</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='deactivateprevioustimeouts'>
+      deactivatePreviousTimeouts
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L273-L279'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>deactivate old waiting timeouts and update the UI
+according to the current timeouts value</p>
+
+
+  <div class='pre p1 fill-light mt0'>deactivatePreviousTimeouts(timeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>, oldTimeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>timeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oldTimeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='autodetectcobijs'>
+      autoDetectCobiJs
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L286-L294'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>It is possible that the user reloaded the website without actually re-opening
+the simulator so we need to retry every once in a while to check that
+all necessary elements are there.</p>
+
+
+  <div class='pre p1 fill-light mt0'>autoDetectCobiJs()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='welcomeuser'>
+      welcomeUser
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L300-L304'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>display an ascii version of the COBI logo once the app authentication
+works</p>
+
+
+  <div class='pre p1 fill-light mt0'>welcomeUser(current: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, previous: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>current</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>previous</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ringthebell'>
+      ringTheBell
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L310-L316'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>fake ringing the Hub Bell and sets a timeout to deactivate it
+at a random point between 0 - 500 ms</p>
+
+
+  <div class='pre p1 fill-light mt0'>ringTheBell(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='onplaybackbuttonpressed'>
+      onPlayBackButtonPressed
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/COBI.js-simulator/blob/f525e8ca1070727a8ebb1ec0919a2163443019fa/src/chrome.hooks.js#L322-L329'>
+      <span>src/chrome.hooks.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Stop the current running track file or reset a new cobitrack
+according to the class assigned to the button: stop button or play button</p>
+
+
+  <div class='pre p1 fill-light mt0'>onPlayBackButtonPressed()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
   
 
   
