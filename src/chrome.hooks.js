@@ -41,7 +41,7 @@ const thumbControllerHTMLIds = Immutable.Map({
 const ENTER = 13
 const averageSpeed = 15 // km/h
 
-// run intermitedly to check for COBI.js library
+// check for COBI.js library
 autoDetectCobiJs()
 
 let trackReader = new FileReader()
@@ -297,8 +297,6 @@ function autoDetectCobiJs () {
     if (result) {
       core.update('cobiVersion', result)
     }
-    // setTimeout(autoDetectCobiJs, 60000)
-    // if (result) console.warn('COBI.js was not detected. Retrying in 1 second')
   })
 }
 
