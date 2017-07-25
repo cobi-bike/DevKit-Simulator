@@ -107,6 +107,7 @@
 /* END Bold */
 
 body {
+    background-color: #fff;
     font-family: "UniSansBook";
     font-size: 100%;
     margin: 0;
@@ -152,7 +153,7 @@ body {
 
 #left_collumn {
     grid-area: sidebar;
-    padding: 15px 0 20px 35px;
+    padding: 15px 0 20px 25px;
     overflow-y: auto;
     overflow-x: hidden;
     white-space: nowrap;
@@ -411,12 +412,12 @@ div.upload input {
 #btn-apply {
     width: 35px;
     height: 35px;
-    margin-top: 10px;
-    margin-left: 8px;
-    background: #00c8e6;
+    margin-top: 20px;
+    background: #ededed;
     border-radius: 54px;
     overflow: hidden;
     cursor: pointer !important;
+    float: left;
 }
 
 #btn-apply:hover {
@@ -447,11 +448,11 @@ input[type="text"] {
     display: block;
     margin: 0;
     margin-right: 10px;
-    width: 140px;
+    width: 145px;
     height: 30px;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: .24px;
-    color: #585858;
+    color: #9b9b9b;
     font-family: 'Open Sans';
     font-weight: 300;
     padding-left: 15px;
@@ -615,9 +616,9 @@ text-decoration: none;
 /* Browser Popup */
 
 .popup {
+    position: relative;
     width: 270px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 200px auto;
     padding-right: 20px;
     padding-left: 20px;
     font-size: 15px;
@@ -631,6 +632,20 @@ text-decoration: none;
     margin-right: 10px;
     margin-top: -2px;
     content: url('images/info.svg');
+}
+
+.popup-error::before {
+  display: inline-block;
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: -2px;
+  content: url('images/error.svg');
+}
+
+.popup a{
+  color: #00C8E6;
 }
 
 #cobi {

@@ -88,6 +88,10 @@ function gpxErrors (oDOM: Document) {
   return null
 }
 
+/**
+ * check if the raw object is a valid cobitrack object
+ * Returns an error message if so, otherwise undefined
+ */
 function cobiTrackErrors (raw: any) {
   if (!Array.isArray(raw)) return `root element must be an Array`
 
@@ -110,6 +114,33 @@ function cobiTrackErrors (raw: any) {
   }
 }
 
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing.
+ */
+function debounce (func: () => mixed, wait?: number, immediate?: boolean) {
+  const wait2 = wait || 500
+  let timeout
+  return function () {
+    const context = this
+    const args = arguments
+    const later = function () {
+      timeout = null
+      if (!immediate) {
+        func.apply(context, args)
+      }
+    }
+    const callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait2)
+    if (callNow) {
+      func.apply(context, args)
+    }
+  }
+};
+
 module.exports.path = path
 module.exports.normalize = normalize
 module.exports.fetchLineStr = fetchLineStr
@@ -117,3 +148,4 @@ module.exports.geoToTrack = geoToTrack
 module.exports.gpxErrors = gpxErrors
 module.exports.partialMobileLocation = partialMobileLocation
 module.exports.cobiTrackErrors = cobiTrackErrors
+module.exports.debounce = debounce

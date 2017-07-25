@@ -7,21 +7,25 @@
   "minimum_chrome_version": "45",
 
   "browser_action": {
-    "default_icon": "images/cobi-icon.png",
+    "default_icon": "images/icons/cobi-default-128.png",
     "default_title": "COBI DevKit Simulator",
     "default_popup": "popups/default.html"
   },
 
   "icons": {
-    "16": "images/cobi-icon.png",
-    "48": "images/cobi-icon.png",
-    "128": "images/cobi-icon.png"
+    "16": "images/icons/cobi-default-16.png",
+    "48": "images/icons/cobi-default-64.png",
+    "128": "images/icons/cobi-default-128.png"
   },
 
-  "devtools_page": "default.html",
+  "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/cobi-bike/COBI.js-simulator",
 
   "offline_enabled": true,
 
-  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://maps.googleapis.com; object-src 'self' 'unsafe-eval' 'unsafe-inline'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://maps.googleapis.com; object-src 'self' 'unsafe-eval' 'unsafe-inline'",
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
