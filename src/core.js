@@ -12,7 +12,10 @@ const Schema = Immutable.Record({
   'cobiVersion': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
-  'timeouts': Immutable.List() // List<List<number>>
+  'timeouts': Immutable.List(), // List<List<number>>
+  'map': null,
+  'position/marker': null,
+  'destination/marker': null
 })
 // the schema only allows the above keys
 let state = new Schema()
@@ -23,11 +26,11 @@ let listener = new Emitter()
  *
  * Throws on `value === null` and on unknown key
  */
-function update (key: string, value: any) {
+function update<T> (key: string, value: T) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  if (value === null || value === undefined) throw new Error(`invalid value ${value} for key ${key}`)
+  if (value === null || value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
 
-  const oldValue = state.get(key)
+  const oldValue: T = state.get(key)
   state = state.set(key, value)
   listener.emit(key, value, oldValue)
   return value
@@ -38,17 +41,17 @@ function get (key: string) {
   return state.get(key)
 }
 
-function listen (key: string, callback: (value: any, oldValue: any) => any) {
+function listen<T> (key: string, callback: (value: T, oldValue: T) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   listener.on(key, callback)
 }
 
-function listenOnce (key: string, callback: (value: any, oldValue: any) => any) {
+function listenOnce<T> (key: string, callback: (value: T, oldValue: T) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   listener.once(key, callback)
 }
 
-function remove (key: string, callback?: (value: any, oldValue: any) => any) {
+function remove<T> (key: string, callback?: (value: T, oldValue: T) => any) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
   if (callback) {
     return listener.removeListener(key, callback)

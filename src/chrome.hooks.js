@@ -2,9 +2,11 @@
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
-/* global marker:false */
-/* global map:false */
 /* global google: false */
+
+// Can use
+// chrome.devtools.*
+// chrome.extension.*
 
 import type {List, Map} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
@@ -53,14 +55,14 @@ core.on('track', fakeInput)
 core.on('track', mapMarkerFollowsFakeInput)
 
 core.on('timeouts', deactivatePreviousTimeouts)
-core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
-core.on('timeouts', (timeouts: List<List<number>>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
-core.on('timeouts', (timeouts: List<List<number>>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
-core.on('timeouts', (timeouts: List<any>) => $('#btn-play').toggle(timeouts.isEmpty()))
-core.on('timeouts', (timeouts: List<any>) => $('#btn-stop').toggle(!timeouts.isEmpty()))
+core.on('timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
+core.on('timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
+core.on('timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
+core.on('timeouts', (current: List<any>) => $('#btn-play').toggle(current.isEmpty() && !core.get('track').isEmpty()))
+core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmpty()))
 
 core.once('cobiVersion', welcomeUser)
-core.on('cobiVersion', (version) => $('#is-cobi-supported').html(version || 'not connected'))
+core.on('cobiVersion', version => $('#is-cobi-supported').html(version || 'not connected'))
 core.on('thumbControllerType', onThumbControllerTypeChanged)
 // ----
 // ui elements setup
@@ -79,18 +81,24 @@ $('#input-file').on('change', (event) => {
   } // xml otherwise
   return gpxReader.readAsText(file)
 })
-
 // --
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
-$('#coordinates').on('keypress', (event) => event.keyCode === ENTER ? setPosition($('#coordinates'))
-                                                                          : null)
-$('#destination-coordinates').on('keypress', onDestinationCoordinatesChanged)
-$('#btn-cancel').on('click', () => {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
-})
-$('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
+
+$('#coordinates').on('input', util.debounce(event => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
+$('#coordinates').keypress(event => event.keyCode === ENTER ? setPosition($('#coordinates').val()) : null)
+
+$('#destination-coordinates').on('input', util.debounce(event => event.keyCode !== ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null))
+$('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null)
+
+$('#btn-cancel').on('click', () => $('#btn-apply').show())
+$('#btn-cancel').on('click', () => $('#btn-cancel').hide())
+$('#btn-cancel').hide().on('click', () => chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE')))
+$('#btn-apply').on('click', () => onDestinationCoordinatesChanged($('#destination-coordinates').val()))
+
 $('#btn-stop').hide().on('click', () => onTogglePlayBackButtonPressed(false))
 $('#btn-play').hide().on('click', () => onTogglePlayBackButtonPressed(true))
+
+$('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
 
 $('#nyn-select').mouseenter(() => {
   $('#joystick').css('opacity', '1.0')
@@ -118,6 +126,28 @@ $('#nyn-select').on('click', () => thumbAction('SELECT'))
 $('#iva-plus').on('click', () => thumbAction('UP'))
 $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
+
+// -- reflect values shown in the UI - initilization
+$(document).ready(() => {
+  const position = {lat: 50.119496, lng: 8.6377155}
+  const destination = {lat: 50.104286, lng: 8.674835}
+  core.update('map', new google.maps.Map(document.getElementById('map'), {
+    zoom: 17,
+    center: position
+  }))
+  core.update('position/marker', new google.maps.Marker({
+    position: position,
+    map: core.get('map')
+  }))
+  core.update('destination/marker', new google.maps.Marker({
+    position: destination,
+    map: core.get('map'),
+    icon: 'images/beachflag.png'
+  }))
+  setTouchInteraction($('#touch-ui-toggle').is(':checked'))
+  setPosition($('#coordinates').val())
+  onDestinationCoordinatesChanged($('#destination-coordinates').val())
+})
 
 /**
  * CDK-2 mock input data to test webapps
@@ -203,8 +233,7 @@ function setTouchInteraction (checked) {
 /**
  * CDK-61 mock the location of the user and deactivates fake events
  */
-function setPosition (jQCoordinates) {
-  const inputText = jQCoordinates.val()
+function setPosition (inputText: string) {
   const [lat, lon] = inputText.split(',')
                               .map(text => text.trim())
                               .map(parseFloat)
@@ -242,8 +271,8 @@ function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
  * CDK-107 update the position of the Marker in the Embedded Google Map
  */
 function changeMarkerPosition (lat: number, lon: number) {
-  marker.setPosition(new google.maps.LatLng(lat, lon))
-  map.setCenter(new google.maps.LatLng(lat, lon))
+  core.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
+  core.get('map').setCenter(new google.maps.LatLng(lat, lon))
 }
 
 /**
@@ -306,10 +335,7 @@ function onTogglePlayBackButtonPressed (play) {
   }
 }
 
-function onDestinationCoordinatesChanged (event) {
-  if (event.keyCode !== ENTER) return
-
-  const inputText = $('#destination-coordinates').val()
+function onDestinationCoordinatesChanged (inputText: string) {
   if (inputText.length === 0) {
     return chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
   }
@@ -339,5 +365,8 @@ function onDestinationCoordinatesChanged (event) {
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, dTDmeters))
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
     chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NAVIGATING'))
+
+    $('#btn-apply').hide()
+    $('#btn-cancel').show()
   })
 }

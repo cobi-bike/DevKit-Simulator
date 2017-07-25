@@ -1,11 +1,20 @@
+// @flow
+/* global chrome:false */
 
-const fetchCOBIjsVersion = 'COBI ? COBI.specVersion : null'
-const devkitInvitation =  `This website doesnt contain the COBI.js library. Please visit https://github.com/cobi-bike/COBI.js for more information.`
-
+// Can use
+// devtools.inspectedWindow
+// devtools.network
+// devtools.panels
+const fetchCOBIjsVersion = 'window.COBI ? window.COBI.specVersion : null'
+const currentSupportedMajorVersion = 0
 let COBIpanelCreated = false
-let devkitInvitationPrinted = false
 
-autoDetectCobiJs()
+setInterval(autoDetectCobiJs, 1000) // 1 seconds
+
+// Create a connection to the background page
+const backgroundPageConnection = chrome.runtime.connect({
+  name: 'devtools-page'
+})
 
 /**
  * It is possible that the user reloaded the website without actually re-opening
@@ -14,33 +23,37 @@ autoDetectCobiJs()
  */
 function autoDetectCobiJs () {
   chrome.devtools.inspectedWindow.eval(fetchCOBIjsVersion, {}, (result) => {
+    // Relay the tab ID to the background page
+    backgroundPageConnection.postMessage({
+      specVersion: result,
+      tabId: chrome.devtools.inspectedWindow.tabId
+    })
     if (result) {
+      // fake iOS native webkit if cobi.js is detected
       chrome.devtools.inspectedWindow.eval(fakeiOSWebkit)
-      if (!COBIpanelCreated) {
-        COBIpanelCreated = true // prevent trying to create the panel twice
-        createCOBIpanel()
+    }
+    if (!COBIpanelCreated) { // prevent trying to create the panel twice
+      let panel = ''
+      if (result === null || result === undefined) {
+        panel = 'popups/invitation.html'
+      } else if (parseInt(result.split('.')[0]) > currentSupportedMajorVersion) {
+        panel = 'popups/error.html'
+      } else {
+        panel = 'panel.html'
       }
+      /**
+       * By default the simulator is disabled. So depending on the presence of
+       * COBI.js library we display one of three options:
+       * - an invitation panel if no cobi.js was FOUND
+       * - an error panel if the current cobi.js version is not compatible with the simulator
+       * - the simulator panel otherwise
+       */
+      chrome.devtools.panels.create('COBI',
+        'images/cobi-default-64.png',
+        panel)
+      COBIpanelCreated = true
     }
-
-    if(!result && !devkitInvitationPrinted) {
-      chrome.devtools.inspectedWindow.eval(`console.error('${devkitInvitation}')`)
-      devkitInvitationPrinted = true
-    }
-    setTimeout(autoDetectCobiJs, 1000) // 1 seconds
   })
-}
-
-/**
- * By default the simulator is disabled. So once we detect the presence of the
- * COBI.js library in the current website we create the COBI panel
- *
- * The index.html file contains a index.js script which setups all necessary
- * event listeners
- */
-function createCOBIpanel() {
-  chrome.devtools.panels.create('COBI',
-       'images/cobi-icon.png',
-       'index.html')
 }
 
 /**
