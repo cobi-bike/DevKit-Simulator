@@ -192,7 +192,7 @@ function onCobiTrackFileLoaded (evt) {
   if (errors) {
     return chrome.devtools.inspectedWindow.eval(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
   }
-  const content: List<[number, Object]> = Immutable.List(raw)
+  const content: List<{t: number, message: Object}> = Immutable.List(raw)
   const track = util.normalize(content)
 
   core.update('track', track)

@@ -30,9 +30,9 @@ function toMixedCase (name: string) {
  * converts a log of COBI Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
-function normalize (cobiTrack: List<[number, Object]>): List<[number, Map<string, any>]> {
-  const start = cobiTrack.minBy(([time]) => time)[0] // first timestampt
-  return cobiTrack.map(([t, msg]) => [t - start, Immutable.fromJS(msg)])
+function normalize (cobiTrack: List<{t: number, message: Object}>): List<[number, Map<string, any>]> {
+  const start = cobiTrack.minBy(({t}) => t).t // first timestampt
+  return cobiTrack.map(({t, message}) => [t - start, Immutable.fromJS(message)])
 }
 
 /**
@@ -95,19 +95,21 @@ function gpxErrors (oDOM: Document) {
 function cobiTrackErrors (raw: any) {
   if (!Array.isArray(raw)) return `root element must be an Array`
 
-  const notTuples = raw.filter(v => !(Array.isArray(v) && v.length === 2))
+  const notTuples = raw.filter(v => !(v.t && v.message))
   if (notTuples.length > 0) {
-    return `Every element of the array MUST be a [t, msg] tuple.
+    return `Every element of the array MUST be a {t: number, msg: object} object.
     the following elements failed: ${JSON.stringify(notTuples)}`
   }
 
-  const notTimestamps = raw.filter(([t]) => !Number.isInteger(t))
+  const notTimestamps = raw.filter(({t}) => !Number.isInteger(t))
   if (notTimestamps.length > 0) {
     return `Every timestampt element MUST be an integer in milliseconds.
     the following elements failed: ${JSON.stringify(notTimestamps)}`
   }
 
-  const notMessages = raw.filter(([_, msg]) => !(msg['action'] && msg['path'] && msg['payload'] != null))
+  const notMessages = raw.filter(({message}) => !(message['action'] &&
+                                                  message['path'] &&
+                                                  message['payload'] != null))
   if (notMessages.length > 0) {
     return `Every message MUST contain "action", "path" and "payload".
     the following elements failed: ${JSON.stringify(notMessages)}`
