@@ -21,16 +21,7 @@ const meta = require('./meta')
 const log = require('./log')
 const util = require('./utils')
 const math = require('./math')
-// --
-const mobileLocation = 'mobile/location'
-const hubThumbControllerAction = 'hub/externalInterfaceAction'
-const appTouchUi = 'app/touchInteractionEnabled'
-const hubThumbControllerType = 'hub/thumbControllerInterfaceId'
-const hubBellRinging = 'hub/bellRinging'
-const navigationServiceStatus = 'navigationService/status'
-const navigationServiceDestination = 'navigationService/destinationLocation'
-const navigationServiceETA = 'navigationService/Eta'
-const navigationServiceDistanceToDestination = 'navigationService/distanceToDestination'
+const spec = require('./spec')
 // --
 const thumbControllerHTMLIds = Immutable.Map({
   'COBI': '#cobi',
@@ -92,7 +83,7 @@ $('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDest
 
 $('#btn-cancel').on('click', () => $('#btn-apply').show())
 $('#btn-cancel').on('click', () => $('#btn-cancel').hide())
-$('#btn-cancel').hide().on('click', () => chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE')))
+$('#btn-cancel').hide().on('click', () => chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NONE')))
 $('#btn-apply').on('click', () => onDestinationCoordinatesChanged($('#destination-coordinates').val()))
 
 $('#btn-stop').hide().on('click', () => onTogglePlayBackButtonPressed(false))
@@ -153,7 +144,7 @@ $(document).ready(() => {
  * CDK-2 mock input data to test webapps
  */
 function thumbAction (value) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(hubThumbControllerAction, value))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.hub.externalInterfaceAction, value))
 }
 
 /**
@@ -173,7 +164,7 @@ function fakeInput (track: List<[number, Map<string, any>]>) {
  */
 function mapMarkerFollowsFakeInput (track: List<[number, Map<string, any>]>) {
   const mappers = track
-    .filter(([t, msg]) => msg.get('path') === mobileLocation)
+    .filter(([t, msg]) => msg.get('path') === spec.mobile.location)
     .map(([t, msg]) => {
       return [t, () => changeMarkerPosition(msg.get('payload').get('latitude'),
                                             msg.get('payload').get('longitude'))]
@@ -227,7 +218,7 @@ function onGpxFileLoaded (evt) {
  * CDK-60 manually set the touch UI flag
  */
 function setTouchInteraction (checked) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(appTouchUi, checked))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.app.touchInteractionEnabled, checked))
 }
 
 /**
@@ -249,7 +240,7 @@ function setPosition (inputText: string) {
 
   core.update('timeouts', Immutable.List())
 
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(mobileLocation, msg.get('payload')))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.mobile.location, msg.get('payload')))
 }
 
 /**
@@ -263,7 +254,7 @@ function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
   $(newId).show()
   $(oldId).hide()
 
-  const expression = meta.emitStr(hubThumbControllerType, currentValue)
+  const expression = meta.emitStr(spec.hub.thumbControllerInterfaceId, currentValue)
   chrome.devtools.inspectedWindow.eval(expression)
 }
 
@@ -315,7 +306,7 @@ function welcomeUser (current: boolean, previous: boolean) {
  * at a random point between 0 - 500 ms
  */
 function ringTheBell (value: boolean) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(hubBellRinging, value))
+  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.hub.bellRinging, value))
   if (value) {
     setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
   }
@@ -335,7 +326,7 @@ function onTogglePlayBackButtonPressed (play) {
 
 function onDestinationCoordinatesChanged (inputText: string) {
   if (inputText.length === 0) {
-    return chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NONE'))
+    return chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NONE'))
   }
   const [lat, lon] = inputText.split(',')
                               .map(text => text.trim())
@@ -346,7 +337,7 @@ function onDestinationCoordinatesChanged (inputText: string) {
       - instead got: ${inputText}`))
   }
 
-  chrome.devtools.inspectedWindow.eval(meta.fetch(mobileLocation), {}, (location) => {
+  chrome.devtools.inspectedWindow.eval(meta.fetch(spec.mobile.location), {}, (location) => {
     if (!location) {
       const error = `destination triggers navigation events which require the current position but
       none was found. Please set the current position and try again.`
@@ -359,10 +350,10 @@ function onDestinationCoordinatesChanged (inputText: string) {
     // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
     const dTDmeters = distanceToDestination * 1000
 
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDestination, destination.get('payload')))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceDistanceToDestination, dTDmeters))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceETA, eta))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(navigationServiceStatus, 'NAVIGATING'))
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.destinationLocation, destination.get('payload')))
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.distanceToDestination, dTDmeters))
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.eta, eta))
+    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
 
     $('#btn-apply').hide()
     $('#btn-cancel').show()
