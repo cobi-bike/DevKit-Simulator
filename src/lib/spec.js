@@ -1,7 +1,7 @@
 // @flow
 
 const spec = {
-  specVersion: '0.33.1',
+  version: '0.33.1',
   // channel - properties
   mobile: {
     location: 'mobile/location'

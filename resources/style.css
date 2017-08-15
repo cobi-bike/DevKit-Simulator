@@ -149,6 +149,7 @@ body {
 #map {
     grid-area: map;
     background: gray;
+    overflow: visible;
 }
 
 #left_collumn {

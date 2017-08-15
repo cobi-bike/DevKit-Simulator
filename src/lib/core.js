@@ -9,7 +9,10 @@ const Emitter = require('events')
  * pin-point changes more dynamically
  */
 const Schema = Immutable.Record({
-  'cobiVersion': null,
+  'specVersion': null,
+  'cobiJsToken': null,
+  'panel': 'invitation',
+  'containerUrl': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
   'timeouts': Immutable.List(), // List<List<number>>
@@ -28,7 +31,7 @@ let listener = new Emitter()
  */
 function update<T> (key: string, value: T) {
   if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  if (value === null || value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
+  if (value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
 
   const oldValue: T = state.get(key)
   state = state.set(key, value)

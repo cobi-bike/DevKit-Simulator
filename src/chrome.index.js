@@ -5,23 +5,25 @@
 /* global google: false */
 
 // Can use
-// chrome.devtools.*
-// chrome.extension.*
+// chrome.devtools.inspectedWindow
+// chrome.devtools.network
+// chrome.devtools.panels
 
 import type {List, Map} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
 // --
 const Immutable = require('immutable')
 const toGeoJSON = require('togeojson')
+const semver = require('semver')
 const GJV = require('geojson-validation')
 const $ = require('jquery')
 // --
-const core = require('./core')
-const meta = require('./meta')
-const log = require('./log')
-const util = require('./utils')
-const math = require('./math')
-const spec = require('./spec')
+const core = require('./lib/core')
+const meta = require('./lib/meta')
+const log = require('./lib/log')
+const util = require('./lib/utils')
+const math = require('./lib/math')
+const spec = require('./lib/spec')
 // --
 const thumbControllerHTMLIds = Immutable.Map({
   'COBI': '#cobi',
@@ -29,16 +31,36 @@ const thumbControllerHTMLIds = Immutable.Map({
   'BOSCH_INTUVIA': '#intuvia',
   'BOSCH_INTUVIA_MY17': '#intuvia'
 })
-const ENTER = 13
+const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
-
-// check for COBI.js library
-autoDetectCobiJs()
-
+const minCobiJsSupported = '0.33.0'
 let trackReader = new FileReader()
 trackReader.onload = onCobiTrackFileLoaded
 let gpxReader = new FileReader()
 gpxReader.onload = onGpxFileLoaded
+
+// Create a connection to the background page
+const backgroundPageConnection = chrome.runtime.connect({
+  name: 'panel'
+})
+// initialize a double direction connection by sending the tabId
+backgroundPageConnection.postMessage({
+  name: 'panel',
+  tabId: chrome.devtools.inspectedWindow.tabId
+})
+// receive messages from the devtools page forwarded through the backgroundPageConnection
+backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(`message received: ${JSON.stringify(message)}`)
+  core.update('specVersion', message.specVersion || null)
+  if (message.containerUrl && core.get('containerUrl') !== message.containerUrl) {
+    core.update('containerUrl', message.containerUrl)
+  }
+})
+
+// check for COBI.js library
+autoDetectCobiJs()
+setInterval(autoDetectCobiJs, 1000) // 1 seconds
+
 // core elements
 // set up internal event driven listeners
 core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
@@ -52,18 +74,64 @@ core.on('timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disable
 core.on('timeouts', (current: List<any>) => $('#btn-play').toggle(current.isEmpty() && !core.get('track').isEmpty()))
 core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmpty()))
 
-core.once('cobiVersion', welcomeUser)
-core.on('cobiVersion', version => $('#is-cobi-supported').html(version || 'not connected'))
+core.on('panel', welcomeUser)
+/**
+ * By default the simulator is disabled. So depending on the presence of
+ * COBI.js library we display one of three options:
+ * - an invitation panel if no cobi.js was found
+ * - an error panel if the current cobi.js version is not compatible with the simulator
+ * - the simulator panel otherwise
+ */
+core.on('panel', (current, previous) => {
+  if (current !== previous) {
+    $(`#${current}`).show()
+    $(`#${previous}`).hide()
+  }
+})
+core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected'))
+core.on('specVersion', version => {
+  if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
+    core.update('panel', 'error')
+  } else if (semver.valid(version)) {
+    core.update('panel', 'simulator')
+  } else {
+    core.update('panel', 'invitation')
+  }
+})
 core.on('thumbControllerType', onThumbControllerTypeChanged)
+
+core.on('cobiJsToken', (current: string, previous: string) => {
+  if (current && current !== previous) {
+    $(document).ready(initializeCobiJs)
+  }
+})
+
+$(document).ready(() => {
+  const position = {lat: 50.119496, lng: 8.6377155}
+  const destination = {lat: 50.104286, lng: 8.674835}
+  core.update('map', new google.maps.Map(document.getElementById('map'), {
+    zoom: 17,
+    center: position
+  }))
+  core.update('position/marker', new google.maps.Marker({
+    position: position,
+    map: core.get('map')
+  }))
+  core.update('destination/marker', new google.maps.Marker({
+    position: destination,
+    map: core.get('map'),
+    icon: 'images/beachflag.png'
+  }))
+})
+
 // ----
 // ui elements setup
-// keep a reference to ui elements for later usage
 $('#input-file').on('change', (event) => {
   const file = event.target.files[0]
   if (!file) {  // cancelled input - do nothing
     return $('#fileLabel').html('No file chosen')
   }
-  chrome.devtools.inspectedWindow.eval(log.info(`loading: ${file.name}`))
+  exec(log.info(`loading: ${file.name}`))
   const displayName = file.name.length > 14 ? file.name.substring(0, 14) + '...'
                                                   : file.name
   $('#fileLabel').html(displayName)
@@ -83,7 +151,7 @@ $('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDest
 
 $('#btn-cancel').on('click', () => $('#btn-apply').show())
 $('#btn-cancel').on('click', () => $('#btn-cancel').hide())
-$('#btn-cancel').hide().on('click', () => chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NONE')))
+$('#btn-cancel').hide().on('click', () => exec(meta.emitStr(spec.navigationService.status, 'NONE')))
 $('#btn-apply').on('click', () => onDestinationCoordinatesChanged($('#destination-coordinates').val()))
 
 $('#btn-stop').hide().on('click', () => onTogglePlayBackButtonPressed(false))
@@ -104,7 +172,7 @@ $('#tc-left').on('click', () => thumbAction('LEFT'))
 $('#tc-select').on('click', () => thumbAction('SELECT'))
 $('#tc-bell').on('click', () => ringTheBell(true))
 // thumbcontrollers - nyon
-const thumbControllerActionUnavailable = () => chrome.devtools.inspectedWindow.eval(log.warn(`This thumb controller button is reserved for the native app`))
+const thumbControllerActionUnavailable = () => exec(log.warn(`This thumb controller button is reserved for the native app`))
 $('#nyn-plus').on('click', thumbControllerActionUnavailable)
 $('#nyn-minus').on('click', thumbControllerActionUnavailable)
 $('#nyn-home').on('click', thumbControllerActionUnavailable)
@@ -118,33 +186,18 @@ $('#iva-plus').on('click', () => thumbAction('UP'))
 $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
 
-// -- reflect values shown in the UI - initilization
-$(document).ready(() => {
-  const position = {lat: 50.119496, lng: 8.6377155}
-  const destination = {lat: 50.104286, lng: 8.674835}
-  core.update('map', new google.maps.Map(document.getElementById('map'), {
-    zoom: 17,
-    center: position
-  }))
-  core.update('position/marker', new google.maps.Marker({
-    position: position,
-    map: core.get('map')
-  }))
-  core.update('destination/marker', new google.maps.Marker({
-    position: destination,
-    map: core.get('map'),
-    icon: 'images/beachflag.png'
-  }))
+function initializeCobiJs () {
   setTouchInteraction($('#touch-ui-toggle').is(':checked'))
   setPosition($('#coordinates').val())
   onDestinationCoordinatesChanged($('#destination-coordinates').val())
-})
+  exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
+}
 
 /**
  * CDK-2 mock input data to test webapps
  */
 function thumbAction (value) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.hub.externalInterfaceAction, value))
+  exec(meta.emitStr(spec.hub.externalInterfaceAction, value))
 }
 
 /**
@@ -153,7 +206,7 @@ function thumbAction (value) {
 function fakeInput (track: List<[number, Map<string, any>]>) {
   const emmiters = track.map(([t, msg]) => {
     const expression = meta.emitStr(msg.get('path'), msg.get('payload'))
-    return [t, () => chrome.devtools.inspectedWindow.eval(expression)]
+    return [t, () => exec(expression)]
   }).map(([t, fn]) => setTimeout(fn, t))
 
   core.update('timeouts', core.get('timeouts').push(emmiters))
@@ -181,7 +234,7 @@ function onCobiTrackFileLoaded (evt) {
   const raw = JSON.parse(evt.target.result)
   const errors = util.cobiTrackErrors(raw)
   if (errors) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
+    return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
   }
   const content: List<{t: number, message: Object}> = Immutable.List(raw)
   const track = util.normalize(content)
@@ -198,17 +251,17 @@ function onGpxFileLoaded (evt) {
 
   let errors = util.gpxErrors(content)
   if (errors) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
+    return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
   }
 
   const geojson: FeatureCollection = toGeoJSON.gpx(content)
   if (!GJV.valid(geojson)) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid input file`))
+    return exec(log.error(`Invalid input file`))
   }
 
   const featLineStr = util.fetchLineStr(geojson)
   if (!featLineStr) {
-    return chrome.devtools.inspectedWindow.eval(log.error('Invalid input file data'))
+    return exec(log.error('Invalid input file data'))
   }
 
   core.update('track', util.geoToTrack(featLineStr))
@@ -218,7 +271,7 @@ function onGpxFileLoaded (evt) {
  * CDK-60 manually set the touch UI flag
  */
 function setTouchInteraction (checked) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.app.touchInteractionEnabled, checked))
+  exec(meta.emitStr(spec.app.touchInteractionEnabled, checked))
 }
 
 /**
@@ -229,7 +282,7 @@ function setPosition (inputText: string) {
                               .map(text => text.trim())
                               .map(parseFloat)
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid coordinates
+    return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
       - instead got: ${inputText || 'null'}`))
   }
@@ -240,7 +293,7 @@ function setPosition (inputText: string) {
 
   core.update('timeouts', Immutable.List())
 
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.mobile.location, msg.get('payload')))
+  exec(meta.emitStr(spec.mobile.location, msg.get('payload')))
 }
 
 /**
@@ -249,13 +302,15 @@ function setPosition (inputText: string) {
 function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
   let newId = thumbControllerHTMLIds.get(currentValue)
   let oldId = thumbControllerHTMLIds.get(oldValue)
-  if (newId === oldId) return
 
-  $(newId).show()
-  $(oldId).hide()
+  if (currentValue !== oldValue) {
+    exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, currentValue))
+  }
 
-  const expression = meta.emitStr(spec.hub.thumbControllerInterfaceId, currentValue)
-  chrome.devtools.inspectedWindow.eval(expression)
+  if (newId !== oldId) {
+    $(newId).show()
+    $(oldId).hide()
+  }
 }
 
 /**
@@ -274,7 +329,7 @@ function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: 
   // Remove the previous timeouts if any exists
   if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
     oldTimeouts.map(ids => ids.map(clearTimeout))
-    chrome.devtools.inspectedWindow.eval(log.warn('Deactivating previous fake events'))
+    exec(log.warn('Deactivating previous fake events'))
   }
 }
 
@@ -284,20 +339,28 @@ function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: 
  * all necessary elements are there.
  */
 function autoDetectCobiJs () {
-  chrome.devtools.inspectedWindow.eval(meta.containsCOBIjs, {}, (result) => {
-    if (result) {
-      core.update('cobiVersion', result)
-    }
-  })
+  exec(meta.cobiJsToken, {}, (token) => core.update('cobiJsToken', token || null))
+}
+/**
+ * wrapper around chrome eval function. This is mainly to hijack all evaluations
+ * and provide custom defaults like frameURL
+ */
+function exec (expression: string, options?: Object, callback?: (result: Object, exceptionInfo: Object) => any): any {
+  if (options && !options.frameURL && core.get('containerUrl')) {
+    options.frameURL = core.get('containerUrl')
+  } else if (!options) {
+    options = {frameURL: core.get('containerUrl')}
+  }
+  chrome.devtools.inspectedWindow.eval(expression, options, callback)
 }
 
 /**
  * display an ascii version of the COBI logo once the app authentication
  * works
  */
-function welcomeUser (current: boolean, previous: boolean) {
-  if (!previous && current) {
-    chrome.devtools.inspectedWindow.eval(log.info(meta.welcome))
+function welcomeUser (current: string, previous: string) {
+  if (current === 'simulator' && current !== previous) {
+    exec(log.info(meta.welcome))
   }
 }
 
@@ -306,7 +369,7 @@ function welcomeUser (current: boolean, previous: boolean) {
  * at a random point between 0 - 500 ms
  */
 function ringTheBell (value: boolean) {
-  chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.hub.bellRinging, value))
+  exec(meta.emitStr(spec.hub.bellRinging, value))
   if (value) {
     setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
   }
@@ -326,22 +389,22 @@ function onTogglePlayBackButtonPressed (play) {
 
 function onDestinationCoordinatesChanged (inputText: string) {
   if (inputText.length === 0) {
-    return chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NONE'))
+    return exec(meta.emitStr(spec.navigationService.status, 'NONE'))
   }
   const [lat, lon] = inputText.split(',')
                               .map(text => text.trim())
                               .map(parseFloat)
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-    return chrome.devtools.inspectedWindow.eval(log.error(`Invalid coordinates
+    return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
       - instead got: ${inputText}`))
   }
 
-  chrome.devtools.inspectedWindow.eval(meta.fetch(spec.mobile.location), {}, (location) => {
+  exec(meta.fetch(spec.mobile.location), {}, (location) => {
     if (!location) {
       const error = `destination triggers navigation events which require the current position but
       none was found. Please set the current position and try again.`
-      return chrome.devtools.inspectedWindow.eval(log.error(error))
+      return exec(log.error(error))
     }
     const destination = util.partialMobileLocation(lon, lat)
     const distanceToDestination = math.beeLine(lat, lon, location.latitude, location.longitude)
@@ -350,10 +413,10 @@ function onDestinationCoordinatesChanged (inputText: string) {
     // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
     const dTDmeters = distanceToDestination * 1000
 
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.destinationLocation, destination.get('payload')))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.distanceToDestination, dTDmeters))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.eta, eta))
-    chrome.devtools.inspectedWindow.eval(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
+    exec(meta.emitStr(spec.navigationService.destinationLocation, destination.get('payload')))
+    exec(meta.emitStr(spec.navigationService.distanceToDestination, dTDmeters))
+    exec(meta.emitStr(spec.navigationService.eta, eta))
+    exec(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
 
     $('#btn-apply').hide()
     $('#btn-cancel').show()
