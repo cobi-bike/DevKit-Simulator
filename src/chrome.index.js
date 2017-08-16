@@ -33,7 +33,7 @@ const thumbControllerHTMLIds = Immutable.Map({
 })
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
-const minCobiJsSupported = '0.33.0'
+const minCobiJsSupported = '0.34.0'
 let trackReader = new FileReader()
 trackReader.onload = onCobiTrackFileLoaded
 let gpxReader = new FileReader()
@@ -219,8 +219,8 @@ function mapMarkerFollowsFakeInput (track: List<[number, Map<string, any>]>) {
   const mappers = track
     .filter(([t, msg]) => msg.get('path') === spec.mobile.location)
     .map(([t, msg]) => {
-      return [t, () => changeMarkerPosition(msg.get('payload').get('latitude'),
-                                            msg.get('payload').get('longitude'))]
+      return [t, () => changeMarkerPosition(msg.get('payload').get('coordinate').get('latitude'),
+                                            msg.get('payload').get('coordinate').get('longitude'))]
     })
     .map(([t, fn]) => setTimeout(fn, t))
 
@@ -406,17 +406,19 @@ function onDestinationCoordinatesChanged (inputText: string) {
       none was found. Please set the current position and try again.`
       return exec(log.error(error))
     }
-    const destination = util.partialMobileLocation(lon, lat)
-    const distanceToDestination = math.beeLine(lat, lon, location.latitude, location.longitude)
+
+    const route = util.partialRoute(location.coordinate, {latitude: lat, longitude: lon})
+    const distanceToDestination = math.beeLine(lat, lon, location.coordinate.latitude,
+                                               location.coordinate.longitude)
     // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
     const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
     // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
     const dTDmeters = distanceToDestination * 1000
 
-    exec(meta.emitStr(spec.navigationService.destinationLocation, destination.get('payload')))
     exec(meta.emitStr(spec.navigationService.distanceToDestination, dTDmeters))
     exec(meta.emitStr(spec.navigationService.eta, eta))
     exec(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
+    exec(meta.emitStr(spec.navigationService.route, route.get('payload')))
 
     $('#btn-apply').hide()
     $('#btn-cancel').show()

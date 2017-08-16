@@ -1,7 +1,7 @@
 // @flow
 
-const spec = {
-  version: '0.33.1',
+module.exports = {
+  version: '0.34.0',
   // channel - properties
   mobile: {
     location: 'mobile/location'
@@ -16,10 +16,9 @@ const spec = {
   },
   navigationService: {
     status: 'navigationService/status',
-    destinationLocation: 'navigationService/destinationLocation',
+    route: 'navigationService/route',
+    control: 'navigationService/control',
     eta: 'navigationService/eta',
     distanceToDestination: 'navigationService/distanceToDestination'
   }
 }
-
-module.exports = spec

@@ -3,28 +3,8 @@ import type {Map, List} from 'immutable'
 import type {FeatureCollection, Feature} from 'geojson-flow'
 
 const Immutable = require('immutable')
+const spec = require('./spec')
 const GJV = require('geojson-validation')
-
-/**
- * create a firebase-like path using the channel and property enum name
- * @example path("HUB", "FRONT_LIGHT_ID") -> "hub/frontLightId"
- */
-function path (channel: string, property: string) {
-  const ch = channel.indexOf('_') === 0 ? channel : toMixedCase(channel)
-  const prop = property.indexOf('_') === 0 ? property : toMixedCase(property)
-
-  return `${ch}/${prop}`
-}
-
-/**
- * converts an underscore separated string into a camelcase one
- * @example "FRONT_LIGHT_ID" -> "frontLightId"
- */
-function toMixedCase (name: string) {
-  const words = name.split('_')
-                  .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
-  return words[0].toLowerCase() + words.slice(1).join('')
-}
 
 /**
  * converts a log of COBI Bus events from their absolute epoch value
@@ -63,17 +43,54 @@ function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/is
   return ntimes.zip(msgs)
 }
 
-function partialMobileLocation (longitude: number, latitude: number) {
-  return Immutable.Map({
+function partialMobileLocation (longitude: number, latitude: number): Map<string, any> {
+  return Immutable.fromJS({
     'action': 'NOTIFY',
-    'path': 'mobile/location',
-    'payload': Immutable.Map({
+    'path': spec.mobile.location,
+    'payload': {
       'altitude': 0,
       'bearing': 0,
-      'latitude': latitude,
-      'longitude': longitude,
+      'coordinate': {
+        'latitude': latitude,
+        'longitude': longitude
+      },
       'speed': 0
+    }
+  })
+}
+
+function partialStartControl (longitude: number, latitude: number) {
+  return Immutable.Map({
+    'action': 'NOTIFY',
+    'path': spec.navigationService.control,
+    'payload': Immutable.Map({
+      'action': 'START',
+      'destination': {
+        'latitude': latitude,
+        'longitude': longitude
+      }
     })
+  })
+}
+
+function partialRoute (origin: {longitude: number, latitude: number},
+                       destination: {longitude: number, latitude: number}) {
+  return Immutable.Map({
+    'action': 'NOTIFY',
+    'path': spec.navigationService.route,
+    'payload': Immutable.fromJS({
+      'origin': {
+        'name': 'Solmsstraße',
+        'address': 'Frankfurt am Main',
+        'category': 'BICYCLE_RELEVANT',
+        'coordinate': origin
+      },
+      'destination': {
+        'name': 'Wonderland',
+        'address': 'Neverland',
+        'category': 'NIGHTLIFE',
+        'coordinate': destination
+      }})
   })
 }
 
@@ -143,11 +160,14 @@ function debounce (func: () => mixed, wait?: number, immediate?: boolean) {
   }
 };
 
-module.exports.path = path
-module.exports.normalize = normalize
-module.exports.fetchLineStr = fetchLineStr
-module.exports.geoToTrack = geoToTrack
-module.exports.gpxErrors = gpxErrors
-module.exports.partialMobileLocation = partialMobileLocation
-module.exports.cobiTrackErrors = cobiTrackErrors
-module.exports.debounce = debounce
+module.exports = {
+  normalize: normalize,
+  fetchLineStr: fetchLineStr,
+  geoToTrack: geoToTrack,
+  gpxErrors: gpxErrors,
+  partialMobileLocation: partialMobileLocation,
+  partialStartControl: partialStartControl,
+  partialRoute: partialRoute,
+  cobiTrackErrors: cobiTrackErrors,
+  debounce: debounce
+}

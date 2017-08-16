@@ -54,6 +54,6 @@ gulp.task('copy', function () {
 gulp.task('once', ['browser', 'node', 'copy'])
 // watch and rebuild everything on change
 gulp.task('watch', () => {
-  gulp.watch(['src/*.js', 'resources/**/*.*'], ['browser', 'node', 'copy'])
+  gulp.watch(['src/**/*.js', 'resources/**/*.*'], ['browser', 'node', 'copy'])
       .on('change', event => console.log(`\nFile ${event.path} was ${event.type}, running tasks...`))
 })

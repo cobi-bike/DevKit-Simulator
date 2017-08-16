@@ -1,7 +1,5 @@
 // @flow
 
-const fetchCOBIjsVersion = 'COBI ? COBI.specVersion : null'
-const cobiJsToken = 'COBI ? COBI.__apiKey : null'
 /**
  * Some websites might include one or more iframes in which COBI.js might be
  * included. So if we fail to find COBI.js in the top frame, we try to search
@@ -12,8 +10,6 @@ const cobiJsToken = 'COBI ? COBI.__apiKey : null'
  * @returns {Array<string>} the return value of chrome eval
  */
 const fetchIframeUrls = `Array.prototype.slice.call(document.getElementsByTagName('iframe')).map(frame => frame.src)`
-const emitStr = (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`
-const fetch = (path: string) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`
 
 /**
  * this code should be injected to a webpage containing COBI.js in order
@@ -27,7 +23,7 @@ const fakeiOSWebkit = `
       window.webkit = {
         messageHandlers: {
           cobiAuth: {
-            postMessage: (authKey) => window.COBI.__authenticated({confirmed: true, apiKey: authKey})
+            postMessage: (request) => window.COBI.__authenticated({confirmed: true, apiKey: request.token})
           },
           cobiShell: {
             cache: {},
@@ -93,10 +89,12 @@ const welcome = `
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 `
 
-module.exports.fetchCOBIjsVersion = fetchCOBIjsVersion
-module.exports.cobiJsToken = cobiJsToken
-module.exports.emitStr = emitStr
-module.exports.welcome = welcome
-module.exports.fetch = fetch
-module.exports.IframeUrls = fetchIframeUrls
-module.exports.fakeiOSWebkit = fakeiOSWebkit
+module.exports = {
+  fetchCOBIjsVersion: 'COBI ? COBI.specVersion : null',
+  cobiJsToken: 'COBI ? COBI.__apiKey : null',
+  emitStr: (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`,
+  welcome: welcome,
+  fetch: (path: string) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`,
+  IframeUrls: fetchIframeUrls,
+  fakeiOSWebkit: fakeiOSWebkit
+}

@@ -24,46 +24,56 @@ const Schema = Immutable.Record({
 let state = new Schema()
 let listener = new Emitter()
 
-/**
- * changes the value of key in the system state.
- *
- * Throws on `value === null` and on unknown key
- */
-function update<T> (key: string, value: T) {
-  if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  if (value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
+module.exports = {
+  /**
+   * changes the value of key in the system state.
+   *
+   * Throws on `value === null` and on unknown key
+   */
+  update: function<T> (key: string, value: T) {
+    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+    if (value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
 
-  const oldValue: T = state.get(key)
-  state = state.set(key, value)
-  listener.emit(key, value, oldValue)
-  return value
-}
+    const oldValue: T = state.get(key)
+    state = state.set(key, value)
+    listener.emit(key, value, oldValue)
+    return value
+  },
+  /**
+   * get the value of 'key' from the core or throws if
+   * it doesnt exists
+   */
+  get: function (key: string) {
+    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+    return state.get(key)
+  },
 
-function get (key: string) {
-  if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  return state.get(key)
-}
+  /**
+   * sets a listener for 'key' which will be triggered everytime that
+   * its internal value changes
+   */
+  on: function<T> (key: string, callback: (value: T, oldValue: T) => any) {
+    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+    listener.on(key, callback)
+  },
 
-function listen<T> (key: string, callback: (value: T, oldValue: T) => any) {
-  if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  listener.on(key, callback)
-}
+  /**
+   * sets a listener for 'key' which will be only ONCE when its
+   * internal value changes
+   */
+  once: function<T> (key: string, callback: (value: T, oldValue: T) => any) {
+    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+    listener.once(key, callback)
+  },
 
-function listenOnce<T> (key: string, callback: (value: T, oldValue: T) => any) {
-  if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  listener.once(key, callback)
-}
-
-function remove<T> (key: string, callback?: (value: T, oldValue: T) => any) {
-  if (!state.has(key)) throw new Error(`unknown key ${key}`)
-  if (callback) {
-    return listener.removeListener(key, callback)
+  /**
+   * remove ALL listener registered for 'key' or only the passed one
+   */
+  remove: function<T> (key: string, callback?: (value: T, oldValue: T) => any) {
+    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+    if (callback) {
+      return listener.removeListener(key, callback)
+    }
+    listener.removeAllListeners(key)
   }
-  listener.removeAllListeners(key)
 }
-
-module.exports.update = update
-module.exports.get = get
-module.exports.on = listen
-module.exports.once = listenOnce
-module.exports.remove = remove
