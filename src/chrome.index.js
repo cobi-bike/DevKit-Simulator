@@ -143,10 +143,10 @@ $('#input-file').on('change', (event) => {
 // --
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
 
-$('#coordinates').on('input', util.debounce(event => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
+$('#coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
 $('#coordinates').keypress(event => event.keyCode === ENTER ? setPosition($('#coordinates').val()) : null)
 
-$('#destination-coordinates').on('input', util.debounce(event => event.keyCode !== ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null))
+$('#destination-coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null))
 $('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null)
 
 $('#btn-cancel').on('click', () => $('#btn-apply').show())
