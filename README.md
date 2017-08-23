@@ -6,7 +6,6 @@ COBI DevKit Simulator is a browser-based DevTools extension to simulate WebApp e
 Currently it is only available for Chrome browsers version 45 or greater.
 
 More information:
-- [COBI.js library](https://github.com/cobi-bike/COBI.js)
 - [COBI DevKit Forum](https://forums.cobi.bike/)
 - [COBI.js api docs](https://cobi-bike.github.io/COBI.js/)
 
@@ -27,7 +26,7 @@ The simulator offers some basic manual controls:
 
 Furthermore it is also possible to load a `cobitrack` or `gpx` file which the simulator will convert into events and reproduce them in the same tempo as they were recorded.
 
-You can find some example files in the [resource/assets](resource/assets) folder.
+You can find some example files in the [tracks](tracks) folder.
 
 ## contributing
 
@@ -58,12 +57,12 @@ make sure to conform to it before submitting a pull request.
 
 ### Debugging (in Chrome)
 
-What to do if the extension breaks.
+What to do if the extension breaks:
 
-- check the error console of devtools. Part of COBI Devtools runs scripts in the
+- check the error console of devtools. Part of COBI Devtools runs code in the
 context of your page, and is vulnerable to misbehaving polyfills.
 
-- open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the "debug devtools" debugger. Check the console there for errors.
+- open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the `debug devtools` debugger. Check the console there for errors.
 
 - open chrome://extensions, find COBI, and click "background page" under
 "Inspected views". You might find the errors there.
