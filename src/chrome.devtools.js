@@ -35,7 +35,7 @@ function autoDetectCobiJs () {
     })
     if (version) { // fake iOS native webkit if cobi.js is detected
       chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, options)
-    } else if (iframeContainerUrl === null) {
+    } else if (iframeContainerUrl === null || !version) {
       // find out if the current page has iframe containers with a COBI.js in any of them
       // we purposedly neglect the case of more than one iframe with a COBI.js in it
       // for simplicity
