@@ -35,7 +35,14 @@ module.exports = {
     if (value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
 
     const oldValue: T = state.get(key)
+    if (Immutable.is(oldValue, value)) {
+      return oldValue // nothing changed
+    }
+
     state = state.set(key, value)
+    console.log(`${key} updated!`, // some objects contain circular references which cannot be stringify with JSON
+      `before: ${oldValue ? oldValue.toString() : 'null'}
+       now: ${value ? value.toString() : 'null'}`)
     listener.emit(key, value, oldValue)
     return value
   },
