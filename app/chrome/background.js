@@ -5,7 +5,6 @@
 // chrome.tabs.*
 // chrome.extension.*
 
-// TODO we need to remove the mapping on disconnect to avoid leaking memory
 let panels = {} // devtool panels map
 let pages = {} // devtool pages map
 console.log('background init')
@@ -52,4 +51,18 @@ chrome.runtime.onConnect.addListener(function (port) {
   // add the listener
   port.onMessage.addListener(listener)
   port.onDisconnect.addListener(() => port.onMessage.removeListener(listener))
+
+  port.onDisconnect.addListener(function (port) {
+    console.log(`port disconnected: ${JSON.stringify(port)}`)
+    port.onMessage.removeListener(listener)
+    const container = port.name === 'page' ? pages : panels
+
+    var tabs = Object.keys(container)
+    for (var i = 0, len = tabs.length; i < len; i++) {
+      if (container[tabs[i]] === port) {
+        console.log(`port removed`)
+        return delete container[tabs[i]]
+      }
+    }
+  })
 })
