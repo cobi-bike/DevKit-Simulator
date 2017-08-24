@@ -62,7 +62,7 @@ What to do if the extension breaks:
 - check the error console of devtools. Part of COBI Devtools runs code in the
 context of your page, and is vulnerable to misbehaving polyfills.
 
-- open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the `debug devtools` debugger. Check the console there for errors.
+- open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the `debug devtools` debugger. Check the console there for errors. If you want to file a bug, please save the content of this console as described [here](https://developers.google.com/web/tools/chrome-devtools/console/#saving_the_history)
 
 - open chrome://extensions, find COBI, and click "background page" under
 "Inspected views". You might find the errors there.

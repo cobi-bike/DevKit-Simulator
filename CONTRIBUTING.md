@@ -29,6 +29,8 @@ We will be using GitHub Issues for our public bugs. We will keep a close eye on 
 
 The best way to get your bug fixed is to provide a reduced test case. jsFiddle, jsBin, and other sites provide a way to give live examples.
 
+Another good way to provide hints of a possible bug is to export the content of the "debug devtools". See instructions [here](https://developers.google.com/web/tools/chrome-devtools/console/#saving_the_history)
+
 ## How to Get in Touch
 
 * email : `devkit@cobi.bike`
