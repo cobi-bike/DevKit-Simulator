@@ -73,8 +73,7 @@ core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmp
 
 /**
  * By default the simulator is disabled. So depending on the presence of
- * COBI.js library we display one of three options:
- * - an invitation panel if no cobi.js was found
+ * COBI.js library we display one of these options:
  * - an error panel if the current cobi.js version is not compatible with the simulator
  * - the simulator panel otherwise
  */
@@ -84,18 +83,18 @@ core.on('panel', (current, previous) => {
     $(`#${previous}`).hide()
   }
 })
-core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected'))
+
+core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
+                                                         .toggleClass('webapp-warning', version === null))
+core.on('specVersion', version => $('#left_column').toggleClass('is-disabled', version === null))
+core.on('specVersion', version => $('#map').toggleClass('is-disabled', version === null))
 core.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
-    core.update('panel', 'error')
-  } else if (semver.valid(version)) {
-    core.update('panel', 'simulator')
-  } else {
-    core.update('panel', 'invitation')
+    return core.update('panel', 'error')
   }
+  core.update('panel', 'simulator')
 })
 core.on('thumbControllerType', onThumbControllerTypeChanged)
-
 core.on('cobiJsToken', (current: string, previous: string) => {
   if (current && current !== previous) {
     $(document).ready(initializeCobiJs)

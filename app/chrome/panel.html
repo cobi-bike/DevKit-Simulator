@@ -20,13 +20,10 @@
 
     Visit the <a href="https://forums.cobi.bike/" target="_newtab"> COBI Forum </a> for more information
   </p>
-  <p id="invitation" class="popup" hidden>
-    This website doesnt contain the COBI.js library. To watch an example app <a href="https://cobi-debug.glitch.me/" target="_newtab"> Click here</a>
-  </p>
   <div id="simulator">
     <div id="status"></div>
     <div id="main">
-      <div id="left_collumn">
+      <div id="left_column" class="is-disabled">
         <img id="image-result">
         <section id="file-upload">
 
@@ -65,13 +62,6 @@
             <button></button>
           </div>
         </section>
-
-        <!-- Apply button
-        <div id="btn-apply">
-          <button></button>
-        </div>
-      -->
-
 
         <section id="thumb-controller">
 
@@ -263,7 +253,7 @@
         <a class="link" href="https://cobi-bike.github.io/COBI.js/" target="_newtab">COBI.js docs</a>
       </div>
 
-      <div id="map"></div>
+      <div id="map" class="is-disabled"></div>
     </div>
     <div id="float_footer">
       <svg class="cobijs" width="67px" height="19px" viewBox="0 0 67 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -292,7 +282,7 @@
           </g>
         </g>
       </svg>
-      <span id="is-cobi-supported">Not connected</span>
+      <span id="is-cobi-supported" class="webapp-warning">Not connected</span>
     </div>
   </div>
 
