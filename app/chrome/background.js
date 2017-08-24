@@ -15,7 +15,6 @@ chrome.runtime.onConnect.addListener(function (port) {
   console.log(`init message received: ${JSON.stringify(port)}`)
   if (port.name === 'panel') {
     listener = function (message, sender, sendResponse) {
-      console.log(`panel message received: ${JSON.stringify(message)}`)
       // set up the mapping between devtool panel and page to communicate them
       if (message.tabId && !panels[message.tabId]) {
         panels[message.tabId] = port
@@ -23,7 +22,6 @@ chrome.runtime.onConnect.addListener(function (port) {
     }
   } else if (port.name === 'page') {
     listener = function (message, sender, sendResponse) {
-      console.log(`page message received: ${JSON.stringify(message)}`)
       if (message.tabId && !(message.tabId in pages)) {
         pages[message.tabId] = port
       }
@@ -31,6 +29,7 @@ chrome.runtime.onConnect.addListener(function (port) {
       // forward message from devtool page to panel
       if (message.tabId && message.tabId in panels) {
         panels[message.tabId].postMessage(message)
+        console.log(`message forwarded: ${JSON.stringify(message)}`)
       } else if (message.tabId) {
         console.warn('Tab not found in connection list.')
       }
