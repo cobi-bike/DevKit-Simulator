@@ -50,11 +50,8 @@ backgroundPageConnection.postMessage({
 })
 // receive messages from the devtools page forwarded through the backgroundPageConnection
 backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
-  console.log(`message received: ${JSON.stringify(message)}`)
   core.update('specVersion', message.specVersion || null)
-  if (message.containerUrl && core.get('containerUrl') !== message.containerUrl) {
-    core.update('containerUrl', message.containerUrl)
-  }
+  core.update('containerUrl', message.containerUrl)
 })
 
 // check for COBI.js library
@@ -74,7 +71,6 @@ core.on('timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disable
 core.on('timeouts', (current: List<any>) => $('#btn-play').toggle(current.isEmpty() && !core.get('track').isEmpty()))
 core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmpty()))
 
-core.on('panel', welcomeUser)
 /**
  * By default the simulator is disabled. So depending on the presence of
  * COBI.js library we display one of three options:
@@ -352,16 +348,6 @@ function exec (expression: string, options?: Object, callback?: (result: Object,
     options = {frameURL: core.get('containerUrl')}
   }
   chrome.devtools.inspectedWindow.eval(expression, options, callback)
-}
-
-/**
- * display an ascii version of the COBI logo once the app authentication
- * works
- */
-function welcomeUser (current: string, previous: string) {
-  if (current === 'simulator' && current !== previous) {
-    exec(log.info(meta.welcome))
-  }
 }
 
 /**
