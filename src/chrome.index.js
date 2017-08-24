@@ -368,9 +368,10 @@ function ringTheBell (value: boolean) {
 function onTogglePlayBackButtonPressed (play) {
   if (!play) {
     return core.update('timeouts', Immutable.List())
-  } else {
-    core.update('track', core.get('track')) // fake track input event
   }
+  const track = core.get('track')
+  core.update('track', Immutable.List())
+  core.update('track', track) // fake track input event
 }
 
 function onDestinationCoordinatesChanged (inputText: string) {
