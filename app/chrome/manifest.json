@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "COBI DevKit Simulator",
-  "version": "0.6.3",
+  "version": "0.6.4",
 
-  "description": "Chrome-based IDE to build web apps for bikes",
+  "description": "Create and test your COBI Modules in Chrome",
   "minimum_chrome_version": "45",
 
   "browser_action": {

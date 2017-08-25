@@ -136,6 +136,7 @@ $('#input-file').on('change', (event) => {
   return gpxReader.readAsText(file)
 })
 // --
+$('#btn-state').on('click', () => exec(meta.state))
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
 
 $('#coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
@@ -349,6 +350,9 @@ function exec (expression: string, options?: Object, callback?: (result: Object,
   } else if (!options) {
     options = {frameURL: core.get('containerUrl')}
   }
+  if (!callback) {
+    callback = errorHandler
+  }
   chrome.devtools.inspectedWindow.eval(expression, options, callback)
 }
 
@@ -412,4 +416,22 @@ function onDestinationCoordinatesChanged (inputText: string) {
     $('#btn-apply').hide()
     $('#btn-cancel').show()
   })
+}
+
+type ExceptionInfo = {
+  code: string,
+  description: string,
+  details: Array<any>,
+  isError: boolean,
+  isException: boolean,
+  value: string
+}
+
+/**
+ * default handler for evaluations in the context of webapps
+ */
+function errorHandler (result: Object, exceptionInfo: ExceptionInfo) {
+  if (exceptionInfo) {
+    console.error('foreign evaluation failure:', exceptionInfo)
+  }
 }

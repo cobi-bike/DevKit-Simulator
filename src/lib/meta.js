@@ -64,6 +64,7 @@ module.exports = {
   cobiJsToken: 'COBI ? COBI.__apiKey : null',
   emitStr: (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`,
   fetch: (path: string) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`,
+  state: `console.log("COBI.js state:", window.webkit.messageHandlers.cobiShell.cache)`,
   IframeUrls: fetchIframeUrls,
   fakeiOSWebkit: fakeiOSWebkit
 }
