@@ -11,7 +11,7 @@ const Emitter = require('events')
 const Schema = Immutable.Record({
   'specVersion': null,
   'cobiJsToken': null,
-  'panel': 'invitation',
+  'panel': 'simulator',
   'containerUrl': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
