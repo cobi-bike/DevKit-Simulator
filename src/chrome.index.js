@@ -184,7 +184,10 @@ $('#iva-center').on('click', () => thumbAction('SELECT'))
 function initializeCobiJs () {
   setTouchInteraction($('#touch-ui-toggle').is(':checked'))
   setPosition($('#coordinates').val())
-  onDestinationCoordinatesChanged($('#destination-coordinates').val())
+   // only set the destination if the user didnt cancel it before
+  if ($('#btn-cancel').is(':visible')) {
+    onDestinationCoordinatesChanged($('#destination-coordinates').val())
+  }
   exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
 }
 
