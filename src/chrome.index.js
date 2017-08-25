@@ -33,7 +33,7 @@ const thumbControllerHTMLIds = Immutable.Map({
 })
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
-const minCobiJsSupported = '0.34.0'
+const minCobiJsSupported = '0.34.1'
 let trackReader = new FileReader()
 trackReader.onload = onCobiTrackFileLoaded
 let gpxReader = new FileReader()
