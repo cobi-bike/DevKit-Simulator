@@ -434,6 +434,8 @@ function errorHandler (result: Object, exceptionInfo: ExceptionInfo) {
   if (exceptionInfo) {
     console.error('foreign evaluation failure:', exceptionInfo)
     // give a custom callback to avoid stack overflow
-    exec(log.error(exceptionInfo), {}, () => console.error('double internal error'))
+    exec(log.error(exceptionInfo.value ? exceptionInfo.value : exceptionInfo),
+     {},
+     () => console.error('double internal error'))
   }
 }
