@@ -1,36 +1,33 @@
 
 # COBI DevKit Simulator
 
-COBI DevKit Simulator is a Chrome Extension to simulate data & events without having to install them on your Smartphone nor connect them to the COBI Hub.
+COBI DevKit Simulator is a Chrome Extension to test COBI Modules in the browser with simulated data sources. Continuous riding & fitness data can be simulated by one of our sample cobitrack or GPX files. 
 
-Currently it is available for Chrome version 45 or greater.
+This project is part of the [COBI DevKit](https://github.com/cobi-bike/devkit/).
 
-More information:
+![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
 
-- [COBI DevKit](https://cobi.bike/devkit/)
-- [COBI DevKit Forum](https://forums.cobi.bike/)
-- [COBI.js API Reference](https://cobi-bike.github.io/COBI.js/)
-
-![preview](/resources/SimulatorScreenShot.png)
+Compatible with Chrome version 45+.
 
 ## Install
 
-The easiest way to get the COBI Devkit simulator is to install it directly from the
+The easiest way to get the COBI DevKit Simulator is to install it directly from the
 [Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno).
 
 ## Usage
 
 You can find the DevKit Simulator in the *Chrome Devtools* in a tab named `COBI`.
 
-The simulator offers some basic manual controls:
-* Thumb Controller selection
-* Thumb Controller actions
-* Location
-* Touch Interaction
+The Simulator offers some basic manual controls:
+* Thumb Controller actions 
+* Thumb Controller type
+* Simulate current location
+* Set navigation destination
+* Simulate availability of touch interaction
 
 Furthermore it is also possible to load a `cobitrack` or `gpx` file which the simulator will convert into events and reproduce them in the same tempo as they were recorded.
 
-You can find some example files in the [tracks](tracks) folder.
+You can find example files in the [tracks](tracks) folder.
 
 ## Contributing
 
@@ -54,13 +51,13 @@ make sure to conform to it before submitting a pull request.
 
 ### Install development version locally
 
-* Go to `chrome settings` -> `extensions`
-* Activate `developer mode` on the top right
-* Click `load unpacked extension` on the top left
+* Launch `Chrome` and open `Window` -> `Extensions`
+* Activate `Developer mode` on the top right
+* Click `Load unpacked extension...` on the top left
 * Select the `app/chrome` local folder
 * You're ready to go!
 
-### Debugging (in Chrome)
+### Debugging in Chrome
 
 What to do if the extension breaks:
 
