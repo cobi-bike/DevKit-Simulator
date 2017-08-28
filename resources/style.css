@@ -716,3 +716,10 @@ input:checked + .slider:before {
     opacity: .5;
     pointer-events: none;
 }
+
+#link-demo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -85px;
+}
