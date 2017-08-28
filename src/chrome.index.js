@@ -88,6 +88,7 @@ core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not c
                                                          .toggleClass('webapp-warning', version === null))
 core.on('specVersion', version => $('#left_column').toggleClass('is-disabled', version === null))
 core.on('specVersion', version => $('#map').toggleClass('is-disabled', version === null))
+core.on('specVersion', version => $('#link-demo').toggle(version === null))
 core.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
     return core.update('panel', 'error')
@@ -102,21 +103,39 @@ core.on('cobiJsToken', (current: string, previous: string) => {
 })
 
 $(document).ready(() => {
-  const position = {lat: 50.119496, lng: 8.6377155}
-  const destination = {lat: 50.104286, lng: 8.674835}
-  core.update('map', new google.maps.Map(document.getElementById('map'), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 17,
-    center: position
-  }))
-  core.update('position/marker', new google.maps.Marker({
-    position: position,
-    map: core.get('map')
-  }))
-  core.update('destination/marker', new google.maps.Marker({
-    position: destination,
-    map: core.get('map'),
-    icon: 'images/beachflag.png'
-  }))
+    center: {lat: 50.119496, lng: 8.6377155}
+  })
+
+  const marker = new google.maps.Marker({
+    position: {lat: 50.119496, lng: 8.6377155},
+    map: map,
+    draggable: true
+  })
+  google.maps.event.addListener(marker,
+    'dragend',
+    (event) => {
+      let position = marker.getPosition()
+      setPosition(`${position.lat()},${position.lng()}`)
+    })
+
+  const flag = new google.maps.Marker({
+    position: {lat: 50.104286, lng: 8.674835},
+    map: map,
+    icon: 'images/beachflag.png',
+    draggable: true
+  })
+  google.maps.event.addListener(flag,
+    'dragend',
+    (event) => {
+      let position = flag.getPosition()
+      onDestinationCoordinatesChanged(`${position.lat()},${position.lng()}`)
+    })
+
+  core.update('map', map)
+  core.update('position/marker', marker)
+  core.update('destination/marker', flag)
 })
 
 // ----
