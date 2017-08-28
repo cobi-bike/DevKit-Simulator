@@ -278,6 +278,32 @@ div.upload input {
     z-index: 99px;
 }
 
+/*btn style start*/
+div.btn input {
+    display: block !important;
+    width: 75px !important;
+    height: 35px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    margin-top: -28px !important;
+    cursor: pointer !important;
+    z-index: 99px;
+}
+
+div.btn {
+    width: 75px;
+    height: 35px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background: #ededed;
+    border-radius: 54px;
+    overflow: hidden;
+    cursor: pointer !important;
+    float: left;
+}
+
+/*btn style end*/
+
 #file-upload span {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
