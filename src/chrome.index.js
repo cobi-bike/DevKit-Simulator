@@ -33,7 +33,7 @@ const thumbControllerHTMLIds = Immutable.Map({
 })
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
-const minCobiJsSupported = '0.34.0'
+const minCobiJsSupported = '0.34.1'
 let trackReader = new FileReader()
 trackReader.onload = onCobiTrackFileLoaded
 let gpxReader = new FileReader()
@@ -73,8 +73,7 @@ core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmp
 
 /**
  * By default the simulator is disabled. So depending on the presence of
- * COBI.js library we display one of three options:
- * - an invitation panel if no cobi.js was found
+ * COBI.js library we display one of these options:
  * - an error panel if the current cobi.js version is not compatible with the simulator
  * - the simulator panel otherwise
  */
@@ -84,18 +83,19 @@ core.on('panel', (current, previous) => {
     $(`#${previous}`).hide()
   }
 })
-core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected'))
+
+core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
+                                                         .toggleClass('webapp-warning', version === null))
+core.on('specVersion', version => $('#left_column').toggleClass('is-disabled', version === null))
+core.on('specVersion', version => $('#map').toggleClass('is-disabled', version === null))
+core.on('specVersion', version => $('#link-demo').toggle(version === null))
 core.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
-    core.update('panel', 'error')
-  } else if (semver.valid(version)) {
-    core.update('panel', 'simulator')
-  } else {
-    core.update('panel', 'invitation')
+    return core.update('panel', 'error')
   }
+  core.update('panel', 'simulator')
 })
 core.on('thumbControllerType', onThumbControllerTypeChanged)
-
 core.on('cobiJsToken', (current: string, previous: string) => {
   if (current && current !== previous) {
     $(document).ready(initializeCobiJs)
@@ -103,21 +103,39 @@ core.on('cobiJsToken', (current: string, previous: string) => {
 })
 
 $(document).ready(() => {
-  const position = {lat: 50.119496, lng: 8.6377155}
-  const destination = {lat: 50.104286, lng: 8.674835}
-  core.update('map', new google.maps.Map(document.getElementById('map'), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 17,
-    center: position
-  }))
-  core.update('position/marker', new google.maps.Marker({
-    position: position,
-    map: core.get('map')
-  }))
-  core.update('destination/marker', new google.maps.Marker({
-    position: destination,
-    map: core.get('map'),
-    icon: 'images/beachflag.png'
-  }))
+    center: {lat: 50.119496, lng: 8.6377155}
+  })
+
+  const marker = new google.maps.Marker({
+    position: {lat: 50.119496, lng: 8.6377155},
+    map: map,
+    draggable: true
+  })
+  google.maps.event.addListener(marker,
+    'dragend',
+    (event) => {
+      let position = marker.getPosition()
+      setPosition(`${position.lat()},${position.lng()}`)
+    })
+
+  const flag = new google.maps.Marker({
+    position: {lat: 50.104286, lng: 8.674835},
+    map: map,
+    icon: 'images/beachflag.png',
+    draggable: true
+  })
+  google.maps.event.addListener(flag,
+    'dragend',
+    (event) => {
+      let position = flag.getPosition()
+      onDestinationCoordinatesChanged(`${position.lat()},${position.lng()}`)
+    })
+
+  core.update('map', map)
+  core.update('position/marker', marker)
+  core.update('destination/marker', flag)
 })
 
 // ----
@@ -137,6 +155,7 @@ $('#input-file').on('change', (event) => {
   return gpxReader.readAsText(file)
 })
 // --
+$('#btn-state').on('click', () => exec(meta.state))
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
 
 $('#coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
@@ -185,7 +204,10 @@ $('#iva-center').on('click', () => thumbAction('SELECT'))
 function initializeCobiJs () {
   setTouchInteraction($('#touch-ui-toggle').is(':checked'))
   setPosition($('#coordinates').val())
-  onDestinationCoordinatesChanged($('#destination-coordinates').val())
+   // only set the destination if the user didnt cancel it before
+  if ($('#btn-cancel').is(':visible')) {
+    onDestinationCoordinatesChanged($('#destination-coordinates').val())
+  }
   exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
 }
 
@@ -347,6 +369,9 @@ function exec (expression: string, options?: Object, callback?: (result: Object,
   } else if (!options) {
     options = {frameURL: core.get('containerUrl')}
   }
+  if (!callback) {
+    callback = errorHandler
+  }
   chrome.devtools.inspectedWindow.eval(expression, options, callback)
 }
 
@@ -368,9 +393,10 @@ function ringTheBell (value: boolean) {
 function onTogglePlayBackButtonPressed (play) {
   if (!play) {
     return core.update('timeouts', Immutable.List())
-  } else {
-    core.update('track', core.get('track')) // fake track input event
   }
+  const track = core.get('track')
+  core.update('track', Immutable.List())
+  core.update('track', track) // fake track input event
 }
 
 function onDestinationCoordinatesChanged (inputText: string) {
@@ -409,4 +435,26 @@ function onDestinationCoordinatesChanged (inputText: string) {
     $('#btn-apply').hide()
     $('#btn-cancel').show()
   })
+}
+
+type ExceptionInfo = {
+  code: string,
+  description: string,
+  details: Array<any>,
+  isError: boolean,
+  isException: boolean,
+  value: string
+}
+
+/**
+ * default handler for evaluations in the context of webapps
+ */
+function errorHandler (result: Object, exceptionInfo: ExceptionInfo) {
+  if (exceptionInfo) {
+    console.error('foreign evaluation failure:', exceptionInfo)
+    // give a custom callback to avoid stack overflow
+    exec(log.error(exceptionInfo.value ? exceptionInfo.value : exceptionInfo),
+     {},
+     () => console.error('double internal error'))
+  }
 }

@@ -113,11 +113,11 @@ body {
     margin: 0;
     padding: 0;
     -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
 }
 
@@ -152,7 +152,7 @@ body {
     overflow: visible;
 }
 
-#left_collumn {
+#left_column {
     grid-area: sidebar;
     padding: 15px 0 20px 25px;
     overflow-y: auto;
@@ -167,19 +167,19 @@ section {
     clear: both;
 }
 
-#location::before{
-  display: inline-block;
-  float: left;
-  margin-right: 10px;
-      margin-top: 10px;
-  content: url('images/navigation_icon.svg');
+#location::before {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    content: url('images/navigation_icon.svg');
 }
 
-#destination-coordinates{
-  margin-top: 20px;
+#destination-coordinates {
+    margin-top: 20px;
 }
 
-#thumb-controller{
+#thumb-controller {
     padding-top: 25px;
     clear: both;
 }
@@ -327,7 +327,6 @@ div.btn {
     letter-spacing: .24px;
 }
 
-
 /*Stop button*/
 
 #btn-stop {
@@ -346,11 +345,11 @@ div.btn {
     background-color: #e1e1e1;
 }
 
-#btn-stop::before{
-  content: url('images/stop.svg');
-  display: inline-block;
-  margin-top: 8px;
-  margin-left: 12px;
+#btn-stop::before {
+    content: url('images/stop.svg');
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 12px;
 }
 
 #btn-stop button {
@@ -380,11 +379,11 @@ div.btn {
     background-color: #e1e1e1;
 }
 
-#btn-cancel::before{
-  content: url('images/cancel.svg');
-  display: inline-block;
-  margin-top: 8px;
-  margin-left: 12px;
+#btn-cancel::before {
+    content: url('images/cancel.svg');
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 12px;
 }
 
 #btn-cancel button {
@@ -396,7 +395,6 @@ div.btn {
     margin-top: -28px !important;
     cursor: pointer !important;
 }
-
 
 /*Play button*/
 
@@ -411,11 +409,11 @@ div.btn {
     cursor: pointer !important;
 }
 
-#btn-play::before{
-  content: url('images/play.svg');
-  display: inline-block;
-  margin-top: 9px;
-  margin-left: 13px;
+#btn-play::before {
+    content: url('images/play.svg');
+    display: inline-block;
+    margin-top: 9px;
+    margin-left: 13px;
 }
 
 #btn-play:hover {
@@ -432,8 +430,6 @@ div.btn {
     cursor: pointer !important;
 }
 
-
-
 /*Apply button*/
 
 #btn-apply {
@@ -442,7 +438,6 @@ div.btn {
     margin-top: 20px;
     background: #ededed;
     border-radius: 54px;
-    overflow: hidden;
     cursor: pointer !important;
     float: left;
 }
@@ -451,11 +446,11 @@ div.btn {
     opacity: .6;
 }
 
-#btn-apply::before{
-  content: url('images/apply.svg');
-  display: inline-block;
-  margin-top: 9px;
-  margin-left: 10px;
+#btn-apply::before {
+    content: url('images/apply.svg');
+    display: inline-block;
+    margin-top: 9px;
+    margin-left: 10px;
 }
 
 #btn-apply button {
@@ -463,13 +458,10 @@ div.btn {
     width: 110px !important;
     height: 35px !important;
     opacity: 0 !important;
-    overflow: hidden !important;
     margin-top: -28px !important;
     cursor: pointer !important;
     z-index: 99px;
 }
-
-
 
 input[type="text"] {
     display: block;
@@ -573,11 +565,11 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-#touch-interaction span{
-  display: inline-block;
-  margin-top: 11px;
-  margin-right: 8px;
-  float: left;
+#touch-interaction span {
+    display: inline-block;
+    margin-top: 11px;
+    margin-right: 8px;
+    float: left;
 }
 
 /* Select list style*/
@@ -622,23 +614,20 @@ input:checked + .slider:before {
 }
 
 .link {
-font-family: 'Open Sans';
-font-weight: 300;
-font-size: 12px;
-color: #9b9b9b;
-letter-spacing: .24px;
-margin-top: 50px;
-margin-left: -15px;
-display: inline-block;
-text-decoration: none;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    font-size: 12px;
+    color: #9b9b9b;
+    letter-spacing: .24px;
+    margin-top: 50px;
+    margin-left: -15px;
+    display: inline-block;
+    text-decoration: none;
 }
 
 .link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
-
-
-
 
 /* Browser Popup */
 
@@ -661,15 +650,14 @@ text-decoration: none;
 }
 
 .popup-default::before {
-  display: inline-block;
-  float: left;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  margin-top: -2px;
-  content: url('images/info.svg');
+    display: inline-block;
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -2px;
+    content: url('images/info.svg');
 }
-
 
 .popup::before {
     display: inline-block;
@@ -682,21 +670,21 @@ text-decoration: none;
 }
 
 .popup-error::before {
-  display: inline-block;
-  float: left;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  margin-top: -2px;
-  content: url('images/error.svg');
+    display: inline-block;
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -2px;
+    content: url('images/error.svg');
 }
 
-.popup a{
-  color: #00C8E6;
+.popup a {
+    color: #00c8e6;
 }
 
 #cobi {
-  /*display: none;*/
+    /*display: none;*/
 }
 
 #tc-right, #tc-left, #tc-up, #tc-down, #tc-select, #tc-bell {
@@ -743,4 +731,21 @@ text-decoration: none;
 
 #iva-center:hover, #iva-plus:hover, #iva-minus:hover {
     opacity: .6;
+}
+
+.webapp-warning {
+    font-weight: bolder;
+    color: #FA4B69 !important;
+}
+
+.is-disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+#link-demo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -85px;
 }

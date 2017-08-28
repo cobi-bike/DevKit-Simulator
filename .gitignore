@@ -7,7 +7,8 @@ app/chrome/fonts/
 app/chrome/images/
 app/chrome/style.css
 app/chrome.zip
-app/chrome/SimulatorScreenShot.png
+app/chrome/*.png
+app/chrome/*.jpg
 /lib/
 
 # -------- ATOM files ------------
