@@ -1,18 +1,18 @@
 
 # COBI DevKit Simulator
 
-COBI DevKit Simulator is a Chrome Extension to test COBI Modules in the browser with simulated data sources. Continuous riding & fitness data can be simulated by one of our sample cobitrack or GPX files. 
-
+COBI DevKit Simulator is a Chrome Extension to test COBI Modules in the browser with simulated data sources. Continuous riding & fitness data can be simulated by one of our sample cobitrack or GPX files.  
 This project is part of the [COBI DevKit](https://github.com/cobi-bike/devkit/).
 
-![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
 
-Compatible with Chrome version 45+.
+[<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno)
+
+![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
 
 ## Install
 
 The easiest way to get the COBI DevKit Simulator is to install it directly from the
-[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno).
+[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno). It is compatible with Chrome version 45+.
 
 ## Usage
 
