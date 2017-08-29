@@ -35,7 +35,7 @@ The simulator is written using [flow](https://flow.org/), a powerful static type
 Therefore it is recommended to use an IDE with `flow` support such as `Atom` or `Webstorm`.
 
 The code is separated into modules which are transpiled and minified using `gulp`.
-For best development experience I recommend you to run `npm run gulp watch` which
+For best development experience we recommend you to run `npm run gulp watch` which
 will retranspile all files if a change is detected.
 
 If you just want to get a deployment version `npm run gulp once` will just do that.
