@@ -154,7 +154,7 @@ body {
 
 #left_column {
     grid-area: sidebar;
-    padding: 15px 0 20px 25px;
+    padding: 0px 0 20px 25px;
     overflow-y: auto;
     overflow-x: hidden;
     white-space: nowrap;
@@ -162,7 +162,7 @@ body {
 
 section {
     height: auto;
-    padding: 15px 0 0 0;
+    padding: 10px 0 0 0;
     margin: 0;
     clear: both;
 }
@@ -279,27 +279,27 @@ div.upload input {
 }
 
 /*btn style start*/
-div.btn input {
-    display: block !important;
-    width: 75px !important;
-    height: 35px !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
-    margin-top: -28px !important;
-    cursor: pointer !important;
-    z-index: 99px;
+.btn {
+  position: relative;
+  display: block;
+  padding: 13px 20px 13px 20px;
+  margin: 10px 0px 10px 0px;
+  line-height: 1;
+  color: #585858;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: #ededed;
+  border: 0px;
+  border-radius: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
 }
 
-div.btn {
-    width: 75px;
-    height: 35px;
-    margin-top: 10px;
-    margin-right: 10px;
-    background: #ededed;
-    border-radius: 54px;
-    overflow: hidden;
-    cursor: pointer !important;
-    float: left;
+.btn:hover{
+  opacity: 0.7;
 }
 
 /*btn style end*/
@@ -580,6 +580,7 @@ input:checked + .slider:before {
     width: 200px;
     height: 35px;
     margin-top: 8px;
+    margin-bottom: 8px;
     cursor: pointer;
 }
 
@@ -614,14 +615,13 @@ input:checked + .slider:before {
 }
 
 .link {
+    display: block;
     font-family: 'Open Sans';
     font-weight: 300;
     font-size: 12px;
     color: #9b9b9b;
     letter-spacing: .24px;
-    margin-top: 50px;
-    margin-left: -15px;
-    display: inline-block;
+    margin-top: 10px;
     text-decoration: none;
 }
 
@@ -739,7 +739,7 @@ input:checked + .slider:before {
 }
 
 .is-disabled {
-    opacity: .5;
+    opacity: 0.5;
     pointer-events: none;
 }
 
