@@ -124,7 +124,7 @@ body {
 #main {
     display: grid;
     grid-template-areas: "sidebar map";
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
     grid-template-rows: 100vh;
     min-height: 100vh;
     background-color: #fff;
@@ -247,27 +247,16 @@ h4 {
     color: #9b9b9b;
     letter-spacing: .24px;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     clear: both;
 }
 
-div.upload {
-    width: 75px;
-    height: 35px;
-    margin-top: 10px;
-    margin-right: 10px;
-    background: #ededed;
-    border-radius: 54px;
-    overflow: hidden;
-    cursor: pointer !important;
-    float: left;
+.upload {
+  margin-top: -25px;
+  opacity: 0;
 }
 
-div.upload:hover {
-    background-color: #e1e1e1;
-}
-
-div.upload input {
+.upload input {
     display: block !important;
     width: 75px !important;
     height: 35px !important;
@@ -281,7 +270,7 @@ div.upload input {
 /*btn style start*/
 .btn {
   position: relative;
-  display: block;
+  display: inline-block;
   padding: 13px 20px 13px 20px;
   margin: 10px 0px 10px 0px;
   line-height: 1;
@@ -331,14 +320,13 @@ div.upload input {
 
 #btn-stop {
     /*When you want hide playback button*/
+    display: inline-block;
+    float: left;
     width: 35px;
     height: 35px;
-    margin: 10px 0 0 0;
     background: #ededed;
     border-radius: 54px;
-    overflow: hidden;
     cursor: pointer !important;
-    float: left;
 }
 
 #btn-stop:hover {
@@ -399,9 +387,10 @@ div.upload input {
 /*Play button*/
 
 #btn-play {
+  display: inline-block;
     width: 35px;
     height: 35px;
-    margin-top: 10px;
+    margin-left: 10px;
     background: #ededed;
     border-radius: 54px;
     overflow: hidden;
@@ -467,7 +456,7 @@ input[type="text"] {
     display: block;
     margin: 0;
     margin-right: 10px;
-    width: 145px;
+    width: 155px;
     height: 30px;
     font-size: 13px;
     letter-spacing: .24px;
@@ -575,12 +564,12 @@ input:checked + .slider:before {
 /* Select list style*/
 
 .select-style {
+    display: inline-block;
     background: #ededed;
     border-radius: 54px;
     width: 200px;
     height: 35px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    float: left;
     cursor: pointer;
 }
 
@@ -589,18 +578,18 @@ input:checked + .slider:before {
 }
 
 .select-style select {
-    padding: 8px 18px;
-    width: 130%;
+    padding: 8px 15px;
+    width: 100%;
     border: none;
     font-family: 'Open Sans';
     font-size: 13px;
     color: #585858;
-    letter-spacing: .22px;
     box-shadow: none;
     background: transparent;
     background-image: none;
     -webkit-appearance: none;
     cursor: pointer;
+    z-index: 99;
 }
 
 .select-style select:focus {
@@ -683,6 +672,10 @@ input:checked + .slider:before {
     color: #00c8e6;
 }
 
+.thumb-controller-section {
+  margin-bottom: 10px;
+}
+
 #cobi {
     /*display: none;*/
 }
@@ -739,7 +732,7 @@ input:checked + .slider:before {
 }
 
 .is-disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     pointer-events: none;
 }
 
@@ -748,4 +741,23 @@ input:checked + .slider:before {
   top: 50%;
   left: 50%;
   margin-left: -85px;
+}
+
+/*infinity loader animation*/
+@keyframes dash {
+  to {
+    stroke-dashoffset: 3000;
+  }
+}
+
+#infinity_loader {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -50px;
+  z-index: 9999;
+  padding-top: 5px;
+  stroke-dasharray: 60,200;
+  animation: dash 10s linear infinite;
 }
