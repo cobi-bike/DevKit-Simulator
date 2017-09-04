@@ -117,6 +117,7 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = marker.getPosition()
+      $('#coordinates').val(`${position.lat()},${position.lng()}`)
       setPosition(`${position.lat()},${position.lng()}`)
     })
 
@@ -130,6 +131,7 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = flag.getPosition()
+      $('#destination-coordinates').val(`${position.lat()},${position.lng()}`)
       onDestinationCoordinatesChanged(`${position.lat()},${position.lng()}`)
     })
 
