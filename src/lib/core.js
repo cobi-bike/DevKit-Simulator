@@ -15,7 +15,9 @@ const Schema = Immutable.Record({
   'containerUrl': null,
   'thumbControllerType': 'COBI',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
-  'timeouts': Immutable.List(), // List<List<number>>
+  'track/url': null,
+  'track/timeouts': Immutable.List(), // List<List<number>>
+  'user/tracks': Immutable.Map(),
   'map': null,
   'position/marker': null,
   'destination/marker': null
@@ -27,22 +29,25 @@ let listener = new Emitter()
 module.exports = {
   /**
    * changes the value of key in the system state.
-   *
-   * Throws on `value === null` and on unknown key
+   * @throws on unknown key
    */
-  update: function<T> (key: string, value: T) {
+  update: function<T> (key: string, value: ?T) {
     if (!state.has(key)) throw new Error(`unknown key ${key}`)
-    if (value === undefined) throw new Error(`invalid value ${JSON.stringify(value)} for key ${key}`)
 
-    const oldValue: T = state.get(key)
+    const oldValue: ?T = state.get(key)
+
+    if (!value && !oldValue) {
+      console.log(`attempt to change from undefined to null ignored for key ${key}`)
+      return oldValue
+    }
+
     if (Immutable.is(oldValue, value)) {
       return oldValue // nothing changed
     }
 
     state = state.set(key, value)
-    console.log(`${key} updated!`, // some objects contain circular references which cannot be stringify with JSON
-      `before: ${oldValue ? oldValue.toString() : 'null'}
-       now: ${value ? value.toString() : 'null'}`)
+    console.log(`${key} updated!`, '\nbefore: ', oldValue,
+                                   '\nnow: ', value)
     listener.emit(key, value, oldValue)
     return value
   },

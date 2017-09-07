@@ -15,15 +15,12 @@
 
 <body>
   <p id="error" class="popup popup-error" hidden>
-    Yikes, it looks like your COBI.js version is not compatible with the simulator.
-    Please update your COBI.js version and try again.
-
-    Visit the <a href="https://forums.cobi.bike/" target="_newtab"> COBI Forum </a> for more information
+    Yikes, it looks like your COBI.js version is not compatible with the simulator. Please update your COBI.js version and try again. Visit the <a href="https://forums.cobi.bike/" target="_newtab"> COBI Forum </a> for more information
   </p>
-  <div id="simulator">
+  <div id="simulator" class="is-disabled">
     <div id="status"></div>
     <div id="main">
-      <div id="left_column" class="is-disabled">
+      <div id="left_column">
         <img id="image-result">
         <section id="file-upload">
 
@@ -31,21 +28,19 @@
           <h4>Use defaults or upload your own</h4>
           <div class="select-style">
             <svg class="select-arrow" width="8px" height="6px" viewBox="0 0 8 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-              <defs></defs>
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="cobi_js_simulator" transform="translate(-218.000000, -600.000000)" fill="#585858">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-218.000000, -600.000000)" fill="#585858">
                   <path d="M224.126347,603.582435 L220.08829,606.274473 L220.08829,606.274473 C219.76662,606.48892 219.332012,606.401998 219.117565,606.080328 C219.040907,605.965341 219,605.830236 219,605.692038 L219,600.307962 L219,600.307962 C219,599.921363 219.313401,599.607962 219.7,599.607962 C219.838197,599.607962 219.973303,599.648869 220.08829,599.725527 L224.126347,602.417565 L224.126347,602.417565 C224.448017,602.632012 224.534939,603.06662 224.320492,603.38829 C224.269228,603.465187 224.203244,603.531171 224.126347,603.582435 Z"
-                  id="Triangle" transform="translate(222.000000, 603.000000) rotate(-270.000000) translate(-222.000000, -603.000000) "></path>
+                  transform="translate(222.000000, 603.000000) rotate(-270.000000) translate(-222.000000, -603.000000) "></path>
                 </g>
               </g>
             </svg>
             <select id="default-tracks">
-              <option value="" selected="selected">ebike-5min-ride.json</option>
-              <option value="">ebike-15min-ride.gpx</option>
-              <option value="">regular-5min-ride.json</option>
-              <option value="">Upload your own</option>
-              <input id="input-file" class="upload" type="file" name="pic" accept="application/json,application/xml">
+              <option value="standard-5min-ride.json" selected>standard-5min-ride.json</option>
+              <option value="standard-15min-ride.json">standard-15min-ride.json</option>
+              <option value="standard-5min-ride.gpx">standard-5min-ride.gpx</option>
+              <option value="ebike-5min-ride.json">ebike-5min-ride.json</option>
+              <option value="ebike-15min-ride.json">ebike-15min-ride.json</option>
             </select>
           </div>
 
@@ -56,8 +51,9 @@
           <div id="btn-stop">
             <button></button>
           </div>
+          <a id="input-file-link" class="link" href="#">Upload your own</a>
+          <input id="input-file" class="upload" type="file" name="pic" accept="application/json,application/xml">
         </section>
-
         <section id="touch-interaction">
           <span>Touch interaction:</span>
           <label class="switch">
@@ -78,7 +74,6 @@
         </section>
 
         <section id="thumb-controller">
-
           <div class="thumb-controller-section">
             <svg id="cobi" width="102px" height="134px" viewBox="0 0 102 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs>
@@ -243,7 +238,6 @@
           </div>
 
           <div class="select-style">
-
             <svg class="select-arrow" width="8px" height="6px" viewBox="0 0 8 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
               <defs></defs>
@@ -273,16 +267,11 @@
 
           <a class="link" href="https://cobi-bike.github.io/COBI.js/" target="_blank">COBI.js docs</a>
           <a id="link-forums" class="link" href="https://forums.cobi.bike" target="_blank">Join the community</a>
-          <svg width="25" height="auto" id="infinity_loader" viewBox="0 0 100 55">
-            <use xlink:href="#infinity_loader"></use>
-          </svg>
-
-
         </section>
 
       </div>
 
-      <div id="map" class="is-disabled"></div>
+      <div id="map"></div>
     </div>
     <div id="float_footer">
       <svg class="cobijs" width="67px" height="19px" viewBox="0 0 67 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -321,16 +310,18 @@
     <img src="images/open-demo-btn.png" width="170px" alt="Open demo button">
   </a>
 
+  <!-- Infinity loader -->
+  <svg width="50" height="auto" id="infinity_loader" viewBox="0 0 100 55">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+      <g id="Background" transform="translate(-4540.000000, -2006.000000)" stroke="#00C8E6" stroke-width="5">
+        <path d="M4593.24263,2042.26254 C4595.18535,2049.99195 4602.888,2052.8618 4602.888,2052.8618 C4605.992,2054.3648 4609.476,2055.2068 4613.157,2055.2068 C4626.193,2055.2068 4636.761,2044.6388 4636.761,2031.6038 C4636.761,2018.5678 4626.193,2007.9998 4613.157,2007.9998 C4601.693,2007.9998 4592.138,2016.1728 4590,2027.0098 L4588.761,2036.1968 C4586.623,2047.0338 4577.068,2055.2068 4565.604,2055.2068 C4552.568,2055.2068 4542,2044.6388 4542,2031.6038 C4542,2018.5678 4552.568,2007.9998 4565.604,2007.9998 C4569.284,2007.9998 4572.768,2008.8418 4575.873,2010.3448 C4575.873,2010.3448 4583.07027,2013.85339 4584.99504,2021.67304"
+        class="infinity_loader_path"></path>
+      </g>
+    </g>
+  </svg>
 
-    <svg width="50" height="auto" id="infinity_loader" viewBox="0 0 100 55">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"><g id="Background" transform="translate(-4540.000000, -2006.000000)" stroke="#00C8E6" stroke-width="5"><path d="M4593.24263,2042.26254 C4595.18535,2049.99195 4602.888,2052.8618 4602.888,2052.8618 C4605.992,2054.3648 4609.476,2055.2068 4613.157,2055.2068 C4626.193,2055.2068 4636.761,2044.6388 4636.761,2031.6038 C4636.761,2018.5678 4626.193,2007.9998 4613.157,2007.9998 C4601.693,2007.9998 4592.138,2016.1728 4590,2027.0098 L4588.761,2036.1968 C4586.623,2047.0338 4577.068,2055.2068 4565.604,2055.2068 C4552.568,2055.2068 4542,2044.6388 4542,2031.6038 C4542,2018.5678 4552.568,2007.9998 4565.604,2007.9998 C4569.284,2007.9998 4572.768,2008.8418 4575.873,2010.3448 C4575.873,2010.3448 4583.07027,2013.85339 4584.99504,2021.67304" class="infinity_loader_path"></path></g></g>
-    </svg>
 
 
-  <!-- Infinity COBI loader  -->
-  <div style="display: none;">
-
-  </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJmloGS_QRE3aetND1q2CRH6Q_lJiwTyA"></script>
   <script src="index.js"></script>

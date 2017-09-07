@@ -252,8 +252,8 @@ h4 {
 }
 
 .upload {
-  margin-top: -25px;
-  opacity: 0;
+  position: absolute;
+  top: -100px;
 }
 
 .upload input {
@@ -274,7 +274,6 @@ h4 {
   padding: 13px 20px 13px 20px;
   margin: 10px 0px 10px 0px;
   line-height: 1;
-  color: #585858;
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
@@ -282,9 +281,9 @@ h4 {
   background-color: #ededed;
   border: 0px;
   border-radius: 40px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  font-size: 12px;
+  font-family: 'Open Sans';
+    font-size: 12px;
+    color: #585858;
 }
 
 .btn:hover{
@@ -321,12 +320,14 @@ h4 {
 #btn-stop {
     /*When you want hide playback button*/
     display: inline-block;
-    float: left;
-    width: 35px;
-    height: 35px;
-    background: #ededed;
-    border-radius: 54px;
-    cursor: pointer !important;
+      width: 35px;
+      height: 35px;
+      margin-left: 10px;
+      background: #ededed;
+      border-radius: 54px;
+      overflow: hidden;
+      float: left;
+      cursor: pointer !important;
 }
 
 #btn-stop:hover {
@@ -342,7 +343,7 @@ h4 {
 
 #btn-stop button {
     display: block !important;
-    width: 110px !important;
+    width: 35px !important;
     height: 35px !important;
     opacity: 0 !important;
     overflow: hidden !important;
@@ -376,7 +377,7 @@ h4 {
 
 #btn-cancel button {
     display: block !important;
-    width: 110px !important;
+    width: 35px !important;
     height: 35px !important;
     opacity: 0 !important;
     overflow: hidden !important;
@@ -411,7 +412,7 @@ h4 {
 
 #btn-play button {
     display: block !important;
-    width: 110px !important;
+    width: 35px !important;
     height: 35px !important;
     opacity: 0 !important;
     overflow: hidden !important;
@@ -444,7 +445,7 @@ h4 {
 
 #btn-apply button {
     display: block !important;
-    width: 110px !important;
+    width: 35px !important;
     height: 35px !important;
     opacity: 0 !important;
     margin-top: -28px !important;
@@ -582,7 +583,7 @@ input:checked + .slider:before {
     width: 100%;
     border: none;
     font-family: 'Open Sans';
-    font-size: 13px;
+    font-size: 12px;
     color: #585858;
     box-shadow: none;
     background: transparent;
@@ -604,7 +605,7 @@ input:checked + .slider:before {
 }
 
 .link {
-    display: block;
+    display: table;
     font-family: 'Open Sans';
     font-weight: 300;
     font-size: 12px;
@@ -616,6 +617,11 @@ input:checked + .slider:before {
 
 .link:hover {
     text-decoration: underline;
+}
+
+#input-file-link{
+  margin-top: 53px;
+  margin-left: 13px;  
 }
 
 /* Browser Popup */
@@ -751,7 +757,7 @@ input:checked + .slider:before {
 }
 
 #infinity_loader {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
   left: 50%;

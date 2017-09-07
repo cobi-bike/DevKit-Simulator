@@ -34,10 +34,6 @@ const thumbControllerHTMLIds = Immutable.Map({
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
 const minCobiJsSupported = '0.34.1'
-let trackReader = new FileReader()
-trackReader.onload = onCobiTrackFileLoaded
-let gpxReader = new FileReader()
-gpxReader.onload = onGpxFileLoaded
 
 // Create a connection to the background page
 const backgroundPageConnection = chrome.runtime.connect({
@@ -46,12 +42,18 @@ const backgroundPageConnection = chrome.runtime.connect({
 // initialize a double direction connection by sending the tabId
 backgroundPageConnection.postMessage({
   name: 'panel',
-  tabId: chrome.devtools.inspectedWindow.tabId
+  tabId: chrome.devtools.inspectedWindow.tabId,
+  track: $('#default-tracks').val()
 })
 // receive messages from the devtools page forwarded through the backgroundPageConnection
 backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
-  core.update('specVersion', message.specVersion || null)
-  core.update('containerUrl', message.containerUrl)
+  console.log('message received: ', message)
+  if (message.name !== 'panel') { // ignore reply messages
+    core.update('specVersion', message.specVersion)
+    core.update('containerUrl', message.containerUrl)
+  } else {
+    core.update('track/url', message.trackUrl)
+  }
 })
 
 // check for COBI.js library
@@ -60,16 +62,24 @@ setInterval(autoDetectCobiJs, 1000) // 1 seconds
 
 // core elements
 // set up internal event driven listeners
-core.on('track', () => core.update('timeouts', Immutable.List())) // clear old timeouts
-core.on('track', fakeInput)
-core.on('track', mapMarkerFollowsFakeInput)
+core.once('track', () => $('#btn-play').toggle())
+core.on('track', () => core.update('track/timeouts', Immutable.List()))
+core.on('track/url', (fileUrl: string) => {
+  if (fileUrl.endsWith('.gpx')) {
+    return $.ajax({
+      url: fileUrl,
+      dataType: 'xml',
+      success: (data) => onGpxFileLoaded(data, 'application/xml')
+    })
+  }
+  $.getJSON(fileUrl, onCobiTrackFileLoaded)
+})
 
-core.on('timeouts', deactivatePreviousTimeouts)
-core.on('timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
-core.on('timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
-core.on('timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
-core.on('timeouts', (current: List<any>) => $('#btn-play').toggle(current.isEmpty() && !core.get('track').isEmpty()))
-core.on('timeouts', (current: List<any>) => $('#btn-stop').toggle(!current.isEmpty()))
+core.on('track/timeouts', deactivatePreviousTimeouts)
+core.on('track/timeouts', resetPlayStopButton)
+core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
+core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
+core.on('track/timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
 
 /**
  * By default the simulator is disabled. So depending on the presence of
@@ -86,9 +96,9 @@ core.on('panel', (current, previous) => {
 
 core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
                                                          .toggleClass('webapp-warning', version === null))
-core.on('specVersion', version => $('#left_column').toggleClass('is-disabled', version === null))
-core.on('specVersion', version => $('#map').toggleClass('is-disabled', version === null))
-core.on('specVersion', version => $('#link-demo').toggle(version === null))
+core.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
+core.once('specVersion', version => $('#link-demo').toggle(version === null))
+core.on('specVersion', version => $('#infinity_loader').toggle(version === null))
 core.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
     return core.update('panel', 'error')
@@ -102,6 +112,7 @@ core.on('cobiJsToken', (current: string, previous: string) => {
   }
 })
 
+// ui elements initialization
 $(document).ready(() => {
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 17,
@@ -119,6 +130,14 @@ $(document).ready(() => {
       let position = marker.getPosition()
       $('#coordinates').val(`${position.lat()},${position.lng()}`)
       setPosition(`${position.lat()},${position.lng()}`)
+    })
+  google.maps.event.addListener(marker,
+    'position_changed',
+    (event) => {
+      const position = marker.getPosition()
+      if ($('#coordinates').val() !== `${position.lat()},${position.lng()}`) {
+        $('#coordinates').val(`${position.lat()},${position.lng()}`)
+      }
     })
 
   const flag = new google.maps.Marker({
@@ -142,26 +161,77 @@ $(document).ready(() => {
 
 // ----
 // ui elements setup
-$('#input-file').on('change', (event) => {
-  const file = event.target.files[0]
-  if (!file) {  // cancelled input - do nothing
-    return $('#fileLabel').html('No file chosen')
+$('#default-tracks').on('change', () => {
+  let value = $('#default-tracks').val()
+  if (value.startsWith('custom-')) {
+    const filename = value.substring('custom-'.length)
+    return core.update('track', core.get('user/tracks').get(filename))
   }
+  backgroundPageConnection.postMessage({
+    name: 'panel',
+    tabId: chrome.devtools.inspectedWindow.tabId,
+    track: value
+  })
+})
+
+$('#btn-stop').hide().on('click', () => core.update('track/timeouts', Immutable.List())) // clear old timeouts
+$('#btn-play').hide().on('click', () => fakeInput(core.get('track')))
+                     .on('click', () => mapMarkerFollowsFakeInput(core.get('track')))
+
+$('#input-file-link').on('click', () => $('#input-file').click())
+$('#input-file').on('change', event => {
+  const file = event.target.files[0]
+  if (!file) return
+
+  // helper function to avoid duplication
+  // once we confirm that the file is a valid track. Add it to the options
+  // and select it
+  const onSuccess = (result) => {
+    const currentTrack = core.get('track')
+    if (Immutable.is(result, currentTrack)) {
+      const newTracks = core.get('user/tracks')
+                            .set(file.name, currentTrack)
+      // HACK: we are forced to store the content of the files because it is not
+      // possible to trigger a file read from JS without the user manually
+      // triggering it
+      core.update('user/tracks', newTracks)
+      $('#default-tracks').append($('<option>', {
+        value: `custom-${file.name}`,
+        text: file.name,
+        selected: true
+      }))
+      exec(log.info(`${file.name} load: DONE`))
+    }
+  }
+
   exec(log.info(`loading: ${file.name}`))
-  const displayName = file.name.length > 14 ? file.name.substring(0, 14) + '...'
-                                                  : file.name
-  $('#fileLabel').html(displayName)
+  // assume cobitrack file
   if (file.type.endsWith('json')) {
+    const trackReader = new FileReader()
+    trackReader.onload = (evt) => {
+      const result = onCobiTrackFileLoaded(JSON.parse(evt.target.result))
+      onSuccess(result)
+    }
     return trackReader.readAsText(file)
-  } // xml otherwise
-  return gpxReader.readAsText(file)
+  }
+  // xml otherwise
+  const gpxReader = new FileReader()
+  const parser = new DOMParser()
+  gpxReader.onload = (evt) => {
+    const result = onGpxFileLoaded(parser.parseFromString(evt.target.result, 'application/xml'))
+    onSuccess(result)
+  }
+  gpxReader.readAsText(file)
 })
 // --
+$('#infinity_loader').hide()
 $('#btn-state').on('click', () => exec(meta.state))
 $('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
 
 $('#coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
+                 .on('input', () => core.update('track/timeouts', Immutable.List()))
 $('#coordinates').keypress(event => event.keyCode === ENTER ? setPosition($('#coordinates').val()) : null)
+                 .keypress(() => core.update('track/timeouts', Immutable.List()))
 
 $('#destination-coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null))
 $('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null)
@@ -170,9 +240,6 @@ $('#btn-cancel').on('click', () => $('#btn-apply').show())
 $('#btn-cancel').on('click', () => $('#btn-cancel').hide())
 $('#btn-cancel').hide().on('click', () => exec(meta.emitStr(spec.navigationService.status, 'NONE')))
 $('#btn-apply').on('click', () => onDestinationCoordinatesChanged($('#destination-coordinates').val()))
-
-$('#btn-stop').hide().on('click', () => onTogglePlayBackButtonPressed(false))
-$('#btn-play').hide().on('click', () => onTogglePlayBackButtonPressed(true))
 
 $('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
 
@@ -229,7 +296,7 @@ function fakeInput (track: List<[number, Map<string, any>]>) {
     return [t, () => exec(expression)]
   }).map(([t, fn]) => setTimeout(fn, t))
 
-  core.update('timeouts', core.get('timeouts').push(emmiters))
+  core.update('track/timeouts', core.get('track/timeouts').push(emmiters))
 }
 
 /**
@@ -238,20 +305,18 @@ function fakeInput (track: List<[number, Map<string, any>]>) {
 function mapMarkerFollowsFakeInput (track: List<[number, Map<string, any>]>) {
   const mappers = track
     .filter(([t, msg]) => msg.get('path') === spec.mobile.location)
-    .map(([t, msg]) => {
-      return [t, () => changeMarkerPosition(msg.get('payload').get('coordinate').get('latitude'),
-                                            msg.get('payload').get('coordinate').get('longitude'))]
-    })
+    .map(([t, msg]) =>
+      [t, () => changeMarkerPosition(msg.get('payload').get('coordinate').get('latitude'),
+                                     msg.get('payload').get('coordinate').get('longitude'))])
     .map(([t, fn]) => setTimeout(fn, t))
 
-  core.update('timeouts', core.get('timeouts').push(mappers))
+  core.update('track/timeouts', core.get('track/timeouts').push(mappers))
 }
 
 /**
  * CDK-107 mock input data to test webapps
  */
-function onCobiTrackFileLoaded (evt) {
-  const raw = JSON.parse(evt.target.result)
+function onCobiTrackFileLoaded (raw: any) {
   const errors = util.cobiTrackErrors(raw)
   if (errors) {
     return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
@@ -259,16 +324,13 @@ function onCobiTrackFileLoaded (evt) {
   const content: List<{t: number, message: Object}> = Immutable.List(raw)
   const track = util.normalize(content)
 
-  core.update('track', track)
+  return core.update('track', track)
 }
 
 /**
  * CDK-2 mock input data to test webapps
  */
-function onGpxFileLoaded (evt) {
-  const parser = new DOMParser()
-  const content = parser.parseFromString(evt.target.result, 'application/xml')
-
+function onGpxFileLoaded (content) {
   let errors = util.gpxErrors(content)
   if (errors) {
     return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
@@ -284,7 +346,7 @@ function onGpxFileLoaded (evt) {
     return exec(log.error('Invalid input file data'))
   }
 
-  core.update('track', util.geoToTrack(featLineStr))
+  return core.update('track', util.geoToTrack(featLineStr))
 }
 
 /**
@@ -310,8 +372,6 @@ function setPosition (inputText: string) {
   changeMarkerPosition(lat, lon)
 
   const msg = util.partialMobileLocation(lon, lat)
-
-  core.update('timeouts', Immutable.List())
 
   exec(meta.emitStr(spec.mobile.location, msg.get('payload')))
 }
@@ -342,14 +402,27 @@ function changeMarkerPosition (lat: number, lon: number) {
 }
 
 /**
- * deactivate old waiting timeouts and update the UI
- * according to the current timeouts value
+ * deactivate old waiting timeouts according to the current timeouts value
  */
 function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
   // Remove the previous timeouts if any exists
   if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
     oldTimeouts.map(ids => ids.map(clearTimeout))
     exec(log.warn('Deactivating previous fake events'))
+  }
+}
+
+/**
+ * reset the state of the play/stop button is something
+ * triggered a change without the user clicking on the button
+ */
+function resetPlayStopButton (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
+  if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
+    $('#btn-play').show()
+    $('#btn-stop').hide()
+  } else if (!timeouts.isEmpty() && oldTimeouts.isEmpty()) {
+    $('#btn-play').hide()
+    $('#btn-stop').show()
   }
 }
 
@@ -386,19 +459,6 @@ function ringTheBell (value: boolean) {
   if (value) {
     setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
   }
-}
-
-/**
- * Stop the current running track file or reset a new cobitrack
- * according to the class assigned to the button: stop button or play button
- */
-function onTogglePlayBackButtonPressed (play) {
-  if (!play) {
-    return core.update('timeouts', Immutable.List())
-  }
-  const track = core.get('track')
-  core.update('track', Immutable.List())
-  core.update('track', track) // fake track input event
 }
 
 function onDestinationCoordinatesChanged (inputText: string) {

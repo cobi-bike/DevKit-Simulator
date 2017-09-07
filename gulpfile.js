@@ -45,11 +45,17 @@ gulp.task('node', function () {
     .pipe(gulp.dest('lib'))
 })
 
-gulp.task('copy', function () {
+gulp.task('resources', function () {
   return gulp.src('resources/**/*.*')
              .pipe(gulp.dest('app/chrome/'))
 })
 
+gulp.task('tracks', function () {
+  return gulp.src('tracks/**/*.*')
+             .pipe(gulp.dest('app/chrome/tracks'))
+})
+
+gulp.task('copy', ['resources', 'tracks'])
 // build everything once, probably for production
 gulp.task('once', ['browser', 'node', 'copy'])
 // watch and rebuild everything on change

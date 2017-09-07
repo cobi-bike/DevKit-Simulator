@@ -1,15 +1,16 @@
 *.crx
 *.pem
-app/chrome/index.js*
-app/chrome/devtools.js*
-app/chrome/assets/
-app/chrome/fonts/
-app/chrome/images/
-app/chrome/style.css
-app/chrome.zip
-app/chrome/*.png
-app/chrome/*.jpg
-/lib/
+*.zip
+
+# Ignore everything in these folders
+app/chrome/*
+/lib/*
+# But not these files...
+!app/chrome/panel.html
+!app/chrome/manifest.json
+!app/chrome/devtools.html
+!app/chrome/background.js
+!app/chrome/popups
 
 # -------- ATOM files ------------
 *.swp

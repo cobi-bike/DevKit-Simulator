@@ -39,6 +39,7 @@ function autoDetectCobiJs () {
       // find out if the current page has iframe containers with a COBI.js in any of them
       // we purposedly neglect the case of more than one iframe with a COBI.js in it
       // for simplicity
+      iframeContainerUrl = null // reset if not in a webapp
       chrome.devtools.inspectedWindow.eval(meta.IframeUrls, {}, (urls) => {
         if (urls && urls.length !== 0) {
           urls.filter(url => url) // ignore empty strings - from weird iframes
