@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
-  "name": "COBI DevKit Simulator",
+  "name": "COBI.bike DevKit Simulator",
   "version": "0.7.0",
 
-  "description": "Create and test your COBI Modules in Chrome",
+  "description": "Create and test your COBI.bike modules in Chrome",
   "minimum_chrome_version": "45",
 
   "browser_action": {
     "default_icon": "images/icons/cobi-default-128.png",
-    "default_title": "COBI DevKit Simulator",
+    "default_title": "COBI.bike DevKit Simulator",
     "default_popup": "popups/default.html"
   },
 
@@ -19,7 +19,7 @@
   },
 
   "devtools_page": "devtools.html",
-  "homepage_url": "https://github.com/cobi-bike/COBI.js-simulator",
+  "homepage_url": "https://github.com/cobi-bike/DevKit-Simulator",
 
   "offline_enabled": true,
 

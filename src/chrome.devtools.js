@@ -55,7 +55,7 @@ function autoDetectCobiJs () {
       })
     }
     if (!COBIpanelCreated) { // prevent trying to create the panel twice
-      chrome.devtools.panels.create('COBI',
+      chrome.devtools.panels.create('COBI.bike',
         'images/cobi-default-64.png',
         'panel.html')
       COBIpanelCreated = true

@@ -248,7 +248,7 @@ $('#nyn-select').mouseenter(() => {
   $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
 })
 $('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
-// thumbcontrollers - COBI
+// thumbcontrollers - COBI.bike
 $('#tc-up').on('click', () => thumbAction('UP'))
 $('#tc-down').on('click', () => thumbAction('DOWN'))
 $('#tc-right').on('click', () => thumbAction('RIGHT'))

@@ -13,7 +13,7 @@ const Schema = Immutable.Record({
   'cobiJsToken': null,
   'panel': 'simulator',
   'containerUrl': null,
-  'thumbControllerType': 'COBI',
+  'thumbControllerType': 'COBI.bike',
   'track': Immutable.List(), // List<[number, Map<string, any>]>
   'track/url': null,
   'track/timeouts': Immutable.List(), // List<List<number>>
