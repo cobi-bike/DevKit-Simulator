@@ -1,4 +1,4 @@
-# Contributing to COBI.js Simulator
+# Contributing to the COBI.bike DevKit Simulator
 
 ### Pull Requests
 
