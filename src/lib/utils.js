@@ -7,7 +7,7 @@ const spec = require('./spec')
 const GJV = require('geojson-validation')
 
 /**
- * converts a log of COBI Bus events from their absolute epoch value
+ * converts a log of COBI.bike Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
  */
 function normalize (cobiTrack: List<{t: number, message: Object}>): List<[number, Map<string, any>]> {
