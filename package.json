@@ -1,7 +1,7 @@
 {
-  "name": "cobi-devkit-simulator",
-  "version": "0.7.0",
-  "description": "COBI DevKit Simulator is a browser-based IDE to build web apps for bikes.",
+  "name": "devkit-simulator",
+  "version": "0.7.2",
+  "description": "DevKit Simulator is a browser-based IDE to build COBI.bike modules for bikes.",
   "scripts": {
     "test": "eslint src/",
     "build": "npm run gulp once && npm run docs",
@@ -10,7 +10,7 @@
     "gulp": "gulp",
     "docs": "documentation build -f html -o ./docs -g --shallow ./src/**.js"
   },
-  "author": "COBI GmbH",
+  "author": "COBI.bike GmbH",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -40,7 +40,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "keywords": [
-    "COBI",
+    "COBI.bike",
     "bike",
     "simulator",
     "chrome",

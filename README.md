@@ -5,21 +5,21 @@ The COBI.bike DevKit Simulator is a Chrome Extension to test COBI.bike modules i
 This project is part of the [COBI.bike DevKit](https://github.com/cobi-bike/devkit/).
 
 
-[<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno)
+[<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-devkit-simulator/hpdhkapigojggienmiejhblkhenjdbno)
 
 ![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
 
 ## Install
 
 The easiest way to get the DevKit Simulator is to install it directly from the
-[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno). It is compatible with Chrome version 45+.
+[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-devkit-simulator/hpdhkapigojggienmiejhblkhenjdbno). It is compatible with Chrome version 45+.
 
 ## Usage
 
-You can find the DevKit Simulator in the *Chrome Devtools* in a tab named `COBI`.
+You can find the DevKit Simulator in the *Chrome Devtools* in a tab named »COBI.bike«.
 
 The Simulator offers some basic manual controls:
-* Thumb Controller actions 
+* Thumb Controller actions
 * Thumb Controller type
 * Simulate current location
 * Set navigation destination
@@ -64,5 +64,5 @@ What to do if the extension breaks:
 * Check the error console of devtools. Part of COBI.bike Devtools runs code in the
 context of your page, and is vulnerable to misbehaving polyfills.
 * Open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the `debug devtools` debugger. Check the console there for errors. If you want to file a bug, please save the content of this console as described [here](https://developers.google.com/web/tools/chrome-devtools/console/#saving_the_history)
-* Open chrome://extensions, find COBI, and click "background page" under
+* Open chrome://extensions, find COBI.bike, and click "background page" under
 "Inspected views". You might find the errors there.

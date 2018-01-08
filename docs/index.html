@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>cobi-devkit-simulator 0.1.0 | Documentation</title>
+  <title>devkit-simulator 0.7.2 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -13,8 +13,8 @@
     <div class='clearfix md-mxn2'>
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>cobi-devkit-simulator</h3>
-          <div class='mb1'><code>0.1.0</code></div>
+          <h3 class='mb0 no-anchor'>devkit-simulator</h3>
+          <div class='mb1'><code>0.7.2</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -155,9 +155,9 @@
               
                 
                 <li><a
-                  href='#exec'
+                  href='#resetplaystopbutton'
                   class="">
-                  exec
+                  resetPlayStopButton
                   
                 </a>
                 
@@ -165,9 +165,9 @@
               
                 
                 <li><a
-                  href='#welcomeuser'
+                  href='#exec'
                   class="">
-                  welcomeUser
+                  exec
                   
                 </a>
                 
@@ -185,9 +185,9 @@
               
                 
                 <li><a
-                  href='#ontoggleplaybackbuttonpressed'
+                  href='#errorhandler'
                   class="">
-                  onTogglePlayBackButtonPressed
+                  errorHandler
                   
                 </a>
                 
@@ -213,7 +213,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.devtools.js#L27-L63'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.devtools.js#L27-L64'>
       <span>src/chrome.devtools.js</span>
       </a>
     
@@ -266,7 +266,7 @@ all necessary elements are there.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L341-L343'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L434-L436'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -319,7 +319,7 @@ all necessary elements are there.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L85-L90'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L90-L95'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -327,9 +327,8 @@ all necessary elements are there.</p>
   
 
   <p>By default the simulator is disabled. So depending on the presence of
-COBI.js library we display one of three options:</p>
+COBI.js library we display one of these options:</p>
 <ul>
-<li>an invitation panel if no cobi.js was found</li>
 <li>an error panel if the current cobi.js version is not compatible with the simulator</li>
 <li>the simulator panel otherwise</li>
 </ul>
@@ -376,7 +375,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L199-L201'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L286-L288'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -440,7 +439,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L206-L213'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L293-L300'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -450,7 +449,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-2 mock input data to test webapps</p>
 
 
-  <div class='pre p1 fill-light mt0'>fakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  <div class='pre p1 fill-light mt0'>fakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
   
   
 
@@ -467,7 +466,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
 	    
           </div>
           
@@ -504,7 +503,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L218-L228'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L305-L314'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -514,7 +513,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-2 move the map marker and center based on fake locations</p>
 
 
-  <div class='pre p1 fill-light mt0'>mapMarkerFollowsFakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
+  <div class='pre p1 fill-light mt0'>mapMarkerFollowsFakeInput(track: List&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</div>
   
   
 
@@ -531,7 +530,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
+            <span class='code bold'>track</span> <code class='quiet'>(List&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>]>)</code>
 	    
           </div>
           
@@ -568,7 +567,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L233-L243'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L319-L328'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -578,7 +577,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-107 mock input data to test webapps</p>
 
 
-  <div class='pre p1 fill-light mt0'>onCobiTrackFileLoaded(evt: any)</div>
+  <div class='pre p1 fill-light mt0'>onCobiTrackFileLoaded(raw: any)</div>
   
   
 
@@ -595,7 +594,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>evt</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>raw</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -632,7 +631,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L248-L268'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L333-L350'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -642,7 +641,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-2 mock input data to test webapps</p>
 
 
-  <div class='pre p1 fill-light mt0'>onGpxFileLoaded(evt: any)</div>
+  <div class='pre p1 fill-light mt0'>onGpxFileLoaded(content: any)</div>
   
   
 
@@ -659,7 +658,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>evt</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>content</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -696,7 +695,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L273-L275'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L355-L357'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -760,7 +759,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L280-L297'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L362-L377'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -770,7 +769,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-61 mock the location of the user and deactivates fake events</p>
 
 
-  <div class='pre p1 fill-light mt0'>setPosition(inputText: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>setPosition(inputText: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
   
   
 
@@ -787,7 +786,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>inputText</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>inputText</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
@@ -824,7 +823,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L302-L314'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L382-L394'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -834,7 +833,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-59 manually set the type of Thumb controller</p>
 
 
-  <div class='pre p1 fill-light mt0'>onThumbControllerTypeChanged(currentValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, oldValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>onThumbControllerTypeChanged(currentValue: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, oldValue: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
   
   
 
@@ -851,7 +850,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>currentValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
@@ -859,7 +858,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>oldValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>oldValue</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
@@ -896,7 +895,7 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L319-L322'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L399-L402'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -906,7 +905,7 @@ COBI.js library we display one of three options:</p>
   <p>CDK-107 update the position of the Marker in the Embedded Google Map</p>
 
 
-  <div class='pre p1 fill-light mt0'>changeMarkerPosition(lat: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  <div class='pre p1 fill-light mt0'>changeMarkerPosition(lat: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
   
   
 
@@ -923,7 +922,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lat</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lat</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -931,7 +930,7 @@ COBI.js library we display one of three options:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lon</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lon</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -968,18 +967,17 @@ COBI.js library we display one of three options:</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L328-L334'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L407-L413'>
       <span>src/chrome.index.js</span>
       </a>
     
   </div>
   
 
-  <p>deactivate old waiting timeouts and update the UI
-according to the current timeouts value</p>
+  <p>deactivate old waiting timeouts according to the current timeouts value</p>
 
 
-  <div class='pre p1 fill-light mt0'>deactivatePreviousTimeouts(timeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>, oldTimeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</div>
+  <div class='pre p1 fill-light mt0'>deactivatePreviousTimeouts(timeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>, oldTimeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</div>
   
   
 
@@ -996,7 +994,7 @@ according to the current timeouts value</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>timeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+            <span class='code bold'>timeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
 	    
           </div>
           
@@ -1004,7 +1002,80 @@ according to the current timeouts value</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>oldTimeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+            <span class='code bold'>oldTimeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='resetplaystopbutton'>
+      resetPlayStopButton
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L419-L427'>
+      <span>src/chrome.index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>reset the state of the play/stop button is something
+triggered a change without the user clicking on the button</p>
+
+
+  <div class='pre p1 fill-light mt0'>resetPlayStopButton(timeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>, oldTimeouts: List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>timeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>oldTimeouts</span> <code class='quiet'>(List&#x3C;List&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>>)</code>
 	    
           </div>
           
@@ -1041,7 +1112,7 @@ according to the current timeouts value</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L348-L355'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L441-L451'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -1052,7 +1123,7 @@ according to the current timeouts value</p>
 and provide custom defaults like frameURL</p>
 
 
-  <div class='pre p1 fill-light mt0'>exec(expression: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, callback: function (result: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, exceptionInfo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): any): any</div>
+  <div class='pre p1 fill-light mt0'>exec(expression: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, callback: function (result: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, exceptionInfo: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): any): any</div>
   
   
 
@@ -1069,7 +1140,7 @@ and provide custom defaults like frameURL</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>expression</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>expression</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
@@ -1077,7 +1148,7 @@ and provide custom defaults like frameURL</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    
           </div>
           
@@ -1085,7 +1156,7 @@ and provide custom defaults like frameURL</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(function (result: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, exceptionInfo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): any)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>(function (result: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, exceptionInfo: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): any)</code>
 	    
           </div>
           
@@ -1122,85 +1193,12 @@ and provide custom defaults like frameURL</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='welcomeuser'>
-      welcomeUser
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L361-L365'>
-      <span>src/chrome.index.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>display an ascii version of the COBI logo once the app authentication
-works</p>
-
-
-  <div class='pre p1 fill-light mt0'>welcomeUser(current: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, previous: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>current</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>previous</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='ringthebell'>
       ringTheBell
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L371-L376'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L457-L462'>
       <span>src/chrome.index.js</span>
       </a>
     
@@ -1211,7 +1209,7 @@ works</p>
 at a random point between 0 - 500 ms</p>
 
 
-  <div class='pre p1 fill-light mt0'>ringTheBell(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</div>
+  <div class='pre p1 fill-light mt0'>ringTheBell(value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</div>
   
   
 
@@ -1228,7 +1226,7 @@ at a random point between 0 - 500 ms</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
 	    
           </div>
           
@@ -1260,23 +1258,22 @@ at a random point between 0 - 500 ms</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='ontoggleplaybackbuttonpressed'>
-      onTogglePlayBackButtonPressed
+    <h3 class='fl m0' id='errorhandler'>
+      errorHandler
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/7057225fe609e935fc5aa7675ebb77f0089201d3/src/chrome.index.js#L382-L388'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cobi-bike/jetpack-simulator/blob/9ff544910f02d9925d49b7da14c3a6046241f5c9/src/chrome.index.js#L514-L522'>
       <span>src/chrome.index.js</span>
       </a>
     
   </div>
   
 
-  <p>Stop the current running track file or reset a new cobitrack
-according to the class assigned to the button: stop button or play button</p>
+  <p>default handler for evaluations in the context of webapps</p>
 
 
-  <div class='pre p1 fill-light mt0'>onTogglePlayBackButtonPressed(play: any)</div>
+  <div class='pre p1 fill-light mt0'>errorHandler(result: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, exceptionInfo: ExceptionInfo)</div>
   
   
 
@@ -1293,7 +1290,15 @@ according to the class assigned to the button: stop button or play button</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>play</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>result</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>exceptionInfo</span> <code class='quiet'>(ExceptionInfo)</code>
 	    
           </div>
           
