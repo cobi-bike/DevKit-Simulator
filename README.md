@@ -5,21 +5,21 @@ COBI DevKit Simulator is a Chrome Extension to test COBI Modules in the browser 
 This project is part of the [COBI DevKit](https://github.com/cobi-bike/devkit/).
 
 
-[<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno)
+[<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-devkit-simulator/hpdhkapigojggienmiejhblkhenjdbno)
 
 ![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
 
 ## Install
 
 The easiest way to get the COBI DevKit Simulator is to install it directly from the
-[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-jetpack-simulator/hpdhkapigojggienmiejhblkhenjdbno). It is compatible with Chrome version 45+.
+[Chrome Webstore](https://chrome.google.com/webstore/detail/cobi-devkit-simulator/hpdhkapigojggienmiejhblkhenjdbno). It is compatible with Chrome version 45+.
 
 ## Usage
 
 You can find the DevKit Simulator in the *Chrome Devtools* in a tab named »COBI.bike«.
 
 The Simulator offers some basic manual controls:
-* Thumb Controller actions 
+* Thumb Controller actions
 * Thumb Controller type
 * Simulate current location
 * Set navigation destination
