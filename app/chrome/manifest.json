@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "COBI.bike DevKit Simulator",
-  "version": "0.7.0",
+  "version": "0.7.2",
 
   "description": "Create and test your COBI.bike modules in Chrome",
   "minimum_chrome_version": "45",
