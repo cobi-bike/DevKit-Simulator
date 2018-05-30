@@ -11,6 +11,7 @@
 
 import type {List, Map} from 'immutable'
 import type {FeatureCollection} from 'geojson-flow'
+import type google from '@types/googlemaps'
 // --
 const Immutable = require('immutable')
 const toGeoJSON = require('togeojson')
@@ -114,12 +115,12 @@ core.on('cobiJsToken', (current: string, previous: string) => {
 
 // ui elements initialization
 $(document).ready(() => {
-  const map = new google.maps.Map(document.getElementById('map'), {
+  const map: google.maps.Map = new google.maps.Map(document.getElementById('map'), {
     zoom: 17,
     center: {lat: 50.119496, lng: 8.6377155}
   })
 
-  const marker = new google.maps.Marker({
+  const marker: google.maps.Marker = new google.maps.Marker({
     position: {lat: 50.119496, lng: 8.6377155},
     map: map,
     draggable: true
@@ -140,7 +141,7 @@ $(document).ready(() => {
       }
     })
 
-  const flag = new google.maps.Marker({
+  const flag: google.maps.Marker = new google.maps.Marker({
     position: {lat: 50.104286, lng: 8.674835},
     map: map,
     icon: 'images/beachflag.png',

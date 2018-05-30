@@ -6,12 +6,13 @@
 .*node_modules/node-libs-browser.*
 .*node_modules/webpack.*
 .*node_modules/fbjs/flow.*
-.*node_modules/documentation/lib.*
+.*node_modules/documentation/*
 
 [include]
-../node_modules/*
+./node_modules/*
 
 [libs]
-../node_modules/flow-interfaces-chrome/interfaces/
+./node_modules/flow-interfaces-chrome/interfaces/
+./node_modules/@types/googlemaps
 
 [options]
