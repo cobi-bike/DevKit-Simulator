@@ -46,7 +46,6 @@
     "devtools"
   ],
   "dependencies": {
-    "@types/googlemaps": "^3.30.8",
     "geojson-validation": "^0.1.6",
     "immutable": "^3.8.1",
     "semver": "^5.4.1",
