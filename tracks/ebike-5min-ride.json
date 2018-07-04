@@ -14853,6 +14853,7 @@
 {"t": 1498837539091, "message": {"action": "NOTIFY", "path": "tourService/calories", "payload": 16.05051612854004}},
 {"t": 1498837539091, "message": {"action": "NOTIFY", "path": "tourService/averageSpeed", "payload": 6.6710147956535915}},
 {"t": 1498837539121, "message": {"action": "NOTIFY", "path": "mobile/location", "payload": {"coordinate": {"latitude": 50.11757791530352, "longitude": 8.634587609892488}, "altitude": 110.89047279543055, "bearing": 88.48982035823175, "speed": 6.162814140319824, "horizontalAccuracy": 8.0, "verticalAccuracy": 3.1816399097442627}}},
+{"t": 1498837539149, "message": {"action": "NOTIFY", "path": "motor/range", "payload": 49}},
 {"t": 1498837539179, "message": {"action": "NOTIFY", "path": "rideService/cadence", "payload": 2.0}},
 {"t": 1498837539191, "message": {"action": "NOTIFY", "path": "rideService/speed", "payload": 7.712581366097815}},
 {"t": 1498837539192, "message": {"action": "NOTIFY", "path": "rideService/userPower", "payload": 75.0}},
