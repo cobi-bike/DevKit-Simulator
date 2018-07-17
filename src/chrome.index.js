@@ -69,7 +69,7 @@ core.on('track/url', (fileUrl: string) => {
     return $.ajax({
       url: fileUrl,
       dataType: 'xml',
-      success: (data) => onGpxFileLoaded(data, 'application/xml')
+      success: (data) => onGpxFileLoaded(data)
     })
   }
   $.getJSON(fileUrl, onCobiTrackFileLoaded)
@@ -140,7 +140,7 @@ $(document).ready(() => {
       }
     })
 
-  const flag = new google.maps.Marker({
+  const flag: google.maps.Marker = new google.maps.Marker({
     position: {lat: 50.104286, lng: 8.674835},
     map: map,
     icon: 'images/beachflag.png',

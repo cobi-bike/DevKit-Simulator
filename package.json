@@ -1,13 +1,12 @@
 {
   "name": "devkit-simulator",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "DevKit Simulator is a browser-based IDE to build COBI.bike modules for bikes.",
   "scripts": {
-    "test": "eslint src/",
-    "build": "npm run gulp once && npm run docs",
+    "test": "eslint --fix src/",
+    "build": "gulp once && npm run docs",
     "prepare": "npm test && npm run build",
-    "flow": "flow src/",
-    "gulp": "gulp",
+    "flow": "flow check src/",
     "docs": "documentation build -f html -o ./docs -g --shallow ./src/**.js"
   },
   "author": "COBI.bike GmbH",
