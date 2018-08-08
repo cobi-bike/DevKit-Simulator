@@ -34,6 +34,20 @@ const thumbControllerHTMLIds = Immutable.Map({
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
 const minCobiJsSupported = '0.34.1'
+const dom = {
+  defaultTracks: $('#default-tracks'),
+  buttonPlay: $('#btn-play'),
+  touchUiToggle: $('#touch-ui-toggle'),
+  infinityLoader: $('#infinity_loader'),
+  coordinates: $('#coordinates'),
+  inputFile: $('#input-file'),
+  destinationCoordinates: $('#destination-coordinates'),
+  buttonApply: $('#btn-apply'),
+  buttonCancel: $('#btn-cancel'),
+  tcType: $('#tc-type'), // thumb controller type
+  joystick: $('#joystick'),
+  nyonSelect: $('#nyn-select')
+}
 
 // Create a connection to the background page
 const backgroundPageConnection = chrome.runtime.connect({
@@ -43,7 +57,7 @@ const backgroundPageConnection = chrome.runtime.connect({
 backgroundPageConnection.postMessage({
   name: 'panel',
   tabId: chrome.devtools.inspectedWindow.tabId,
-  track: $('#default-tracks').val()
+  track: dom.defaultTracks.val()
 })
 // receive messages from the devtools page forwarded through the backgroundPageConnection
 backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
@@ -62,7 +76,7 @@ setInterval(autoDetectCobiJs, 1000) // 1 seconds
 
 // core elements
 // set up internal event driven listeners
-core.once('track', () => $('#btn-play').toggle())
+core.once('track', () => dom.buttonPlay.toggle())
 core.on('track', () => core.update('track/timeouts', Immutable.List()))
 core.on('track/url', (fileUrl: string) => {
   if (fileUrl.endsWith('.gpx')) {
@@ -78,8 +92,8 @@ core.on('track/url', (fileUrl: string) => {
 core.on('track/timeouts', deactivatePreviousTimeouts)
 core.on('track/timeouts', resetPlayStopButton)
 core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
-core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : $('#touch-ui-toggle').prop('checked', false))
-core.on('track/timeouts', (timeouts: List<any>) => $('#touch-ui-toggle').prop('disabled', !timeouts.isEmpty()))
+core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : dom.touchUiToggle.prop('checked', false))
+core.on('track/timeouts', (timeouts: List<any>) => dom.touchUiToggle.prop('disabled', !timeouts.isEmpty()))
 
 /**
  * By default the simulator is disabled. So depending on the presence of
@@ -98,7 +112,7 @@ core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not c
                                                          .toggleClass('webapp-warning', version === null))
 core.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
 core.once('specVersion', version => $('#link-demo').toggle(version === null))
-core.on('specVersion', version => $('#infinity_loader').toggle(version === null))
+core.on('specVersion', version => dom.infinityLoader.toggle(version === null))
 core.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
     return core.update('panel', 'error')
@@ -128,15 +142,15 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = marker.getPosition()
-      $('#coordinates').val(`${position.lat()},${position.lng()}`)
+      dom.coordinates.val(`${position.lat()},${position.lng()}`)
       setPosition(`${position.lat()},${position.lng()}`)
     })
   google.maps.event.addListener(marker,
     'position_changed',
     (event) => {
       const position = marker.getPosition()
-      if ($('#coordinates').val() !== `${position.lat()},${position.lng()}`) {
-        $('#coordinates').val(`${position.lat()},${position.lng()}`)
+      if (dom.coordinates.val() !== `${position.lat()},${position.lng()}`) {
+        dom.coordinates.val(`${position.lat()},${position.lng()}`)
       }
     })
 
@@ -150,7 +164,7 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = flag.getPosition()
-      $('#destination-coordinates').val(`${position.lat()},${position.lng()}`)
+      dom.destinationCoordinates.val(`${position.lat()},${position.lng()}`)
       onDestinationCoordinatesChanged(`${position.lat()},${position.lng()}`)
     })
 
@@ -161,8 +175,8 @@ $(document).ready(() => {
 
 // ----
 // ui elements setup
-$('#default-tracks').on('change', () => {
-  let value = $('#default-tracks').val()
+dom.defaultTracks.on('change', () => {
+  let value = dom.defaultTracks.val()
   if (value.startsWith('custom-')) {
     const filename = value.substring('custom-'.length)
     return core.update('track', core.get('user/tracks').get(filename))
@@ -175,11 +189,11 @@ $('#default-tracks').on('change', () => {
 })
 
 $('#btn-stop').hide().on('click', () => core.update('track/timeouts', Immutable.List())) // clear old timeouts
-$('#btn-play').hide().on('click', () => fakeInput(core.get('track')))
+dom.buttonPlay.hide().on('click', () => fakeInput(core.get('track')))
                      .on('click', () => mapMarkerFollowsFakeInput(core.get('track')))
 
-$('#input-file-link').on('click', () => $('#input-file').click())
-$('#input-file').on('change', event => {
+$('#input-file-link').on('click', () => dom.inputFile.click())
+dom.inputFile.on('change', event => {
   const file = event.target.files[0]
   if (!file) return
 
@@ -195,7 +209,7 @@ $('#input-file').on('change', event => {
       // possible to trigger a file read from JS without the user manually
       // triggering it
       core.update('user/tracks', newTracks)
-      $('#default-tracks').append($('<option>', {
+      dom.defaultTracks.append($('<option>', {
         value: `custom-${file.name}`,
         text: file.name,
         selected: true
@@ -224,30 +238,30 @@ $('#input-file').on('change', event => {
   gpxReader.readAsText(file)
 })
 // --
-$('#infinity_loader').hide()
+dom.infinityLoader.hide()
 $('#btn-state').on('click', () => exec(meta.state))
-$('#touch-ui-toggle').on('click', () => setTouchInteraction($('#touch-ui-toggle').is(':checked')))
+dom.touchUiToggle.on('click', () => setTouchInteraction(dom.touchUiToggle.is(':checked')))
 
-$('#coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition($('#coordinates').val()) : null))
+dom.coordinates.on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition(dom.coordinates.val()) : null))
                  .on('input', () => core.update('track/timeouts', Immutable.List()))
-$('#coordinates').keypress(event => event.keyCode === ENTER ? setPosition($('#coordinates').val()) : null)
+dom.coordinates.keypress(event => event.keyCode === ENTER ? setPosition(dom.coordinates.val()) : null)
                  .keypress(() => core.update('track/timeouts', Immutable.List()))
 
-$('#destination-coordinates').on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null))
-$('#destination-coordinates').keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged($('#destination-coordinates').val()) : null)
+dom.destinationCoordinates.on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? onDestinationCoordinatesChanged(dom.destinationCoordinates.val()) : null))
+dom.destinationCoordinates.keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged(dom.destinationCoordinates.val()) : null)
 
-$('#btn-cancel').on('click', () => $('#btn-apply').show())
-$('#btn-cancel').on('click', () => $('#btn-cancel').hide())
-$('#btn-cancel').hide().on('click', () => exec(meta.emitStr(spec.navigationService.status, 'NONE')))
-$('#btn-apply').on('click', () => onDestinationCoordinatesChanged($('#destination-coordinates').val()))
+dom.buttonCancel.on('click', () => dom.buttonApply.show())
+dom.buttonCancel.on('click', () => dom.buttonCancel.hide())
+dom.buttonCancel.hide().on('click', () => exec(meta.emitStr(spec.navigationService.status, 'NONE')))
+dom.buttonApply.on('click', () => onDestinationCoordinatesChanged(dom.destinationCoordinates.val()))
 
-$('#tc-type').on('change', () => core.update('thumbControllerType', $('#tc-type').val()))
+dom.tcType.on('change', () => core.update('thumbControllerType', dom.tcType.val()))
 
-$('#nyn-select').mouseenter(() => {
-  $('#joystick').css('opacity', '1.0')
-  $('#joystick').css('transition', 'opacity 0.2s ease-in-out')
+dom.nyonSelect.mouseenter(() => {
+  dom.joystick.css('opacity', '1.0')
+  dom.joystick.css('transition', 'opacity 0.2s ease-in-out')
 })
-$('#joystick').mouseleave(() => $('#joystick').css('opacity', '0'))
+dom.joystick.mouseleave(() => dom.joystick.css('opacity', '0'))
 // thumbcontrollers - COBI.bike
 $('#tc-up').on('click', () => thumbAction('UP'))
 $('#tc-down').on('click', () => thumbAction('DOWN'))
@@ -264,18 +278,18 @@ $('#nyn-up').on('click', () => thumbAction('UP'))
 $('#nyn-down').on('click', () => thumbAction('DOWN'))
 $('#nyn-right').on('click', () => thumbAction('RIGHT'))
 $('#nyn-left').on('click', () => thumbAction('LEFT'))
-$('#nyn-select').on('click', () => thumbAction('SELECT'))
+dom.nyonSelect.on('click', () => thumbAction('SELECT'))
 // thumbcontrollers - bosch
 $('#iva-plus').on('click', () => thumbAction('UP'))
 $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
 
 function initializeCobiJs () {
-  setTouchInteraction($('#touch-ui-toggle').is(':checked'))
-  setPosition($('#coordinates').val())
+  setTouchInteraction(dom.touchUiToggle.is(':checked'))
+  setPosition(dom.coordinates.val())
    // only set the destination if the user didnt cancel it before
-  if ($('#btn-cancel').is(':visible')) {
-    onDestinationCoordinatesChanged($('#destination-coordinates').val())
+  if (dom.buttonCancel.is(':visible')) {
+    onDestinationCoordinatesChanged(dom.destinationCoordinates.val())
   }
   exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
 }
@@ -418,10 +432,10 @@ function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: 
  */
 function resetPlayStopButton (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
   if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
-    $('#btn-play').show()
+    dom.buttonPlay.show()
     $('#btn-stop').hide()
   } else if (!timeouts.isEmpty() && oldTimeouts.isEmpty()) {
-    $('#btn-play').hide()
+    dom.buttonPlay.hide()
     $('#btn-stop').show()
   }
 }
@@ -494,8 +508,8 @@ function onDestinationCoordinatesChanged (inputText: string) {
     exec(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
     exec(meta.emitStr(spec.navigationService.route, route.get('payload')))
 
-    $('#btn-apply').hide()
-    $('#btn-cancel').show()
+    dom.buttonApply.hide()
+    dom.buttonCancel.show()
   })
 }
 
