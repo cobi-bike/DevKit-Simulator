@@ -6,7 +6,7 @@
 // chrome.devtools.network
 // chrome.devtools.panels
 
-const meta = require('./lib/meta')
+const browser = require('./lib/browser')
 
 let COBIpanelCreated = false
 let iframeContainerUrl = null
@@ -26,7 +26,7 @@ const backgroundPageConnection = chrome.runtime.connect({
  */
 function autoDetectCobiJs () {
   const options = iframeContainerUrl === null ? {} : {frameURL: iframeContainerUrl}
-  chrome.devtools.inspectedWindow.eval(meta.fetchCOBIjsVersion, options, (version) => {
+  chrome.devtools.inspectedWindow.eval(browser.fetchCOBIjsVersion, options, (version) => {
     // Relay the tab ID to the background page
     backgroundPageConnection.postMessage({
       specVersion: version || null,
@@ -34,16 +34,16 @@ function autoDetectCobiJs () {
       containerUrl: iframeContainerUrl
     })
     if (version) { // fake iOS native webkit if cobi.js is detected
-      chrome.devtools.inspectedWindow.eval(meta.fakeiOSWebkit, options)
+      chrome.devtools.inspectedWindow.eval(browser.fakeiOSWebkit, options)
     } else if (iframeContainerUrl === null || !version) {
       // find out if the current page has iframe containers with a COBI.js in any of them
       // we purposedly neglect the case of more than one iframe with a COBI.js in it
       // for simplicity
       iframeContainerUrl = null // reset if not in a webapp
-      chrome.devtools.inspectedWindow.eval(meta.IframeUrls, {}, (urls) => {
+      chrome.devtools.inspectedWindow.eval(browser.IframeUrls, {}, (urls) => {
         if (urls && urls.length !== 0) {
           urls.filter(url => url) // ignore empty strings - from weird iframes
-            .forEach(url => chrome.devtools.inspectedWindow.eval(meta.fetchCOBIjsVersion,
+            .forEach(url => chrome.devtools.inspectedWindow.eval(browser.fetchCOBIjsVersion,
               {frameURL: url},
               (version2) => {
                 if (version2) {

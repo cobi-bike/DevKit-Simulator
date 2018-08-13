@@ -48,7 +48,7 @@ module.exports.fakeiOSWebkit = `
       var oldReceiver = COBI.__receiveMessage
       COBI.__receiveMessage = function (message) {
         console.log(message.path + ' = ' + JSON.stringify(message.payload))
-        window.webkit.messageHandlers.cobiShell.cache[event] = message.payload
+        window.webkit.messageHandlers.cobiShell.cache[message.path] = message.payload
         oldReceiver(message)
       }
     }

@@ -17,7 +17,7 @@ const $ = require('jquery')
 const lodash = require('lodash')
 // --
 const core = require('./lib/core')
-const meta = require('./lib/meta')
+const meta = require('./lib/browser')
 const log = require('./lib/log')
 const util = require('./lib/utils')
 const math = require('./lib/math')
