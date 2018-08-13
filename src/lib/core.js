@@ -28,7 +28,7 @@ module.exports = {
    * @throws on unknown key
    */
   update: function (key, value) {
-    if (!state[key]) {
+    if (!lodash.has(state, key)) {
       throw new Error(`unknown key ${key}`)
     }
 
@@ -56,7 +56,7 @@ module.exports = {
    * @throws on unknown key
    */
   get: function (key) {
-    if (!state[key]) {
+    if (!lodash.has(state, key)) {
       throw new Error(`unknown key ${key}`)
     }
     return state[key]
@@ -70,7 +70,7 @@ module.exports = {
    * @throws on unknown key
    */
   on: function (key, callback) {
-    if (!state[key]) {
+    if (!lodash.has(state, key)) {
       throw new Error(`unknown key ${key}`)
     }
     listener.on(key, callback)
@@ -84,7 +84,7 @@ module.exports = {
    * @throws on unknown key
    */
   once: function (key, callback) {
-    if (!state[key]) {
+    if (!lodash.has(state, key)) {
       throw new Error(`unknown key ${key}`)
     }
     listener.once(key, callback)
@@ -97,7 +97,7 @@ module.exports = {
    * @throws on unknown key
    */
   remove: function (key, callback) {
-    if (!state[key]) {
+    if (!lodash.has(state, key)) {
       throw new Error(`unknown key ${key}`)
     }
     if (callback) {
