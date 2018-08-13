@@ -43,14 +43,14 @@ function autoDetectCobiJs () {
       chrome.devtools.inspectedWindow.eval(meta.IframeUrls, {}, (urls) => {
         if (urls && urls.length !== 0) {
           urls.filter(url => url) // ignore empty strings - from weird iframes
-              .forEach(url => chrome.devtools.inspectedWindow.eval(meta.fetchCOBIjsVersion,
-                                {frameURL: url},
-                                (version2) => {
-                                  if (version2) {
-                                    iframeContainerUrl = url
-                                  }
-                                }
-                              ))
+            .forEach(url => chrome.devtools.inspectedWindow.eval(meta.fetchCOBIjsVersion,
+              {frameURL: url},
+              (version2) => {
+                if (version2) {
+                  iframeContainerUrl = url
+                }
+              }
+            ))
         }
       })
     }

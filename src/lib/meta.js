@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * Some websites might include one or more iframes in which COBI.js might be
  * included. So if we fail to find COBI.js in the top frame, we try to search
@@ -9,7 +7,7 @@
  * implementation of Array which would break our code
  * @returns {Array<string>} the return value of chrome eval
  */
-const fetchIframeUrls = `Array.prototype.slice.call(document.getElementsByTagName('iframe')).map(frame => frame.src)`
+module.exports.IframeUrls = `Array.prototype.slice.call(document.getElementsByTagName('iframe')).map(frame => frame.src)`
 
 /**
  * this code should be injected to a webpage containing COBI.js in order
@@ -17,7 +15,7 @@ const fetchIframeUrls = `Array.prototype.slice.call(document.getElementsByTagNam
  * It basically monkey patches the parts that are expected to be there
  * when running on an iOS system, but that are not on a Chrome browser
  */
-const fakeiOSWebkit = `
+module.exports.fakeiOSWebkit = `
   (function () {
     if (!window.webkit) {
       window.webkit = {
@@ -31,11 +29,11 @@ const fakeiOSWebkit = `
               switch (msg.action) {
                 case 'WRITE':
                   window.webkit.messageHandlers.cobiShell.cache[msg.path] = msg.payload
-                  return setTimeout(() => COBI.__emitter.emit(msg.path, msg.payload),
+                  return setTimeout(() => COBI.__receiveMessage({action: 'NOTIFY', path: msg.path, payload: msg.payload}),
                                     2 * Math.random()) // 0 to 2 seconds. Fake asynchronisity
                 case 'READ':
                   if (window.webkit.messageHandlers.cobiShell.cache[msg.path]) {
-                    setTimeout(() => COBI.__emitter.emit(msg.path, window.webkit.messageHandlers.cobiShell.cache[msg.path]),
+                    setTimeout(() => COBI.__receiveMessage({action: 'NOTIFY', path: msg.path, payload: window.webkit.messageHandlers.cobiShell.cache[msg.path]}),
                                2 * Math.random()) // 0 to 2 seconds. Fake asynchronisity
                   }
                   return
@@ -47,24 +45,28 @@ const fakeiOSWebkit = `
       }
       // monkey path the emit function to hijack all cobi events
       // and put them in the cache
-      var oldEmit = COBI.__emitter.emit
-      COBI.__emitter.emit = function () {
-        var event = arguments[0]
-        if (typeof event === 'string' && event.match(/^\\w+\\/\\w+$/)) {
-          console.log(event + ' = ' + JSON.stringify(arguments[1]))
-          window.webkit.messageHandlers.cobiShell.cache[event] = arguments[1]
-        }
-        oldEmit.apply(COBI.__emitter, arguments)
+      var oldReceiver = COBI.__receiveMessage
+      COBI.__receiveMessage = function (message) {
+        console.log(message.path + ' = ' + JSON.stringify(message.payload))
+        window.webkit.messageHandlers.cobiShell.cache[event] = message.payload
+        oldReceiver(message)
       }
     }
   })()`
 
-module.exports = {
-  fetchCOBIjsVersion: 'COBI ? COBI.specVersion : null',
-  cobiJsToken: 'COBI ? COBI.__apiKey : null',
-  emitStr: (path: string, value: any) => `COBI.__emitter.emit("${path}", ${JSON.stringify(value)})`,
-  fetch: (path: string) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`,
-  state: `console.log("COBI.js state:", window.webkit.messageHandlers.cobiShell.cache)`,
-  IframeUrls: fetchIframeUrls,
-  fakeiOSWebkit: fakeiOSWebkit
-}
+module.exports.fetchCOBIjsVersion = 'COBI ? COBI.specVersion : null'
+module.exports.cobiJsToken = 'COBI ? COBI.__authentication() : null'
+/**
+ * sends a message to COBI.js in the web page
+ * @param {String} path the COBI Spec property to notify
+ * @param {*} value
+ * @returns {string}
+ */
+module.exports.notify = (path, value) => `COBI.__receiveMessage({action: 'NOTIFY', path: "${path}", payload: ${JSON.stringify(value)}})`
+/**
+ * retrieves the last known value for property path
+ * @param {String} path the COBI Spec property
+ * @returns {string}
+ */
+module.exports.fetch = (path) => `window.webkit.messageHandlers.cobiShell.cache['${path}']`
+module.exports.state = `console.log("COBI.js state:", window.webkit.messageHandlers.cobiShell.cache)`

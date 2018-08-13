@@ -1,22 +1,20 @@
-// @flow
+
 /* global chrome:false */
 /* global FileReader:false */
 /* global DOMParser:false */
-/* global google: false */
+/* global google:false */
 
 // Can use
 // chrome.devtools.inspectedWindow
 // chrome.devtools.network
 // chrome.devtools.panels
 
-import type {List, Map} from 'immutable'
-import type {FeatureCollection} from 'geojson-flow'
 // --
-const Immutable = require('immutable')
 const toGeoJSON = require('togeojson')
 const semver = require('semver')
 const GJV = require('geojson-validation')
 const $ = require('jquery')
+const lodash = require('lodash')
 // --
 const core = require('./lib/core')
 const meta = require('./lib/meta')
@@ -25,15 +23,15 @@ const util = require('./lib/utils')
 const math = require('./lib/math')
 const spec = require('./lib/spec')
 // --
-const thumbControllerHTMLIds = Immutable.Map({
+const thumbControllerHTMLIds = {
   'COBI': '#cobi',
   'BOSCH_NYON': '#nyon',
   'BOSCH_INTUVIA': '#intuvia',
   'BOSCH_INTUVIA_MY17': '#intuvia'
-})
+}
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
-const minCobiJsSupported = '0.34.1'
+const minCobiJsSupported = '0.44.0'
 const dom = {
   defaultTracks: $('#default-tracks'),
   buttonPlay: $('#btn-play'),
@@ -77,23 +75,9 @@ setInterval(autoDetectCobiJs, 1000) // 1 seconds
 // core elements
 // set up internal event driven listeners
 core.once('track', () => dom.buttonPlay.toggle())
-core.on('track', () => core.update('track/timeouts', Immutable.List()))
-core.on('track/url', (fileUrl: string) => {
-  if (fileUrl.endsWith('.gpx')) {
-    return $.ajax({
-      url: fileUrl,
-      dataType: 'xml',
-      success: (data) => onGpxFileLoaded(data)
-    })
-  }
-  $.getJSON(fileUrl, onCobiTrackFileLoaded)
-})
-
-core.on('track/timeouts', deactivatePreviousTimeouts)
-core.on('track/timeouts', resetPlayStopButton)
-core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : setTouchInteraction(false))
-core.on('track/timeouts', (timeouts: List<any>) => timeouts.isEmpty() ? null : dom.touchUiToggle.prop('checked', false))
-core.on('track/timeouts', (timeouts: List<any>) => dom.touchUiToggle.prop('disabled', !timeouts.isEmpty()))
+core.on('track', () => core.update('track/timeouts', []))
+core.on('track/url', onTrackUrlChanged)
+core.on('track/timeouts', onTrackTimeoutsChanged)
 
 /**
  * By default the simulator is disabled. So depending on the presence of
@@ -109,7 +93,7 @@ core.on('panel', (current, previous) => {
 })
 
 core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
-                                                         .toggleClass('webapp-warning', version === null))
+  .toggleClass('webapp-warning', version === null))
 core.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
 core.once('specVersion', version => $('#link-demo').toggle(version === null))
 core.on('specVersion', version => dom.infinityLoader.toggle(version === null))
@@ -120,11 +104,7 @@ core.on('specVersion', version => {
   core.update('panel', 'simulator')
 })
 core.on('thumbControllerType', onThumbControllerTypeChanged)
-core.on('cobiJsToken', (current: string, previous: string) => {
-  if (current && current !== previous) {
-    $(document).ready(initializeCobiJs)
-  }
-})
+core.on('cobiJsToken', onCobiJsTokenChanged)
 
 // ui elements initialization
 $(document).ready(() => {
@@ -154,7 +134,7 @@ $(document).ready(() => {
       }
     })
 
-  const flag: google.maps.Marker = new google.maps.Marker({
+  const flag = new google.maps.Marker({
     position: {lat: 50.104286, lng: 8.674835},
     map: map,
     icon: 'images/beachflag.png',
@@ -188,9 +168,9 @@ dom.defaultTracks.on('change', () => {
   })
 })
 
-$('#btn-stop').hide().on('click', () => core.update('track/timeouts', Immutable.List())) // clear old timeouts
+$('#btn-stop').hide().on('click', () => core.update('track/timeouts', [])) // clear old timeouts
 dom.buttonPlay.hide().on('click', () => fakeInput(core.get('track')))
-                     .on('click', () => mapMarkerFollowsFakeInput(core.get('track')))
+  .on('click', () => mapMarkerFollowsFakeInput(core.get('track')))
 
 $('#input-file-link').on('click', () => dom.inputFile.click())
 dom.inputFile.on('change', event => {
@@ -202,9 +182,9 @@ dom.inputFile.on('change', event => {
   // and select it
   const onSuccess = (result) => {
     const currentTrack = core.get('track')
-    if (Immutable.is(result, currentTrack)) {
+    if (lodash.isEqual(result, currentTrack)) {
       const newTracks = core.get('user/tracks')
-                            .set(file.name, currentTrack)
+        .set(file.name, currentTrack)
       // HACK: we are forced to store the content of the files because it is not
       // possible to trigger a file read from JS without the user manually
       // triggering it
@@ -219,7 +199,7 @@ dom.inputFile.on('change', event => {
   }
 
   exec(log.info(`loading: ${file.name}`))
-  // assume cobitrack file
+  // assume cobi track file
   if (file.type.endsWith('json')) {
     const trackReader = new FileReader()
     trackReader.onload = (evt) => {
@@ -231,8 +211,8 @@ dom.inputFile.on('change', event => {
   // xml otherwise
   const gpxReader = new FileReader()
   const parser = new DOMParser()
-  gpxReader.onload = (evt) => {
-    const result = onGpxFileLoaded(parser.parseFromString(evt.target.result, 'application/xml'))
+  gpxReader.onload = (event) => {
+    const result = onGpxFileLoaded(parser.parseFromString(event.target.result, 'application/xml'))
     onSuccess(result)
   }
   gpxReader.readAsText(file)
@@ -242,18 +222,20 @@ dom.infinityLoader.hide()
 $('#btn-state').on('click', () => exec(meta.state))
 dom.touchUiToggle.on('click', () => setTouchInteraction(dom.touchUiToggle.is(':checked')))
 
-dom.coordinates.on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? setPosition(dom.coordinates.val()) : null))
-                 .on('input', () => core.update('track/timeouts', Immutable.List()))
-dom.coordinates.keypress(event => event.keyCode === ENTER ? setPosition(dom.coordinates.val()) : null)
-                 .keypress(() => core.update('track/timeouts', Immutable.List()))
+// debounce in case of fast typing
+dom.coordinates.on('input', util.debounce(event => event.keyCode !== ENTER ? onInputCoordinatesChanged(event) : null))
+// change the coordinates immediately if the user pressed enter
+dom.coordinates.keypress(event => event.keyCode === ENTER ? onInputCoordinatesChanged(event) : null)
 
-dom.destinationCoordinates.on('input', util.debounce((event: Event) => event.keyCode !== ENTER ? onDestinationCoordinatesChanged(dom.destinationCoordinates.val()) : null))
-dom.destinationCoordinates.keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged(dom.destinationCoordinates.val()) : null)
+// debounce in case of fast typing
+dom.destinationCoordinates.on('input', util.debounce(event => event.keyCode !== ENTER ? onDestinationCoordinatesChanged() : null))
+// change the coordinates immediately if the user pressed enter
+dom.destinationCoordinates.keypress(event => event.keyCode === ENTER ? onDestinationCoordinatesChanged() : null)
 
 dom.buttonCancel.on('click', () => dom.buttonApply.show())
 dom.buttonCancel.on('click', () => dom.buttonCancel.hide())
-dom.buttonCancel.hide().on('click', () => exec(meta.emitStr(spec.navigationService.status, 'NONE')))
-dom.buttonApply.on('click', () => onDestinationCoordinatesChanged(dom.destinationCoordinates.val()))
+dom.buttonCancel.hide().on('click', () => exec(meta.notify(spec.navigationService.status, 'NONE')))
+dom.buttonApply.on('click', () => onDestinationCoordinatesChanged())
 
 dom.tcType.on('change', () => core.update('thumbControllerType', dom.tcType.val()))
 
@@ -262,14 +244,14 @@ dom.nyonSelect.mouseenter(() => {
   dom.joystick.css('transition', 'opacity 0.2s ease-in-out')
 })
 dom.joystick.mouseleave(() => dom.joystick.css('opacity', '0'))
-// thumbcontrollers - COBI.bike
+// thumb controllers - COBI.bike
 $('#tc-up').on('click', () => thumbAction('UP'))
 $('#tc-down').on('click', () => thumbAction('DOWN'))
 $('#tc-right').on('click', () => thumbAction('RIGHT'))
 $('#tc-left').on('click', () => thumbAction('LEFT'))
 $('#tc-select').on('click', () => thumbAction('SELECT'))
 $('#tc-bell').on('click', () => ringTheBell(true))
-// thumbcontrollers - nyon
+// thumb controllers - nyon
 const thumbControllerActionUnavailable = () => exec(log.warn(`This thumb controller button is reserved for the native app`))
 $('#nyn-plus').on('click', thumbControllerActionUnavailable)
 $('#nyn-minus').on('click', thumbControllerActionUnavailable)
@@ -279,7 +261,7 @@ $('#nyn-down').on('click', () => thumbAction('DOWN'))
 $('#nyn-right').on('click', () => thumbAction('RIGHT'))
 $('#nyn-left').on('click', () => thumbAction('LEFT'))
 dom.nyonSelect.on('click', () => thumbAction('SELECT'))
-// thumbcontrollers - bosch
+// thumb controllers - bosch
 $('#iva-plus').on('click', () => thumbAction('UP'))
 $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
@@ -287,62 +269,66 @@ $('#iva-center').on('click', () => thumbAction('SELECT'))
 function initializeCobiJs () {
   setTouchInteraction(dom.touchUiToggle.is(':checked'))
   setPosition(dom.coordinates.val())
-   // only set the destination if the user didnt cancel it before
+  // only set the destination if the user didn't cancel it before
   if (dom.buttonCancel.is(':visible')) {
     onDestinationCoordinatesChanged(dom.destinationCoordinates.val())
   }
-  exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
+  exec(meta.notify(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
 }
 
 /**
- * CDK-2 mock input data to test webapps
+ * CDK-2 mock input data to test web apps
  */
 function thumbAction (value) {
-  exec(meta.emitStr(spec.hub.externalInterfaceAction, value))
+  exec(meta.notify(spec.hub.externalInterfaceAction, value))
 }
 
 /**
- * CDK-2 mock input data to test webapps
+ * CDK-2 mock input data to test web apps
+ * @param {Message[]} track a cobi track representation
  */
-function fakeInput (track: List<[number, Map<string, any>]>) {
-  const emmiters = track.map(([t, msg]) => {
-    const expression = meta.emitStr(msg.get('path'), msg.get('payload'))
-    return [t, () => exec(expression)]
-  }).map(([t, fn]) => setTimeout(fn, t))
+function fakeInput (track) {
+  const emitters = track.map(msg => { return {...msg, expression: meta.notify(msg.path, msg.payload)} })
 
-  core.update('track/timeouts', core.get('track/timeouts').push(emmiters))
+    .map(data => setTimeout(() => exec(data.expression), data.timestamp))
+
+  core.update('track/timeouts', [...core.get('track/timeouts'), emitters])
 }
 
 /**
  * CDK-2 move the map marker and center based on fake locations
+ * @param {Message[]} track a cobi track representation
  */
-function mapMarkerFollowsFakeInput (track: List<[number, Map<string, any>]>) {
+function mapMarkerFollowsFakeInput (track) {
   const mappers = track
-    .filter(([t, msg]) => msg.get('path') === spec.mobile.location)
-    .map(([t, msg]) =>
-      [t, () => changeMarkerPosition(msg.get('payload').get('coordinate').get('latitude'),
-                                     msg.get('payload').get('coordinate').get('longitude'))])
-    .map(([t, fn]) => setTimeout(fn, t))
+    .filter(msg => msg.path === spec.mobile.location)
+    .map(msg => {
+      return {...msg,
+        expression: () => changeMarkerPosition(msg.payload.coordinate.latitude, msg.payload.coordinate.longitude)
+      }
+    })
+    .map(msg => setTimeout(msg.expression, msg.timestamp))
 
-  core.update('track/timeouts', core.get('track/timeouts').push(mappers))
+  core.update('track/timeouts', [...core.get('track/timeouts'), mappers])
 }
 
 /**
- * CDK-107 mock input data to test webapps
+ * CDK-107 mock input data to test web apps
+ * @param {*} raw a js object ... possibly a cobi track
  */
-function onCobiTrackFileLoaded (raw: any) {
+function onCobiTrackFileLoaded (raw) {
   const errors = util.cobiTrackErrors(raw)
   if (errors) {
     return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
   }
-  const content: List<{t: number, message: Object}> = Immutable.List(raw)
-  const track = util.normalize(content)
+  const track = util.normalize(raw)
 
   return core.update('track', track)
 }
 
 /**
- * CDK-2 mock input data to test webapps
+ * CDK-2 mock input data to test web apps
+ * @param {Document} content the dom of the xml file
  */
 function onGpxFileLoaded (content) {
   let errors = util.gpxErrors(content)
@@ -350,7 +336,7 @@ function onGpxFileLoaded (content) {
     return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
   }
 
-  const geojson: FeatureCollection = toGeoJSON.gpx(content)
+  const geojson = toGeoJSON.gpx(content)
   if (!GJV.valid(geojson)) {
     return exec(log.error(`Invalid input file`))
   }
@@ -365,18 +351,20 @@ function onGpxFileLoaded (content) {
 
 /**
  * CDK-60 manually set the touch UI flag
+ * @param {boolean} checked enabled or not
  */
 function setTouchInteraction (checked) {
-  exec(meta.emitStr(spec.app.touchInteractionEnabled, checked))
+  exec(meta.notify(spec.app.touchInteractionEnabled, checked))
 }
 
 /**
  * CDK-61 mock the location of the user and deactivates fake events
+ * @param {string} inputText a lat long text representation
  */
-function setPosition (inputText: string) {
+function setPosition (inputText) {
   const [lat, lon] = inputText.split(',')
-                              .map(text => text.trim())
-                              .map(parseFloat)
+    .map(text => text.trim())
+    .map(parseFloat)
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
     return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
@@ -387,18 +375,20 @@ function setPosition (inputText: string) {
 
   const msg = util.partialMobileLocation(lon, lat)
 
-  exec(meta.emitStr(spec.mobile.location, msg.get('payload')))
+  exec(meta.notify(spec.mobile.location, msg.payload))
 }
 
 /**
  * CDK-59 manually set the type of Thumb controller
+ * @param {string} currentValue
+ * @param {string} oldValue
  */
-function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
-  let newId = thumbControllerHTMLIds.get(currentValue)
-  let oldId = thumbControllerHTMLIds.get(oldValue)
+function onThumbControllerTypeChanged (currentValue, oldValue) {
+  let newId = thumbControllerHTMLIds[currentValue]
+  let oldId = thumbControllerHTMLIds[oldValue]
 
   if (currentValue !== oldValue) {
-    exec(meta.emitStr(spec.hub.thumbControllerInterfaceId, currentValue))
+    exec(meta.notify(spec.hub.thumbControllerInterfaceId, currentValue))
   }
 
   if (newId !== oldId) {
@@ -409,35 +399,12 @@ function onThumbControllerTypeChanged (currentValue: string, oldValue: string) {
 
 /**
  * CDK-107 update the position of the Marker in the Embedded Google Map
+ * @param {number} lat
+ * @param {number} lon
  */
-function changeMarkerPosition (lat: number, lon: number) {
+function changeMarkerPosition (lat, lon) {
   core.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
   core.get('map').setCenter(new google.maps.LatLng(lat, lon))
-}
-
-/**
- * deactivate old waiting timeouts according to the current timeouts value
- */
-function deactivatePreviousTimeouts (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
-  // Remove the previous timeouts if any exists
-  if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
-    oldTimeouts.map(ids => ids.map(clearTimeout))
-    exec(log.warn('Deactivating previous fake events'))
-  }
-}
-
-/**
- * reset the state of the play/stop button is something
- * triggered a change without the user clicking on the button
- */
-function resetPlayStopButton (timeouts: List<List<number>>, oldTimeouts: List<List<number>>) {
-  if (timeouts.isEmpty() && !oldTimeouts.isEmpty()) {
-    dom.buttonPlay.show()
-    $('#btn-stop').hide()
-  } else if (!timeouts.isEmpty() && oldTimeouts.isEmpty()) {
-    dom.buttonPlay.hide()
-    $('#btn-stop').show()
-  }
 }
 
 /**
@@ -451,8 +418,12 @@ function autoDetectCobiJs () {
 /**
  * wrapper around chrome eval function. This is mainly to hijack all evaluations
  * and provide custom defaults like frameURL
+ * @param {string} expression a js expression to execute in the web page
+ * @param {Object} [options]
+ * @param {Function<Object, Object>} [callback] a callback which will receive the result of the execution
+ * or an error otherwise
  */
-function exec (expression: string, options?: Object, callback?: (result: Object, exceptionInfo: Object) => any): any {
+function exec (expression, options, callback) {
   if (options && !options.frameURL && core.get('containerUrl')) {
     options.frameURL = core.get('containerUrl')
   } else if (!options) {
@@ -467,21 +438,77 @@ function exec (expression: string, options?: Object, callback?: (result: Object,
 /**
  * fake ringing the Hub Bell and sets a timeout to deactivate it
  * at a random point between 0 - 500 ms
+ * @param {boolean} value
  */
-function ringTheBell (value: boolean) {
-  exec(meta.emitStr(spec.hub.bellRinging, value))
+function ringTheBell (value) {
+  exec(meta.notify(spec.hub.bellRinging, value))
   if (value) {
     setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
   }
 }
 
-function onDestinationCoordinatesChanged (inputText: string) {
+/**
+ * attempts to read a gpx or cobi track file url
+ * @param {string} fileUrl
+ */
+function onTrackUrlChanged (fileUrl) {
+  if (fileUrl.endsWith('.gpx')) {
+    return $.ajax({
+      url: fileUrl,
+      dataType: 'xml',
+      success: (data) => onGpxFileLoaded(data)
+    })
+  }
+  // json cobi track otherwise
+  $.getJSON(fileUrl, onCobiTrackFileLoaded)
+}
+
+/**
+ * reset the UI state according to the timeouts change
+ * @param {Array<Array<number>>} timeouts a collection of timeouts sets to execute in the future
+ * @param {Array<Array<number>>} oldTimeouts the previous collection of timeouts
+ */
+function onTrackTimeoutsChanged (timeouts, oldTimeouts) {
+  // deactivate old waiting timeouts according to the current timeouts value
+  // Remove the previous timeouts if any exists
+  if (timeouts.length === 0 && oldTimeouts.length !== 0) {
+    oldTimeouts.map(ids => ids.map(clearTimeout))
+    exec(log.warn('Deactivating previous fake events'))
+  }
+
+  // reset the state of the play/stop button is something
+  // triggered a change without the user clicking on the button
+  if (timeouts.length === 0 && oldTimeouts.length !== 0) {
+    dom.buttonPlay.show()
+    $('#btn-stop').hide()
+  } else if (timeouts.length !== 0 && oldTimeouts.length === 0) {
+    dom.buttonPlay.hide()
+    $('#btn-stop').show()
+  }
+
+  if (timeouts.length === 0) {
+    setTouchInteraction(false)
+  }
+
+  if (timeouts.length === 0) {
+    dom.touchUiToggle.prop('checked', false)
+  }
+
+  dom.touchUiToggle.prop('disabled', !(timeouts.length !== 0))
+}
+
+/**
+ * cancels the current navigation and sets the inputText coordinates
+ * as destination
+ */
+function onDestinationCoordinatesChanged () {
+  const inputText = dom.destinationCoordinates.val()
   if (inputText.length === 0) {
-    return exec(meta.emitStr(spec.navigationService.status, 'NONE'))
+    return exec(meta.notify(spec.navigationService.status, 'NONE'))
   }
   const [lat, lon] = inputText.split(',')
-                              .map(text => text.trim())
-                              .map(parseFloat)
+    .map(text => text.trim())
+    .map(parseFloat)
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
     return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
@@ -497,40 +524,64 @@ function onDestinationCoordinatesChanged (inputText: string) {
 
     const route = util.partialRoute(location.coordinate, {latitude: lat, longitude: lon})
     const distanceToDestination = math.beeLine(lat, lon, location.coordinate.latitude,
-                                               location.coordinate.longitude)
+      location.coordinate.longitude)
     // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
     const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
-    // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
-    const dTDmeters = distanceToDestination * 1000
 
-    exec(meta.emitStr(spec.navigationService.distanceToDestination, dTDmeters))
-    exec(meta.emitStr(spec.navigationService.eta, eta))
-    exec(meta.emitStr(spec.navigationService.status, 'NAVIGATING'))
-    exec(meta.emitStr(spec.navigationService.route, route.get('payload')))
+    // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
+    exec(meta.notify(spec.navigationService.distanceToDestination, distanceToDestination * 1000))
+    exec(meta.notify(spec.navigationService.eta, eta))
+    exec(meta.notify(spec.navigationService.status, 'NAVIGATING'))
+    exec(meta.notify(spec.navigationService.route, route.payload))
 
     dom.buttonApply.hide()
     dom.buttonCancel.show()
   })
 }
 
-type ExceptionInfo = {
-  code: string,
-  description: string,
-  details: Array<any>,
-  isError: boolean,
-  isException: boolean,
-  value: string
+/**
+ * Fired whenever the user changed the content of the input text field
+ * adding/removing/changing are taken into account
+ * set the coordinates immediately if the user pressed enter
+ * @param {KeyboardEvent} event
+ */
+function onInputCoordinatesChanged (event) {
+  setPosition(dom.coordinates.val())
+  core.update('track/timeouts', [])
 }
 
 /**
- * default handler for evaluations in the context of webapps
+ * fake the initialization of cobi js if detected in the current website
+ * @param {string} current
+ * @param {string} previous
  */
-function errorHandler (result: Object, exceptionInfo: ExceptionInfo) {
+function onCobiJsTokenChanged (current, previous) {
+  if (current && current !== previous) {
+    $(document).ready(initializeCobiJs)
+  }
+}
+
+/**
+ * @typedef {Object} ExceptionInfo
+ * @property {string} code
+ * @property {string} description
+ * @property {*[]} details
+ * @property {boolean} isError
+ * @property {boolean} isException
+ * @property {string} value
+ */
+
+/**
+ * default handler for evaluations in the context of web apps
+ * @param {Object} result
+ * @param {ExceptionInfo} exceptionInfo
+ */
+function errorHandler (result, exceptionInfo) {
   if (exceptionInfo) {
     console.error('foreign evaluation failure:', exceptionInfo)
     // give a custom callback to avoid stack overflow
     exec(log.error(exceptionInfo.value ? exceptionInfo.value : exceptionInfo),
-     {},
-     () => console.error('double internal error'))
+      {},
+      () => console.error('double internal error'))
   }
 }

@@ -1,88 +1,105 @@
-// @flow
 
-const Immutable = require('immutable')
 const Emitter = require('events')
+const lodash = require('lodash')
 
-/**
- * A schema of the allowed key/value pairs for the COBI simulator. Invalid keys
- * are ignored when set/update is called on the schema. This allows us to
- * pin-point changes more dynamically
- */
-const Schema = Immutable.Record({
+// TODO: refactor this later on to not be so obscure
+let state = {
   'specVersion': null,
   'cobiJsToken': null,
   'panel': 'simulator',
   'containerUrl': null,
   'thumbControllerType': 'COBI',
-  'track': Immutable.List(), // List<[number, Map<string, any>]>
+  'track': [], // List<[number, Map<string, any>]>
   'track/url': null,
-  'track/timeouts': Immutable.List(), // List<List<number>>
-  'user/tracks': Immutable.Map(),
+  'track/timeouts': [], // List<List<number>>
+  'user/tracks': {},
   'map': null,
   'position/marker': null,
   'destination/marker': null
-})
-// the schema only allows the above keys
-let state = new Schema()
+}
 let listener = new Emitter()
 
 module.exports = {
   /**
    * changes the value of key in the system state.
+   * @param {String} key the value to change
+   * @param {*} value the new value
+   * @returns {*} the new value if it changed
    * @throws on unknown key
    */
-  update: function<T> (key: string, value: ?T) {
-    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  update: function (key, value) {
+    if (!state[key]) {
+      throw new Error(`unknown key ${key}`)
+    }
 
-    const oldValue: ?T = state.get(key)
+    const oldValue = state[key]
 
     if (!value && !oldValue) {
       console.log(`attempt to change from undefined to null ignored for key ${key}`)
       return oldValue
     }
 
-    if (Immutable.is(oldValue, value)) {
+    if (lodash.isEqual(oldValue, value)) {
       return oldValue // nothing changed
     }
 
-    state = state.set(key, value)
+    state = {...state, [key]: value}
     console.log(`${key} updated!`, '\nbefore: ', oldValue,
-                                   '\nnow: ', value)
+      '\nnow: ', value)
     listener.emit(key, value, oldValue)
     return value
   },
   /**
    * get the value of 'key' from the core or throws if
    * it doesnt exists
+   * @param {String} key
+   * @throws on unknown key
    */
-  get: function (key: string) {
-    if (!state.has(key)) throw new Error(`unknown key ${key}`)
-    return state.get(key)
+  get: function (key) {
+    if (!state[key]) {
+      throw new Error(`unknown key ${key}`)
+    }
+    return state[key]
   },
 
   /**
-   * sets a listener for 'key' which will be triggered everytime that
+   * sets a listener for 'key' which will be triggered every time that
    * its internal value changes
+   * @param {String} key
+   * @param {Function} callback will receive the current and old value
+   * @throws on unknown key
    */
-  on: function<T> (key: string, callback: (value: T, oldValue: T) => any) {
-    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  on: function (key, callback) {
+    if (!state[key]) {
+      throw new Error(`unknown key ${key}`)
+    }
     listener.on(key, callback)
   },
 
   /**
    * sets a listener for 'key' which will be only ONCE when its
    * internal value changes
+   * @param {String} key
+   * @param {Function} callback will receive the current and old value
+   * @throws on unknown key
    */
-  once: function<T> (key: string, callback: (value: T, oldValue: T) => any) {
-    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  once: function (key, callback) {
+    if (!state[key]) {
+      throw new Error(`unknown key ${key}`)
+    }
     listener.once(key, callback)
   },
 
   /**
    * remove ALL listener registered for 'key' or only the passed one
+   * @param {String} key
+   * @param {Function} [callback] will receive the current and old value
+   * @throws on unknown key
    */
-  remove: function<T> (key: string, callback?: (value: T, oldValue: T) => any) {
-    if (!state.has(key)) throw new Error(`unknown key ${key}`)
+  remove: function (key, callback) {
+    if (!state[key]) {
+      throw new Error(`unknown key ${key}`)
+    }
     if (callback) {
       return listener.removeListener(key, callback)
     }
