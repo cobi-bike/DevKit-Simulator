@@ -32,8 +32,8 @@ function transpile (src, dest) {
 }
 
 // ---------- tasks
-gulp.task('chrome.index', () => transpile('src/chrome.index.js', 'index.js'))
-gulp.task('chrome.devtools', () => transpile('src/chrome.devtools.js', 'devtools.js'))
+gulp.task('chrome.index', () => transpile('src/panel.js', 'index.js'))
+gulp.task('chrome.devtools', () => transpile('src/devtools.js', 'devtools.js'))
 gulp.task('browser', ['chrome.index', 'chrome.devtools'])
 
 gulp.task('resources', function () {
