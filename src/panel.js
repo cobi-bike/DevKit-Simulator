@@ -16,7 +16,7 @@ const GJV = require('geojson-validation')
 const $ = require('jquery')
 const lodash = require('lodash')
 // --
-const core = require('./lib/core')
+const state = require('./lib/state')
 const meta = require('./lib/browser')
 const log = require('./lib/log')
 const util = require('./lib/utils')
@@ -61,10 +61,10 @@ backgroundPageConnection.postMessage({
 backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
   console.log('message received: ', message)
   if (message.name !== 'panel') { // ignore reply messages
-    core.update('specVersion', message.specVersion)
-    core.update('containerUrl', message.containerUrl)
+    state.update('specVersion', message.specVersion)
+    state.update('containerUrl', message.containerUrl)
   } else {
-    core.update('track/url', message.trackUrl)
+    state.update('track/url', message.trackUrl)
   }
 })
 
@@ -72,12 +72,12 @@ backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) =
 autoDetectCobiJs()
 setInterval(autoDetectCobiJs, 1000) // 1 seconds
 
-// core elements
+// state elements
 // set up internal event driven listeners
-core.once('track', () => dom.buttonPlay.toggle())
-core.on('track', () => core.update('track/timeouts', []))
-core.on('track/url', onTrackUrlChanged)
-core.on('track/timeouts', onTrackTimeoutsChanged)
+state.once('track', () => dom.buttonPlay.toggle())
+state.on('track', () => state.update('track/timeouts', []))
+state.on('track/url', onTrackUrlChanged)
+state.on('track/timeouts', onTrackTimeoutsChanged)
 
 /**
  * By default the simulator is disabled. So depending on the presence of
@@ -85,26 +85,26 @@ core.on('track/timeouts', onTrackTimeoutsChanged)
  * - an error panel if the current cobi.js version is not compatible with the simulator
  * - the simulator panel otherwise
  */
-core.on('panel', (current, previous) => {
+state.on('panel', (current, previous) => {
   if (current !== previous) {
     $(`#${current}`).show()
     $(`#${previous}`).hide()
   }
 })
 
-core.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
+state.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
   .toggleClass('webapp-warning', version === null))
-core.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
-core.once('specVersion', version => $('#link-demo').toggle(version === null))
-core.on('specVersion', version => dom.infinityLoader.toggle(version === null))
-core.on('specVersion', version => {
+state.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
+state.once('specVersion', version => $('#link-demo').toggle(version === null))
+state.on('specVersion', version => dom.infinityLoader.toggle(version === null))
+state.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
-    return core.update('panel', 'error')
+    return state.update('panel', 'error')
   }
-  core.update('panel', 'simulator')
+  state.update('panel', 'simulator')
 })
-core.on('thumbControllerType', onThumbControllerTypeChanged)
-core.on('cobiJsToken', onCobiJsTokenChanged)
+state.on('thumbControllerType', onThumbControllerTypeChanged)
+state.on('cobiJsToken', onCobiJsTokenChanged)
 
 // ui elements initialization
 $(document).ready(() => {
@@ -122,15 +122,15 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = marker.getPosition()
-      dom.coordinates.val(`${position.lat()},${position.lng()}`)
-      setPosition(`${position.lat()},${position.lng()}`)
+      dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
+      setPosition(`${position.lat()}, ${position.lng()}`)
     })
   google.maps.event.addListener(marker,
     'position_changed',
     (event) => {
       const position = marker.getPosition()
-      if (dom.coordinates.val() !== `${position.lat()},${position.lng()}`) {
-        dom.coordinates.val(`${position.lat()},${position.lng()}`)
+      if (dom.coordinates.val() !== `${position.lat()}, ${position.lng()}`) {
+        dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
       }
     })
 
@@ -144,13 +144,13 @@ $(document).ready(() => {
     'dragend',
     (event) => {
       let position = flag.getPosition()
-      dom.destinationCoordinates.val(`${position.lat()},${position.lng()}`)
-      onDestinationCoordinatesChanged(`${position.lat()},${position.lng()}`)
+      dom.destinationCoordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
+      onDestinationCoordinatesChanged(`${position.lat()}, ${position.lng()}`)
     })
 
-  core.update('map', map)
-  core.update('position/marker', marker)
-  core.update('destination/marker', flag)
+  state.update('map', map)
+  state.update('position/marker', marker)
+  state.update('destination/marker', flag)
 })
 
 // ----
@@ -159,7 +159,7 @@ dom.defaultTracks.on('change', () => {
   let value = dom.defaultTracks.val()
   if (value.startsWith('custom-')) {
     const filename = value.substring('custom-'.length)
-    return core.update('track', core.get('user/tracks').get(filename))
+    return state.update('track', state.get('user/tracks').get(filename))
   }
   backgroundPageConnection.postMessage({
     name: 'panel',
@@ -168,9 +168,9 @@ dom.defaultTracks.on('change', () => {
   })
 })
 
-$('#btn-stop').hide().on('click', () => core.update('track/timeouts', [])) // clear old timeouts
-dom.buttonPlay.hide().on('click', () => fakeInput(core.get('track')))
-  .on('click', () => mapMarkerFollowsFakeInput(core.get('track')))
+$('#btn-stop').hide().on('click', () => state.update('track/timeouts', [])) // clear old timeouts
+dom.buttonPlay.hide().on('click', () => fakeInput(state.get('track')))
+  .on('click', () => mapMarkerFollowsFakeInput(state.get('track')))
 
 $('#input-file-link').on('click', () => dom.inputFile.click())
 dom.inputFile.on('change', event => {
@@ -181,14 +181,14 @@ dom.inputFile.on('change', event => {
   // once we confirm that the file is a valid track. Add it to the options
   // and select it
   const onSuccess = (result) => {
-    const currentTrack = core.get('track')
+    const currentTrack = state.get('track')
     if (lodash.isEqual(result, currentTrack)) {
-      const newTracks = core.get('user/tracks')
+      const newTracks = state.get('user/tracks')
         .set(file.name, currentTrack)
       // HACK: we are forced to store the content of the files because it is not
       // possible to trigger a file read from JS without the user manually
       // triggering it
-      core.update('user/tracks', newTracks)
+      state.update('user/tracks', newTracks)
       dom.defaultTracks.append($('<option>', {
         value: `custom-${file.name}`,
         text: file.name,
@@ -237,7 +237,7 @@ dom.buttonCancel.on('click', () => dom.buttonCancel.hide())
 dom.buttonCancel.hide().on('click', () => exec(meta.notify(spec.navigationService.status, 'NONE')))
 dom.buttonApply.on('click', () => onDestinationCoordinatesChanged())
 
-dom.tcType.on('change', () => core.update('thumbControllerType', dom.tcType.val()))
+dom.tcType.on('change', () => state.update('thumbControllerType', dom.tcType.val()))
 
 dom.nyonSelect.mouseenter(() => {
   dom.joystick.css('opacity', '1.0')
@@ -273,7 +273,7 @@ function initializeCobiJs () {
   if (dom.buttonCancel.is(':visible')) {
     onDestinationCoordinatesChanged(dom.destinationCoordinates.val())
   }
-  exec(meta.notify(spec.hub.thumbControllerInterfaceId, core.get('thumbControllerType')))
+  exec(meta.notify(spec.hub.thumbControllerInterfaceId, state.get('thumbControllerType')))
 }
 
 /**
@@ -292,7 +292,7 @@ function fakeInput (track) {
 
     .map(data => setTimeout(() => exec(data.expression), data.timestamp))
 
-  core.update('track/timeouts', [...core.get('track/timeouts'), emitters])
+  state.update('track/timeouts', [...state.get('track/timeouts'), emitters])
 }
 
 /**
@@ -309,7 +309,7 @@ function mapMarkerFollowsFakeInput (track) {
     })
     .map(msg => setTimeout(msg.expression, msg.timestamp))
 
-  core.update('track/timeouts', [...core.get('track/timeouts'), mappers])
+  state.update('track/timeouts', [...state.get('track/timeouts'), mappers])
 }
 
 /**
@@ -323,7 +323,7 @@ function onCobiTrackFileLoaded (raw) {
   }
   const track = util.normalize(raw)
 
-  return core.update('track', track)
+  return state.update('track', track)
 }
 
 /**
@@ -346,7 +346,7 @@ function onGpxFileLoaded (content) {
     return exec(log.error('Invalid input file data'))
   }
 
-  return core.update('track', util.geoToTrack(featLineStr))
+  return state.update('track', util.geoToTrack(featLineStr))
 }
 
 /**
@@ -403,8 +403,8 @@ function onThumbControllerTypeChanged (currentValue, oldValue) {
  * @param {number} lon
  */
 function changeMarkerPosition (lat, lon) {
-  core.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
-  core.get('map').setCenter(new google.maps.LatLng(lat, lon))
+  state.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
+  state.get('map').setCenter(new google.maps.LatLng(lat, lon))
 }
 
 /**
@@ -413,7 +413,7 @@ function changeMarkerPosition (lat, lon) {
  * all necessary elements are there.
  */
 function autoDetectCobiJs () {
-  exec(meta.cobiJsToken, {}, (token) => core.update('cobiJsToken', token || null))
+  exec(meta.cobiJsToken, {}, (token) => state.update('cobiJsToken', token || null))
 }
 /**
  * wrapper around chrome eval function. This is mainly to hijack all evaluations
@@ -424,10 +424,10 @@ function autoDetectCobiJs () {
  * or an error otherwise
  */
 function exec (expression, options, callback) {
-  if (options && !options.frameURL && core.get('containerUrl')) {
-    options.frameURL = core.get('containerUrl')
+  if (options && !options.frameURL && state.get('containerUrl')) {
+    options.frameURL = state.get('containerUrl')
   } else if (!options) {
-    options = {frameURL: core.get('containerUrl')}
+    options = {frameURL: state.get('containerUrl')}
   }
   if (!callback) {
     callback = errorHandler
@@ -488,13 +488,10 @@ function onTrackTimeoutsChanged (timeouts, oldTimeouts) {
 
   if (timeouts.length === 0) {
     setTouchInteraction(false)
-  }
-
-  if (timeouts.length === 0) {
     dom.touchUiToggle.prop('checked', false)
   }
 
-  dom.touchUiToggle.prop('disabled', !(timeouts.length !== 0))
+  dom.touchUiToggle.prop('disabled', timeouts.length !== 0)
 }
 
 /**
@@ -547,7 +544,7 @@ function onDestinationCoordinatesChanged () {
  */
 function onInputCoordinatesChanged (event) {
   setPosition(dom.coordinates.val())
-  core.update('track/timeouts', [])
+  state.update('track/timeouts', [])
 }
 
 /**
