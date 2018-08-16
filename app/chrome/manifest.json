@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "COBI.bike DevKit Simulator",
-  "version": "0.7.3",
+  "version": "0.7.4",
 
   "description": "Create and test your COBI.bike modules in Chrome",
   "minimum_chrome_version": "45",
@@ -23,8 +23,7 @@
 
   "offline_enabled": true,
 
-  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://maps.googleapis.com; object-src 'self' 'unsafe-eval' 'unsafe-inline'",
-
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://googletagmanager.com https://maps.googleapis.com; script-src 'self' 'unsafe-eval'",
   "background": {
     "scripts": ["background.js"]
   },

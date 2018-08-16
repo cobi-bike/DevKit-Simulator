@@ -10,6 +10,7 @@ app/chrome/*
 !app/chrome/manifest.json
 !app/chrome/devtools.html
 !app/chrome/background.js
+!app/chrome/analytics.js
 !app/chrome/popups
 
 # -------- ATOM files ------------
