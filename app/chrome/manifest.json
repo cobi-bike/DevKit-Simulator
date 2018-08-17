@@ -23,7 +23,7 @@
 
   "offline_enabled": true,
 
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://googletagmanager.com https://maps.googleapis.com; script-src 'self' 'unsafe-eval'",
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://maps.googleapis.com https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self'",
   "background": {
     "scripts": ["background.js"]
   },
