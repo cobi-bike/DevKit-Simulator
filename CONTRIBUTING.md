@@ -1,4 +1,4 @@
-# Contributing to the COBI.bike DevKit Simulator
+# Contributing to the COBI.Bike DevKit Simulator
 
 ### Pull Requests
 
