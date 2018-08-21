@@ -34,6 +34,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.5.1",
+    "gulp-zip": "^4.2.0",
     "jquery": "^3.2.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

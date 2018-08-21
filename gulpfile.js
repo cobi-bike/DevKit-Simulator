@@ -1,6 +1,7 @@
 const gulp = require('gulp')
 const babel = require('gulp-babel')
 const concat = require('gulp-concat')
+const zip = require('gulp-zip')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
 const browserify = require('browserify')
@@ -57,7 +58,12 @@ gulp.task('tracks', function () {
 
 gulp.task('copy', ['resources', 'tracks'])
 // build everything once, probably for production
-gulp.task('once', ['browser', 'node', 'copy'])
+gulp.task('once', ['browser', 'node', 'copy'], function () {
+  return gulp.src('app/chrome/**')
+             .pipe(zip('chrome.zip'))
+             .pipe(gulp.dest('app'))
+})
+
 // watch and rebuild everything on change
 gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'resources/**/*.*'], ['browser', 'node', 'copy'])
