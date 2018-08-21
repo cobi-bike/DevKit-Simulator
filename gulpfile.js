@@ -56,15 +56,14 @@ gulp.task('tracks', function () {
              .pipe(gulp.dest('app/chrome/tracks'))
 })
 
-gulp.task('zip', ['copy'], function () {
+gulp.task('copy', ['resources', 'tracks'])
+// build everything once, probably for production
+gulp.task('once', ['browser', 'node', 'copy'], function () {
   return gulp.src('app/chrome/**')
              .pipe(zip('chrome.zip'))
              .pipe(gulp.dest('app'))
 })
 
-gulp.task('copy', ['resources', 'tracks'])
-// build everything once, probably for production
-gulp.task('once', ['browser', 'node', 'copy', 'zip'])
 // watch and rebuild everything on change
 gulp.task('watch', () => {
   gulp.watch(['src/**/*.js', 'resources/**/*.*'], ['browser', 'node', 'copy'])
