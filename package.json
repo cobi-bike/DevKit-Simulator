@@ -1,43 +1,25 @@
 {
   "name": "devkit-simulator",
-  "version": "0.7.6",
+  "version": "0.8.0",
   "description": "DevKit Simulator is a browser-based IDE to build COBI.Bike modules for bikes.",
   "scripts": {
     "test": "eslint --fix src/",
-    "build": "gulp once && npm run docs",
     "prepare": "npm test && npm run build",
-    "flow": "flow check src/",
-    "docs": "documentation build -f html -o ./docs -g --shallow ./src/**.js"
+    "build": "gulp once"
   },
   "author": "COBI.Bike GmbH",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-flow": "^6.23.0",
-    "babelify": "^7.3.0",
-    "brfs": "^1.4.3",
-    "browserify": "^14.3.0",
-    "documentation": "^4.0.0-rc.0",
-    "eslint": "^3.19.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-flowtype": "^2.32.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.48.0",
-    "flow-interfaces-chrome": "^0.3.1",
-    "geojson-flow": "^1.0.1",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "babelify": "^9.0.0",
+    "browserify": "^16.2.2",
+    "eslint": "^5.3.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.5.1",
-    "gulp-zip": "^4.2.0",
-    "jquery": "^3.2.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^2.0.0"
   },
   "keywords": [
     "COBI.Bike",
@@ -47,8 +29,9 @@
     "devtools"
   ],
   "dependencies": {
-    "geojson-validation": "^0.1.6",
-    "immutable": "^3.8.1",
+    "jquery": "^3.2.1",
+    "geojson-validation": "^0.2.1",
+    "lodash": "^4.17.10",
     "semver": "^5.4.1",
     "togeojson": "^0.16.0"
   }

@@ -1,25 +1,34 @@
-// @flow
-import type {Map, List} from 'immutable'
-import type {FeatureCollection, Feature} from 'geojson-flow'
 
-const Immutable = require('immutable')
 const spec = require('./spec')
 const GJV = require('geojson-validation')
 
 /**
+ * A COBI json message representation
+ * @typedef {Object} Message
+ * @property {string} action - read, write or notify
+ * @property {string} path - the cobi spec property path
+ * @property {number} timestamp - the unix timestamp for the creation of the message in milliseconds
+ * @property {*} payload - the value of the property
+ */
+
+/**
  * converts a log of COBI.bike Bus events from their absolute epoch value
  * to a relative one with the lowest epoch as base.
+ * @param {Message[]} cobiTrack
+ * @returns {Message[]}
  */
-function normalize (cobiTrack: List<{t: number, message: Object}>): List<[number, Map<string, any>]> {
-  const start = cobiTrack.minBy(({t}) => t).t // first timestampt
-  return cobiTrack.map(({t, message}) => [t - start, Immutable.fromJS(message)])
+module.exports.normalize = function (cobiTrack) {
+  const start = Math.min(...cobiTrack.map(m => m.timestamp)) // first timestamp
+  return cobiTrack.map(message => { return {...message, timestamp: message.timestamp - start} })
 }
 
 /**
  * take a feature collection and returns the first linestring feature that
- * also contains timestampts (coordTimes)
+ * also contains timestamp (coordTimes)
+ * @param {FeatureCollection} geojson
+ * @returns {Feature || null} a geojson linestring feature if any was found
  */
-function fetchLineStr (geojson: FeatureCollection): ?Feature {
+module.exports.fetchLineStr = function (geojson) {
   return geojson.features.find(v => {
     return GJV.isFeature(v) && v.geometry && GJV.isLineString(v.geometry) &&
           Array.isArray(v.geometry.coordinates) && v.properties &&
@@ -31,20 +40,27 @@ function fetchLineStr (geojson: FeatureCollection): ?Feature {
 /**
  * converts a geojson feature and returns a cobitrack compatible
  * js representation with relative timestamps
+ * @param {Feature} geoTrack a geojson linestring with timestamps inside
  */
-function geoToTrack (geoTrack: Feature) { // https://github.com/facebook/flow/issues/1959
-  const times = Immutable.List(geoTrack.properties.coordTimes)
-              .map(Date.parse)
-  const start = times.first()
+module.exports.geoToTrack = function (geoTrack) {
+  const times = geoTrack.properties.coordTimes.map(Date.parse)
+  const start = times[0]
   const ntimes = times.map(v => v - start)
 
-  const msgs = Immutable.fromJS(geoTrack.geometry.coordinates)
-                        .map(v => partialMobileLocation(v.get(0), v.get(1)))
-  return ntimes.zip(msgs)
+  if (geoTrack.geometry && geoTrack.geometry.coordinates) {
+    return geoTrack.geometry.coordinates
+      .map(([lon, lat], index) => { return {...module.exports.partialMobileLocation(lon, lat), timestamp: ntimes[index]} })
+  }
 }
 
-function partialMobileLocation (longitude: number, latitude: number): Map<string, any> {
-  return Immutable.fromJS({
+/**
+ * create a cobi spec location using only lat and lon values
+ * @param {number} longitude
+ * @param {number} latitude
+ * @returns {{action: string, path: string, payload: {altitude: number, bearing: number, coordinate: {latitude: *, longitude: *}, speed: number}}}
+ */
+module.exports.partialMobileLocation = function (longitude, latitude) {
+  return {
     'action': 'NOTIFY',
     'path': spec.mobile.location,
     'payload': {
@@ -56,29 +72,46 @@ function partialMobileLocation (longitude: number, latitude: number): Map<string
       },
       'speed': 0
     }
-  })
+  }
 }
 
-function partialStartControl (longitude: number, latitude: number) {
-  return Immutable.Map({
+/**
+ * creates a navigation service start navigation control
+ * @param {number} longitude
+ * @param {number} latitude
+ * @returns {{action: string, path: string, payload: {action: string, destination: {latitude: number, longitude: number}}}}
+ */
+module.exports.partialStartControl = function (longitude, latitude) {
+  return {
     'action': 'NOTIFY',
     'path': spec.navigationService.control,
-    'payload': Immutable.Map({
+    'payload': {
       'action': 'START',
       'destination': {
         'latitude': latitude,
         'longitude': longitude
       }
-    })
-  })
+    }
+  }
 }
 
-function partialRoute (origin: {longitude: number, latitude: number},
-                       destination: {longitude: number, latitude: number}) {
-  return Immutable.Map({
+/**
+ * @typedef latlng
+ * @property {number} longitude
+ * @property {number} latitude
+ */
+
+/**
+ * creates a navigation service route message
+ * @param {latlng} origin
+ * @param {latlng} destination
+ * @returns {{action: string, path: string, payload: {origin: {name: string, address: string, category: string, coordinate: latlng}, destination: {name: string, address: string, category: string, coordinate: latlng}}}}
+ */
+module.exports.partialRoute = function (origin, destination) {
+  return {
     'action': 'NOTIFY',
     'path': spec.navigationService.route,
-    'payload': Immutable.fromJS({
+    'payload': {
       'origin': {
         'name': 'Solmsstraße',
         'address': 'Frankfurt am Main',
@@ -90,17 +123,18 @@ function partialRoute (origin: {longitude: number, latitude: number},
         'address': 'Neverland',
         'category': 'NIGHTLIFE',
         'coordinate': destination
-      }})
-  })
+      }}
+  }
 }
 
 /**
  * check if there is any errors on the gpx file, returns null when no errors occurs
+ * @param {Document} oDOM an xml DOM
  */
-function gpxErrors (oDOM: Document) {
+module.exports.gpxErrors = function (oDOM) {
   // print the name of the root element or error message
   if (oDOM.documentElement && oDOM.documentElement.nodeName === 'parsererror') {
-    return 'parsererror reading xml file'
+    return 'parser error reading xml file'
   }
   return null
 }
@@ -108,25 +142,15 @@ function gpxErrors (oDOM: Document) {
 /**
  * check if the raw object is a valid cobitrack object
  * Returns an error message if so, otherwise undefined
+ * @param {*} raw any js object
  */
-function cobiTrackErrors (raw: any) {
+module.exports.cobiTrackErrors = function (raw) {
   if (!Array.isArray(raw)) return `root element must be an Array`
 
-  const notTuples = raw.filter(v => !(v.t && v.message))
-  if (notTuples.length > 0) {
-    return `Every element of the array MUST be a {t: number, msg: object} object.
-    the following elements failed: ${JSON.stringify(notTuples)}`
-  }
-
-  const notTimestamps = raw.filter(({t}) => !Number.isInteger(t))
-  if (notTimestamps.length > 0) {
-    return `Every timestampt element MUST be an integer in milliseconds.
-    the following elements failed: ${JSON.stringify(notTimestamps)}`
-  }
-
-  const notMessages = raw.filter(({message}) => !(message['action'] &&
-                                                  message['path'] &&
-                                                  message['payload'] != null))
+  const notMessages = raw.filter(message => !(message.action &&
+                                              message.path &&
+                                              message.timestamp !== null &&
+                                              message.payload !== null))
   if (notMessages.length > 0) {
     return `Every message MUST contain "action", "path" and "payload".
     the following elements failed: ${JSON.stringify(notMessages)}`
@@ -138,36 +162,28 @@ function cobiTrackErrors (raw: any) {
  * be triggered. The function will be called after it stops being called for
  * N milliseconds. If `immediate` is passed, trigger the function on the
  * leading edge, instead of the trailing.
+ *
+ * @param {Function} func the function to debounce
+ * @param {number} [wait] the amount of time to debounce
+ * @param {boolean} [immediate] whether to call the function immediately the first time
  */
-function debounce (func: () => mixed, wait?: number, immediate?: boolean) {
+module.exports.debounce = function (func, wait, immediate) {
   const wait2 = wait || 500
-  let timeout
-  return function () {
-    const context = this
-    const args = arguments
+  let timeout = null
+  return () => {
     const later = function () {
       timeout = null
       if (!immediate) {
-        func.apply(context, args)
+        func.apply(this, arguments)
       }
     }
     const callNow = immediate && !timeout
-    clearTimeout(timeout)
+    if (timeout) {
+      clearTimeout(timeout)
+    }
     timeout = setTimeout(later, wait2)
     if (callNow) {
-      func.apply(context, args)
+      func.apply(this, arguments)
     }
   }
-};
-
-module.exports = {
-  normalize: normalize,
-  fetchLineStr: fetchLineStr,
-  geoToTrack: geoToTrack,
-  gpxErrors: gpxErrors,
-  partialMobileLocation: partialMobileLocation,
-  partialStartControl: partialStartControl,
-  partialRoute: partialRoute,
-  cobiTrackErrors: cobiTrackErrors,
-  debounce: debounce
 }

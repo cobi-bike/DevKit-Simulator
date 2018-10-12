@@ -9,7 +9,7 @@ let panels = {} // devtool panels map
 let pages = {} // devtool pages map
 console.log('background init')
 chrome.runtime.onConnect.addListener(function (port) {
-    // assign the listener function to a variable so we can remove it later
+  // assign the listener function to a variable so we can remove it later
   let listener = null
   console.log(`init message received: ${JSON.stringify(port)}`)
   if (port.name === 'panel') {
@@ -76,8 +76,8 @@ function reply (port, message, sender, sendResponse) {
   if (message.tabId && !panels[message.tabId]) {
     panels[message.tabId] = port
   }
-    // the devtool panel might request the URL of a track file from
-    // the backgroung page
+  // the devtool panel might request the URL of a track file from
+  // the backgroung page
   if (message.tabId && message.track && panels[message.tabId]) {
     console.log('track request: ', message)
     message.trackUrl = chrome.runtime.getURL(`tracks/${message.track}`)
