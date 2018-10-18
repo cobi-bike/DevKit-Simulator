@@ -18,6 +18,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.5.1",
+    "gulp-zip": "^4.2.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
@@ -29,8 +30,9 @@
     "devtools"
   ],
   "dependencies": {
-    "jquery": "^3.2.1",
+    "brfs": "^2.0.1",
     "geojson-validation": "^0.2.1",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.10",
     "semver": "^5.4.1",
     "togeojson": "^0.16.0"
