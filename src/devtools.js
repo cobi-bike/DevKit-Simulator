@@ -1,4 +1,3 @@
-// @flow
 /* global chrome:false */
 
 // Can use
