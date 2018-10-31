@@ -9,7 +9,7 @@
 // chrome.devtools.network
 // chrome.devtools.panels
 
-// --
+// .....................................
 const toGeoJSON = require('togeojson')
 const semver = require('semver')
 const GJV = require('geojson-validation')
@@ -22,7 +22,8 @@ const log = require('./lib/log')
 const util = require('./lib/utils')
 const math = require('./lib/math')
 const spec = require('./lib/spec')
-// --
+
+// ......................................
 const thumbControllerHTMLIds = {
   'COBI': '#cobi',
   'BOSCH_NYON': '#nyon',
@@ -44,7 +45,8 @@ const dom = {
   buttonCancel: $('#btn-cancel'),
   tcType: $('#tc-type'), // thumb controller type
   joystick: $('#joystick'),
-  nyonSelect: $('#nyn-select')
+  nyonSelect: $('#nyn-select'),
+  linkDemo: $('#link-demo')
 }
 
 // Create a connection to the background page
@@ -95,7 +97,7 @@ state.on('panel', (current, previous) => {
 state.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
   .toggleClass('webapp-warning', version === null))
 state.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
-state.once('specVersion', version => $('#link-demo').toggle(version === null))
+state.once('specVersion', version => dom.linkDemo.toggle(version === null))
 state.on('specVersion', version => dom.infinityLoader.toggle(version === null))
 state.on('specVersion', version => {
   if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
@@ -106,6 +108,7 @@ state.on('specVersion', version => {
 state.on('thumbControllerType', onThumbControllerTypeChanged)
 state.on('cobiJsToken', onCobiJsTokenChanged)
 
+// .............................................................................................
 // ui elements initialization
 $(document).ready(() => {
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -153,8 +156,9 @@ $(document).ready(() => {
   state.update('destination/marker', flag)
 })
 
-// ----
+// .............................................................................................
 // ui elements setup
+dom.linkDemo.on('click', () => chrome.tabs.update({ url: 'https://codepen.io/cobi-bike/pen/VzBOqp?editors=0010' }))
 dom.defaultTracks.on('change', () => {
   let value = dom.defaultTracks.val()
   if (value.startsWith('custom-')) {
@@ -217,7 +221,7 @@ dom.inputFile.on('change', event => {
   }
   gpxReader.readAsText(file)
 })
-// --
+// .......................................................................................
 dom.infinityLoader.hide()
 $('#btn-state').on('click', () => exec(meta.state))
 dom.touchUiToggle.on('click', () => setTouchInteraction(dom.touchUiToggle.is(':checked')))
