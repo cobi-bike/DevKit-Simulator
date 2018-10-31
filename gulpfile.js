@@ -34,8 +34,9 @@ function transpile (src, dest) {
 
 // ---------- tasks
 gulp.task('chrome.index', () => transpile('src/panel.js', 'index.js'))
+gulp.task('chrome.background', () => transpile('src/background.js', 'background.js'))
 gulp.task('chrome.devtools', () => transpile('src/devtools.js', 'devtools.js'))
-gulp.task('browser', ['chrome.index', 'chrome.devtools'])
+gulp.task('browser', ['chrome.index', 'chrome.devtools', 'chrome.background'])
 
 gulp.task('resources', function () {
   return gulp.src('resources/**/*.*')
