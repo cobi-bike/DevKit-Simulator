@@ -25,49 +25,49 @@ const spec = require('./lib/spec')
 
 // ......................................
 const thumbControllerHTMLIds = {
-  'COBI': '#cobi',
-  'BOSCH_NYON': '#nyon',
-  'BOSCH_INTUVIA': '#intuvia',
-  'BOSCH_INTUVIA_MY17': '#intuvia'
+    'COBI': '#cobi',
+    'BOSCH_NYON': '#nyon',
+    'BOSCH_INTUVIA': '#intuvia',
+    'BOSCH_INTUVIA_MY17': '#intuvia'
 }
 const ENTER = 13 // key code on a keyboard
 const averageSpeed = 15 // km/h
 const minCobiJsSupported = '0.44.0'
 const dom = {
-  defaultTracks: $('#default-tracks'),
-  buttonPlay: $('#btn-play'),
-  touchUiToggle: $('#touch-ui-toggle'),
-  infinityLoader: $('#infinity_loader'),
-  coordinates: $('#coordinates'),
-  inputFile: $('#input-file'),
-  destinationCoordinates: $('#destination-coordinates'),
-  buttonApply: $('#btn-apply'),
-  buttonCancel: $('#btn-cancel'),
-  tcType: $('#tc-type'), // thumb controller type
-  joystick: $('#joystick'),
-  nyonSelect: $('#nyn-select'),
-  linkDemo: $('#link-demo')
+    defaultTracks: $('#default-tracks'),
+    buttonPlay: $('#btn-play'),
+    touchUiToggle: $('#touch-ui-toggle'),
+    infinityLoader: $('#infinity_loader'),
+    coordinates: $('#coordinates'),
+    inputFile: $('#input-file'),
+    destinationCoordinates: $('#destination-coordinates'),
+    buttonApply: $('#btn-apply'),
+    buttonCancel: $('#btn-cancel'),
+    tcType: $('#tc-type'), // thumb controller type
+    joystick: $('#joystick'),
+    nyonSelect: $('#nyn-select'),
+    linkDemo: $('#link-demo')
 }
 
 // Create a connection to the background page
 const backgroundPageConnection = chrome.runtime.connect({
-  name: 'panel'
+    name: 'panel'
 })
 // initialize a double direction connection by sending the tabId
 backgroundPageConnection.postMessage({
-  name: 'panel',
-  tabId: chrome.devtools.inspectedWindow.tabId,
-  track: dom.defaultTracks.val()
+    name: 'panel',
+    tabId: chrome.devtools.inspectedWindow.tabId,
+    track: dom.defaultTracks.val()
 })
 // receive messages from the devtools page forwarded through the backgroundPageConnection
 backgroundPageConnection.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('message received: ', message)
-  if (message.name !== 'panel') { // ignore reply messages
-    state.update('specVersion', message.specVersion)
-    state.update('containerUrl', message.containerUrl)
-  } else {
-    state.update('track/url', message.trackUrl)
-  }
+    console.log('message received: ', message)
+    if (message.name !== 'panel') { // ignore reply messages
+        state.update('specVersion', message.specVersion)
+        state.update('containerUrl', message.containerUrl)
+    } else {
+        state.update('track/url', message.trackUrl)
+    }
 })
 
 // check for COBI.js library
@@ -88,22 +88,22 @@ state.on('track/timeouts', onTrackTimeoutsChanged)
  * - the simulator panel otherwise
  */
 state.on('panel', (current, previous) => {
-  if (current !== previous) {
-    $(`#${current}`).show()
-    $(`#${previous}`).hide()
-  }
+    if (current !== previous) {
+        $(`#${current}`).show()
+        $(`#${previous}`).hide()
+    }
 })
 
 state.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
-  .toggleClass('webapp-warning', version === null))
+    .toggleClass('webapp-warning', version === null))
 state.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
 state.once('specVersion', version => dom.linkDemo.toggle(version === null))
 state.on('specVersion', version => dom.infinityLoader.toggle(version === null))
 state.on('specVersion', version => {
-  if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
-    return state.update('panel', 'error')
-  }
-  state.update('panel', 'simulator')
+    if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {
+        return state.update('panel', 'error')
+    }
+    state.update('panel', 'simulator')
 })
 state.on('thumbControllerType', onThumbControllerTypeChanged)
 state.on('cobiJsToken', onCobiJsTokenChanged)
@@ -111,115 +111,115 @@ state.on('cobiJsToken', onCobiJsTokenChanged)
 // .............................................................................................
 // ui elements initialization
 $(document).ready(() => {
-  const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17,
-    center: {lat: 50.119496, lng: 8.6377155}
-  })
-
-  const marker = new google.maps.Marker({
-    position: {lat: 50.119496, lng: 8.6377155},
-    map: map,
-    draggable: true
-  })
-  google.maps.event.addListener(marker,
-    'dragend',
-    (event) => {
-      let position = marker.getPosition()
-      dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
-      setPosition(`${position.lat()}, ${position.lng()}`)
-    })
-  google.maps.event.addListener(marker,
-    'position_changed',
-    (event) => {
-      const position = marker.getPosition()
-      if (dom.coordinates.val() !== `${position.lat()}, ${position.lng()}`) {
-        dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
-      }
+    const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: { lat: 50.119496, lng: 8.6377155 }
     })
 
-  const flag = new google.maps.Marker({
-    position: {lat: 50.104286, lng: 8.674835},
-    map: map,
-    icon: 'images/beachflag.png',
-    draggable: true
-  })
-  google.maps.event.addListener(flag,
-    'dragend',
-    (event) => {
-      let position = flag.getPosition()
-      dom.destinationCoordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
-      onDestinationCoordinatesChanged(`${position.lat()}, ${position.lng()}`)
+    const marker = new google.maps.Marker({
+        position: { lat: 50.119496, lng: 8.6377155 },
+        map: map,
+        draggable: true
     })
+    google.maps.event.addListener(marker,
+        'dragend',
+        (event) => {
+            let position = marker.getPosition()
+            dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
+            setPosition(`${position.lat()}, ${position.lng()}`)
+        })
+    google.maps.event.addListener(marker,
+        'position_changed',
+        (event) => {
+            const position = marker.getPosition()
+            if (dom.coordinates.val() !== `${position.lat()}, ${position.lng()}`) {
+                dom.coordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
+            }
+        })
 
-  state.update('map', map)
-  state.update('position/marker', marker)
-  state.update('destination/marker', flag)
+    const flag = new google.maps.Marker({
+        position: { lat: 50.104286, lng: 8.674835 },
+        map: map,
+        icon: 'images/beachflag.png',
+        draggable: true
+    })
+    google.maps.event.addListener(flag,
+        'dragend',
+        (event) => {
+            let position = flag.getPosition()
+            dom.destinationCoordinates.val(`${position.lat().toPrecision(7)}, ${position.lng().toPrecision(7)}`)
+            onDestinationCoordinatesChanged(`${position.lat()}, ${position.lng()}`)
+        })
+
+    state.update('map', map)
+    state.update('position/marker', marker)
+    state.update('destination/marker', flag)
 })
 
 // .............................................................................................
 // ui elements setup
 dom.linkDemo.on('click', () => chrome.tabs.update({ url: 'https://codepen.io/cobi-bike/pen/VzBOqp?editors=0010' }))
 dom.defaultTracks.on('change', () => {
-  let value = dom.defaultTracks.val()
-  if (value.startsWith('custom-')) {
-    const filename = value.substring('custom-'.length)
-    return state.update('track', state.get('user/tracks').get(filename))
-  }
-  backgroundPageConnection.postMessage({
-    name: 'panel',
-    tabId: chrome.devtools.inspectedWindow.tabId,
-    track: value
-  })
+    let value = dom.defaultTracks.val()
+    if (value.startsWith('custom-')) {
+        const filename = value.substring('custom-'.length)
+        return state.update('track', state.get('user/tracks').get(filename))
+    }
+    backgroundPageConnection.postMessage({
+        name: 'panel',
+        tabId: chrome.devtools.inspectedWindow.tabId,
+        track: value
+    })
 })
 
 $('#btn-stop').hide().on('click', () => state.update('track/timeouts', [])) // clear old timeouts
 dom.buttonPlay.hide().on('click', () => fakeInput(state.get('track')))
-  .on('click', () => mapMarkerFollowsFakeInput(state.get('track')))
+    .on('click', () => mapMarkerFollowsFakeInput(state.get('track')))
 
 $('#input-file-link').on('click', () => dom.inputFile.click())
 dom.inputFile.on('change', event => {
-  const file = event.target.files[0]
-  if (!file) return
+    const file = event.target.files[0]
+    if (!file) return
 
-  // helper function to avoid duplication
-  // once we confirm that the file is a valid track. Add it to the options
-  // and select it
-  const onSuccess = (result) => {
-    const currentTrack = state.get('track')
-    if (lodash.isEqual(result, currentTrack)) {
-      const newTracks = state.get('user/tracks')
-        .set(file.name, currentTrack)
-      // HACK: we are forced to store the content of the files because it is not
-      // possible to trigger a file read from JS without the user manually
-      // triggering it
-      state.update('user/tracks', newTracks)
-      dom.defaultTracks.append($('<option>', {
-        value: `custom-${file.name}`,
-        text: file.name,
-        selected: true
-      }))
-      exec(log.info(`${file.name} load: DONE`))
+    // helper function to avoid duplication
+    // once we confirm that the file is a valid track. Add it to the options
+    // and select it
+    const onSuccess = (result) => {
+        const currentTrack = state.get('track')
+        if (lodash.isEqual(result, currentTrack)) {
+            const newTracks = state.get('user/tracks')
+                .set(file.name, currentTrack)
+            // HACK: we are forced to store the content of the files because it is not
+            // possible to trigger a file read from JS without the user manually
+            // triggering it
+            state.update('user/tracks', newTracks)
+            dom.defaultTracks.append($('<option>', {
+                value: `custom-${file.name}`,
+                text: file.name,
+                selected: true
+            }))
+            exec(log.info(`${file.name} load: DONE`))
+        }
     }
-  }
 
-  exec(log.info(`loading: ${file.name}`))
-  // assume cobi track file
-  if (file.type.endsWith('json')) {
-    const trackReader = new FileReader()
-    trackReader.onload = (evt) => {
-      const result = onCobiTrackFileLoaded(JSON.parse(evt.target.result))
-      onSuccess(result)
+    exec(log.info(`loading: ${file.name}`))
+    // assume cobi track file
+    if (file.type.endsWith('json')) {
+        const trackReader = new FileReader()
+        trackReader.onload = (evt) => {
+            const result = onCobiTrackFileLoaded(JSON.parse(evt.target.result))
+            onSuccess(result)
+        }
+        return trackReader.readAsText(file)
     }
-    return trackReader.readAsText(file)
-  }
-  // xml otherwise
-  const gpxReader = new FileReader()
-  const parser = new DOMParser()
-  gpxReader.onload = (event) => {
-    const result = onGpxFileLoaded(parser.parseFromString(event.target.result, 'application/xml'))
-    onSuccess(result)
-  }
-  gpxReader.readAsText(file)
+    // xml otherwise
+    const gpxReader = new FileReader()
+    const parser = new DOMParser()
+    gpxReader.onload = (event) => {
+        const result = onGpxFileLoaded(parser.parseFromString(event.target.result, 'application/xml'))
+        onSuccess(result)
+    }
+    gpxReader.readAsText(file)
 })
 
 dom.infinityLoader.hide()
@@ -244,8 +244,8 @@ dom.buttonApply.on('click', () => onDestinationCoordinatesChanged())
 dom.tcType.on('change', () => state.update('thumbControllerType', dom.tcType.val()))
 
 dom.nyonSelect.mouseenter(() => {
-  dom.joystick.css('opacity', '1.0')
-  dom.joystick.css('transition', 'opacity 0.2s ease-in-out')
+    dom.joystick.css('opacity', '1.0')
+    dom.joystick.css('transition', 'opacity 0.2s ease-in-out')
 })
 dom.joystick.mouseleave(() => dom.joystick.css('opacity', '0'))
 // thumb controllers - COBI.bike
@@ -271,20 +271,20 @@ $('#iva-minus').on('click', () => thumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
 
 function initializeCobiJs () {
-  setTouchInteraction(dom.touchUiToggle.is(':checked'))
-  setPosition(dom.coordinates.val())
-  // only set the destination if the user didn't cancel it before
-  if (dom.buttonCancel.is(':visible')) {
-    onDestinationCoordinatesChanged(dom.destinationCoordinates.val())
-  }
-  exec(meta.notify(spec.hub.thumbControllerInterfaceId, state.get('thumbControllerType')))
+    setTouchInteraction(dom.touchUiToggle.is(':checked'))
+    setPosition(dom.coordinates.val())
+    // only set the destination if the user didn't cancel it before
+    if (dom.buttonCancel.is(':visible')) {
+        onDestinationCoordinatesChanged(dom.destinationCoordinates.val())
+    }
+    exec(meta.notify(spec.hub.thumbControllerInterfaceId, state.get('thumbControllerType')))
 }
 
 /**
  * CDK-2 mock input data to test web apps
  */
 function thumbAction (value) {
-  exec(meta.notify(spec.hub.externalInterfaceAction, value))
+    exec(meta.notify(spec.hub.externalInterfaceAction, value))
 }
 
 /**
@@ -292,11 +292,11 @@ function thumbAction (value) {
  * @param {Message[]} track a cobi track representation
  */
 function fakeInput (track) {
-  const emitters = track.map(msg => { return {...msg, expression: meta.notify(msg.path, msg.payload)} })
+    const emitters = track.map(msg => { return { ...msg, expression: meta.notify(msg.path, msg.payload) } })
 
-    .map(data => setTimeout(() => exec(data.expression), data.timestamp))
+        .map(data => setTimeout(() => exec(data.expression), data.timestamp))
 
-  state.update('track/timeouts', [...state.get('track/timeouts'), emitters])
+    state.update('track/timeouts', [...state.get('track/timeouts'), emitters])
 }
 
 /**
@@ -304,16 +304,16 @@ function fakeInput (track) {
  * @param {Message[]} track a cobi track representation
  */
 function mapMarkerFollowsFakeInput (track) {
-  const mappers = track
-    .filter(msg => msg.path === spec.mobile.location)
-    .map(msg => {
-      return {...msg,
-        expression: () => changeMarkerPosition(msg.payload.coordinate.latitude, msg.payload.coordinate.longitude)
-      }
-    })
-    .map(msg => setTimeout(msg.expression, msg.timestamp))
+    const mappers = track
+        .filter(msg => msg.path === spec.mobile.location)
+        .map(msg => {
+            return { ...msg,
+                expression: () => changeMarkerPosition(msg.payload.coordinate.latitude, msg.payload.coordinate.longitude)
+            }
+        })
+        .map(msg => setTimeout(msg.expression, msg.timestamp))
 
-  state.update('track/timeouts', [...state.get('track/timeouts'), mappers])
+    state.update('track/timeouts', [...state.get('track/timeouts'), mappers])
 }
 
 /**
@@ -321,13 +321,13 @@ function mapMarkerFollowsFakeInput (track) {
  * @param {*} raw a js object ... possibly a cobi track
  */
 function onCobiTrackFileLoaded (raw) {
-  const errors = util.cobiTrackErrors(raw)
-  if (errors) {
-    return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
-  }
-  const track = util.normalize(raw)
+    const errors = util.cobiTrackErrors(raw)
+    if (errors) {
+        return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
+    }
+    const track = util.normalize(raw)
 
-  return state.update('track', track)
+    return state.update('track', track)
 }
 
 /**
@@ -335,22 +335,22 @@ function onCobiTrackFileLoaded (raw) {
  * @param {Document} content the dom of the xml file
  */
 function onGpxFileLoaded (content) {
-  let errors = util.gpxErrors(content)
-  if (errors) {
-    return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
-  }
+    let errors = util.gpxErrors(content)
+    if (errors) {
+        return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
+    }
 
-  const geojson = toGeoJSON.gpx(content)
-  if (!GJV.valid(geojson)) {
-    return exec(log.error(`Invalid input file`))
-  }
+    const geojson = toGeoJSON.gpx(content)
+    if (!GJV.valid(geojson)) {
+        return exec(log.error(`Invalid input file`))
+    }
 
-  const featLineStr = util.fetchLineStr(geojson)
-  if (!featLineStr) {
-    return exec(log.error('Invalid input file data'))
-  }
+    const featLineStr = util.fetchLineStr(geojson)
+    if (!featLineStr) {
+        return exec(log.error('Invalid input file data'))
+    }
 
-  return state.update('track', util.geoToTrack(featLineStr))
+    return state.update('track', util.geoToTrack(featLineStr))
 }
 
 /**
@@ -358,7 +358,7 @@ function onGpxFileLoaded (content) {
  * @param {boolean} checked enabled or not
  */
 function setTouchInteraction (checked) {
-  exec(meta.notify(spec.app.touchInteractionEnabled, checked))
+    exec(meta.notify(spec.app.touchInteractionEnabled, checked))
 }
 
 /**
@@ -366,20 +366,20 @@ function setTouchInteraction (checked) {
  * @param {string} inputText a lat long text representation
  */
 function setPosition (inputText) {
-  const [lat, lon] = inputText.split(',')
-    .map(text => text.trim())
-    .map(parseFloat)
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-    return exec(log.error(`Invalid coordinates
+    const [lat, lon] = inputText.split(',')
+        .map(text => text.trim())
+        .map(parseFloat)
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
       - instead got: ${inputText || 'null'}`))
-  }
+    }
 
-  changeMarkerPosition(lat, lon)
+    changeMarkerPosition(lat, lon)
 
-  const msg = util.partialMobileLocation(lon, lat)
+    const msg = util.partialMobileLocation(lon, lat)
 
-  exec(meta.notify(spec.mobile.location, msg.payload))
+    exec(meta.notify(spec.mobile.location, msg.payload))
 }
 
 /**
@@ -388,17 +388,17 @@ function setPosition (inputText) {
  * @param {string} oldValue
  */
 function onThumbControllerTypeChanged (currentValue, oldValue) {
-  let newId = thumbControllerHTMLIds[currentValue]
-  let oldId = thumbControllerHTMLIds[oldValue]
+    let newId = thumbControllerHTMLIds[currentValue]
+    let oldId = thumbControllerHTMLIds[oldValue]
 
-  if (currentValue !== oldValue) {
-    exec(meta.notify(spec.hub.thumbControllerInterfaceId, currentValue))
-  }
+    if (currentValue !== oldValue) {
+        exec(meta.notify(spec.hub.thumbControllerInterfaceId, currentValue))
+    }
 
-  if (newId !== oldId) {
-    $(newId).show()
-    $(oldId).hide()
-  }
+    if (newId !== oldId) {
+        $(newId).show()
+        $(oldId).hide()
+    }
 }
 
 /**
@@ -407,8 +407,8 @@ function onThumbControllerTypeChanged (currentValue, oldValue) {
  * @param {number} lon
  */
 function changeMarkerPosition (lat, lon) {
-  state.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
-  state.get('map').setCenter(new google.maps.LatLng(lat, lon))
+    state.get('position/marker').setPosition(new google.maps.LatLng(lat, lon))
+    state.get('map').setCenter(new google.maps.LatLng(lat, lon))
 }
 
 /**
@@ -417,7 +417,7 @@ function changeMarkerPosition (lat, lon) {
  * all necessary elements are there.
  */
 function autoDetectCobiJs () {
-  exec(meta.cobiJsToken, {}, (token) => state.update('cobiJsToken', token || null))
+    exec(meta.cobiJsToken, {}, (token) => state.update('cobiJsToken', token || null))
 }
 /**
  * wrapper around chrome eval function. This is mainly to hijack all evaluations
@@ -428,15 +428,15 @@ function autoDetectCobiJs () {
  * or an error otherwise
  */
 function exec (expression, options, callback) {
-  if (options && !options.frameURL && state.get('containerUrl')) {
-    options.frameURL = state.get('containerUrl')
-  } else if (!options) {
-    options = {frameURL: state.get('containerUrl')}
-  }
-  if (!callback) {
-    callback = errorHandler
-  }
-  chrome.devtools.inspectedWindow.eval(expression, options, callback)
+    if (options && !options.frameURL && state.get('containerUrl')) {
+        options.frameURL = state.get('containerUrl')
+    } else if (!options) {
+        options = { frameURL: state.get('containerUrl') }
+    }
+    if (!callback) {
+        callback = errorHandler
+    }
+    chrome.devtools.inspectedWindow.eval(expression, options, callback)
 }
 
 /**
@@ -445,10 +445,10 @@ function exec (expression, options, callback) {
  * @param {boolean} value
  */
 function ringTheBell (value) {
-  exec(meta.notify(spec.hub.bellRinging, value))
-  if (value) {
-    setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
-  }
+    exec(meta.notify(spec.hub.bellRinging, value))
+    if (value) {
+        setTimeout(() => ringTheBell(false), 500 * Math.random()) // ms
+    }
 }
 
 /**
@@ -456,15 +456,15 @@ function ringTheBell (value) {
  * @param {string} fileUrl
  */
 function onTrackUrlChanged (fileUrl) {
-  if (fileUrl.endsWith('.gpx')) {
-    return $.ajax({
-      url: fileUrl,
-      dataType: 'xml',
-      success: (data) => onGpxFileLoaded(data)
-    })
-  }
-  // json cobi track otherwise
-  $.getJSON(fileUrl, onCobiTrackFileLoaded)
+    if (fileUrl.endsWith('.gpx')) {
+        return $.ajax({
+            url: fileUrl,
+            dataType: 'xml',
+            success: (data) => onGpxFileLoaded(data)
+        })
+    }
+    // json cobi track otherwise
+    $.getJSON(fileUrl, onCobiTrackFileLoaded)
 }
 
 /**
@@ -473,29 +473,29 @@ function onTrackUrlChanged (fileUrl) {
  * @param {Array<Array<number>>} oldTimeouts the previous collection of timeouts
  */
 function onTrackTimeoutsChanged (timeouts, oldTimeouts) {
-  // deactivate old waiting timeouts according to the current timeouts value
-  // Remove the previous timeouts if any exists
-  if (timeouts.length === 0 && oldTimeouts.length !== 0) {
-    oldTimeouts.map(ids => ids.map(clearTimeout))
-    exec(log.warn('Deactivating previous fake events'))
-  }
+    // deactivate old waiting timeouts according to the current timeouts value
+    // Remove the previous timeouts if any exists
+    if (timeouts.length === 0 && oldTimeouts.length !== 0) {
+        oldTimeouts.map(ids => ids.map(clearTimeout))
+        exec(log.warn('Deactivating previous fake events'))
+    }
 
-  // reset the state of the play/stop button is something
-  // triggered a change without the user clicking on the button
-  if (timeouts.length === 0 && oldTimeouts.length !== 0) {
-    dom.buttonPlay.show()
-    $('#btn-stop').hide()
-  } else if (timeouts.length !== 0 && oldTimeouts.length === 0) {
-    dom.buttonPlay.hide()
-    $('#btn-stop').show()
-  }
+    // reset the state of the play/stop button is something
+    // triggered a change without the user clicking on the button
+    if (timeouts.length === 0 && oldTimeouts.length !== 0) {
+        dom.buttonPlay.show()
+        $('#btn-stop').hide()
+    } else if (timeouts.length !== 0 && oldTimeouts.length === 0) {
+        dom.buttonPlay.hide()
+        $('#btn-stop').show()
+    }
 
-  if (timeouts.length === 0) {
-    setTouchInteraction(false)
-    dom.touchUiToggle.prop('checked', false)
-  }
+    if (timeouts.length === 0) {
+        setTouchInteraction(false)
+        dom.touchUiToggle.prop('checked', false)
+    }
 
-  dom.touchUiToggle.prop('disabled', timeouts.length !== 0)
+    dom.touchUiToggle.prop('disabled', timeouts.length !== 0)
 }
 
 /**
@@ -503,41 +503,41 @@ function onTrackTimeoutsChanged (timeouts, oldTimeouts) {
  * as destination
  */
 function onDestinationCoordinatesChanged () {
-  const inputText = dom.destinationCoordinates.val()
-  if (inputText.length === 0) {
-    return exec(meta.notify(spec.navigationService.status, 'NONE'))
-  }
-  const [lat, lon] = inputText.split(',')
-    .map(text => text.trim())
-    .map(parseFloat)
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-    return exec(log.error(`Invalid coordinates
+    const inputText = dom.destinationCoordinates.val()
+    if (inputText.length === 0) {
+        return exec(meta.notify(spec.navigationService.status, 'NONE'))
+    }
+    const [lat, lon] = inputText.split(',')
+        .map(text => text.trim())
+        .map(parseFloat)
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        return exec(log.error(`Invalid coordinates
       - expected: latitude, longitude
       - instead got: ${inputText}`))
-  }
-
-  exec(meta.fetch(spec.mobile.location), {}, (location) => {
-    if (!location) {
-      const error = `destination triggers navigation events which require the current position but
-      none was found. Please set the current position and try again.`
-      return exec(log.error(error))
     }
 
-    const route = util.partialRoute(location.coordinate, {latitude: lat, longitude: lon})
-    const distanceToDestination = math.beeLine(lat, lon, location.coordinate.latitude,
-      location.coordinate.longitude)
-    // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
-    const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
+    exec(meta.fetch(spec.mobile.location), {}, (location) => {
+        if (!location) {
+            const error = `destination triggers navigation events which require the current position but
+      none was found. Please set the current position and try again.`
+            return exec(log.error(error))
+        }
 
-    // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
-    exec(meta.notify(spec.navigationService.distanceToDestination, distanceToDestination * 1000))
-    exec(meta.notify(spec.navigationService.eta, eta))
-    exec(meta.notify(spec.navigationService.status, 'NAVIGATING'))
-    exec(meta.notify(spec.navigationService.route, route.payload))
+        const route = util.partialRoute(location.coordinate, { latitude: lat, longitude: lon })
+        const distanceToDestination = math.beeLine(lat, lon, location.coordinate.latitude,
+            location.coordinate.longitude)
+        // 3600 = hours -> seconds, 1000 = seconds -> milliseconds
+        const eta = Math.round((distanceToDestination / averageSpeed) * 3600 * 1000) + Date.now()
 
-    dom.buttonApply.hide()
-    dom.buttonCancel.show()
-  })
+        // in meters according to COBI Spec: https://github.com/cobi-bike/COBI-Spec#navigation-service-channel
+        exec(meta.notify(spec.navigationService.distanceToDestination, distanceToDestination * 1000))
+        exec(meta.notify(spec.navigationService.eta, eta))
+        exec(meta.notify(spec.navigationService.status, 'NAVIGATING'))
+        exec(meta.notify(spec.navigationService.route, route.payload))
+
+        dom.buttonApply.hide()
+        dom.buttonCancel.show()
+    })
 }
 
 /**
@@ -547,8 +547,8 @@ function onDestinationCoordinatesChanged () {
  * @param {KeyboardEvent} event
  */
 function onInputCoordinatesChanged (event) {
-  setPosition(dom.coordinates.val())
-  state.update('track/timeouts', [])
+    setPosition(dom.coordinates.val())
+    state.update('track/timeouts', [])
 }
 
 /**
@@ -557,9 +557,9 @@ function onInputCoordinatesChanged (event) {
  * @param {string} previous
  */
 function onCobiJsTokenChanged (current, previous) {
-  if (current && current !== previous) {
-    $(document).ready(initializeCobiJs)
-  }
+    if (current && current !== previous) {
+        $(document).ready(initializeCobiJs)
+    }
 }
 
 /**
@@ -578,11 +578,11 @@ function onCobiJsTokenChanged (current, previous) {
  * @param {ExceptionInfo} exceptionInfo
  */
 function errorHandler (result, exceptionInfo) {
-  if (exceptionInfo) {
-    console.error('foreign evaluation failure:', exceptionInfo)
-    // give a custom callback to avoid stack overflow
-    exec(log.error(exceptionInfo.value ? exceptionInfo.value : exceptionInfo),
-      {},
-      () => console.error('double internal error'))
-  }
+    if (exceptionInfo) {
+        console.error('foreign evaluation failure:', exceptionInfo)
+        // give a custom callback to avoid stack overflow
+        exec(log.error(exceptionInfo.value ? exceptionInfo.value : exceptionInfo),
+            {},
+            () => console.error('double internal error'))
+    }
 }
