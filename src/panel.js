@@ -221,7 +221,7 @@ dom.inputFile.on('change', event => {
   }
   gpxReader.readAsText(file)
 })
-// .......................................................................................
+
 dom.infinityLoader.hide()
 $('#btn-state').on('click', () => exec(meta.state))
 dom.touchUiToggle.on('click', () => setTouchInteraction(dom.touchUiToggle.is(':checked')))
