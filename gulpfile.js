@@ -13,20 +13,20 @@ function handleError (err) {
 }
 
 function transpile (src, dest) {
-  const b = browserify(src, {debug: true})
+  const b = browserify(src, { debug: true })
   b.transform(babelify, {
     sourceMaps: true,
     presets: [
       ['@babel/env', {
         'targets': {
-          'browsers': ['Chrome >= 45']}}]]
+          'browsers': ['Chrome >= 45'] } }]]
   })
   // run automatically on every update
   b.bundle()
     .on('error', handleError)
     .pipe(source(src))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(concat(dest)) // output filename
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('app/chrome/'))
@@ -50,10 +50,9 @@ gulp.task('tracks', function () {
 gulp.task('copy', ['resources', 'tracks'])
 // build everything once, probably for production
 gulp.task('once', ['browser', 'copy'], function () {
-    return gulp.src('app/chrome/**')
-          .pipe(zip('chrome.zip'))
-          .pipe(gulp.dest('app'))
-
+  return gulp.src('app/chrome/**')
+    .pipe(zip('chrome.zip'))
+    .pipe(gulp.dest('app'))
 })
 // watch and rebuild everything on change
 gulp.task('watch', () => {
