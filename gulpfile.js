@@ -8,55 +8,63 @@ const babelify = require('babelify')
 const sourcemaps = require('gulp-sourcemaps')
 
 function handleError (err) {
-  console.error(err.toString())
-  this.emit('end')
+    console.error(err.toString())
+    this.emit('end')
 }
 
-function transpile (src, dest) {
-  const b = browserify(src, { debug: true })
-  b.transform(babelify, {
-    sourceMaps: true,
-    presets: [
-      ['@babel/env', {
-        'targets': {
-          'browsers': ['Chrome >= 45'] } }]]
-  })
-  // run automatically on every update
-  b.bundle()
-    .on('error', handleError)
-    .pipe(source(src))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(concat(dest)) // output filename
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('app/chrome/'))
+function adaptForBrowsers (src, dest) {
+    const b = browserify(src, { debug: true })
+    b.transform(babelify, {
+        sourceMaps: true,
+        presets: [
+            ['@babel/env', {
+                'targets': {
+                    'browsers': ['Chrome >= 45'] } }]]
+    })
+    // run automatically on every update
+    return b.bundle()
+        .on('error', handleError)
+        .pipe(source(src))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(concat(dest)) // output filename
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('app/chrome/'))
 }
 
 // ---------- tasks
-gulp.task('chrome.index', () => transpile('src/panel.js', 'index.js'))
-gulp.task('chrome.background', () => transpile('src/background.js', 'background.js'))
-gulp.task('chrome.devtools', () => transpile('src/devtools.js', 'devtools.js'))
-gulp.task('browser', ['chrome.index', 'chrome.devtools', 'chrome.background'])
+const browser = gulp.parallel(() => adaptForBrowsers('src/panel.js', 'index.js'),
+    () => adaptForBrowsers('src/background.js', 'background.js'),
+    () => adaptForBrowsers('src/devtools.js', 'devtools.js'))
 
-gulp.task('resources', function () {
-  return gulp.src('resources/**/*.*')
-    .pipe(gulp.dest('app/chrome/'))
-})
+function copyResources () {
+    return gulp.src('resources/**/*.*')
+        .pipe(gulp.dest('app/chrome/'))
+}
 
-gulp.task('tracks', function () {
-  return gulp.src('tracks/**/*.*')
-    .pipe(gulp.dest('app/chrome/tracks'))
-})
+function copyCobiTracks () {
+    return gulp.src('tracks/**/*.*')
+        .pipe(gulp.dest('app/chrome/tracks'))
+}
 
-gulp.task('copy', ['resources', 'tracks'])
+function compressChromeDir () {
+    return gulp.src('app/chrome/**')
+        .pipe(zip('chrome.zip'))
+        .pipe(gulp.dest('app'))
+}
+
+const copy = gulp.parallel(copyResources, copyCobiTracks)
+
 // build everything once, probably for production
-gulp.task('once', ['browser', 'copy'], function () {
-  return gulp.src('app/chrome/**')
-    .pipe(zip('chrome.zip'))
-    .pipe(gulp.dest('app'))
-})
+const buildAndPack = gulp.series(gulp.parallel(browser, copy), compressChromeDir)
+
 // watch and rebuild everything on change
-gulp.task('watch', () => {
-  gulp.watch(['src/**/*.js', 'resources/**/*.*'], ['browser', 'copy'])
-    .on('change', event => console.log(`\nFile ${event.path} was ${event.type}, running tasks...`))
-})
+function watchAndBuild () {
+    gulp.watch('src/**/*.js', browser)
+        .on('change', filename => console.log(`\n${filename} changed, rebuilding...`))
+    gulp.watch('resources/**/*.*', copyResources)
+        .on('change', filename => console.log(`\n${filename} modified, copying...`))
+}
+
+module.exports.build = buildAndPack
+module.exports.watch = watchAndBuild
