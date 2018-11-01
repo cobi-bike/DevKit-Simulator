@@ -205,22 +205,21 @@ dom.inputFile.on('change', event => {
 
     exec(log.info(`loading: ${file.name}`))
     // assume cobi track file
+    const filereader = new FileReader()
     if (file.type.endsWith('json')) {
-        const trackReader = new FileReader()
-        trackReader.onload = (evt) => {
-            const result = onCobiTrackFileLoaded(JSON.parse(evt.target.result))
+        filereader.onload = (evt) => {
+            const result = onCobiTrackFileLoaded(evt.target.result)
             onSuccess(result)
         }
-        return trackReader.readAsText(file)
+    } else {
+        // xml otherwise
+        filereader.onload = (event) => {
+            const result = onGpxFileLoaded(event.target.result)
+            onSuccess(result)
+        }
     }
-    // xml otherwise
-    const gpxReader = new FileReader()
-    const parser = new DOMParser()
-    gpxReader.onload = (event) => {
-        const result = onGpxFileLoaded(parser.parseFromString(event.target.result, 'application/xml'))
-        onSuccess(result)
-    }
-    gpxReader.readAsText(file)
+    // finally read file content
+    filereader.readAsText(file)
 })
 
 dom.infinityLoader.hide()
@@ -319,23 +318,31 @@ function mapMarkerFollowsFakeInput (track) {
 
 /**
  * CDK-107 mock input data to test web apps
- * @param {*} raw a js object ... possibly a cobi track
+ * @param {String} text content of the file
  */
-function onCobiTrackFileLoaded (raw) {
-    const errors = util.cobiTrackErrors(raw)
-    if (errors) {
-        return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
-    }
-    const track = util.normalize(raw)
+function onCobiTrackFileLoaded (text) {
+    try {
+        const raw = JSON.parse(text)
+        const errors = util.cobiTrackErrors(raw)
+        if (errors) {
+            return exec(log.error(`Invalid COBI Track file passed: ${JSON.stringify(errors)}`))
+        }
+        const track = util.normalize(raw)
 
-    return state.update('track', track)
+        return state.update('track', track)
+    } catch (e) {
+        return exec(log.error(`Syntax error: the provided json file cannot be parsed \n ${e.message}`))
+    }
 }
 
 /**
  * CDK-2 mock input data to test web apps
- * @param {Document} content the dom of the xml file
+ * @param {String} text the content of the file
  */
-function onGpxFileLoaded (content) {
+function onGpxFileLoaded (text) {
+    const parser = new DOMParser()
+    const content = parser.parseFromString(text, 'application/xml')
+
     let errors = util.gpxErrors(content)
     if (errors) {
         return exec(log.error(`Invalid GPX file passed: ${JSON.stringify(errors)}`))
@@ -457,15 +464,16 @@ function ringTheBell (value) {
  * @param {string} fileUrl
  */
 function onTrackUrlChanged (fileUrl) {
+    let onContentLoaded = onCobiTrackFileLoaded
     if (fileUrl.endsWith('.gpx')) {
-        return $.ajax({
-            url: fileUrl,
-            dataType: 'xml',
-            success: (data) => onGpxFileLoaded(data)
-        })
+        onContentLoaded = onGpxFileLoaded
     }
     // json cobi track otherwise
-    $.getJSON(fileUrl, onCobiTrackFileLoaded)
+    $.ajax({
+        url: fileUrl,
+        dataType: 'text',
+        success: onContentLoaded
+    })
 }
 
 /**
