@@ -4,7 +4,7 @@
  * @return {number} the same angle in radians
  */
 function toRadians (degrees) {
-  return degrees * Math.PI / 180
+    return degrees * Math.PI / 180
 }
 
 /**
@@ -16,14 +16,14 @@ function toRadians (degrees) {
  * @param {number} lon2 point 2
  */
 module.exports.beeLine = function (lat1, lon1, lat2, lon2) {
-  const R = 6371 // km
-  const dLat = toRadians(lat2 - lat1)
-  const dLon = toRadians(lon2 - lon1)
-  const rlat1 = toRadians(lat1)
-  const rlat2 = toRadians(lat2)
+    const R = 6371 // km
+    const dLat = toRadians(lat2 - lat1)
+    const dLon = toRadians(lon2 - lon1)
+    const rlat1 = toRadians(lat1)
+    const rlat2 = toRadians(lat2)
 
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(rlat1) * Math.cos(rlat2)
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-  return R * c
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    return R * c
 }
