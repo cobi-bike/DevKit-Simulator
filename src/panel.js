@@ -46,7 +46,8 @@ const dom = {
     tcType: $('#tc-type'), // thumb controller type
     joystick: $('#joystick'),
     nyonSelect: $('#nyn-select'),
-    linkDemo: $('#link-demo')
+    linkDemo: $('#link-demo'),
+    linkDemoContainer: $('#link-demo-container')
 }
 
 // Create a connection to the background page
@@ -97,7 +98,7 @@ state.on('panel', (current, previous) => {
 state.on('specVersion', version => $('#is-cobi-supported').html(version || 'not connected')
     .toggleClass('webapp-warning', version === null))
 state.on('specVersion', version => $('#simulator').toggleClass('is-disabled', version === null))
-state.once('specVersion', version => dom.linkDemo.toggle(version === null))
+state.once('specVersion', version => dom.linkDemoContainer.toggle(version === null))
 state.on('specVersion', version => dom.infinityLoader.toggle(version === null))
 state.on('specVersion', version => {
     if (semver.valid(version) && semver.lt(version, minCobiJsSupported)) {

@@ -21,7 +21,6 @@
     <div id="status"></div>
     <div id="main">
       <div id="left_column">
-        <img id="image-result">
         <section id="file-upload">
 
           <h3>Simulate ride</h3>
@@ -258,6 +257,7 @@
         </section>
 
         <section>
+          <h3>Debugging</h3>
           <button id="btn-state" class="btn"> Print state to console</button>
         </section>
 
@@ -306,9 +306,14 @@
 
 
   <!-- Open demo overlay button -->
-  <a id="link-demo">
-    <img src="images/open-demo-btn.png" width="170px" alt="Open demo button">
-  </a>
+  <div id="link-demo-container" class="popup-info">
+    <img src="images/info.svg" height="41" width="40">
+    <p>It looks like your current website doesn't support COBI.Bike DevKit.</p>
+    <p>To learn more, check out the <a class="help-link" href="https://cobi-bike.github.io/COBI.js/">documentation</a> or click the button below to open an interactive demo.</p>
+    <a id="link-demo">
+      <img src="images/open-demo-btn.png" width="170px" alt="Open demo button">
+    </a>
+  </div>
 
   <!-- Infinity loader -->
   <svg width="50" height="auto" id="infinity_loader" viewBox="0 0 100 55">
