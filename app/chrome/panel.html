@@ -14,9 +14,12 @@
 </head>
 
 <body>
-  <p id="error" class="popup popup-error" hidden>
-    Yikes, it looks like your COBI.js version is not compatible with the simulator. Please update your COBI.js version and try again. Visit the <a href="https://forums.cobi.bike/" target="_newtab"> COBI.Bike Forum </a> for more information
-  </p>
+  <div id="error" class="popup-error" hidden>
+    <img src="images/error.svg" height="41" width="41">
+    <p>
+      Yikes, it looks like your COBI.js version is not compatible with the simulator. Please update your COBI.js version and try again. Visit the <a href="https://forums.cobi.bike/" target="_newtab"> COBI.Bike Forum </a> for more information
+    </p>
+  </div>
   <div id="simulator" class="is-disabled">
     <div id="status"></div>
     <div id="main">
@@ -307,9 +310,9 @@
 
   <!-- Open demo overlay button -->
   <div id="link-demo-container" class="popup-info">
-    <img src="images/info.svg" height="41" width="40">
+    <img src="images/info.svg" height="41" width="41">
     <p>It looks like your current website doesn't support COBI.Bike DevKit.</p>
-    <p>To learn more, check out the <a class="help-link" href="https://cobi-bike.github.io/COBI.js/">documentation</a> or click the button below to open an interactive demo.</p>
+    <p>To learn more, check out the <a class="help-link" href="https://cobi-bike.github.io/COBI.js/" target="_blank">documentation</a> or click the button below to open an interactive demo.</p>
     <a id="link-demo" style="cursor: pointer">
       <img src="images/open-demo-btn.png" width="170px" alt="Open demo button">
     </a>

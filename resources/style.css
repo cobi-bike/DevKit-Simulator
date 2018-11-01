@@ -655,15 +655,6 @@ input:checked + .slider:before {
 
 /* Browser Popup */
 
-.popup {
-    position: relative;
-    width: 270px;
-    margin: 200px auto;
-    padding-right: 20px;
-    padding-left: 20px;
-    font-size: 15px;
-}
-
 .popup-info {
     width: 270px;
     font-size: 19px;
@@ -691,30 +682,11 @@ input:checked + .slider:before {
 }
 
 
-/*
-.popup::before {
-    display: inline-block;
-    float: left;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    margin-top: -2px;
-    content: url('images/info.svg');
-}
-*/
-
-.popup-error::before {
-    display: inline-block;
-    float: left;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    margin-top: -2px;
-    content: url('images/error.svg');
-}
-
-.popup a {
-    color: #00c8e6;
+.popup-error {
+    width: 270px;
+    font-size: 19px;
+    text-align: center;
+    transform: translate(-50%, -50%);
 }
 
 .thumb-controller-section {
@@ -780,6 +752,13 @@ input:checked + .slider:before {
     opacity: 0.1;
     pointer-events: none;
 }
+
+#error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 
 #link-demo-container {
   position: absolute;
