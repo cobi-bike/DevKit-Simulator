@@ -188,8 +188,10 @@ dom.inputFile.on('change', event => {
     const onSuccess = (result) => {
         const currentTrack = state.get('track')
         if (lodash.isEqual(result, currentTrack)) {
-            const newTracks = state.get('user/tracks')
-                .set(file.name, currentTrack)
+            const newTracks = Object.assign({
+                [file.name]: currentTrack
+            },
+            state.get('user/tracks'))
             // HACK: we are forced to store the content of the files because it is not
             // possible to trigger a file read from JS without the user manually
             // triggering it
