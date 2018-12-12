@@ -8,7 +8,7 @@
     "start": "npx gulp watch"
   },
   "author": "COBI.Bike GmbH",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "@babel/preset-env": "^7.0.0-rc.1",
