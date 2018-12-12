@@ -1,4 +1,3 @@
-
 # COBI.Bike DevKit Simulator
 
 The COBI.Bike DevKit Simulator is a Chrome Extension to test COBI.Bike modules in the browser with simulated data sources. Continuous riding & fitness data can be simulated by one of our sample cobitrack or GPX files.  
@@ -8,6 +7,7 @@ This project is part of the [COBI.bike DevKit](https://github.com/cobi-bike/devk
 [<img src="resources/btn-install-simulator.png" width="203px" alt="Install simulator button">](https://chrome.google.com/webstore/detail/cobi-devkit-simulator/hpdhkapigojggienmiejhblkhenjdbno)
 
 ![DevKit Simulator](/resources/DevKit%20Simulator.jpg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcobi-bike%2FDevKit-Simulator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcobi-bike%2FDevKit-Simulator?ref=badge_shield)
 
 ## Install
 
@@ -66,3 +66,7 @@ context of your page, and is vulnerable to misbehaving polyfills.
 * Open devtools out into a new window, and then hit the shortcut to open devtools again (cmd+option+i or ctrl+shift+i). This is the `debug devtools` debugger. Check the console there for errors. If you want to file a bug, please save the content of this console as described [here](https://developers.google.com/web/tools/chrome-devtools/console/#saving_the_history)
 * Open chrome://extensions, find COBI.Bike, and click "background page" under
 "Inspected views". You might find the errors there.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcobi-bike%2FDevKit-Simulator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcobi-bike%2FDevKit-Simulator?ref=badge_large)
