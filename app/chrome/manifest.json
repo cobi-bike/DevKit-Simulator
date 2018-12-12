@@ -23,7 +23,7 @@
 
   "offline_enabled": true,
 
-  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://maps.googleapis.com https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com",
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://maps.googleapis.com https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com http://www.google-analytics.com",
   "background": {
     "scripts": ["background.js"]
   },
