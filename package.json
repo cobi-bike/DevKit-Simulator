@@ -1,6 +1,6 @@
 {
   "name": "devkit-simulator",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "DevKit Simulator is a browser-based IDE to build COBI.Bike modules for bikes.",
   "scripts": {
     "test": "eslint --fix src/",
