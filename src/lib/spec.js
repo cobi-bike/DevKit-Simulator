@@ -19,5 +19,8 @@ module.exports = {
         control: 'navigationService/control',
         eta: 'navigationService/eta',
         distanceToDestination: 'navigationService/distanceToDestination'
+    },
+    devkit: {
+        overrideThumbControllerMapping: 'devkit/overrideThumbControllerMapping'
     }
 }
