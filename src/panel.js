@@ -268,8 +268,8 @@ $('#nyn-right').on('click', () => thumbAction('RIGHT'))
 $('#nyn-left').on('click', () => thumbAction('LEFT'))
 dom.nyonSelect.on('click', () => thumbAction('SELECT'))
 // thumb controllers - bosch
-$('#iva-plus').on('click', () => thumbAction('UP'))
-$('#iva-minus').on('click', () => thumbAction('DOWN'))
+$('#iva-plus').on('click', () => onIntuviaThumbAction('UP'))
+$('#iva-minus').on('click', () => onIntuviaThumbAction('DOWN'))
 $('#iva-center').on('click', () => thumbAction('SELECT'))
 
 function initializeCobiJs () {
@@ -548,6 +548,20 @@ function onDestinationCoordinatesChanged () {
 
         dom.buttonApply.hide()
         dom.buttonCancel.show()
+    })
+}
+
+/**
+ * Fired whenever the plus or minus buttons in the Intuvia Thumb
+ * controller is triggered. Returns a warning if the controller
+ * mapping is not overridden, else the corresponding UP/DOWN action
+ * @param {thumbType} String
+ */
+function onIntuviaThumbAction (thumbType) {
+    exec(meta.fetch(spec.devkit.overrideThumbControllerMapping), {}, (overrideThumbControllerMapping) => {
+        overrideThumbControllerMapping
+            ? thumbAction(thumbType)
+            : thumbControllerActionUnavailable()
     })
 }
 
