@@ -10,11 +10,11 @@
   "author": "COBI.Bike GmbH",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
+    "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.0.0-rc.1",
     "babelify": "^9.0.0",
-    "browserify": "^16.2.2",
-    "eslint": "^5.8.0",
+    "browserify": "^16.2.3",
+    "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
@@ -38,7 +38,7 @@
     "brfs": "^2.0.1",
     "geojson-validation": "^0.2.1",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "semver": "^5.4.1",
     "togeojson": "^0.16.0"
   }
