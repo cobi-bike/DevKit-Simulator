@@ -18,8 +18,13 @@ const GJV = require('geojson-validation')
  * @returns {Message[]}
  */
 module.exports.normalize = function (cobiTrack) {
-    const start = Math.min(...cobiTrack.map(m => m.timestamp)) // first timestamp
-    return cobiTrack.map(message => { return { ...message, timestamp: message.timestamp - start } })
+    let start = cobiTrack[0].timestamp // earliest timestamp
+    for (let msg of cobiTrack) {
+        if (msg.timestamp < start) {
+            start = msg.timestamp
+        }
+    }
+    return cobiTrack.map(message => Object.assign({}, message, {timestamp: message.timestamp - start }))
 }
 
 /**
